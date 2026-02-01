@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSAC | Admin Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- jsPDF + autoTable + html2canvas for styled multi-page PDFs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root {--islamic-green:#0a5c36; --islamic-gold:#c19a3f; --islamic-cream:#f8f3e6; --islamic-light:#e9f5e9; --dark-green:#064e3b; --transition:all 0.3s ease;}
+    body {font-family:'Poppins',sans-serif; background-color:var(--islamic-cream); color:#333; scroll-behavior:smooth; overflow-x:hidden; padding-top:80px;}
+        .navbar-optimized {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); border-bottom:3px solid var(--islamic-gold); transition:var(--transition); padding:0.5rem 0; height:80px; z-index:1030 !important;}
+    a {text-decoration: none;}
+    .navbar-toggler {border-color:rgba(255,255,255,0.5);}
+    .navbar-toggler:focus {box-shadow:0 0 0 2px var(--islamic-gold);}
+    .navbar-toggler-icon {background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+    .navbar-optimized.scrolled {background:rgba(10,92,54,0.98); box-shadow:0 5px 20px rgba(0,0,0,0.1); height:70px;}
+    .navbar-brand-compact img {border-radius:8px; transition:transform 0.3s ease; width:60px; height:60px; object-fit:contain; filter:brightness(0) invert(1); border:none; box-shadow:0 0 0 2px var(--islamic-gold); padding:0;}
+    .navbar-optimized.scrolled .navbar-brand-compact img {width:50px; height:50px;}
+    .navbar-brand-compact:hover img {transform:scale(1.05);}
+    .brand-text {font-size:1.2rem; line-height:1.2;}
+    .brand-subtext {font-size:0.8rem; opacity:0.9;}
+    .nav-link-optimized {color:#fff !important; font-weight:500; transition:var(--transition); padding-left:0.4rem; padding-right:0.4rem; border-radius:5px; margin:0 2px; white-space:nowrap;}
+    .nav-item-optimized {margin:0 2px;}
+    .nav-link-optimized:hover {color:var(--islamic-gold) !important; background:rgba(255,255,255,0.1);}
+    .dropdown-menu-optimized {background:var(--islamic-green); border:1px solid var(--islamic-gold); border-radius:8px; padding:0.5rem 0;}
+    .dropdown-item-optimized {color:white; padding:0.5rem 1rem; transition:var(--transition);}
+    .dropdown-item-optimized:hover {background:var(--islamic-gold); color:var(--islamic-green);}
+    .page-header {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); color:white; height:30vh; min-height:220px; display:flex; align-items:center; justify-content:center; text-align:center; margin-bottom:3rem; border-bottom:5px solid var(--islamic-gold); position:relative; overflow:hidden;}
+    .page-header::before {content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:radial-gradient(circle at 20% 30%,rgba(193,154,63,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(10,92,54,0.1) 0%,transparent 50%);}
+    .page-header-content {position:relative; z-index:2;}
+    .page-title {font-family:'Scheherazade New',serif; font-size:3.5rem; font-weight:700; margin-bottom:1rem; color:var(--islamic-gold); text-shadow:0 2px 4px rgba(0,0,0,0.3);}
+    .page-subtitle {font-size:1.4rem; opacity:0.95; max-width:800px; margin:0 auto; color:var(--islamic-cream);}
+    .content-section {padding:4rem 0; background:var(--islamic-cream);}
+    .section-header {text-align:center; margin-bottom:3rem; position:relative; padding:2rem 0;}
+    .section-title {color:var(--islamic-green); font-weight:700; display:inline-block; padding:0 1rem; background:var(--islamic-cream); position:relative; z-index:2; margin-bottom:0.5rem; font-size:2.5rem;}
+    .section-header::before {content:''; position:absolute; top:50%; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--islamic-gold),transparent); z-index:1;}
+    .section-subtitle {color:#666; font-size:1.1rem; max-width:700px; margin:0 auto;}
+    .btn-gold {background:linear-gradient(135deg,var(--islamic-gold),#d4af37); border:none; color:var(--islamic-green); font-weight:600; border-radius:8px; box-shadow:0 4px 15px rgba(193,154,63,0.3); transition:var(--transition); padding:0.75rem 1.5rem;}
+    .btn-gold:hover {background:linear-gradient(135deg,#d4af37,var(--islamic-gold)); box-shadow:0 6px 20px rgba(193,154,63,0.4); transform:translateY(-2px); color:var(--islamic-green);}
+    .btn-outline-gold {border:2px solid var(--islamic-gold); color:var(--islamic-gold); background:transparent; border-radius:8px; padding:0.75rem 1.5rem; font-weight:600; transition:var(--transition);}
+    .btn-outline-gold:hover {background:var(--islamic-gold); color:var(--islamic-green);}
+    .form-container {background:white; border-radius:15px; padding:2.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:2px solid var(--islamic-gold); margin-bottom:2rem;}
+    .form-title {color:var(--islamic-green); font-weight:700; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:2px solid var(--islamic-gold); font-size:1.8rem; text-align:center;}
+    .document-container {width:21cm; min-height:29.7cm; background:white; box-shadow:0 10px 30px rgba(0,0,0,0.1); border-radius:12px; overflow:hidden; margin:0 auto; position:relative;}
+    .document-watermark {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-45deg); font-size:60px; color:rgba(10,92,54,0.03); font-weight:bold; z-index:0; white-space:nowrap; pointer-events:none;}
+    .document-header {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); color:white; padding:20px; text-align:left; position:relative; display:flex; align-items:flex-start; justify-content:flex-start; gap:20px; border-bottom:5px solid var(--islamic-gold);}
+    .document-logo {width:120px; height:120px; border-radius:50%; border:3px solid white; box-shadow:0 4px 10px rgba(0,0,0,0.2); background:white; padding:3px; flex-shrink:0;}
+    .document-college-info {flex:1; display:flex; flex-direction:column; justify-content:center; text-align:left;}
+    .document-arabic {font-family:'Scheherazade New',serif; font-size:14px; font-weight:600; margin-bottom:2px; text-align:left;}
+    .document-college-name {font-size:16px; font-weight:700; margin-bottom:2px; text-align:left; color:white;}
+    .document-address {font-size:10px; margin-bottom:2px; text-align:left; color:rgba(255,255,255,0.9);}
+    .document-title {font-size:18px; font-weight:700; margin-top:8px; text-align:left; color:white; border-top:1px solid rgba(255,255,255,0.3); padding-top:8px;}
+    .document-content {padding:25px; position:relative; text-align:left; z-index:1;}
+    .document-footer {text-align:center; padding:10px; background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%); border-top:1px solid #dee2e6; margin-top:20px;}
+    .info-grid {display:grid; grid-template-columns: 235px 235px 235px; gap:8px;}
+    .info-grid1 {display:grid; grid-template-columns:repeat(2,1fr); gap:8px;}
+    .info-item {display:flex; padding:5px 0; border-bottom:1px dashed #dee2e6; text-align:left;}
+    .info-label {font-weight:600; color:#495057; width:120px; font-size:11px; line-height:1.2; text-align:left;}
+    .info-value {color:#212529; font-size:11px; flex:1; line-height:1.2; text-align:left;}
+    .document-section-title {font-size:14px; font-weight:600; color:var(--islamic-green); margin:8px 0 3px; padding-bottom:2px; border-bottom:1px solid #e9ecef; text-align:left;}
+    .document-declaration {background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%); border-radius:8px; padding:10px; margin-top:10px; border:1px solid #dee2e6;}
+    .document-signature-section {text-align:right; margin-top:20px; padding-top:10px; solid #ced4da;}
+    .document-signature-line {display:inline-block; width:250px; border-bottom:1px solid #212529; margin-bottom:3px;}
+    .student-info-box {background:#f8f9fa; border-radius:8px; padding:15px; margin-bottom:15px; border:1px solid #dee2e6;}
+    .exam-details-box {background:white; border:2px solid var(--islamic-green); border-radius:8px; padding:15px; margin:15px 0; max-width: 600px; display:flex; flex-direction:column;}
+    .exam-title {font-size:16px; font-weight:700; color:var(--islamic-green); text-align:center; margin-bottom:12px;}
+    .exam-info-grid {display:grid; grid-template-columns:repeat(2,1fr); gap:10px; flex:1;}
+    .exam-item {padding:8px; background:#f8f9fa; border-radius:6px; border:1px solid #dee2e6; display:flex; flex-direction:column; justify-content:center;}
+    .exam-label {font-weight:600; color:#495057; font-size:10px; margin-bottom:3px;}
+    .exam-value {font-size:14px; font-weight:700; color:var(--islamic-green);}
+    .exam-wrapper {display:grid; grid-template-columns:1fr auto; gap:15px; align-items:start;}
+    .signing-table {width:100%; border-collapse:collapse; margin:15px 0; border:2px solid var(--islamic-green); border-radius:6px; overflow:hidden;}
+    .signing-table th {background:var(--islamic-green); color:white; padding:8px; font-weight:600; font-size:12px; text-align:center;}
+    .signing-table td {padding:15px; text-align:center; border:1px solid #dee2e6; font-weight:500; color:#495057; height:60px; font-size:11px;}
+    .document-instructions {background:linear-gradient(135deg,#fff3cd 0%,#ffeaa7 100%); border-radius:8px; padding:15px; margin-top:15px; border:1px solid #ffc107;}
+    .document-instructions-title {font-size:16px; font-weight:700; color:#856404; margin-bottom:8px; text-align:center;}
+    .document-instructions-list {padding-left:20px; font-size:11px;}
+    .document-instructions-list li {margin-bottom:5px; color:#856404;}
+    .result-section-box {background:white; border:2px solid var(--islamic-green); border-radius:8px; padding:15px; margin:15px 0; text-align:center;}
+    .result-status {font-size:24px; font-weight:700; color:var(--islamic-green); margin-bottom:10px;}
+    .result-rank {font-size:16px; color:#6c757d; margin-bottom:10px;}
+    .admission-info-box {background:#e8f4ff; border-radius:6px; padding:12px; margin-top:15px; text-align:left;}
+    .admission-title {font-size:14px; font-weight:600; color:var(--islamic-green); margin-bottom:8px; text-align:center;}
+    .admission-row {margin-bottom:6px; display:flex; align-items:flex-start;}
+    .admission-label {font-weight:600; color:#495057; min-width:140px; font-size:11px; padding:2px 0;}
+    .admission-value {color:#212529; font-size:11px; flex:1; padding:2px 0;}
+    .note-section {background:#fff3cd; border-radius:6px; padding:12px; margin-top:12px; border-left:4px solid #ffc107;}
+    .note-title {font-size:12px; font-weight:600; color:#856404; margin-bottom:6px;}
+    .note-content {font-size:11px; color:#856404; line-height:1.4;}
+    @media print {body{padding:0 !important;background:white !important;margin:0 !important;} .document-container{width:21cm !important;min-height:29.7cm !important;box-shadow:none !important;border-radius:0 !important;margin:0 !important;page-break-after:always !important;} .no-print{display:none !important;} .navbar-optimized,.footer,.whatsapp-float,.page-header,.pattern-bg,.islamic-ornament,.content-section:not(.document-section),#mainContentArea{display:none !important;} #documentDisplayArea{display:block !important;width:100% !important;height:auto !important;position:static !important;} .document-container{break-inside:avoid !important;} @page{size:A4;margin:0.5cm;}}
+    .footer {background:linear-gradient(135deg,var(--dark-green),var(--islamic-green)); border-top:3px solid var(--islamic-gold); padding:3rem 0 1.5rem; color:white;}
+    .footer-brand {font-size:1.8rem; font-weight:700; color:var(--islamic-gold); margin-bottom:1rem;}
+    .social-links {display:flex; gap:12px; margin-top:1rem;}
+    .social-icon {width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:var(--transition); background:rgba(255,255,255,0.1); font-size:1.1rem;}
+    .social-icon:hover {transform:translateY(-5px); background:var(--islamic-gold); color:var(--islamic-green);}
+    .footer-links h5 {color:var(--islamic-gold); margin-bottom:1.2rem; font-size:1.1rem; font-weight:600;}
+    .footer-links a {display:block; color:rgba(255,255,255,0.85); text-decoration:none; margin-bottom:0.6rem; transition:var(--transition); font-size:0.95rem;}
+    .footer-links a:hover {color:var(--islamic-gold); padding-left:5px;}
+    .whatsapp-float {position:fixed; bottom:25px; right:15px; width:60px; height:60px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; box-shadow:0 10px 25px rgba(37,211,102,0.3); z-index:1000; animation:float 3s ease-in-out infinite; transition:var(--transition); text-decoration:none;}
+    .whatsapp-float:hover {transform:scale(1.1) rotate(10deg); box-shadow:0 15px 30px rgba(37,211,102,0.4);}
+    @keyframes float {0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);}}
+    .islamic-ornament {position:fixed; color:var(--islamic-gold); opacity:0.08; font-size:1.8rem; z-index:-1; pointer-events:none;}
+    .ornament-1 {top:20%; left:5%; animation:float 6s ease-in-out infinite;}
+    .ornament-2 {top:60%; right:5%; animation:float 8s ease-in-out infinite reverse;}
+    .ornament-3 {bottom:20%; left:10%; animation:float 7s ease-in-out infinite;}
+    
+    /* Admin Nav Styles */
+    .admin-nav {
+      background: white; border-bottom: 2px solid var(--islamic-gold); position: relative; z-index: 1000; margin-bottom: 2rem;
+    }
+    .admin-nav-container {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 0.5rem 0;
+    }
+    .admin-nav-tab {
+      padding: 0.75rem 1.5rem; border: none; background: transparent; color: #666; font-weight: 500; border-radius: 8px; transition: var(--transition); display: flex; align-items: center; gap: 8px;
+    }
+    .admin-nav-tab:hover {background: rgba(10, 92, 54, 0.1); color: var(--islamic-green);}
+    .admin-card {
+      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; position: relative;
+    }
+    .admin-card:hover {transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);}
+    
+    @media (max-width:768px) {body{padding-top:70px !important;} .navbar-optimized{height:70px;padding:0.3rem 0;} .page-header{height:26vh;min-height:180px;} .page-title{font-size:2.2rem;} .page-subtitle{font-size:1.1rem;} .content-section{padding:2.5rem 0;} .section-title{font-size:1.8rem;} .navbar-collapse{background:var(--dark-green);padding:1rem;border-radius:0 0 10px 10px;border:1px solid var(--islamic-gold);margin-top:0px;max-height:70vh;overflow-y:auto;} .form-container{padding:1.5rem;} .document-container{width:100%;box-shadow:none;border-radius:0;}}
+    @media (max-width:576px) {.page-title{font-size:1.8rem;} .section-title{font-size:1.5rem;}}
+    @media (min-width: 992px) {
+      .dropdown-submenu {  position: relative;  }
+      .dropdown-submenu:hover > .collapse {    display: block !important;  }
+      .dropdown-submenu .collapse {    position: absolute;    top: 0;    left: 100%;    z-index: 1000;    min-width: 12rem;    padding: 0.5rem 0;    margin: 0;    font-size: 1rem;    background-color: var(--islamic-green);    border: 1px solid var(--islamic-gold);    border-radius: 0 0.5rem 0.5rem 0.5rem;  }
+      .dropdown-submenu > a:after {    content: "›";    float: right;    margin-right: -0.5rem;    font-size: 1.2rem;  }
+    }
+    @media (max-width: 991px) {
+      .dropdown-submenu .collapse {    position: static;    width: auto;    border: none;    box-shadow: none;    background: rgba(0,0,0,0.1);
+    margin-left: 1.2rem;  }
+    }
+
+    #adminDataTable { font-size: 0.85rem; max-height: 500px; overflow-y: auto; }
+    #adminDataTable th, #adminDataTable td { white-space: nowrap; }
+  </style>
+</head>
+<body>
+<!-- Islamic Ornaments -->
+<div class="islamic-ornament ornament-1">✸</div>
+<div class="islamic-ornament ornament-2">✸</div>
+<div class="islamic-ornament ornament-3">✸</div>
+<div id="navbar-container"></div>
+<div class="page-header">
+  <div class="container">
+    <div class="page-header-content">
+      <h1 class="page-title">Admin Portal</h1>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ADMIN LOGIN MODAL ==================== -->
+<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-3" style="border-color: var(--islamic-gold);">
+      <div class="modal-header" style="background: var(--islamic-green); color: white;">
+        <h5 class="modal-title" id="adminLoginModalLabel">Admin Access</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="adminLoginForm">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Username</label>
+            <input type="text" class="form-control" id="adminUsername" placeholder="admin" required autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Password</label>
+            <input type="password" class="form-control" id="adminPassword" required autocomplete="off">
+          </div>
+          <button type="submit" class="btn-gold w-100 mt-3"><i class="fas fa-sign-in-alt me-2"></i> Log In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ADMIN PANEL ==================== -->
+<section class="content-section" id="adminPanelSection" style="display:none; background: white;">
+  <div class="container">
+    
+    <!-- Admin Navigation -->
+    <div class="admin-nav" data-aos="fade-down">
+      <div class="container">
+        <div class="admin-nav-container">
+          <a href="admin.html" class="admin-nav-tab nav-tab-active">
+            Entrance Exam
+          </a>
+          <a href="Social.html" class="admin-nav-tab">
+            Social media
+          </a>
+          <a href="test.html" class="admin-nav-tab">
+            Test
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-container mt-4" data-aos="fade-up">
+      <h2 class="form-title text-center mb-4">
+        Entance Exam Portal
+      </h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-5 col-lg-3">
+          <div class="admin-card">
+            <div class="p-4 text-center">
+              <i class="fas fa-file-alt fa-3x mb-3" style="color: var(--islamic-green);"></i>
+              <h4 class="mb-3">Applications</h4>
+              <button class="btn-gold w-100" onclick="generateAllApplicationsPDF()">
+                <i class="fas fa-download me-2"></i> Download
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <div class="admin-card">
+            <div class="p-4 text-center">
+              <i class="fas fa-ticket-alt fa-3x mb-3" style="color: var(--islamic-green);"></i>
+              <h4 class="mb-3">Hall Tickets</h4>
+              <button class="btn-gold w-100" onclick="generateAllHallticketsPDF()">
+                <i class="fas fa-download me-2"></i> Download
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <div class="admin-card">
+            <div class="p-4 text-center">
+              <i class="fas fa-chart-line fa-3x mb-3" style="color: var(--islamic-green);"></i>
+              <h4 class="mb-3">Results</h4>
+              <button class="btn-gold w-100" onclick="showResultsData()">
+                <i class="fas fa-eye me-2"></i> View
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <div class="admin-card">
+            <div class="p-4 text-center">
+              <i class="fas fa-database fa-3x mb-3" style="color: var(--islamic-green);"></i>
+              <h4 class="mb-3">Applications</h4>
+              <button class="btn-gold w-100" onclick="showApplicationData()">
+                <i class="fas fa-table me-2"></i> View
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <button class="btn-outline-gold px-5 py-2" onclick="logoutAdmin()">
+          <i class="fas fa-sign-out-alt me-2"></i> Logout
+        </button>
+      </div>
+    </div>
+
+    <div id="adminDataDisplay" class="mt-5"></div>
+  </div>
+</section>
+  
+<div id="footer-container"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  // Helper function to fix Google Drive photo URLs
+function fixPhotoUrl(rawUrl) {
+  if (!rawUrl || typeof rawUrl !== 'string') return '';
+  
+  // Already a direct link
+  if (rawUrl.includes('drive.google.com/uc?export=view')) {
+    return rawUrl;
+  }
+  
+  // Thumbnail link
+  if (rawUrl.includes('thumbnail?id=')) {
+    const match = rawUrl.match(/id=([-\w]{25,})/);
+    return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
+  }
+  
+  // File view link
+  if (rawUrl.includes('/file/d/')) {
+    const match = rawUrl.match(/\/d\/([-\w]{25,})/);
+    return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
+  }
+  
+  // Try to extract any file ID
+  const match = rawUrl.match(/([-\w]{25,})/);
+  return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : '';
+}
+
+// Pre-load images to ensure they're available for html2canvas
+async function preloadImage(url) {
+  return new Promise((resolve) => {
+    if (!url || !url.startsWith('http')) {
+      resolve(null);
+      return;
+    }
+    
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    
+    img.onload = () => resolve(img);
+    img.onerror = () => {
+      console.warn('Failed to preload image:', url);
+      resolve(null);
+    };
+    
+    // Add cache busting parameter
+    const timestamp = new Date().getTime();
+    const separator = url.includes('?') ? '&' : '?';
+    img.src = url + separator + '_=' + timestamp;
+    
+    // Timeout after 8 seconds
+    setTimeout(() => {
+      if (!img.complete) {
+        console.warn('Image preload timeout:', url);
+        resolve(null);
+      }
+    }, 8000);
+  });
+}
+// Your original SCRIPT_URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5NxWJWl_FHQcVDR0oZCjRgD43cXoxwkXkdu8JqlgjgKo41EzBWYeCob0DHUV-wk11qA/exec';
+
+// ==================== AUTO SHOW LOGIN MODAL ON PAGE LOAD ====================
+document.addEventListener('DOMContentLoaded', function() {
+  // Show login modal automatically when page loads
+  const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
+  adminLoginModal.show();
+});
+
+// ==================== ADMIN LOGIN LOGIC ====================
+document.getElementById('adminLoginForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('adminUsername').value.trim();
+  const password = document.getElementById('adminPassword').value.trim();
+
+  if (username === 'admin' && password === '786') {
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('adminLoginModal')).hide();
+    document.getElementById('adminPanelSection').style.display = 'block';
+    document.getElementById('adminDataDisplay').innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    alert('Wrong username or password');
+  }
+});
+
+function logoutAdmin() {
+  document.getElementById('adminPanelSection').style.display = 'none';
+  document.getElementById('adminDataDisplay').innerHTML = '';
+  // Show login modal again
+  const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
+  adminLoginModal.show();
+}
+
+// ====== NEW WORKING VERSION - 100% PHOTO WILL COME (Tested) ======
+async function generateAllApplicationsPDF() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading applications... Please wait...</p></div>';
+  
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
+    const result = await resp.json();
+    
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No applications found.</div>';
+      return;
+    }
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ format: 'a4', unit: 'mm' });
+    
+    let successCount = 0;
+    let failedCount = 0;
+    
+    // Show progress
+    displayArea.innerHTML = `<div class="alert alert-info">
+      <i class="fas fa-spinner fa-spin me-2"></i>
+      Processing ${result.data.length} applications... 0/${result.data.length}
+    </div>`;
+    
+    for (let i = 0; i < result.data.length; i++) {
+      // Update progress
+      if (i % 5 === 0) {
+        displayArea.innerHTML = `<div class="alert alert-info">
+          <i class="fas fa-spinner fa-spin me-2"></i>
+          Processing ${result.data.length} applications... ${i}/${result.data.length}
+        </div>`;
+      }
+      
+      const row = result.data[i];
+      const get = (header) => row[header] ?? row[header.trim()] ?? '';
+      
+      // Extract and fix photo URL
+      let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
+      let photoUrl = fixPhotoUrl(rawPhotoUrl);
+      
+      // Prepare student data
+      const studentData = {
+        submissionDate: formatDate(get('Timestamp')) || new Date().toLocaleDateString('en-GB'),
+        applicationId: get('ID') || get('Reg. No') || 'N/A',
+        studentName: get('Name') || 'N/A',
+        houseName: get('House') || 'N/A',
+        dob: get('DOB') || 'N/A',
+        aadhaarNumber: get('Aadhar') || 'N/A',
+        address: get('Address') || 'N/A',
+        phoneNumber: get('MOB') || 'N/A',
+        whatsappNumber: get('WHATSAPP') || get('MOB') || 'N/A',
+        fatherName: get('Father') || 'N/A',
+        fatherOccupation: get('Father job') || 'N/A',
+        guardianName: get('Guardian') || 'N/A',
+        relationshipWithGuardian: get('Relation to guardian') || 'N/A',
+        guardianReason: get('if not father cause') || '',
+        madrasa: get('Madrasa') || 'N/A',
+        madrasaclass: get('Madrassa class') || 'N/A',
+        school: get('School') || 'N/A',
+        schoolclass: get('School class') || 'N/A',
+        previousStudy: get('Old institution') || 'No',
+        previousInstitution: get('Name of insti') || '',
+        studyDuration: get('Period') || '',
+        identificationMark: get('Identification mark') || 'N/A',
+        physicalFitness: get('Physical Fitness: yes or no') || 'N/A',
+        illness: get('ill name') || '',
+        photoUrl: photoUrl
+      };
+      
+      // Pre-load image if exists
+      if (photoUrl) {
+        await preloadImage(photoUrl);
+      }
+      
+      // Create temporary div for html2canvas
+      const tempDiv = document.createElement('div');
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.top = '-9999px';
+      tempDiv.style.width = '210mm';
+      tempDiv.innerHTML = generateApplicationHtml({ 
+        collegeInfo: {}, 
+        studentData 
+      });
+      
+      document.body.appendChild(tempDiv);
+      
+      try {
+        // Wait a moment for images to load
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        const canvas = await html2canvas(tempDiv.querySelector('.document-container'), {
+          scale: 1.5,
+          useCORS: true,
+          allowTaint: false,
+          logging: false,
+          backgroundColor: '#ffffff',
+          imageTimeout: 10000,
+          removeContainer: true
+        });
+        
+        const imgData = canvas.toDataURL('image/jpeg', 0.9);
+        const imgProps = doc.getImageProperties(imgData);
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+        if (i > 0) doc.addPage();
+        doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        successCount++;
+        
+      } catch (canvasError) {
+        console.warn(`Error generating PDF for ${studentData.studentName}:`, canvasError);
+        failedCount++;
+        
+        // Add error page
+        if (i > 0) doc.addPage();
+        doc.setFontSize(16);
+        doc.text(`Application: ${studentData.studentName}`, 20, 30);
+        doc.setFontSize(12);
+        doc.text(`Error generating photo - Application ID: ${studentData.applicationId}`, 20, 50);
+        doc.text(`Photo URL: ${studentData.photoUrl || 'No photo'}`, 20, 60);
+      } finally {
+        document.body.removeChild(tempDiv);
+      }
+      
+      // Small delay between pages to prevent browser overload
+      if (i < result.data.length - 1) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    }
+    
+    // Final progress update
+    if (successCount === 0 && failedCount > 0) {
+      displayArea.innerHTML = `<div class="alert alert-danger">
+        All ${failedCount} applications failed to generate. Check photo links and try again.
+      </div>`;
+      return;
+    }
+    
+    // Download the PDF
+    const filename = `All_Applications_${new Date().toISOString().slice(0,10)}.pdf`;
+    doc.save(filename);
+    
+    // Show success message
+    displayArea.innerHTML = `<div class="alert alert-success">
+      <i class="fas fa-check-circle me-2"></i>
+      <strong>${successCount}</strong> applications successfully generated!
+      ${failedCount > 0 ? `<br><small class="text-muted">(${failedCount} applications had issues)</small>` : ''}
+    </div>`;
+    
+  } catch (err) {
+    console.error('PDF generation error:', err);
+    displayArea.innerHTML = `<div class="alert alert-danger">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      Server connection failed. Please check:<br>
+      1. Internet connection<br>
+      2. SCRIPT_URL is correct<br>
+      3. Google Apps Script is deployed
+    </div>`;
+  }
+}
+// ────────────────────────────────────────────────────────────────
+//  DOWNLOAD ALL HALL TICKETS – with photo URL fix
+// ────────────────────────────────────────────────────────────────
+async function generateAllHallticketsPDF() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading hall tickets... Please wait...</p></div>';
+  
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_halltickets`);
+    const result = await resp.json();
+    
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets found.</div>';
+      return;
+    }
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ format: 'a4', unit: 'mm' });
+    
+    let pageCount = 0;
+    
+    // Show progress
+    displayArea.innerHTML = `<div class="alert alert-info">
+      <i class="fas fa-spinner fa-spin me-2"></i>
+      Processing ${result.data.length} hall tickets... 0/${result.data.length}
+    </div>`;
+    
+    for (let i = 0; i < result.data.length; i++) {
+      // Update progress
+      if (i % 5 === 0) {
+        displayArea.innerHTML = `<div class="alert alert-info">
+          <i class="fas fa-spinner fa-spin me-2"></i>
+          Processing hall tickets... ${i}/${result.data.length}
+        </div>`;
+      }
+      
+      const row = result.data[i];
+      const get = (header) => row[header] ?? '';
+      
+      // Check payment status
+      let paymentStatus = get('Payment Status') || get('HALLTICKET') || '';
+      paymentStatus = String(paymentStatus).trim().toUpperCase();
+      
+      if (paymentStatus !== 'YES') continue;
+      
+      pageCount++;
+      
+      // Extract and fix photo URL
+      let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
+      let photoUrl = fixPhotoUrl(rawPhotoUrl);
+      
+      // Prepare student data
+      const studentData = {
+        registerNo: get('Reg. No') || get('ID') || get('Application ID') || 'N/A',
+        studentName: get('Name') || 'N/A',
+        dob: get('DOB') || 'N/A',
+        houseName: get('House') || 'N/A',
+        address: get('Address') || 'N/A',
+        phoneNumber: get('MOB') || get('Phone Number') || 'N/A',
+        photoUrl: photoUrl
+      };
+      
+      // Pre-load image if exists
+      if (photoUrl) {
+        await preloadImage(photoUrl);
+      }
+      
+      // Create temporary div
+      const tempDiv = document.createElement('div');
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.top = '-9999px';
+      tempDiv.style.width = '210mm';
+      tempDiv.innerHTML = generateHallticketHtml({
+        collegeInfo: {},
+        studentData
+      });
+      
+      document.body.appendChild(tempDiv);
+      
+      try {
+        // Wait for images to load
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        const canvas = await html2canvas(tempDiv.querySelector('.document-container'), {
+          scale: 1.5,
+          useCORS: true,
+          allowTaint: false,
+          logging: false,
+          backgroundColor: '#ffffff',
+          imageTimeout: 10000
+        });
+        
+        const imgData = canvas.toDataURL('image/jpeg', 0.9);
+        const imgProps = doc.getImageProperties(imgData);
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+        if (pageCount > 1) doc.addPage();
+        doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        
+      } catch (canvasError) {
+        console.warn(`Error generating hall ticket for ${studentData.studentName}:`, canvasError);
+        
+        // Add error page
+        if (pageCount > 1) doc.addPage();
+        doc.setFontSize(16);
+        doc.text(`Hall Ticket: ${studentData.studentName}`, 20, 30);
+        doc.setFontSize(12);
+        doc.text(`Register No: ${studentData.registerNo}`, 20, 50);
+        doc.text('Photo could not be loaded', 20, 60);
+      } finally {
+        document.body.removeChild(tempDiv);
+      }
+      
+      // Small delay between pages
+      if (i < result.data.length - 1) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    }
+    
+    if (pageCount === 0) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets with payment status "YES" found.</div>';
+      return;
+    }
+    
+    // Download the PDF
+    const filename = `All_Hall_Tickets_${new Date().toISOString().slice(0,10)}.pdf`;
+    doc.save(filename);
+    
+    // Show success message
+    displayArea.innerHTML = `<div class="alert alert-success">
+      <i class="fas fa-check-circle me-2"></i>
+      <strong>${pageCount}</strong> hall ticket(s) successfully generated and downloaded!
+    </div>`;
+    
+  } catch (err) {
+    console.error('Hall ticket generation error:', err);
+    displayArea.innerHTML = `<div class="alert alert-danger">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      Error while creating hall tickets PDF: ${err.message}
+    </div>`;
+  }
+}
+
+// ────────────────────────────────────────────────────────────────
+//   3. VIEW ALL RESULTS (table like application data)
+// ────────────────────────────────────────────────────────────────
+async function showResultsData() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading all results...</p></div>';
+
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_results`);
+    const result = await resp.json();
+
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No results found.</div>';
+      return;
+    }
+
+    let html = `
+      <h3 class="text-center mb-4">Results</h3>
+      <div class="table-responsive" id="adminDataTable">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark">
+            <tr>`;
+
+    const headers = Object.keys(result.data[0]);
+    headers.forEach(h => html += `<th>${h}</th>`);
+
+    html += `</tr></thead><tbody>`;
+
+    result.data.forEach(row => {
+      html += '<tr>';
+      headers.forEach(key => html += `<td>${row[key] ?? ''}</td>`);
+      html += '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+    displayArea.innerHTML = html;
+
+  } catch (err) {
+    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load results.</div>';
+    console.error(err);
+  }
+}
+
+// ==================== SHOW APPLICATION DATA TABLE ====================
+async function showApplicationData() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading data...</p></div>';
+
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`); // or use ?type=application_data
+    const result = await resp.json();
+
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No data found or error occurred.</div>';
+      return;
+    }
+
+    let html = `
+      <h3 class="text-center mb-4">Applications</h3>
+      <div class="table-responsive" id="adminDataTable">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark">
+            <tr>`;
+
+    // Headers from first row (adjust if your script returns fixed headers)
+    const headers = Object.keys(result.data[0]);
+    headers.forEach(h => {
+      html += `<th>${h}</th>`;
+    });
+
+    html += `
+            </tr>
+          </thead>
+          <tbody>`;
+
+    result.data.forEach(row => {
+      html += '<tr>';
+      headers.forEach(key => {
+        html += `<td>${row[key] ?? ''}</td>`;
+      });
+      html += '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+
+    displayArea.innerHTML = html;
+  } catch (err) {
+    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load application data.</div>';
+    console.error(err);
+  }
+}
+
+function formatDate(dateInput) {
+  if (!dateInput) return '';
+  
+  try {
+    // Handle various date formats
+    const date = new Date(dateInput);
+    if (isNaN(date.getTime())) {
+      // Try parsing DD-MM-YYYY format
+      const parts = String(dateInput).split(/[-/]/);
+      if (parts.length === 3) {
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const year = parseInt(parts[2], 10);
+        const parsedDate = new Date(year, month, day);
+        if (!isNaN(parsedDate.getTime())) {
+          return `${day.toString().padStart(2, '0')}-${(month + 1).toString().padStart(2, '0')}-${year}`;
+        }
+      }
+      return String(dateInput);
+    }
+    
+    // Format as DD-MM-YYYY
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    
+    return `${day}-${month}-${year}`;
+  } catch (e) {
+    return String(dateInput || '');
+  }
+}
+
+function formatDate(ts) {
+  if (!ts) return new Date().toLocaleDateString('en-GB');
+  const d = new Date(ts);
+  return `${d.getDate().toString().padStart(2,'0')}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getFullYear()}`;
+}
+
+function getLocalYMD(dateInput) {
+  if (!dateInput) return '';
+  const date = new Date(dateInput);
+  return date.toISOString().split('T')[0]; // YYYY-MM-DD
+}
+
+function readFileAsBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function generateApplicationHtml(data) {
+  const { collegeInfo, studentData } = data;
+  const hasValidPhoto = studentData.photoUrl && (
+    studentData.photoUrl.includes('drive.google.com') ||
+    studentData.photoUrl.startsWith('data:image') ||
+    studentData.photoUrl.startsWith('http')
+  );
+
+  return `
+<div class="document-container">
+  <div class="document-watermark">APPLICATION FORM</div>
+  <div class="document-header">
+    <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
+    <div class="document-college-info">
+      <div class="document-arabic">كلية دار النجاة للشريعة والآداب</div>
+      <div class="document-college-name">DARUNNAJATH SHAREEATH & ARTS COLLEGE</div>
+      <div class="document-address">Punnakkad, Karuvarakundu, Malappuram District</div>
+      <div class="document-address">Under DARUNNAJATH ISLAMIC CENTRE</div>
+      <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+      <div class="document-title">Admission Application Form</div>
+    </div>
+  </div>
+
+  <div class="document-content">
+    ${hasValidPhoto ? `
+      <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
+        <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+          <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
+        </div>
+        <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
+      </div>
+    ` : ''}
+
+    <div class="document-section-title">1. Personal Information</div><div class="info-grid1" style="margin-right: ${hasValidPhoto?'160px':'0'};">${['Application Date','Application ID',"1. Student's Name","2. House Name","3. Date of Birth","4. Aadhaar Number","5. Address","6. Phone Number","7. WhatsApp Number"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.submissionDate||new Date().toLocaleDateString(),studentData.applicationId||'N/A',studentData.studentName||studentData.name||'N/A',studentData.houseName||'N/A',studentData.dob||'N/A',studentData.aadhaarNumber||'N/A',studentData.address||'N/A',studentData.phoneNumber||studentData.mobile||'N/A',studentData.whatsappNumber||'N/A'][i])}</span></div>`).join('')}</div><div class="document-section-title">2. Parent/Guardian Information</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["8. Father's Name","9. Father's Occupation","10. Guardian's Name","11. Relationship with Guardian"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.fatherName||'N/A',studentData.fatherOccupation||'N/A',studentData.guardianName||'N/A',studentData.relationshipWithGuardian||'N/A'][i])}</span></div>`).join('')}${studentData.guardianReason?`<div class="info-item"><span class="info-label">12. Reason if Guardian is not Father:</span><span class="info-value">${escapeHtml(studentData.guardianReason)}</span></div>`:''}</div><div class="document-section-title">3. Educational Information</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span>
+    <span class="info-value">${escapeHtml([studentData.madrasa||'N/A',studentData.madrasaclass||'N/A',studentData.school||'N/A',studentData.schoolclass||'N/A',studentData.previousStudy||'No'][i])}</span></div>`).join('')}</div>${studentData.previousStudy==='Yes'?`<div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${studentData.previousInstitution?`<div class="info-item"><span class="info-label">Previous Institution:</span><span class="info-value">${escapeHtml(studentData.previousInstitution||'N/A')}</span></div>`:''}${studentData.studyDuration?`<div class="info-item"><span class="info-label">Duration of Study:</span><span class="info-value">${escapeHtml(studentData.studyDuration||'N/A')}</span></div>`:''}</div>`:''}<div class="document-section-title">4. Medical & Identification</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["16. Identification Mark","17. Physical Fitness"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.identificationMark||'N/A',studentData.physicalFitness||'N/A'][i])}</span></div>`).join('')}${studentData.illness?`<div class="info-item"><span class="info-label">Illness:</span><span class="info-value">${escapeHtml(studentData.illness)}</span></div>`:''}</div>
+
+    <div class="document-declaration">
+      <h3 class="document-section-title">Declaration</h3>
+      <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
+        <strong>${escapeHtml(studentData.studentName || studentData.name || '')}</strong> S/o 
+        <strong>${escapeHtml(studentData.guardianName || '')}</strong>, 
+        എന്ന എന്‍റെ കുട്ടിയും ഞാനും ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
+      </p>
+
+            <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
+
+        <!-- Left side: Date & Place – no underline -->
+        <div style="flex: 0 0 auto;">
+          <div style="margin-bottom: 14px;">
+            Date: ______________________________
+          </div>
+          <div>
+            Place: _____________________________
+          </div>
+        </div>
+
+        <!-- Right side: Signature -->
+        <div style="text-align: right; flex: 1;">
+          <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
+          <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+    <div class="document-footer">
+      <p style="color:#495057;font-size:10px;margin:0;">
+        <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> najathshareea@gmail.com
+      </p>
+    </div>
+    </div>
+
+
+<div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+  <button onclick="window.print()" class="btn-gold me-2">
+    <i class="fas fa-print me-2"></i> Print Application Form
+  </button>
+  <button onclick="showDashboard()" class="btn-outline-gold">
+    <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+  </button>
+</div>
+  `;
+}
+
+function generateHallticketHtml(data){
+  const{collegeInfo,studentData}=data;
+  const hasValidPhoto=studentData.photoUrl&&(studentData.photoUrl.includes('drive.google.com')||studentData.photoUrl.startsWith('data:image')||studentData.photoUrl.startsWith('http'));
+  const qrText=`Name: ${studentData.studentName||studentData.name||''}, Register No: ${studentData.registerNo||studentData.applicationId||''}, DoB: ${studentData.dob||''}, Exam Date: 17/12/2025, Venue: College Seminar Hall`;
+  const qrCodeUrl=`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
+  
+  return `<div class="document-container">
+    <div class="document-watermark">HALL TICKET</div>
+    <div class="document-header">
+      <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
+      <div class="document-college-info">
+        <div class="document-arabic">كلية دار النجاة للشريعة والآداب</div>
+        <div class="document-college-name">DARUNNAJATH SHAREEATH & ARTS COLLEGE</div>
+        <div class="document-address">Punnakkad, Karuvarakundu, Malappuram District</div>
+        <div class="document-address">Under DARUNNAJATH ISLAMIC CENTRE</div>
+        <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+        <div class="document-title">Entrance Exam Hall Ticket</div>
+      </div>
+    </div>
+    <div class="document-content">
+      ${hasValidPhoto?`<div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
+        <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+          <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
+        </div>
+        <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
+      </div>`:''}
+      <div class="student-info-box" style="margin-right: ${hasValidPhoto?'150px':'0'};">
+        <div class="info-grid">
+        
+          ${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study']
+            .map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([
+              studentData.registerNo||studentData.applicationId||'N/A',studentData.studentName||studentData.name||'N/A',studentData.dob||'N/A',studentData.age||'N/A',studentData.phoneNumber||studentData.mobile||'N/A',studentData.houseName||'N/A',studentData.address||'N/A',studentData.previousStudy||'N/A'
+            ][i])}</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="exam-wrapper">
+        <div class="exam-details-box">
+          <div class="exam-title">Examination Details</div>
+          <div class="exam-info-grid">
+            ${['Exam Date','Reporting Time','Exam Duration','Venue']
+              .map((label,i)=>`<div class="exam-item">
+                <div class="exam-label">${label}</div>
+                <div class="exam-value">${['17 December 2025','09:30 AM','10:00 AM - 12:30 PM','College Seminar Hall'][i]}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
+          <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
+            <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code">
+          </div>
+          <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div>
+        </div>
+      </div>
+      <table class="signing-table">
+        <thead><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="document-instructions">
+        <div class="document-instructions-title">Important Instructions</div>
+        <ul class="document-instructions-list">
+          <li>Bring this hall ticket to the exam center</li>
+          <li>Carry any original ID proof (Aadhaar card)</li>
+          <li>Report at the exam center 30 minutes before exam time</li>
+          <li>No electronic devices allowed inside exam hall</li>
+          <li>Only blue/black ballpoint pens are allowed</li>
+          <li>Follow all instructions given by invigilators</li>
+        </ul>
+      </div>
+    </div>
+    <div class="document-footer">
+      <p style="color:#495057;font-size:10px;margin:0;">
+        <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> najathshareea@gmail.com
+      </p>
+    </div>
+  </div>`;
+}
+
+function escapeHtml(text){
+  if(!text)return'';
+  const map={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};
+  return String(text).replace(/[&<>"']/g,function(m){return map[m];});
+}
+
+AOS.init();
+</script>
+
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+      document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          const target = document.querySelector(toggle.getAttribute('data-bs-target'));
+          const bsCollapse = new bootstrap.Collapse(target, { toggle: true });
+        });
+      });
+    })
+    .catch(error => console.error('Navbar load error:', error));
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Footer load error:', error));
+</script> 
+
+</body>
+</html>

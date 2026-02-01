@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSAC | Downloads</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --islamic-green: #0a5c36; --islamic-gold: #c19a3f; --islamic-cream: #f8f3e6; --dark-green: #064e3b; --transition: all 0.3s ease;
+    }
+    body {
+      font-family: 'Poppins', sans-serif; background-color: var(--islamic-cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; padding-top: 80px;
+    }
+    a {text-decoration: none;}
+    .navbar-optimized {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 3px solid var(--islamic-gold); transition: var(--transition); padding: 0.5rem 0; height: 80px; z-index: 1030;
+    }
+    .navbar-toggler {border-color: rgba(255, 255, 255, 0.5);}
+    .navbar-toggler:focus {box-shadow: 0 0 0 2px var(--islamic-gold);}
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .navbar-optimized.scrolled {
+      background: rgba(10, 92, 54, 0.98); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); height: 70px;
+    }
+    .navbar-brand-compact img {
+      border-radius: 8px; transition: transform 0.3s ease; width: 60px; height: 60px; object-fit: contain; filter: brightness(0) invert(1); border: none; box-shadow: 0 0 0 2px var(--islamic-gold); padding: 0;
+    }
+    .navbar-optimized.scrolled .navbar-brand-compact img {width: 50px; height: 50px;}
+    .navbar-brand-compact:hover img {transform: scale(1.05);}
+    .brand-text {font-size: 1.2rem; line-height: 1.2;}
+    .brand-subtext {font-size: 0.8rem; opacity: 0.9;}
+    .nav-link-optimized {
+      color: #fff !important; font-weight: 500; transition: var(--transition); padding-left: 0.4rem; padding-right: 0.4rem; border-radius: 5px; margin: 0 2px; white-space: nowrap;
+    }
+    .nav-item-optimized {margin: 0 2px;}
+    .nav-link-optimized:hover {color: var(--islamic-gold) !important; background: rgba(255, 255, 255, 0.1);}
+    .dropdown-menu-optimized {
+      background: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 8px; padding: 0.5rem 0;
+    }
+    .dropdown-item-optimized {
+      color: white; padding: 0.5rem 1rem; transition: var(--transition);
+    }
+    .dropdown-item-optimized:hover {background: var(--islamic-gold); color: var(--islamic-green);}
+    .page-header {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; height: 30vh; min-height: 220px; display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; border-bottom: 5px solid var(--islamic-gold); position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 30%, rgba(193, 154, 63, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(10, 92, 54, 0.1) 0%, transparent 50%);
+    }
+    .page-header-content {position: relative; z-index: 2;}
+    .page-title {
+      font-family: 'Scheherazade New', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--islamic-gold); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .page-subtitle {
+      font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; color: var(--islamic-cream);
+    }
+    .content-section {padding: 4rem 0; background: var(--islamic-cream);}
+    .section-header {
+      text-align: center; margin-bottom: 3rem; position: relative; padding: 2rem 0;
+    }
+    .section-title {
+      color: var(--islamic-green); font-weight: 700; display: inline-block; padding: 0 1rem; background: var(--islamic-cream); position: relative; z-index: 2; margin-bottom: 0.5rem; font-size: 2.5rem;
+    }
+    .section-header::before {
+      content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent); z-index: 1;
+    }
+    .section-subtitle {color: #666; font-size: 1.1rem; max-width: 700px; margin: 0 auto;}
+    .btn-gold {
+      background: linear-gradient(135deg, var(--islamic-gold), #d4af37); border: none; color: var(--islamic-green); font-weight: 600; border-radius: 8px; box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3); transition: var(--transition); padding: 0.75rem 1.5rem;
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #d4af37, var(--islamic-gold)); box-shadow: 0 6px 20px rgba(193, 154, 63, 0.4); transform: translateY(-2px); color: var(--islamic-green);
+    }
+    .btn-outline-gold {
+      border: 2px solid var(--islamic-gold); color: var(--islamic-gold); background: transparent; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; transition: var(--transition);
+    }
+    .btn-outline-gold:hover {background: var(--islamic-gold); color: var(--islamic-green);}
+    .download-card {
+      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; position: relative;
+    }
+    .download-card:hover {transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);}
+    .download-icon-wrapper {
+      width: 80px; height: 80px; background: linear-gradient(135deg, rgba(10, 92, 54, 0.1), rgba(193, 154, 63, 0.05)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;
+    }
+    .download-icon {font-size: 2.5rem; color: var(--islamic-green);}
+    .file-info {
+      background: rgba(10, 92, 54, 0.05); border-radius: 10px; padding: 1rem; margin: 1.5rem 0; font-size: 0.9rem;
+    }
+    .file-info i {color: var(--islamic-gold); margin-right: 5px;}
+    .search-box {
+      background: white; border: 2px solid var(--islamic-gold); border-radius: 50px; padding: 0.75rem 1.5rem; transition: var(--transition);
+    }
+    .search-box:focus-within {box-shadow: 0 0 20px rgba(193, 154, 63, 0.3);}
+    .search-box input {border: none; outline: none; width: 100%; background: transparent;}
+    .category-badge {
+      display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; margin: 0.25rem;
+    }
+    .badge-forms { background: rgba(10, 92, 54, 0.1); color: var(--islamic-green); }
+    .badge-applications { background: rgba(193, 154, 63, 0.1); color: var(--islamic-gold); }
+    .badge-documents { background: rgba(102, 16, 242, 0.1); color: #6610f2; }
+    .stats-card {
+      background: white; border-radius: 15px; padding: 2rem; text-align: center; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .stats-card:hover {border-color: var(--islamic-gold); transform: translateY(-5px);}
+    .stats-number {font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--islamic-green);}
+    .footer {
+      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-top: 3px solid var(--islamic-gold); padding: 3rem 0 1.5rem; color: white;
+    }
+    .footer-brand {font-size: 1.8rem; font-weight: 700; color: var(--islamic-gold); margin-bottom: 1rem;}
+    .social-links {display: flex; gap: 12px; margin-top: 1rem;}
+    .social-icon {
+      width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); background: rgba(255, 255, 255, 0.1); font-size: 1.1rem;
+    }
+    .social-icon:hover {transform: translateY(-5px); background: var(--islamic-gold); color: var(--islamic-green);}
+    .footer-links h5 {color: var(--islamic-gold); margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 600;}
+    .footer-links a {
+      display: block; color: rgba(255, 255, 255, 0.85); text-decoration: none; margin-bottom: 0.6rem; transition: var(--transition); font-size: 0.95rem;
+    }
+    .footer-links a:hover {color: var(--islamic-gold); padding-left: 5px;}
+    .whatsapp-float {
+      position: fixed; bottom: 25px; right: 15px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 1000; animation: float 3s ease-in-out infinite; transition: var(--transition); text-decoration: none;
+    }
+    .whatsapp-float:hover {transform: scale(1.1) rotate(10deg); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);}
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .islamic-ornament {
+      position: fixed; color: var(--islamic-gold); opacity: 0.08; font-size: 1.8rem; z-index: -1; pointer-events: none;
+    }
+    .ornament-1 {top: 20%; left: 5%; animation: float 6s ease-in-out infinite;}
+    .ornament-2 {top: 60%; right: 5%; animation: float 8s ease-in-out infinite reverse;}
+    .ornament-3 {bottom: 20%; left: 10%; animation: float 7s ease-in-out infinite;}
+    @media (max-width: 768px) {
+      body {padding-top: 70px !important;}
+      .navbar-optimized {height: 70px; padding: 0.3rem 0;}
+      .page-header {height: 26vh; min-height: 180px;}
+      .page-title {font-size: 2.2rem;}
+      .page-subtitle {font-size: 1.1rem;}
+      .content-section {padding: 2.5rem 0;}
+      .section-title {font-size: 1.8rem;}
+      .navbar-collapse {
+        background: var(--dark-green); padding: 1rem; border-radius: 0 0 10px 10px; border: 1px solid var(--islamic-gold); margin-top: 0px; max-height: 70vh; overflow-y: auto;
+      }
+      .download-icon-wrapper {width: 70px; height: 70px;}
+      .download-icon {font-size: 2rem;}
+      .stats-number {font-size: 2rem;}
+    }
+    @media (max-width: 576px) {
+      .page-title {font-size: 1.8rem;}
+      .section-title {font-size: 1.5rem;}
+    }
+    @media (min-width: 992px) {
+      .dropdown-submenu {  position: relative;  }
+      .dropdown-submenu:hover > .collapse {    display: block !important;  }
+      .dropdown-submenu .collapse {    position: absolute;    top: 0;    left: 100%;    z-index: 1000;    min-width: 12rem;    padding: 0.5rem 0;    margin: 0;    font-size: 1rem;    background-color: var(--islamic-green);    border: 1px solid var(--islamic-gold);    border-radius: 0 0.5rem 0.5rem 0.5rem;  }
+      .dropdown-submenu > a:after {    content: "›";    float: right;    margin-right: -0.5rem;    font-size: 1.2rem;  }
+    }
+    @media (max-width: 991px) {
+      .dropdown-submenu .collapse {    position: static;    width: auto;    border: none;    box-shadow: none;    background: rgba(0,0,0,0.1);
+    margin-left: 1.2rem;  }
+    }
+
+  </style>
+</head>
+<body>
+<div class="islamic-ornament ornament-1">✸</div>
+<div class="islamic-ornament ornament-2">✸</div>
+<div class="islamic-ornament ornament-3">✸</div>
+<div id="navbar-container"></div>
+<div class="page-header">
+  <div class="container">
+    <div class="page-header-content">
+      <h1 class="page-title">Downloads Center</h1>
+      <div class="mt-4">
+        <span class="badge badge-applications category-badge">PDF Files</span>
+        <span class="badge badge-applications category-badge">Applications</span>
+        <span class="badge badge-applications category-badge">Official Documents</span>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="content-section">
+  <div class="container">
+    <div class="row mb-5" data-aos="fade-up">
+      <div class="col-lg-8 mb-3 mb-lg-0">
+        <div class="search-box">
+          <div class="input-group">
+            <span class="input-group-text bg-white border-0">
+              <i class="fas fa-search" style="color: var(--islamic-gold);"></i>
+            </span>
+            <input type="text" class="form-control border-0" id="searchInput" placeholder="Search for documents, forms, or files...">
+            <button class="btn-gold border-0" type="button" id="searchButton">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="d-flex align-items-center h-100">
+          <label class="me-3 d-none d-lg-block" style="color: var(--islamic-green);">Filter by:</label>
+          <select class="form-select border-2" id="categoryFilter" style="border-color: var(--islamic-gold); border-radius: 8px;">
+            <option value="all">All Categories</option>
+            <option value="forms">Forms</option>
+            <option value="applications">Applications</option>
+            <option value="documents">Documents</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4" id="downloadsContainer" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-md-6 col-lg-4 download-item" data-category="applications" data-name="application form">
+        <div class="download-card h-100">
+          <div class="p-4 text-center">
+            <div class="download-icon-wrapper">
+              <i class="fas fa-file-alt download-icon"></i>
+            </div>
+            <h5 class="fw-bold mb-3" style="color: var(--islamic-green);">Application Form</h5>
+            <p class="text-muted mb-4">Complete application form for new admissions to Darunnajath Shareeath and Arts College.</p>
+            <div class="file-info">
+              <div class="d-flex justify-content-between mb-2">
+                <span><i class="fas fa-file-pdf me-1"></i>PDF Format</span>
+                <span><i class="fas fa-download me-1"></i>121 KB</span>
+              </div>
+              <div class="text-center">
+                <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i>Updated: January 2026</small>
+              </div>
+            </div>
+            <a href="https://crimson-night-427.linkyhost.com/" 
+               class="btn-gold mt-2 w-100" 
+               download="DSAC_Application_Form.pdf"
+               target="_blank"
+               rel="noopener noreferrer">
+              <i class="fas fa-download me-2"></i>Download Form
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 download-item" data-category="documents" data-name="admission brochure">
+        <div class="download-card h-100">
+          <div class="p-4 text-center">
+            <div class="download-icon-wrapper">
+              <i class="fas fa-book download-icon"></i>
+            </div>
+            <h5 class="fw-bold mb-3" style="color: var(--islamic-green);">Admission Brochure</h5>
+            <p class="text-muted mb-4">Detailed information about courses, facilities, and admission process for the academic year 2026-27.</p>
+            <div class="file-info">
+              <div class="d-flex justify-content-between mb-2">
+                <span><i class="fas fa-file-pdf me-1"></i>PDF Format</span>
+                <span><i class="fas fa-download me-1"></i>2.4 MB</span>
+              </div>
+              <div class="text-center">
+                <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i>Updated: December 2025</small>
+              </div>
+            </div>
+            <button class="btn-outline-gold mt-2 w-100" onclick="showComingSoon('Admission Brochure')">
+              <i class="fas fa-download me-2"></i>Coming Soon
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="download-card h-100" style="border: 2px dashed var(--islamic-gold); background: transparent; box-shadow: none;">
+          <div class="p-4 text-center d-flex flex-column align-items-center justify-content-center" style="min-height: 350px;">
+            <div class="download-icon-wrapper mb-3" style="background: rgba(10, 92, 54, 0.05);">
+              <i class="fas fa-plus download-icon" style="color: var(--islamic-gold);"></i>
+            </div>
+            <h5 class="text-muted mb-3">More Downloads Coming Soon</h5>
+            <p class="text-center text-muted">We're preparing additional forms and documents for you.</p>
+            <div class="mt-3">
+              <span class="badge badge-forms category-badge">Library Forms</span>
+              <span class="badge badge-applications category-badge">Leave Applications</span>
+              <span class="badge badge-documents category-badge">Certificates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5 d-none" id="noResults">
+      <div class="col-12">
+        <div class="text-center py-5">
+          <div class="display-1 text-muted mb-4">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <h4 class="mb-3" style="color: var(--islamic-green);">No matching downloads found</h4>
+          <p class="text-muted mb-4">Try adjusting your search terms or select a different category</p>
+          <button class="btn-outline-gold" id="resetFilters">
+            <i class="fas fa-redo-alt me-2"></i>Reset All Filters
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5" data-aos="fade-up" data-aos-delay="300">
+      <div class="col-12">
+        <div class="stats-card">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="mb-2" style="color: var(--islamic-green);"><i class="fas fa-chart-line me-2"></i>Download Statistics</h5>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <div class="stats-number" id="totalDownloads">0</div>
+              <small class="text-muted">Total Downloads</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="index.html" class="btn-outline-gold btn-lg px-5">
+        <i class="fas fa-home me-2"></i>Back to Home
+      </a>
+    </div>
+  </div>
+</section>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    setupDownloads();
+    AOS.init({ duration: 800, once: true, offset: 50 });
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar-optimized');
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      navbar.classList.toggle('scrolled', scrollTop > 50);
+    });
+  });
+  
+  function setupDownloads() {
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const noResults = document.getElementById('noResults');
+    const resetFiltersBtn = document.getElementById('resetFilters');
+    const totalDownloadsEl = document.getElementById('totalDownloads');
+    const downloadItems = document.querySelectorAll('.download-item');
+    
+    let downloadCount = 0;
+    const savedCount = localStorage.getItem('totalDownloads');
+    if (savedCount) {
+      downloadCount = parseInt(savedCount);
+      totalDownloadsEl.textContent = downloadCount;
+    }
+
+    function filterDownloads() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      const selectedCategory = categoryFilter.value;
+      let visibleCount = 0;
+
+      downloadItems.forEach(item => {
+        const itemName = item.getAttribute('data-name').toLowerCase();
+        const itemCategory = item.getAttribute('data-category');
+        
+        const matchesSearch = itemName.includes(searchTerm);
+        const matchesCategory = selectedCategory === 'all' || itemCategory === selectedCategory;
+        
+        if (matchesSearch && matchesCategory) {
+          item.style.display = 'block';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('d-none');
+      } else {
+        noResults.classList.add('d-none');
+      }
+    }
+
+    searchInput.addEventListener('input', filterDownloads);
+    searchButton.addEventListener('click', filterDownloads);
+    categoryFilter.addEventListener('change', filterDownloads);
+
+    resetFiltersBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      categoryFilter.value = 'all';
+      filterDownloads();
+      searchInput.focus();
+    });
+
+    document.querySelectorAll('.btn-gold[href]').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const originalHTML = this.innerHTML;
+        this.innerHTML = '<span class="visually-hidden">Downloading...</span>';
+        this.classList.add('loading');
+        
+        setTimeout(() => {
+          this.innerHTML = originalHTML;
+          this.classList.remove('loading');
+          
+          downloadCount++;
+          totalDownloadsEl.textContent = downloadCount;
+          localStorage.setItem('totalDownloads', downloadCount);
+          
+          showNotification('Download started', 'Your file is being downloaded...', 'success');
+        }, 1500);
+      });
+    });
+
+    filterDownloads();
+  }
+
+  function showComingSoon(itemName) {
+    showNotification('Coming Soon', `${itemName} will be available soon.`, 'info');
+  }
+
+  function showNotification(title, message, type) {
+    const toast = document.createElement('div');
+    toast.className = 'position-fixed bottom-0 end-0 p-3';
+    toast.style.zIndex = '1050';
+    
+    const bgColor = type === 'success' ? 'var(--islamic-green)' : 'var(--islamic-gold)';
+    const icon = type === 'success' ? 'check-circle' : 'info-circle';
+    
+    toast.innerHTML = `
+      <div class="toast show" role="alert" style="background: white; border-left: 4px solid ${bgColor};">
+        <div class="toast-header" style="border-bottom: 1px solid #dee2e6;">
+          <i class="fas fa-${icon} me-2" style="color: ${bgColor};"></i>
+          <strong class="me-auto">${title}</strong>
+          <button type="button" class="btn-close" onclick="this.parentElement.parentElement.parentElement.remove()"></button>
+        </div>
+        <div class="toast-body">
+          ${message}
+        </div>
+      </div>
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.remove();
+      }
+    }, 4000);
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      });
+    });
+  });
+</script>
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+      document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          const target = document.querySelector(toggle.getAttribute('data-bs-target'));
+          const bsCollapse = new bootstrap.Collapse(target, { toggle: true });
+        });
+      });
+    })
+    .catch(error => console.error('Navbar load error:', error));
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Footer load error:', error));
+</script> 
+</body>
+</html>
+

@@ -1,0 +1,1600 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSAC | Fest</title>
+  <meta name="description" content="Jashne Najath 2K25 - അന്യോന്യം" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --islamic-green: #0a5c36; --islamic-gold: #c19a3f; --islamic-cream: #f8f3e6; --dark-green: #064e3b; --transition: all 0.3s ease; --jaihoon: #16a34a; --saihoon: #6366f1;
+    }
+    body {
+      font-family: 'Poppins', sans-serif; background-color: var(--islamic-cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; padding-top: 80px;
+    }
+    a {text-decoration: none;}
+    .navbar-optimized {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 3px solid var(--islamic-gold); transition: var(--transition); padding: 0.5rem 0; height: 80px; z-index: 1030;
+    }
+    .navbar-toggler {border-color: rgba(255, 255, 255, 0.5);}
+    .navbar-toggler:focus {box-shadow: 0 0 0 2px var(--islamic-gold);}
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .navbar-optimized.scrolled {
+      background: rgba(10, 92, 54, 0.98); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); height: 70px;
+    }
+    .navbar-brand-compact img {
+      border-radius: 8px; transition: transform 0.3s ease; width: 60px; height: 60px; object-fit: contain; filter: brightness(0) invert(1); border: none; box-shadow: 0 0 0 2px var(--islamic-gold); padding: 0;
+    }
+    .navbar-optimized.scrolled .navbar-brand-compact img {width: 50px; height: 50px;}
+    .navbar-brand-compact:hover img {transform: scale(1.05);}
+    .brand-text {font-size: 1.2rem; line-height: 1.2;}
+    .brand-subtext {font-size: 0.8rem; opacity: 0.9;}
+    .nav-link-optimized {
+      color: #fff !important; font-weight: 500; transition: var(--transition); padding-left: 0.4rem; padding-right: 0.4rem; border-radius: 5px; margin: 0 2px; white-space: nowrap;
+    }
+    .nav-item-optimized {margin: 0 2px;}
+    .nav-link-optimized:hover {color: var(--islamic-gold) !important; background: rgba(255, 255, 255, 0.1);}
+    .dropdown-menu-optimized {
+      background: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 8px; padding: 0.5rem 0;
+    }
+    .dropdown-item-optimized {
+      color: white; padding: 0.5rem 1rem; transition: var(--transition);
+    }
+    .dropdown-item-optimized:hover {background: var(--islamic-gold); color: var(--islamic-green);}
+    .page-header {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; height: 30vh; min-height: 220px; display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; border-bottom: 5px solid var(--islamic-gold); position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 30%, rgba(193, 154, 63, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(10, 92, 54, 0.1) 0%, transparent 50%);
+    }
+    .page-header-content {position: relative; z-index: 2;}
+    .page-title {
+      font-family: 'Scheherazade New', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--islamic-gold); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .page-subtitle {
+      font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; color: var(--islamic-cream);
+    }
+    .content-section {padding: 4rem 0; background: var(--islamic-cream);}
+    .section-header {
+      text-align: center; margin-bottom: 3rem; position: relative; padding: 2rem 0;
+    }
+    .section-title {
+      color: var(--islamic-green); font-weight: 700; display: inline-block; padding: 0 1rem; background: var(--islamic-cream); position: relative; z-index: 2; margin-bottom: 0.5rem; font-size: 2.5rem;
+    }
+    .section-header::before {
+      content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent); z-index: 1;
+    }
+    .section-subtitle {color: #666; font-size: 1.1rem; max-width: 700px; margin: 0 auto;}
+    .btn-gold {
+      background: linear-gradient(135deg, var(--islamic-gold), #d4af37); border: none; color: var(--islamic-green); font-weight: 600; border-radius: 8px; box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3); transition: var(--transition); padding: 0.75rem 1.5rem;
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #d4af37, var(--islamic-gold)); box-shadow: 0 6px 20px rgba(193, 154, 63, 0.4); transform: translateY(-2px); color: var(--islamic-green);
+    }
+    .btn-outline-gold {
+      border: 2px solid var(--islamic-gold); color: var(--islamic-gold); background: transparent; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; transition: var(--transition);
+    }
+    .btn-outline-gold:hover {background: var(--islamic-gold); color: var(--islamic-green);}
+    .section-active { display: block; }
+    .section-hidden { display: none; }
+    .nav-tab-active {
+      background: linear-gradient(135deg, var(--islamic-green) 0%, var(--dark-green) 100%) !important; color: white !important;
+    }
+    .loader {
+      border: 4px solid #f3f3f3; border-top: 4px solid var(--islamic-green); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .topper-rank-1 { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); }
+    .topper-rank-2 { background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 100%); }
+    .topper-rank-3 { background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%); }
+    .fest-nav {
+      background: white; border-bottom: 2px solid var(--islamic-gold); position: relative; z-index: 1000; margin-bottom: 2rem;
+    }
+    .fest-nav-container {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 0.5rem 0;
+    }
+    .fest-nav-tab {
+      padding: 0.75rem 1.5rem; border: none; background: transparent; color: #666; font-weight: 500; border-radius: 8px; transition: var(--transition); display: flex; align-items: center; gap: 8px;
+    }
+    .fest-nav-tab:hover {background: rgba(10, 92, 54, 0.1); color: var(--islamic-green);}
+    .fest-card {
+      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; position: relative;
+    }
+    .fest-card:hover {transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);}
+    .modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; overflow-y: auto;
+    }
+    .modal-content {
+      background-color: white; margin: 5% auto; padding: 0; border-radius: 20px; width: 90%; max-width: 800px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); animation: modalFadeIn 0.3s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from {opacity: 0; transform: translateY(-50px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .modal-header {
+      padding: 24px 32px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; border-radius: 20px 20px 0 0;
+    }
+    .modal-body {padding: 32px; max-height: 70vh; overflow-y: auto;}
+    .close-modal {
+      background: none; border: none; font-size: 28px; cursor: pointer; color: white; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; transition: all 0.2s;
+    }
+    .close-modal:hover {background-color: rgba(255, 255, 255, 0.1);}
+    .stats-card {
+      background: white; border-radius: 15px; padding: 2rem; text-align: center; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .stats-card:hover {border-color: var(--islamic-gold); transform: translateY(-5px);}
+    .stats-number {font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--islamic-green);}
+    .team-card {
+      background: white; border-radius: 15px; padding: 2rem; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .team-card.jaihoon:hover {border-color: #16a34a;}
+    .team-card.saihoon:hover {border-color: #6366f1;}
+    .team-score {font-size: 4rem; font-weight: 800; margin-bottom: 0.5rem;}
+    .jaihoon-score {color: #16a34a;}
+    .saihoon-score {color: #6366f1;}
+    .filter-buttons {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 2rem;
+    }
+    .filter-btn {
+      padding: 0.75rem 1.5rem; border: none; background: white; color: #666; font-weight: 500; border-radius: 8px; transition: var(--transition); border: 2px solid transparent;
+    }
+    .filter-btn:hover {background: rgba(10, 92, 54, 0.1); color: var(--islamic-green);}
+    .filter-btn.active {background: var(--islamic-green); color: white; border-color: var(--islamic-gold);}
+    .search-box {
+      background: white; border: 2px solid var(--islamic-gold); border-radius: 50px; padding: 0.75rem 1.5rem; transition: var(--transition); max-width: 500px; margin: 0 auto 2rem;
+    }
+    .search-box:focus-within {box-shadow: 0 0 20px rgba(193, 154, 63, 0.3);}
+    .search-box input {border: none; outline: none; width: 100%; background: transparent;}
+    .footer {
+      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-top: 3px solid var(--islamic-gold); padding: 3rem 0 1.5rem; color: white;
+    }
+    .footer-brand {font-size: 1.8rem; font-weight: 700; color: var(--islamic-gold); margin-bottom: 1rem;}
+    .social-links {display: flex; gap: 12px; margin-top: 1rem;}
+    .social-icon {
+      width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); background: rgba(255, 255, 255, 0.1); font-size: 1.1rem;
+    }
+    .social-icon:hover {transform: translateY(-5px); background: var(--islamic-gold); color: var(--islamic-green);}
+    .footer-links h5 {color: var(--islamic-gold); margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 600;}
+    .footer-links a {
+      display: block; color: rgba(255, 255, 255, 0.85); text-decoration: none; margin-bottom: 0.6rem; transition: var(--transition); font-size: 0.95rem;
+    }
+    .footer-links a:hover {color: var(--islamic-gold); padding-left: 5px;}
+    .whatsapp-float {
+      position: fixed; bottom: 25px; right: 15px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 1000; animation: float 3s ease-in-out infinite; transition: var(--transition); text-decoration: none;
+    }
+    .whatsapp-float:hover {transform: scale(1.1) rotate(10deg); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);}
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .islamic-ornament {
+      position: fixed; color: var(--islamic-gold); opacity: 0.08; font-size: 1.8rem; z-index: -1; pointer-events: none;
+    }
+    .ornament-1 {top: 20%; left: 5%; animation: float 6s ease-in-out infinite;}
+    .ornament-2 {top: 60%; right: 5%; animation: float 8s ease-in-out infinite reverse;}
+    .ornament-3 {bottom: 20%; left: 10%; animation: float 7s ease-in-out infinite;}
+    @media (max-width: 768px) {
+      body {padding-top: 70px !important;}
+      .navbar-optimized {height: 70px; padding: 0.3rem 0;}
+      .page-header {height: 26vh; min-height: 180px;}
+      .page-title {font-size: 2.2rem;}
+      .page-subtitle {font-size: 1.1rem;}
+      .content-section {padding: 2.5rem 0;}
+      .section-title {font-size: 1.8rem;}
+      .navbar-collapse {
+        background: var(--dark-green); padding: 1rem; border-radius: 0 0 10px 10px; border: 1px solid var(--islamic-gold); margin-top: 0px; max-height: 70vh; overflow-y: auto;
+      }
+      .fest-nav-container {flex-direction: column; gap: 5px;}
+      .fest-nav-tab {padding: 0.75rem 1rem; font-size: 0.9rem;}
+      .stats-number {font-size: 2rem;}
+      .team-score {font-size: 3rem;}
+      .modal-content {width: 95%; margin: 2% auto;}
+    }
+    @media (max-width: 576px) {
+      .page-title {font-size: 1.8rem;}
+      .section-title {font-size: 1.5rem;}
+    }
+    @media (min-width: 992px) {
+      .dropdown-submenu {  position: relative;  }
+      .dropdown-submenu:hover > .collapse {    display: block !important;  }
+      .dropdown-submenu .collapse {    position: absolute;    top: 0;    left: 100%;    z-index: 1000;    min-width: 12rem;    padding: 0.5rem 0;    margin: 0;    font-size: 1rem;    background-color: var(--islamic-green);    border: 1px solid var(--islamic-gold);    border-radius: 0 0.5rem 0.5rem 0.5rem;  }
+      .dropdown-submenu > a:after {    content: "›";    float: right;    margin-right: -0.5rem;    font-size: 1.2rem;  }
+    }
+    @media (max-width: 991px) {
+      .dropdown-submenu .collapse {    position: static;    width: auto;    border: none;    box-shadow: none;    background: rgba(0,0,0,0.1);
+    margin-left: 1.2rem;  }
+    }
+
+  </style>
+</head>
+<body>
+<div class="islamic-ornament ornament-1">✸</div>
+<div class="islamic-ornament ornament-2">✸</div>
+<div class="islamic-ornament ornament-3">✸</div>
+<div id="navbar-container"></div>
+<div class="page-header">
+  <div class="container">
+    <div class="page-header-content">
+      <h1 class="page-title">Jashne Najath Arts Fest</h1>
+      <p class="page-subtitle">അന്യോന്യം'25 - October 01 - 02, 2025</p>
+    </div>
+  </div>
+</div>
+<div class="fest-nav" data-aos="fade-down">
+  <div class="container">
+    <div class="fest-nav-container">
+      <button class="fest-nav-tab nav-tab-active" data-section="home"><i class="fas fa-home"></i> Home</button>
+      <button class="fest-nav-tab" data-section="results"><i class="fas fa-trophy"></i> Results</button>
+      <button class="fest-nav-tab" data-section="team"><i class="fas fa-users"></i> Teams</button>
+      <button class="fest-nav-tab" data-section="scoreboard"><i class="fas fa-chart-line"></i> Scoreboard</button>
+      <button class="fest-nav-tab" data-section="programs"><i class="fas fa-microphone"></i> Programs</button>
+      <button class="fest-nav-tab" data-section="toppers"><i class="fas fa-crown"></i> Toppers</button>
+    </div>
+  </div>
+</div>
+<div id="program-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="text-white mb-0" id="modal-program-title">Program Results</h2>
+      <button class="close-modal" id="close-modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="modal-program-content"></div>
+    </div>
+  </div>
+</div>
+<main>
+  <section id="home-section" class="section-active content-section">
+    <div class="container">
+      <div class="row align-items-center mb-5" data-aos="fade-up">
+        <div class="col-lg-6">
+          <div class="p-4 mb-4 bg-white rounded-3 shadow-sm">
+            <span class="badge bg-gold text-dark fs-6 mb-3">October 01 - 02, 2025</span>
+            <h2 class="mb-3" style="color: var(--islamic-green);">
+              Jashne Najath<br>
+              <span style="color: var(--jaihoon);">Arts Fest 2K25</span>
+            </h2>
+            <p class="fs-5 text-secondary mb-4">
+              Darunnajath Shareeath & Arts College presents <strong>"അന്യോന്യം"</strong>
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+              <button class="btn-gold" data-section="results">View Results</button>
+              <button class="btn-outline-gold" data-section="scoreboard">Live Scores</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src="https://i.ibb.co/DgHYHFS1/Whats-App-Image-2025-11-26-at-8-50-51-PM.jpg" 
+               alt="Fest Logo" 
+               class="img-fluid rounded-3 shadow">
+        </div>
+      </div>
+      <div class="row g-4 mt-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-md-3 col-6">
+          <div class="stats-card">
+            <div class="stats-number">50+</div>
+            <div class="text-secondary">Programs</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-card">
+            <div class="stats-number" style="color: var(--saihoon);">50+</div>
+            <div class="text-secondary">Contestants</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-card">
+            <div class="stats-number" style="color: var(--islamic-gold);">4</div>
+            <div class="text-secondary">Categories</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-card">
+            <div class="stats-number" style="color: var(--islamic-green);">2</div>
+            <div class="text-secondary">Teams</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <button onclick="window.location.href='index.html'" class="btn-outline-gold btn-lg px-5">
+        <i class="fas fa-home me-2"></i>Back to Home
+      </button>
+    </div>
+  </section>
+  <section id="results-section" class="section-hidden content-section bg-white">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Event Results</h2>
+        <p class="section-subtitle">Check the latest results from all competitions</p>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All Results</button>
+        <button class="filter-btn" data-filter="General">General</button>
+        <button class="filter-btn" data-filter="Group">Group</button>
+        <button class="filter-btn" data-filter="Sub Junior">Sub Junior</button>
+        <button class="filter-btn" data-filter="Junior">Junior</button>
+        <button class="filter-btn" data-filter="Senior">Senior</button>
+      </div>
+      <div id="results-container" class="row g-4">
+        <div class="col-12 text-center py-5">
+          <div class="loader mx-auto mb-3"></div>
+          <p class="text-secondary">Loading results...</p>
+        </div>
+      </div>
+      <div id="no-results" class="text-center py-5 d-none">
+        <h4 class="text-secondary mb-3">No Results Published Yet</h4>
+        <p class="text-muted">Results will be displayed here as soon as they are available.</p>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <button onclick="window.location.href='index.html'" class="btn-outline-gold btn-lg px-5">
+        <i class="fas fa-home me-2"></i>Back to Home
+      </button>
+    </div>
+  </section>
+  <section id="team-section" class="section-hidden content-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Competing Teams</h2>
+        <p class="section-subtitle">Meet the teams and their leaders</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="team-card jaihoon h-100">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div>
+                <h3 class="mb-1" style="color: var(--jaihoon);">Jaihoon</h3>
+                <p class="text-muted mb-0">Team Green</p>
+              </div>
+              <div class="display-6 fw-bold" style="color: var(--jaihoon);">#1</div>
+            </div>
+            <div class="text-center mb-4">
+              <div class="team-score jaihoon-score" id="team-jaihoon-score">0</div>
+              <div class="text-muted">Total Points</div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-3 rounded" style="background: rgba(22, 163, 74, 0.1);">
+                  <div class="text-sm text-muted">Leader</div>
+                  <div class="fw-bold">ANSHIF P</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 rounded" style="background: rgba(22, 163, 74, 0.1);">
+                  <div class="text-sm text-muted">Assistant Leader</div>
+                  <div class="fw-bold" id="assistant-leader-jaihoon">MUHAMMED SHIBIN K</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="team-card saihoon h-100">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div>
+                <h3 class="mb-1" style="color: var(--saihoon);">Saihoon</h3>
+                <p class="text-muted mb-0">Team Blue</p>
+              </div>
+              <div class="display-6 fw-bold" style="color: var(--saihoon);">#2</div>
+            </div>
+            <div class="text-center mb-4">
+              <div class="team-score saihoon-score" id="team-saihoon-score">0</div>
+              <div class="text-muted">Total Points</div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-3 rounded" style="background: rgba(99, 102, 241, 0.1);">
+                  <div class="text-sm text-muted">Leader</div>
+                  <div class="fw-bold">MUHAMMED ASHIK O P</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 rounded" style="background: rgba(99, 102, 241, 0.1);">
+                  <div class="text-sm text-muted">Assistant Leader</div>
+                  <div class="fw-bold" id="assistant-leader-saihoon">MUHAMMED SINAN KP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <button onclick="window.location.href='index.html'" class="btn-outline-gold btn-lg px-5">
+        <i class="fas fa-home me-2"></i>Back to Home
+      </button>
+    </div>
+  </section>
+  <section id="scoreboard-section" class="section-hidden content-section bg-white">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Live Scoreboard</h2>
+        <p class="section-subtitle">Track real-time scores and standings</p>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn" data-category="Total" style="background: var(--islamic-green); color: white;">Total Score</button>
+        <button class="filter-btn active" data-category="General">General</button>
+        <button class="filter-btn" data-category="Group">Group</button>
+        <button class="filter-btn" data-category="Sub Junior">Sub Junior</button>
+        <button class="filter-btn" data-category="Junior">Junior</button>
+        <button class="filter-btn" data-category="Senior">Senior</button>
+      </div>
+      <div class="row g-4 justify-content-center mb-5">
+        <div class="col-md-6" data-aos="fade-right">
+          <div class="text-center p-4 rounded-3 shadow-sm" style="border: 3px solid var(--jaihoon);">
+            <h3 class="mb-3" style="color: var(--jaihoon);">Jaihoon</h3>
+            <div class="display-1 fw-bold" style="color: var(--jaihoon);" id="score-jaihoon">0</div>
+            <div class="text-muted" id="score-label-jaihoon">Points</div>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-left">
+          <div class="text-center p-4 rounded-3 shadow-sm" style="border: 3px solid var(--saihoon);">
+            <h3 class="mb-3" style="color: var(--saihoon);">Saihoon</h3>
+            <div class="display-1 fw-bold" style="color: var(--saihoon);" id="score-saihoon">0</div>
+            <div class="text-muted" id="score-label-saihoon">Points</div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="p-4 rounded-3 shadow-sm bg-white">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="text-muted">Last Updated</div>
+                <div class="fw-bold" id="last-updated">Loading...</div>
+              </div>
+              <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <button class="btn-gold" id="refresh-scores">
+                  <i class="fas fa-sync-alt me-2"></i>Refresh Scores
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <button onclick="window.location.href='index.html'" class="btn-outline-gold btn-lg px-5">
+        <i class="fas fa-home me-2"></i>Back to Home
+      </button>
+    </div>
+  </section>
+  <section id="toppers-section" class="section-hidden content-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Top Performers</h2>
+        <p class="section-subtitle">Celebrating outstanding achievements</p>
+      </div>
+      <div class="row justify-content-center mb-5" data-aos="fade-up">
+        <div class="col-md-8">
+          <div class="p-4 rounded-3 shadow-sm bg-white">
+            <h4 class="text-center mb-4" style="color: var(--islamic-green);">Check Your Score</h4>
+            <div class="row g-3">
+              <div class="col-md-8">
+                <div class="search-box">
+                  <input type="text" 
+                         id="chest-number-input" 
+                         class="form-control border-0" 
+                         placeholder="Enter Chest Number" 
+                         maxlength="10">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <button class="btn-gold w-100" id="search-chest-btn">
+                  Get Score
+                </button>
+              </div>
+            </div>
+            <div id="chest-result" class="mt-4"></div>
+          </div>
+        </div>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-topper-category="all">All Toppers</button>
+        <button class="filter-btn" data-topper-category="General">General</button>
+        <button class="filter-btn" data-topper-category="Sub Junior">Sub Junior</button>
+        <button class="filter-btn" data-topper-category="Junior">Junior</button>
+        <button class="filter-btn" data-topper-category="Senior">Senior</button>
+      </div>
+      <div id="toppers-container" class="mt-4">
+        <div class="text-center py-5">
+          <div class="loader mx-auto mb-3"></div>
+          <p class="text-secondary">Loading toppers data...</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <button onclick="window.location.href='index.html'" class="btn-outline-gold btn-lg px-5">
+        <i class="fas fa-home me-2"></i>Back to Home
+      </button>
+    </div>
+  </section>
+  <section id="programs-section" class="section-hidden content-section bg-white">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">All Programs</h2>
+        <p class="section-subtitle">Browse through all competition programs</p>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-program-filter="all">All</button>
+        <button class="filter-btn" data-program-filter="General">General</button>
+        <button class="filter-btn" data-program-filter="Group">Group</button>
+        <button class="filter-btn" data-program-filter="Sub Junior">Sub Junior</button>
+        <button class="filter-btn" data-program-filter="Junior">Junior</button>
+        <button class="filter-btn" data-program-filter="Senior">Senior</button>
+      </div>
+      <div id="programs-container" class="row g-4">
+        <div class="col-12 text-center py-5">
+          <div class="loader mx-auto mb-3"></div>
+          <p class="text-secondary">Loading programs...</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5" data-aos="fade-up">
+      <button onclick="window.location.href='index.html'" class="btn-outline-gold btn-lg px-5">
+        <i class="fas fa-home me-2"></i>Back to Home
+      </button>
+    </div>
+  </section>
+</main>
+<div id="footer-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  const SHEET_ID = '1vk_hE-Ja5d8kZdzuj7jeYxlunTyopx0p9HjzJcGFl0c';
+  const SCOREBOARD_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Scoreboard`;
+  const RESULTS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Results`;
+  const CANDIDATE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Candidate`;
+  const EVENT_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Event`;
+  const TEAM_LEADERS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=TeamLeaders`;
+  
+  let scoreboardData = {};
+  let allResults = [];
+  let allCandidates = [];
+  let allEvents = [];
+  let teamLeaders = {};
+  let currentCategory = 'General';
+  let currentFilter = 'all';
+  let currentTopperCategory = 'all';
+  let currentProgramFilter = 'all';
+  let totalScores = { jaihoon: 0, saihoon: 0 };
+  
+  const sections = {
+    home: document.getElementById('home-section'),
+    results: document.getElementById('results-section'),
+    team: document.getElementById('team-section'),
+    scoreboard: document.getElementById('scoreboard-section'),
+    programs: document.getElementById('programs-section'),
+    toppers: document.getElementById('toppers-section')
+  };
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    setupNavigation();
+    setupModal();
+    loadScoreboard();
+    loadResults();
+    loadCandidates();
+    loadEvents();
+    loadTeamLeaders();
+    AOS.init({ duration: 800, once: true, offset: 50 });
+    
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar-optimized');
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      navbar.classList.toggle('scrolled', scrollTop > 50);
+    });
+  });
+  
+  function setupNavigation() {
+    document.querySelectorAll('.fest-nav-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const sectionId = this.getAttribute('data-section');
+        showSection(sectionId);
+        
+        document.querySelectorAll('.fest-nav-tab').forEach(t => {
+          t.classList.remove('nav-tab-active');
+        });
+        this.classList.add('nav-tab-active');
+      });
+    });
+    
+    document.querySelectorAll('#home-section button[data-section]').forEach(button => {
+      button.addEventListener('click', function() {
+        const sectionId = this.getAttribute('data-section');
+        showSection(sectionId);
+      });
+    });
+    
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const filter = this.getAttribute('data-filter');
+        
+        document.querySelectorAll('.filter-btn[data-filter]').forEach(b => {
+          b.classList.remove('active');
+        });
+        
+        this.classList.add('active');
+        displayResults(filter);
+      });
+    });
+    
+    document.querySelectorAll('.filter-btn[data-category]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        updateScoreboard(category);
+        
+        document.querySelectorAll('.filter-btn[data-category]').forEach(b => {
+          b.classList.remove('active');
+        });
+        
+        this.classList.add('active');
+      });
+    });
+    
+    document.querySelectorAll('.filter-btn[data-topper-category]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const category = this.getAttribute('data-topper-category');
+        updateToppersCategory(category);
+        
+        document.querySelectorAll('.filter-btn[data-topper-category]').forEach(b => {
+          b.classList.remove('active');
+        });
+        
+        this.classList.add('active');
+      });
+    });
+    
+    document.querySelectorAll('.filter-btn[data-program-filter]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const filter = this.getAttribute('data-program-filter');
+        updateProgramFilter(filter);
+        
+        document.querySelectorAll('.filter-btn[data-program-filter]').forEach(b => {
+          b.classList.remove('active');
+        });
+        
+        this.classList.add('active');
+      });
+    });
+    
+    document.getElementById('search-chest-btn').addEventListener('click', searchChestNumber);
+    document.getElementById('chest-number-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') searchChestNumber();
+    });
+    
+    document.getElementById('refresh-scores').addEventListener('click', function() {
+      loadScoreboard();
+    });
+  }
+  
+  function setupModal() {
+    const modal = document.getElementById('program-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    
+    closeModalBtn.addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.style.display === 'block') {
+        closeModal();
+      }
+    });
+  }
+  
+  function openModal() {
+    const modal = document.getElementById('program-modal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById('program-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+  
+  function showSection(sectionId) {
+    Object.values(sections).forEach(section => {
+      section.classList.remove('section-active');
+      section.classList.add('section-hidden');
+    });
+    
+    if (sections[sectionId]) {
+      sections[sectionId].classList.remove('section-hidden');
+      sections[sectionId].classList.add('section-active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      if (sectionId === 'toppers') {
+        displayToppers(currentTopperCategory);
+      } else if (sectionId === 'results') {
+        displayResults(currentFilter);
+      }
+    }
+  }
+  
+  function loadScoreboard() {
+    fetch(SCOREBOARD_URL)
+      .then(res => res.text())
+      .then(csv => {
+        const rows = parseCSV(csv);
+        scoreboardData = {};
+        
+        rows.forEach(row => {
+          if (row.length >= 3) {
+            const category = row[0].trim();
+            scoreboardData[category] = {
+              jaihoon: parseInt(row[1]) || 0,
+              saihoon: parseInt(row[2]) || 0
+            };
+          }
+        });
+        
+        calculateTotalScores();
+        updateScoreboard(currentCategory);
+        updateTeamScores();
+        document.getElementById('last-updated').textContent = new Date().toLocaleString('en-IN');
+      })
+      .catch(err => {
+        console.error('Error loading scoreboard:', err);
+        document.getElementById('last-updated').textContent = 'Failed to load';
+      });
+  }
+  
+  function loadResults() {
+    fetch(RESULTS_URL)
+      .then(res => res.text())
+      .then(csv => {
+        const rows = parseCSV(csv);
+        allResults = [];
+        
+        for (let i = 1; i < rows.length; i++) {
+          const row = rows[i];
+          if (row.length >= 19) {
+            allResults.push({
+              no: row[0] || '',
+              eventCode: row[1] || '',
+              event: row[2] || '',
+              category: cleanCategoryName(row[3] || ''),
+              firstChestNo: row[4] || '',
+              secondChestNo: row[5] || '',
+              thirdChestNo: row[6] || '',
+              firstName: row[7] || '',
+              secondName: row[8] || '',
+              thirdName: row[9] || '',
+              firstGroup: row[10] || '',
+              secondGroup: row[11] || '',
+              thirdGroup: row[12] || '',
+              firstPoint: parseInt(row[13]) || 0,
+              secondPoint: parseInt(row[14]) || 0,
+              thirdPoint: parseInt(row[15]) || 0,
+              firstGradePoint: parseInt(row[16]) || 0,
+              secondGradePoint: parseInt(row[17]) || 0,
+              thirdGradePoint: parseInt(row[18]) || 0
+            });
+          }
+        }
+        
+        allResults.reverse();
+        displayResults(currentFilter);
+      })
+      .catch(err => {
+        console.error('Error loading results:', err);
+      });
+  }
+  
+  function loadCandidates() {
+    fetch(CANDIDATE_URL)
+      .then(res => res.text())
+      .then(csv => {
+        const rows = parseCSV(csv);
+        allCandidates = [];
+        
+        for (let i = 1; i < rows.length; i++) {
+          const row = rows[i];
+          if (row.length >= 4) {
+            allCandidates.push({
+              chestNo: row[0] || '',
+              name: row[1] || '',
+              team: row[2] || '',
+              category: row[3] || ''
+            });
+          }
+        }
+      })
+      .catch(err => {
+        console.error('Error loading candidates:', err);
+      });
+  }
+  
+  function loadEvents() {
+    fetch(EVENT_URL)
+      .then(res => res.text())
+      .then(csv => {
+        const rows = parseCSV(csv);
+        allEvents = [];
+        
+        for (let i = 1; i < rows.length; i++) {
+          const row = rows[i];
+          if (row.length >= 4) {
+            allEvents.push({
+              event: row[1] || '',
+              eventCode: row[0] || '',
+              type: row[2] || '',
+              category: cleanCategoryName(row[3] || '')
+            });
+          }
+        }
+        
+        displayPrograms();
+      })
+      .catch(err => {
+        console.error('Error loading events:', err);
+      });
+  }
+  
+  function loadTeamLeaders() {
+    fetch(TEAM_LEADERS_URL)
+      .then(res => res.text())
+      .then(csv => {
+        const rows = parseCSV(csv);
+        teamLeaders = { jaihoon: {}, saihoon: {} };
+        
+        for (let i = 1; i < rows.length; i++) {
+          const row = rows[i];
+          if (row.length >= 3) {
+            const team = row[0].toLowerCase().trim();
+            const position = row[1].toLowerCase().trim();
+            const name = row[2].trim();
+            
+            if (team.includes('jaihoon')) {
+              teamLeaders.jaihoon[position] = name;
+            } else if (team.includes('saihoon')) {
+              teamLeaders.saihoon[position] = name;
+            }
+          }
+        }
+        
+        if (teamLeaders.jaihoon.assistant || teamLeaders.jaihoon['assistant leader']) {
+          document.getElementById('assistant-leader-jaihoon').textContent = 
+            teamLeaders.jaihoon.assistant || teamLeaders.jaihoon['assistant leader'];
+        }
+        
+        if (teamLeaders.saihoon.assistant || teamLeaders.saihoon['assistant leader']) {
+          document.getElementById('assistant-leader-saihoon').textContent = 
+            teamLeaders.saihoon.assistant || teamLeaders.saihoon['assistant leader'];
+        }
+      })
+      .catch(err => {
+        console.error('Error loading team leaders:', err);
+      });
+  }
+  
+  function cleanCategoryName(category) {
+    if (!category) return '';
+    
+    category = category.replace('SENIOR - ', '')
+                      .replace('Non stage', '')
+                      .replace('Non Stage', '')
+                      .trim();
+    
+    const categoryMap = {
+      'general': 'General',
+      'group': 'Group',
+      'sub junior': 'Sub Junior',
+      'junior': 'Junior',
+      'senior': 'Senior'
+    };
+    
+    const lowerCategory = category.toLowerCase();
+    for (const key in categoryMap) {
+      if (lowerCategory.includes(key)) {
+        return categoryMap[key];
+      }
+    }
+    
+    return category;
+  }
+  
+  function calculateTotalScores() {
+    totalScores = { jaihoon: 0, saihoon: 0 };
+    
+    for (const category in scoreboardData) {
+      if (category !== 'Total') {
+        totalScores.jaihoon += scoreboardData[category].jaihoon || 0;
+        totalScores.saihoon += scoreboardData[category].saihoon || 0;
+      }
+    }
+    
+    if (scoreboardData['Total']) {
+      totalScores = {
+        jaihoon: scoreboardData['Total'].jaihoon || 0,
+        saihoon: scoreboardData['Total'].saihoon || 0
+      };
+    }
+  }
+  
+  function parseCSV(csv) {
+    const lines = csv.trim().split('\n');
+    return lines.map(line => {
+      const result = [];
+      let inQuotes = false;
+      let currentField = '';
+      
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"' && line[i + 1] === '"') {
+          currentField += '"';
+          i++;
+        } else if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          result.push(currentField);
+          currentField = '';
+        } else {
+          currentField += char;
+        }
+      }
+      
+      result.push(currentField);
+      return result.map(cell => cell.trim());
+    });
+  }
+  
+  function updateScoreboard(category) {
+    currentCategory = category;
+    let data;
+    
+    if (category === 'Total') {
+      data = totalScores;
+      document.getElementById('score-label-jaihoon').textContent = 'Total Points';
+      document.getElementById('score-label-saihoon').textContent = 'Total Points';
+    } else {
+      data = scoreboardData[category] || { jaihoon: 0, saihoon: 0 };
+      document.getElementById('score-label-jaihoon').textContent = 'Points';
+      document.getElementById('score-label-saihoon').textContent = 'Points';
+    }
+    
+    document.getElementById('score-jaihoon').textContent = data.jaihoon || 0;
+    document.getElementById('score-saihoon').textContent = data.saihoon || 0;
+  }
+  
+  function updateTeamScores() {
+    document.getElementById('team-jaihoon-score').textContent = totalScores.jaihoon;
+    document.getElementById('team-saihoon-score').textContent = totalScores.saihoon;
+  }
+  
+  function displayResults(filter) {
+    currentFilter = filter;
+    const container = document.getElementById('results-container');
+    const noResults = document.getElementById('no-results');
+    
+    container.innerHTML = '';
+    
+    const filtered = filter === 'all' 
+      ? allResults 
+      : allResults.filter(r => r.category === filter);
+    
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <h4 class="text-secondary mb-3">No Results Available</h4>
+          <p class="text-muted">Results for ${filter} category will appear here when available.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    noResults.classList.add('d-none');
+    
+    filtered.forEach(result => {
+      const firstGroupBadge = getTeamBadge(result.firstGroup);
+      const secondGroupBadge = getTeamBadge(result.secondGroup);
+      const thirdGroupBadge = getTeamBadge(result.thirdGroup);
+      
+      const card = document.createElement('div');
+      card.className = 'col-lg-6 col-xl-4';
+      card.innerHTML = `
+        <div class="fest-card h-100">
+          <div class="p-4">
+            <div class="d-flex align-items-center mb-3">
+              <span class="badge bg-secondary me-2">${result.eventCode}</span>
+              <span class="badge bg-light text-dark">Event #${result.no}</span>
+            </div>
+            <h5 class="fw-bold mb-2">${result.event}</h5>
+            <div class="mb-3">
+              <span class="badge bg-light text-dark">${result.category}</span>
+            </div>
+            
+            ${result.firstName ? `
+              <div class="border-start border-3 border-warning ps-3 py-2 mb-3">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="text-sm text-muted">Chest No</div>
+                    <div class="fw-bold">${result.firstChestNo || '-'}</div>
+                  </div>
+                  ${firstGroupBadge}
+                </div>
+                <div class="fw-bold mt-1">${result.firstName}</div>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <span class="badge bg-warning text-dark">1st Place</span>
+                  <div>
+                    <span class="badge bg-light text-dark me-1">${result.firstPoint} pts</span>
+                    ${result.firstGradePoint > 0 ? `<span class="badge bg-success">${result.firstGradePoint} gp</span>` : ''}
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+            
+            ${result.secondName ? `
+              <div class="border-start border-3 border-secondary ps-3 py-2 mb-3">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="text-sm text-muted">Chest No</div>
+                    <div class="fw-bold">${result.secondChestNo || '-'}</div>
+                  </div>
+                  ${secondGroupBadge}
+                </div>
+                <div class="fw-bold mt-1">${result.secondName}</div>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <span class="badge bg-secondary">2nd Place</span>
+                  <div>
+                    <span class="badge bg-light text-dark me-1">${result.secondPoint} pts</span>
+                    ${result.secondGradePoint > 0 ? `<span class="badge bg-success">${result.secondGradePoint} gp</span>` : ''}
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+            
+            ${result.thirdName ? `
+              <div class="border-start border-3 border-danger ps-3 py-2">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="text-sm text-muted">Chest No</div>
+                    <div class="fw-bold">${result.thirdChestNo || '-'}</div>
+                  </div>
+                  ${thirdGroupBadge}
+                </div>
+                <div class="fw-bold mt-1">${result.thirdName}</div>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                  <span class="badge bg-danger">3rd Place</span>
+                  <div>
+                    <span class="badge bg-light text-dark me-1">${result.thirdPoint} pts</span>
+                    ${result.thirdGradePoint > 0 ? `<span class="badge bg-success">${result.thirdGradePoint} gp</span>` : ''}
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+      
+      container.appendChild(card);
+    });
+  }
+  
+  function displayToppers(category) {
+    currentTopperCategory = category;
+    const container = document.getElementById('toppers-container');
+    
+    container.innerHTML = '';
+    
+    if (allResults.length === 0) {
+      container.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <div class="loader mx-auto mb-3"></div>
+          <p class="text-secondary">Loading toppers data...</p>
+        </div>
+      `;
+      return;
+    }
+    
+    const candidatePoints = {};
+    
+    allResults.forEach(result => {
+      if (result.firstChestNo && result.firstName) {
+        const key = `${result.firstChestNo}-${result.firstName}`;
+        if (!candidatePoints[key]) {
+          candidatePoints[key] = {
+            chestNo: result.firstChestNo,
+            name: result.firstName,
+            team: result.firstGroup,
+            category: result.category,
+            totalPoints: 0,
+            totalGradePoints: 0,
+            events: []
+          };
+        }
+        candidatePoints[key].totalPoints += result.firstPoint || 0;
+        candidatePoints[key].totalGradePoints += result.firstGradePoint || 0;
+      }
+      
+      if (result.secondChestNo && result.secondName) {
+        const key = `${result.secondChestNo}-${result.secondName}`;
+        if (!candidatePoints[key]) {
+          candidatePoints[key] = {
+            chestNo: result.secondChestNo,
+            name: result.secondName,
+            team: result.secondGroup,
+            category: result.category,
+            totalPoints: 0,
+            totalGradePoints: 0,
+            events: []
+          };
+        }
+        candidatePoints[key].totalPoints += result.secondPoint || 0;
+        candidatePoints[key].totalGradePoints += result.secondGradePoint || 0;
+      }
+      
+      if (result.thirdChestNo && result.thirdName) {
+        const key = `${result.thirdChestNo}-${result.thirdName}`;
+        if (!candidatePoints[key]) {
+          candidatePoints[key] = {
+            chestNo: result.thirdChestNo,
+            name: result.thirdName,
+            team: result.thirdGroup,
+            category: result.category,
+            totalPoints: 0,
+            totalGradePoints: 0,
+            events: []
+          };
+        }
+        candidatePoints[key].totalPoints += result.thirdPoint || 0;
+        candidatePoints[key].totalGradePoints += result.thirdGradePoint || 0;
+      }
+    });
+    
+    const candidatesArray = Object.values(candidatePoints);
+    
+    const toppersByCategory = {};
+    candidatesArray.forEach(candidate => {
+      if (!toppersByCategory[candidate.category]) {
+        toppersByCategory[candidate.category] = [];
+      }
+      toppersByCategory[candidate.category].push(candidate);
+    });
+    
+    for (const cat in toppersByCategory) {
+      toppersByCategory[cat].sort((a, b) => b.totalPoints - a.totalPoints);
+    }
+    
+    if (category === 'all') {
+      const categoriesToShow = ['General', 'Sub Junior', 'Junior', 'Senior', 'Group'];
+      
+      categoriesToShow.forEach(cat => {
+        if (toppersByCategory[cat] && toppersByCategory[cat].length > 0) {
+          const top3 = toppersByCategory[cat].slice(0, 3);
+          if (top3.length > 0) {
+            const categorySection = document.createElement('div');
+            categorySection.className = 'mb-5';
+            categorySection.innerHTML = `
+              <h4 class="text-center mb-4" style="color: var(--islamic-green);">${cat} Toppers</h4>
+              <div class="row g-4">
+                ${top3.map((candidate, index) => `
+                  <div class="col-md-4">
+                    <div class="fest-card h-100">
+                      <div class="p-4 text-center">
+                        <div class="rounded-circle ${index < 3 ? `topper-rank-${index + 1}` : 'bg-secondary'} d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px; color: white; font-weight: bold;">
+                          ${index + 1}
+                        </div>
+                        <div class="display-6 fw-bold mb-2">${candidate.totalPoints}</div>
+                        <div class="text-muted mb-2">Total Points</div>
+                        <h5 class="fw-bold mb-2">${candidate.name}</h5>
+                        <div class="text-muted mb-2">Chest No: ${candidate.chestNo}</div>
+                        <div class="${getTeamColorClass(candidate.team)} px-3 py-1 rounded-pill d-inline-block mb-2">
+                          ${candidate.team}
+                        </div>
+                        ${candidate.totalGradePoints > 0 ? `
+                          <div class="text-muted">Grade Points: ${candidate.totalGradePoints}</div>
+                        ` : ''}
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+            container.appendChild(categorySection);
+          }
+        }
+      });
+      
+      if (container.innerHTML === '') {
+        container.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <h4 class="text-secondary mb-3">No Toppers Data Available</h4>
+            <p class="text-muted">Topper data will appear here when results are published.</p>
+          </div>
+        `;
+      }
+    } else {
+      if (toppersByCategory[category] && toppersByCategory[category].length > 0) {
+        const top10 = toppersByCategory[category].slice(0, 10);
+        
+        const categorySection = document.createElement('div');
+        categorySection.innerHTML = `
+          <h4 class="text-center mb-4" style="color: var(--islamic-green);">${category} Toppers</h4>
+          <div class="row g-4">
+            ${top10.map((candidate, index) => `
+              <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="fest-card h-100">
+                  <div class="p-4 text-center">
+                    <div class="rounded-circle ${index < 3 ? `topper-rank-${index + 1}` : 'bg-secondary'} d-inline-flex align-items-center justify-content-center mb-3" style="width: 40px; height: 40px; color: white; font-weight: bold;">
+                      ${index + 1}
+                    </div>
+                    <div class="display-6 fw-bold mb-2">${candidate.totalPoints}</div>
+                    <div class="text-muted mb-2">Total Points</div>
+                    <h5 class="fw-bold mb-2">${candidate.name}</h5>
+                    <div class="text-muted mb-2">Chest No: ${candidate.chestNo}</div>
+                    <div class="${getTeamColorClass(candidate.team)} px-3 py-1 rounded-pill d-inline-block mb-2">
+                      ${candidate.team}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(categorySection);
+      } else {
+        container.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <h4 class="text-secondary mb-3">No Toppers Data Available for ${category}</h4>
+            <p class="text-muted">Topper data for this category will appear here when results are published.</p>
+          </div>
+        `;
+      }
+    }
+  }
+  
+  function displayPrograms() {
+    const container = document.getElementById('programs-container');
+    
+    container.innerHTML = '';
+    
+    const filtered = currentProgramFilter === 'all' 
+      ? allEvents 
+      : allEvents.filter(event => event.category === currentProgramFilter);
+    
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">No programs found for ${currentProgramFilter} category.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    filtered.forEach(event => {
+      const programCard = document.createElement('div');
+      programCard.className = 'col-md-6 col-lg-4 col-xl-3';
+      programCard.innerHTML = `
+        <div class="fest-card h-100 cursor-pointer" onclick="showProgramResultsModal('${event.eventCode}', '${event.event.replace(/'/g, "\\'")}')">
+          <div class="p-4">
+            <div class="d-flex align-items-start">
+              <div class="badge bg-light text-dark me-3">${event.eventCode}</div>
+              <div>
+                <h6 class="fw-bold mb-2">${event.event}</h6>
+                <div class="text-muted small">${event.category} - ${event.type}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      container.appendChild(programCard);
+    });
+  }
+  
+  function showProgramResultsModal(eventCode, eventName) {
+    const results = allResults.filter(r => r.eventCode === eventCode);
+    
+    if (results.length === 0) {
+      const modalContent = document.getElementById('modal-program-content');
+      modalContent.innerHTML = `
+        <div class="text-center py-5">
+          <div class="display-1 text-muted mb-4">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <h4 class="mb-3">Results Not Available</h4>
+          <p class="text-muted">No results available for this program yet. Check back later.</p>
+        </div>
+      `;
+      document.getElementById('modal-program-title').textContent = `${eventName} Results`;
+      openModal();
+      return;
+    }
+    
+    const result = results[0];
+    const firstGroupBadge = getTeamBadge(result.firstGroup);
+    const secondGroupBadge = getTeamBadge(result.secondGroup);
+    const thirdGroupBadge = getTeamBadge(result.thirdGroup);
+    
+    const modalContent = document.getElementById('modal-program-content');
+    modalContent.innerHTML = `
+      <div class="mb-4">
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge bg-secondary me-2">${result.eventCode}</span>
+          <span class="badge bg-light text-dark">${result.category}</span>
+        </div>
+        <h5 class="fw-bold">${eventName}</h5>
+      </div>
+      
+      <div class="row g-4">
+        ${result.firstName ? `
+          <div class="col-md-4">
+            <div class="border-start border-3 border-warning ps-3 py-3">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <div class="text-sm text-muted">Chest No</div>
+                  <div class="fw-bold">${result.firstChestNo || '-'}</div>
+                </div>
+                ${firstGroupBadge}
+              </div>
+              <div class="fw-bold mb-3">${result.firstName}</div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-warning text-dark">1st Place</span>
+                <div>
+                  <span class="badge bg-light text-dark me-1">${result.firstPoint} pts</span>
+                  ${result.firstGradePoint > 0 ? `<span class="badge bg-success">${result.firstGradePoint} gp</span>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+        
+        ${result.secondName ? `
+          <div class="col-md-4">
+            <div class="border-start border-3 border-secondary ps-3 py-3">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <div class="text-sm text-muted">Chest No</div>
+                  <div class="fw-bold">${result.secondChestNo || '-'}</div>
+                </div>
+                ${secondGroupBadge}
+              </div>
+              <div class="fw-bold mb-3">${result.secondName}</div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-secondary">2nd Place</span>
+                <div>
+                  <span class="badge bg-light text-dark me-1">${result.secondPoint} pts</span>
+                  ${result.secondGradePoint > 0 ? `<span class="badge bg-success">${result.secondGradePoint} gp</span>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+        
+        ${result.thirdName ? `
+          <div class="col-md-4">
+            <div class="border-start border-3 border-danger ps-3 py-3">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <div class="text-sm text-muted">Chest No</div>
+                  <div class="fw-bold">${result.thirdChestNo || '-'}</div>
+                </div>
+                ${thirdGroupBadge}
+              </div>
+              <div class="fw-bold mb-3">${result.thirdName}</div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-danger">3rd Place</span>
+                <div>
+                  <span class="badge bg-light text-dark me-1">${result.thirdPoint} pts</span>
+                  ${result.thirdGradePoint > 0 ? `<span class="badge bg-success">${result.thirdGradePoint} gp</span>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+      
+      ${!result.firstName && !result.secondName && !result.thirdName ? `
+        <div class="text-center py-5">
+          <div class="display-1 text-muted mb-4">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <h4 class="mb-3">Results Not Published</h4>
+          <p class="text-muted">Results for this program have not been published yet.</p>
+        </div>
+      ` : ''}
+    `;
+    
+    document.getElementById('modal-program-title').textContent = `${eventName} Results`;
+    openModal();
+  }
+  
+  function updateToppersCategory(category) {
+    currentTopperCategory = category;
+    displayToppers(category);
+  }
+  
+  function updateProgramFilter(filter) {
+    currentProgramFilter = filter;
+    displayPrograms();
+  }
+  
+  function getTeamBadge(teamName) {
+    if (!teamName) return '<span class="badge bg-light text-dark">-</span>';
+    
+    if (teamName.includes('Jaihoon')) {
+      return '<span class="badge" style="background: rgba(22, 163, 74, 0.1); color: #16a34a;">Jaihoon</span>';
+    } else if (teamName.includes('Saihoon')) {
+      return '<span class="badge" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">Saihoon</span>';
+    } else {
+      return `<span class="badge bg-light text-dark">${teamName}</span>`;
+    }
+  }
+  
+  function getTeamColorClass(teamName) {
+    if (teamName.includes('Jaihoon')) {
+      return 'bg-green-100 text-green-800';
+    } else if (teamName.includes('Saihoon')) {
+      return 'bg-blue-100 text-blue-800';
+    } else {
+      return 'bg-light text-dark';
+    }
+  }
+  
+  function searchChestNumber() {
+    const chestNumber = document.getElementById('chest-number-input').value.trim().toUpperCase();
+    const resultDiv = document.getElementById('chest-result');
+    
+    if (!chestNumber) {
+      resultDiv.innerHTML = `
+        <div class="alert alert-danger">
+          Please enter a chest number
+        </div>
+      `;
+      resultDiv.classList.remove('d-none');
+      return;
+    }
+    
+    const candidate = allCandidates.find(c => c.chestNo === chestNumber);
+    
+    if (!candidate) {
+      resultDiv.innerHTML = `
+        <div class="alert alert-warning">
+          No candidate found with chest number: <strong>${chestNumber}</strong>
+        </div>
+      `;
+      resultDiv.classList.remove('d-none');
+      return;
+    }
+    
+    let foundResults = [];
+    let totalPoints = 0;
+    let totalGradePoints = 0;
+    
+    allResults.forEach(result => {
+      if (result.firstChestNo === chestNumber) {
+        foundResults.push({
+          position: '1st Place',
+          event: result.event,
+          points: result.firstPoint,
+          gradePoints: result.firstGradePoint
+        });
+        totalPoints += result.firstPoint;
+        totalGradePoints += result.firstGradePoint;
+      }
+      if (result.secondChestNo === chestNumber) {
+        foundResults.push({
+          position: '2nd Place',
+          event: result.event,
+          points: result.secondPoint,
+          gradePoints: result.secondGradePoint
+        });
+        totalPoints += result.secondPoint;
+        totalGradePoints += result.secondGradePoint;
+      }
+      if (result.thirdChestNo === chestNumber) {
+        foundResults.push({
+          position: '3rd Place',
+          event: result.event,
+          points: result.thirdPoint,
+          gradePoints: result.thirdGradePoint
+        });
+        totalPoints += result.thirdPoint;
+        totalGradePoints += result.thirdGradePoint;
+      }
+    });
+    
+    let html = `<div class="alert alert-success">`;
+    html += `<h5 class="alert-heading">Results for: <strong>${candidate.name}</strong></h5>`;
+    html += `<div class="row g-3 mb-3">`;
+    html += `<div class="col-md-4"><div class="fw-bold">Chest No:</div>${candidate.chestNo}</div>`;
+    html += `<div class="col-md-4"><div class="fw-bold">Team:</div><span class="${getTeamColorClass(candidate.team)} px-2 py-1 rounded">${candidate.team}</span></div>`;
+    html += `<div class="col-md-4"><div class="fw-bold">Category:</div>${candidate.category}</div>`;
+    html += `</div>`;
+    
+    if (foundResults.length > 0) {
+      html += `<hr><h6 class="fw-bold mb-3">Event Results:</h6>`;
+      
+      foundResults.forEach(result => {
+        let positionClass = 'bg-light text-dark';
+        if (result.position === '1st Place') positionClass = 'bg-warning text-dark';
+        if (result.position === '2nd Place') positionClass = 'bg-secondary text-white';
+        if (result.position === '3rd Place') positionClass = 'bg-danger text-white';
+        
+        html += `
+          <div class="d-flex justify-content-between align-items-center p-2 bg-light rounded mb-2">
+            <div>
+              <span class="badge ${positionClass} me-2">${result.position}</span>
+              <span class="fw-bold">${result.event}</span>
+            </div>
+            <div>
+              <span class="badge bg-light text-dark me-1">${result.points} pts</span>
+              ${result.gradePoints > 0 ? `<span class="badge bg-success">${result.gradePoints} gp</span>` : ''}
+            </div>
+          </div>
+        `;
+      });
+      
+      html += `<hr><div class="row g-3">`;
+      html += `<div class="col-md-6"><div class="p-3 bg-success text-white rounded"><div class="small">Total Points</div><div class="h2 fw-bold">${totalPoints}</div></div></div>`;
+      if (totalGradePoints > 0) {
+        html += `<div class="col-md-6"><div class="p-3 bg-primary text-white rounded"><div class="small">Total Grade Points</div><div class="h2 fw-bold">${totalGradePoints}</div></div></div>`;
+      }
+      html += `</div>`;
+    } else {
+      html += `<div class="alert alert-info mt-3">No event results found yet. Check back later for updates.</div>`;
+    }
+    
+    html += `</div>`;
+    
+    resultDiv.innerHTML = html;
+    resultDiv.classList.remove('d-none');
+  }
+  
+  showSection('home');
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      });
+    });
+  });
+</script>
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+      document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          const target = document.querySelector(toggle.getAttribute('data-bs-target'));
+          const bsCollapse = new bootstrap.Collapse(target, { toggle: true });
+        });
+      });
+    })
+    .catch(error => console.error('Navbar load error:', error));
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Footer load error:', error));
+</script> 
+</body>
+</html>
+
