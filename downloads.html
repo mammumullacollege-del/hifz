@@ -243,6 +243,7 @@
           </div>
         </div>
       </div>
+      
       <div class="col-md-6 col-lg-4 download-item" data-category="documents" data-name="admission brochure">
         <div class="download-card h-100">
           <div class="p-4 text-center">
@@ -265,7 +266,8 @@
             </button>
           </div>
         </div>
-      <div class="row g-4" id="downloadsContainer" data-aos="fade-up" data-aos-delay="200">
+      </div>
+      
       <div class="col-md-6 col-lg-4 download-item" data-category="book" data-name="book mal">
         <div class="download-card h-100">
           <div class="p-4 text-center">
@@ -292,8 +294,8 @@
             </a>
           </div>
         </div>
-        </div>
-        <div class="row g-4" id="downloadsContainer" data-aos="fade-up" data-aos-delay="200">
+      </div>
+      
       <div class="col-md-6 col-lg-4 download-item" data-category="book" data-name="book ara">
         <div class="download-card h-100">
           <div class="p-4 text-center">
@@ -321,7 +323,7 @@
           </div>
         </div>
       </div>
-     </div>
+      
       <div class="col-md-6 col-lg-4">
         <div class="download-card h-100" style="border: 2px dashed var(--islamic-gold); background: transparent; box-shadow: none;">
           <div class="p-4 text-center d-flex flex-column align-items-center justify-content-center" style="min-height: 350px;">
@@ -339,6 +341,7 @@
         </div>
       </div>
     </div>
+    
     <div class="row mt-5 d-none" id="noResults">
       <div class="col-12">
         <div class="text-center py-5">
@@ -353,6 +356,7 @@
         </div>
       </div>
     </div>
+    
     <div class="row mt-5" data-aos="fade-up" data-aos-delay="300">
       <div class="col-12">
         <div class="stats-card">
@@ -368,6 +372,7 @@
         </div>
       </div>
     </div>
+    
     <div class="text-center mt-5" data-aos="fade-up">
       <a href="index.html" class="btn-outline-gold btn-lg px-5">
         <i class="fas fa-home me-2"></i>Back to Home
@@ -382,7 +387,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     setupDownloads();
     AOS.init({ duration: 800, once: true, offset: 50 });
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
     
     window.addEventListener('scroll', function() {
       const navbar = document.querySelector('.navbar-optimized');
@@ -532,4 +536,3 @@
 </script> 
 </body>
 </html>
-
