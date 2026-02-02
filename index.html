@@ -16,576 +16,170 @@
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     :root {
-      --islamic-green: #0a5c36; --islamic-gold: #c19a3f; --islamic-cream: #f8f3e6; --islamic-light: #e9f5e9; --dark-green: #064e3b; --light-gold: #ffd24d; --transition: all 0.3s ease;
-    }
+      --islamic-green: #0a5c36; --islamic-gold: #c19a3f; --islamic-cream: #f8f3e6; --islamic-light: #e9f5e9; --dark-green: #064e3b; --light-gold: #ffd24d; --transition: all 0.3s ease;}
     body {
-      font-family: 'Poppins', sans-serif; background-color: var(--islamic-cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; padding-top: 130px;
-    }
+      font-family: 'Poppins', sans-serif; background-color: var(--islamic-cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; padding-top: 130px;}
     a {text-decoration: none;}
-    .arabic-font {font-family: 'Scheherazade New', serif;}
-    .malayalam-font {font-family: 'Anek Malayalam', sans-serif;}
-    .pattern-bg {
-      background-image: radial-gradient(circle at 25% 25%, rgba(10, 92, 54, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(193, 154, 63, 0.03) 2px, transparent 2px); background-size: 50px 50px; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-    }
-    .navbar-optimized {
-      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 3px solid var(--islamic-gold); transition: var(--transition); padding: 0.5rem 0; height: 80px; z-index: 1030 !important;
-    }
-    .navbar-toggler {border-color: rgba(255, 255, 255, 0.5);}
-    .navbar-toggler:focus {box-shadow: 0 0 0 2px var(--islamic-gold);}
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-    .navbar-optimized.scrolled {
-      background: rgba(10, 92, 54, 0.98); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); height: 70px;
-    }
-    .navbar-brand-compact img {
-      border-radius: 8px; transition: transform 0.3s ease; width: 60px; height: 60px; object-fit: contain; filter: brightness(0) invert(1); border: none; box-shadow: 0 0 0 2px var(--islamic-gold); padding: 0;
-    }
-    .navbar-optimized.scrolled .navbar-brand-compact img {width: 50px; height: 50px;}
-    .navbar-brand-compact:hover img {transform: scale(1.05);}
-    .brand-text {font-size: 1.2rem; line-height: 1.2;}
-    .brand-subtext {font-size: 0.8rem; opacity: 0.9;}
-    .nav-link-optimized {
-      color: #fff !important; font-weight: 500; transition: var(--transition); padding-left: 0.4rem; padding-right: 0.4rem; border-radius: 5px; margin: 0 2px; white-space: nowrap;
-    }
+    .arabic-font { font-family: 'Scheherazade New', serif; }
+    .malayalam-font {font-family: 'Anek Malayalam', sans-serif; }
+    .pattern-bg { background-image: radial-gradient(circle at 25% 25%, rgba(10, 92, 54, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(193, 154, 63, 0.03) 2px, transparent 2px); background-size: 50px 50px; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    .navbar-optimized { background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 3px solid var(--islamic-gold); transition: var(--transition); padding: 0.5rem 0; height: 80px; z-index: 1030 !important; }
+    .navbar-toggler { border-color: rgba(255, 255, 255, 0.5); }
+    .navbar-toggler:focus { box-shadow: 0 0 0 2px var(--islamic-gold); }
+    .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+    .navbar-optimized.scrolled { background: rgba(10, 92, 54, 0.98); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); height: 70px; }
+    .navbar-brand-compact img { border-radius: 8px; transition: transform 0.3s ease; width: 60px; height: 60px; object-fit: contain; filter: brightness(0) invert(1); border: none; box-shadow: 0 0 0 2px var(--islamic-gold); padding: 0; }
+    .navbar-optimized.scrolled .navbar-brand-compact img {width: 50px; height: 50px; }
+    .navbar-brand-compact:hover img {transform: scale(1.05); }
+    .brand-text {font-size: 1.2rem; line-height: 1.2; }
+    .brand-subtext {font-size: 0.8rem; opacity: 0.9; }
+    .nav-link-optimized { color: #fff !important; font-weight: 500; transition: var(--transition); padding-left: 0.4rem; padding-right: 0.4rem; border-radius: 5px; margin: 0 2px; white-space: nowrap; }
     .nav-item-optimized {margin: 0 2px;}
     .nav-link-optimized:hover {color: var(--islamic-gold) !important; background: rgba(255, 255, 255, 0.1);}
-    .dropdown-menu-optimized {
-      background: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 8px; padding: 0.5rem 0;
-    }
-    .dropdown-item-optimized {
-      color: white; padding: 0.5rem 1rem; transition: var(--transition);
-    }
-    .dropdown-item-optimized:hover {background: var(--islamic-gold); color: var(--islamic-green);}
-    .page-header {
-      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; padding: 4rem 0; text-align: center; margin-bottom: 3rem; border-bottom: 5px solid var(--islamic-gold); position: relative; overflow: hidden;
-    }
-    .page-header::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 30%, rgba(193, 154, 63, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(10, 92, 54, 0.1) 0%, transparent 50%);
-    }
+    .dropdown-menu-optimized { background: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 8px; padding: 0.5rem 0; }
+    .dropdown-item-optimized { color: white; padding: 0.5rem 1rem; transition: var(--transition); }
+    .dropdown-item-optimized:hover {background: var(--islamic-gold); color: var(--islamic-green); }
+    .page-header { background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; padding: 4rem 0; text-align: center; margin-bottom: 3rem; border-bottom: 5px solid var(--islamic-gold); position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 30%, rgba(193, 154, 63, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(10, 92, 54, 0.1) 0%, transparent 50%); }
     .page-header-content {position: relative; z-index: 2;}
-    .page-title {
-      font-family: 'Scheherazade New', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--islamic-gold); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    .page-subtitle {
-      font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; color: var(--islamic-cream);
-    }
-    
-    .hero-section {
-      background: linear-gradient(rgba(10, 92, 54, 0.85), rgba(6, 78, 59, 0.85)), url('https://i.ibb.co/FqLZ21p9/masjid.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative;      overflow: hidden;      padding: 4rem 0;      min-height: auto;      display: flex;      align-items: center;      margin-top: 0;    }
-    
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(10, 92, 54, 0.85), rgba(6, 78, 59, 0.85));
-      z-index: 1;
-    }
-    
-    .hero-content-wrapper {
-      position: relative;
-      z-index: 2;
-    }
-    
-    .hero-content-left {
-      margin-bottom: 2rem;
-    }
-    
-    .hero-carousel-right {
-      margin-top: 2rem;
-    }
-    
-    .arabic-text {
-      font-family: 'Scheherazade New', serif; 
-      font-size: 1.2rem; 
-      color: var(--islamic-gold); 
-      margin-bottom: 1.5rem; 
-      text-align: center; 
-      direction: rtl; 
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    .hero-title {
-      color: var(--islamic-gold); 
-      font-weight: 700; 
-      margin-bottom: 1rem; 
-      font-size: 2rem; 
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
-    
-    .hero-subtitle {
-      color: white; 
-      font-size: 1.1rem; 
-      opacity: 0.95; 
-      margin-bottom: 2rem; 
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-    
-    .hero-carousel-container {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      border: 3px solid var(--islamic-gold);
-      height: 300px;
-    }
-    
-    .carousel-item img {
-      height: 300px;
-      object-fit: cover;
-      width: 100%;
-    }
-    
-    .carousel-caption-custom {
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-      padding: 1rem;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-    
-    .carousel-caption-custom h5 {
-      color: var(--islamic-gold);
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 0.3rem;
-    }
-    
-    .carousel-caption-custom p {
-      font-size: 0.9rem;
-      margin-bottom: 0;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-      width: 40px;
-      height: 40px;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.7;
-    }
-    
-    .carousel-control-prev {
-      left: 10px;
-    }
-    
-    .carousel-control-next {
-      right: 10px;
-    }
-    
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-size: 60%;
-    }
-    
-    .carousel-indicators {
-      margin-bottom: 5px;
-    }
-    
-    .carousel-indicators [data-bs-target] {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin: 0 5px;
-      background-color: rgba(255, 255, 255, 0.5);
-      border: none;
-    }
-    
-    .carousel-indicators .active {
-      background-color: var(--islamic-gold);
-    }
-    
+    .page-title { font-family: 'Scheherazade New', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--islamic-gold); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+    .page-subtitle { font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; color: var(--islamic-cream);}
+    .hero-section { background: linear-gradient(rgba(10, 92, 54, 0.85), rgba(6, 78, 59, 0.85)), url('https://i.ibb.co/FqLZ21p9/masjid.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; overflow: hidden; padding: 4rem 0; min-height: auto; display: flex; align-items: center; margin-top: 0; }
+    .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(10, 92, 54, 0.85), rgba(6, 78, 59, 0.85)); z-index: 1; }
+    .hero-content-wrapper { position: relative; z-index: 2; }
+    .hero-content-left { margin-bottom: 2rem; }
+    .hero-carousel-right { margin-top: 2rem; }
+    .arabic-text { font-family: 'Scheherazade New', serif; font-size: 1.2rem; color: var(--islamic-gold); margin-bottom: 1.5rem; text-align: center; direction: rtl; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+    .hero-title { color: var(--islamic-gold); font-weight: 700; margin-bottom: 1rem; font-size: 2rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); text-align: center; }
+    .hero-subtitle { color: white; font-size: 1.1rem; opacity: 0.95; margin-bottom: 2rem; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); text-align: center; }
+    .hero-buttons { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-bottom: 2rem; }
+    .hero-carousel-container { border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); border: 3px solid var(--islamic-gold); height: 300px; }
+    .carousel-item img { height: 300px; object-fit: cover; width: 100%; }
+    .carousel-caption-custom { background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)); padding: 1rem; bottom: 0; left: 0; right: 0; }
+    .carousel-caption-custom h5 { color: var(--islamic-gold); font-weight: 700; font-size: 1.2rem; margin-bottom: 0.3rem; }
+    .carousel-caption-custom p {      font-size: 0.9rem;      margin-bottom: 0;    }
+    .carousel-control-prev,    .carousel-control-next {      width: 40px;      height: 40px;      background-color: rgba(0, 0, 0, 0.5);      border-radius: 50%;      top: 50%;      transform: translateY(-50%);      opacity: 0.7;    }
+    .carousel-control-prev {      left: 10px;    }
+    .carousel-control-next {      right: 10px;    }
+    .carousel-control-prev-icon,    .carousel-control-next-icon {      background-size: 60%;    }
+    .carousel-indicators {      margin-bottom: 5px;    }
+    .carousel-indicators [data-bs-target] {      width: 10px;      height: 10px;      border-radius: 50%;      margin: 0 5px;      background-color: rgba(255, 255, 255, 0.5);      border: none;    }
+    .carousel-indicators .active {      background-color: var(--islamic-gold);    }
     @media (min-width: 992px) {
-      .hero-section {
-        padding: 6rem 0;
-        min-height: 85vh;
-      }
-      
-      .hero-content-left {
-        margin-bottom: 0;
-        padding-right: 2rem;
-      }
-      
-      .hero-carousel-right {
-        margin-top: 0;
-        padding-left: 2rem;
-      }
-      
-      .hero-title {
-        font-size: 2.8rem;
-        text-align: left;
-      }
-      
-      .arabic-text {
-        font-size: 1.6rem;
-        text-align: right;
-        margin-bottom: 2rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.3rem;
-        text-align: left;
-        margin-bottom: 2.5rem;
-      }
-      
-      .hero-buttons {
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: 1rem;
-        margin-bottom: 0;
-      }
-      
-      .hero-carousel-container {
-        height: 400px;
-      }
-      
-      .carousel-item img {
-        height: 400px;
-      }
+      .hero-section {        padding: 6rem 0;        min-height: 85vh;      }
+      .hero-content-left {        margin-bottom: 0;        padding-right: 2rem;      }
+      .hero-carousel-right {        margin-top: 0;        padding-left: 2rem;      }
+      .hero-title {        font-size: 2.8rem;        text-align: left;      }
+      .arabic-text {        font-size: 1.6rem;        text-align: right;        margin-bottom: 2rem;      }
+      .hero-subtitle {        font-size: 1.3rem;        text-align: left;        margin-bottom: 2.5rem;      }
+      .hero-buttons {        flex-direction: row;        justify-content: flex-start;        gap: 1rem;        margin-bottom: 0;      }
+      .hero-carousel-container {        height: 400px;      }
+      .carousel-item img {        height: 400px;      }
     }
-    
-    @media (min-width: 768px) and (max-width: 991px) {
-      .hero-carousel-container {
-        height: 350px;
-      }
-      
-      .carousel-item img {
-        height: 350px;
-      }
-      
-      .hero-title {
-        font-size: 2.2rem;
-      }
+    @media (min-width: 768px) and (max-width: 991px) {      
+      .hero-carousel-container {        height: 350px;      }
+      .carousel-item img {        height: 350px;      }
+      .hero-title {        font-size: 2.2rem;      }
     }
-    
-    .content-section {
-      padding: 4rem 0; background: var(--islamic-cream);
-    }
-    
-    .section-header {
-      text-align: center; margin-bottom: 3rem; position: relative; padding: 2rem 0;
-    }
-    
-    .section-title {
-      color: var(--islamic-green); font-weight: 700; display: inline-block; padding: 0 1rem; background: var(--islamic-cream); position: relative; z-index: 2; margin-bottom: 0.5rem; font-size: 2.5rem;
-    }
-    
-    .section-header::before {
-      content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent); z-index: 1;
-    }
-    
-    .section-subtitle {
-      color: #666; font-size: 1.1rem; max-width: 700px; margin: 0 auto;
-    }
-    
-    .btn-gold {
-      background: linear-gradient(135deg, var(--islamic-gold), #d4af37); border: none; color: var(--islamic-green); font-weight: 600; border-radius: 8px; box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3); transition: var(--transition); padding: 0.75rem 1.5rem;
-    }
-    
-    .btn-gold:hover {
-      background: linear-gradient(135deg, #d4af37, var(--islamic-gold)); box-shadow: 0 6px 20px rgba(193, 154, 63, 0.4); transform: translateY(-2px); color: var(--islamic-green);
-    }
-    
-    .btn-outline-gold {
-      border: 2px solid var(--islamic-gold); color: var(--islamic-gold); background: transparent; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; transition: var(--transition);
-    }
-    
-    .btn-outline-gold:hover {
-      background: var(--islamic-gold); color: var(--islamic-green);
-    }
-    
-    .islamic-card {
-      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 3px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; margin-bottom: 1rem;
-    }
-    
-    .islamic-card:hover {
-      transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-    
-    .islamic-card-header {
-      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; padding: 1.5rem; text-align: center; border-bottom: 3px solid var(--islamic-gold);
-    }
-    
-    .islamic-card-body {
-      padding: 1.5rem;
-    }
-    
-    .ticker-container {
-      background: linear-gradient(90deg, var(--dark-green), var(--islamic-green)); color: white; padding: 0; overflow: hidden; position: fixed; top: 80px; left: 0; right: 0; border-bottom: 2px solid var(--islamic-gold); height: 50px; display: flex; align-items: center; z-index: 1029; margin: 0;
-    }
-    
-    .ticker-wrapper {
-      white-space: nowrap; display: inline-flex; animation: ticker 50s linear infinite; padding-left: 100%;
-    }
-    
-    .ticker-item {
-      display: inline-flex; align-items: center; padding: 0 30px; font-size: 1rem; position: relative;
-    }
-    
-    .ticker-badge {
-      background: var(--islamic-gold); color: var(--islamic-green); padding: 3px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-right: 10px; white-space: nowrap;
-    }
-    
-    .ticker-item:after {
-      content: "•"; color: var(--islamic-gold); position: absolute; right: -10px; font-size: 1.2rem;
-    }
-    
+    .content-section {      padding: 4rem 0; background: var(--islamic-cream);    }
+    .section-header {      text-align: center; margin-bottom: 3rem; position: relative; padding: 2rem 0;    }
+    .section-title {      color: var(--islamic-green); font-weight: 700; display: inline-block; padding: 0 1rem; background: var(--islamic-cream); position: relative; z-index: 2; margin-bottom: 0.5rem; font-size: 2.5rem;    }
+    .section-header::before {      content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent); z-index: 1;    }
+    .section-subtitle {      color: #666; font-size: 1.1rem; max-width: 700px; margin: 0 auto;    }
+    .btn-gold {      background: linear-gradient(135deg, var(--islamic-gold), #d4af37); border: none; color: var(--islamic-green); font-weight: 600; border-radius: 8px; box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3); transition: var(--transition); padding: 0.75rem 1.5rem;    }
+    .btn-gold:hover {      background: linear-gradient(135deg, #d4af37, var(--islamic-gold)); box-shadow: 0 6px 20px rgba(193, 154, 63, 0.4); transform: translateY(-2px); color: var(--islamic-green);    }
+    .btn-outline-gold {      border: 2px solid var(--islamic-gold); color: var(--islamic-gold); background: transparent; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; transition: var(--transition);    }
+    .btn-outline-gold:hover {      background: var(--islamic-gold); color: var(--islamic-green);    }
+    .islamic-card {      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 3px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; margin-bottom: 1rem;    }
+    .islamic-card:hover {      transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);    }
+    .islamic-card-header {      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; padding: 1.5rem; text-align: center; border-bottom: 3px solid var(--islamic-gold);    }
+    .islamic-card-body {      padding: 1.5rem;    }
+    .ticker-container {      background: linear-gradient(90deg, var(--dark-green), var(--islamic-green)); color: white; padding: 0; overflow: hidden; position: fixed; top: 80px; left: 0; right: 0; border-bottom: 2px solid var(--islamic-gold); height: 50px; display: flex; align-items: center; z-index: 1029; margin: 0;    }
+    .ticker-wrapper {      white-space: nowrap; display: inline-flex; animation: ticker 50s linear infinite; padding-left: 100%;    }
+    .ticker-item {      display: inline-flex; align-items: center; padding: 0 30px; font-size: 1rem; position: relative;    }
+    .ticker-badge {      background: var(--islamic-gold); color: var(--islamic-green); padding: 3px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-right: 10px; white-space: nowrap;    }
+    .ticker-item:after {      content: "•"; color: var(--islamic-gold); position: absolute; right: -10px; font-size: 1.2rem;    }
     @keyframes ticker {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-    
-    .footer {
-      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-top: 3px solid var(--islamic-gold); padding: 3rem 0 1.5rem; color: white;
-    }
-    
-    .footer-brand {
-      font-size: 1.8rem; font-weight: 700; color: var(--islamic-gold); margin-bottom: 1rem;
-    }
-    
-    .social-links {
-      display: flex; gap: 12px; margin-top: 1rem;
-    }
-    
-    .social-icon {
-      width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); background: rgba(255, 255, 255, 0.1); font-size: 1.1rem;
-    }
-    
-    .social-icon:hover {
-      transform: translateY(-5px); background: var(--islamic-gold); color: var(--islamic-green);
-    }
-    
-    .footer-links h5 {
-      color: var(--islamic-gold); margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 600;
-    }
-    
-    .footer-links a {
-      display: block; color: rgba(255, 255, 255, 0.85); text-decoration: none; margin-bottom: 0.6rem; transition: var(--transition); font-size: 0.95rem;
-    }
-    
-    .footer-links a:hover {
-      color: var(--islamic-gold); padding-left: 5px;
-    }
-    
-    .whatsapp-float {
-      position: fixed; bottom: 25px; right: 15px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 1000; animation: float 3s ease-in-out infinite; transition: var(--transition); text-decoration: none;
-    }
-    
-    .whatsapp-float:hover {
-      transform: scale(1.1) rotate(10deg); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
-    }
-    
+    .footer {      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-top: 3px solid var(--islamic-gold); padding: 3rem 0 1.5rem; color: white;    }
+    .footer-brand {      font-size: 1.8rem; font-weight: 700; color: var(--islamic-gold); margin-bottom: 1rem;    }
+    .social-links {      display: flex; gap: 12px; margin-top: 1rem;    }
+    .social-icon {      width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); background: rgba(255, 255, 255, 0.1); font-size: 1.1rem;    }
+    .social-icon:hover {      transform: translateY(-5px); background: var(--islamic-gold); color: var(--islamic-green);    }
+    .footer-links h5 {      color: var(--islamic-gold); margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 600;    }
+    .footer-links a {      display: block; color: rgba(255, 255, 255, 0.85); text-decoration: none; margin-bottom: 0.6rem; transition: var(--transition); font-size: 0.95rem;    }
+    .footer-links a:hover {      color: var(--islamic-gold); padding-left: 5px;    }
+    .whatsapp-float {      position: fixed; bottom: 25px; right: 15px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 1000; animation: float 3s ease-in-out infinite; transition: var(--transition); text-decoration: none;    }
+    .whatsapp-float:hover {      transform: scale(1.1) rotate(10deg); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);    }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
-    
-    .islamic-ornament {
-      position: fixed; color: var(--islamic-gold); opacity: 0.08; font-size: 1.8rem; z-index: -1; pointer-events: none;
-    }
-    
-    .ornament-1 {
-      top: 20%; left: 5%; animation: float 6s ease-in-out infinite;
-    }
-    
-    .ornament-2 {
-      top: 60%; right: 5%; animation: float 8s ease-in-out infinite reverse;
-    }
-    
-    .ornament-3 {
-      bottom: 20%; left: 10%; animation: float 7s ease-in-out infinite;
-    }
-    
-    .about-image img {
-      border-radius: 15px; border: 5px solid var(--islamic-gold); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); transition: transform 0.4s ease; width: 100%; height: auto; max-height: 500px; object-fit: cover;
-    }
-    
-    .about-image img:hover {
-      transform: scale(1.03);
-    }
-    
-    .malayalam {
-      font-family: 'Anek Malayalam', sans-serif; font-size: 1.1rem; text-align: justify; line-height: 1.8; color: #444;
-    }
-    
-    .milestone-card {
-      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-radius: 15px; padding: 1.5rem; border: 2px solid var(--islamic-gold); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); height: 100%;
-    }
-    
-    .milestone-icon {
-      font-size: 1.8rem; color: var(--islamic-gold);
-    }
-    
-    .gold-text {
-      color: var(--islamic-gold); font-weight: 600;
-    }
-    
-    .milestone-list > div {
-      padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 0.8rem;
-    }
-    
-    .milestone-list > div:last-child {
-      border-bottom: none; margin-bottom: 0;
-    }
-    
-    .highlight-card {
-      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 3px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; margin-bottom: 1rem;
-    }
-    
-    .highlight-card:hover {
-      transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    }
-    
-    .video-container {
-      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;
-    }
-    
-    .video-container iframe {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
-    }
-    
-    .green-text {
-      color: var(--islamic-green); font-weight: 600;
-    }
-    
-    .notification-item {
-      border-left: 5px solid var(--islamic-gold); border-radius: 8px; margin-bottom: 10px; transition: var(--transition); padding: 1rem; background: white; border: 1px solid #e9ecef;
-    }
-    
-    .notification-item:hover {
-      background-color: var(--islamic-light); transform: translateX(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
+    .islamic-ornament {      position: fixed; color: var(--islamic-gold); opacity: 0.08; font-size: 1.8rem; z-index: -1; pointer-events: none;    }
+    .ornament-1 {      top: 20%; left: 5%; animation: float 6s ease-in-out infinite;    }
+    .ornament-2 {      top: 60%; right: 5%; animation: float 8s ease-in-out infinite reverse;    }
+    .ornament-3 {      bottom: 20%; left: 10%; animation: float 7s ease-in-out infinite;    }
+    .about-image img {      border-radius: 15px; border: 5px solid var(--islamic-gold); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); transition: transform 0.4s ease; width: 100%; height: auto; max-height: 500px; object-fit: cover;    }
+    .about-image img:hover {      transform: scale(1.03);    }
+    .malayalam {      font-family: 'Anek Malayalam', sans-serif; font-size: 1.1rem; text-align: justify; line-height: 1.8; color: #444;    }
+    .milestone-card {      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-radius: 15px; padding: 1.5rem; border: 2px solid var(--islamic-gold); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); height: 100%;    }
+    .milestone-icon {      font-size: 1.8rem; color: var(--islamic-gold);    }
+    .gold-text {      color: var(--islamic-gold); font-weight: 600;    }
+    .milestone-list > div {      padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 0.8rem;    }
+    .milestone-list > div:last-child {      border-bottom: none; margin-bottom: 0;    }
+    .highlight-card {      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 3px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; margin-bottom: 1rem;    }
+    .highlight-card:hover {      transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);    }
+    .video-container {      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;    }
+    .video-container iframe {      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;    }
+    .green-text {      color: var(--islamic-green); font-weight: 600;    }
+    .notification-item {      border-left: 5px solid var(--islamic-gold); border-radius: 8px; margin-bottom: 10px; transition: var(--transition); padding: 1rem; background: white; border: 1px solid #e9ecef;    }
+    .notification-item:hover {      background-color: var(--islamic-light); transform: translateX(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);    }
     @media (max-width: 768px) {
-      body {
-        padding-top: 110px !important;
-      }
-      .navbar-optimized {
-        height: 70px; padding: 0.3rem 0;
-      }
-      .ticker-container {
-        top: 70px !important; height: 40px;
-      }
-      .ticker-wrapper {
-        animation-duration: 40s;
-      }
-      .ticker-item {
-        padding: 0 15px; font-size: 0.85rem;
-      }
-      .page-header {
-        padding: 2.5rem 0;
-      }
-      .page-title {
-        font-size: 2.2rem;
-      }
-      .page-subtitle {
-        font-size: 1.1rem;
-      }
-      .hero-section {
-        min-height: auto; padding: 2.5rem 0; background-attachment: scroll;
-      }
-      .hero-title {
-        font-size: 1.8rem; margin-bottom: 1rem;
-      }
-      .arabic-text {
-        font-size: 1rem; margin: 1.5rem 0;
-      }
-      .hero-subtitle {
-        font-size: 1rem; line-height: 1.5;
-      }
-      .section-title {
-        font-size: 1.8rem;
-      }
-      .content-section {
-        padding: 2.5rem 0;
-      }
-      .hero-carousel-container {
-        height: 250px;
-      }
-      .carousel-item img {
-        height: 250px;
-      }
-      .carousel-caption-custom h5 {
-        font-size: 1rem;
-      }
-      .carousel-caption-custom p {
-        font-size: 0.8rem;
-      }
-      .carousel-control-prev,
-      .carousel-control-next {
-        width: 35px;
-        height: 35px;
-      }
-      .navbar-collapse {
-        background: var(--dark-green); padding: 1rem; border-radius: 0 0 10px 10px; border: 1px solid var(--islamic-gold); margin-top: 0px; max-height: 70vh; overflow-y: auto;
-      }
-      .hero-buttons a {
-        width: 100%;
-        max-width: 300px;
-      }
+      body {        padding-top: 110px !important;      }
+      .navbar-optimized {        height: 70px; padding: 0.3rem 0;      }
+      .ticker-container {        top: 70px !important; height: 40px;      }
+      .ticker-wrapper {        animation-duration: 40s;      }
+      .ticker-item {        padding: 0 15px; font-size: 0.85rem;      }
+      .page-header {        padding: 2.5rem 0;      }
+      .page-title {        font-size: 2.2rem;      }
+      .page-subtitle {        font-size: 1.1rem;      }
+      .hero-section {        min-height: auto; padding: 2.5rem 0; background-attachment: scroll;      }
+      .hero-title {        font-size: 1.8rem; margin-bottom: 1rem;      }
+      .arabic-text {        font-size: 1rem; margin: 1.5rem 0;      }
+      .hero-subtitle {        font-size: 1rem; line-height: 1.5;      }
+      .section-title {        font-size: 1.8rem;      }
+      .content-section {        padding: 2.5rem 0;      }
+      .hero-carousel-container {        height: 250px;      }
+      .carousel-item img {        height: 250px;      }
+      .carousel-caption-custom h5 {        font-size: 1rem;      }
+      .carousel-caption-custom p {        font-size: 0.8rem;      }
+      .carousel-control-prev,      .carousel-control-next {        width: 35px;        height: 35px;      }
+      .navbar-collapse {        background: var(--dark-green); padding: 1rem; border-radius: 0 0 10px 10px; border: 1px solid var(--islamic-gold); margin-top: 0px; max-height: 70vh; overflow-y: auto;      }
+      .hero-buttons a {        width: 100%;        max-width: 300px;      }
     }
     
-    @media (max-width: 576px) {
-      .page-title {
-        font-size: 1.8rem;
-      }
-      .section-title {
-        font-size: 1.5rem;
-      }
-      .hero-title {
-        font-size: 1.6rem;
-      }
-      .arabic-text {
-        font-size: 0.9rem;
-      }
-      .hero-carousel-container {
-        height: 220px;
-      }
-      .carousel-item img {
-        height: 220px;
-      }
-      .hero-buttons {
-        gap: 0.8rem;
-      }
-      .hero-buttons a {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-      }
+    @media (max-width: 576px) {      
+      .page-title {        font-size: 1.8rem;      }
+      .section-title {        font-size: 1.5rem;      }
+      .hero-title {        font-size: 1.6rem;      }
+      .arabic-text {        font-size: 0.9rem;      }
+      .hero-carousel-container {        height: 220px;      }
+      .carousel-item img { height: 220px; }
+      .hero-buttons { gap: 0.8rem; }
+      .hero-buttons a { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
     }
     
-    @media (min-width: 992px) {
-      .dropdown-submenu {
-        position: relative;
-      }
-      .dropdown-submenu:hover > .collapse {
-        display: block !important;
-      }
-      .dropdown-submenu .collapse {
-        position: absolute; top: 0; left: 100%; z-index: 1000; min-width: 12rem; padding: 0.5rem 0; margin: 0; font-size: 1rem; background-color: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 0 0.5rem 0.5rem 0.5rem;
-      }
-      .dropdown-submenu > a:after {
-        content: "›"; float: right; margin-right: -0.5rem; font-size: 1.2rem;
-      }
+    @media (min-width: 992px) { 
+      .dropdown-submenu { position: relative; }
+      .dropdown-submenu:hover > .collapse { display: block !important; }
+      .dropdown-submenu .collapse { position: absolute; top: 0; left: 100%; z-index: 1000; min-width: 12rem; padding: 0.5rem 0; margin: 0; font-size: 1rem; background-color: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 0 0.5rem 0.5rem 0.5rem; }
+      .dropdown-submenu > a:after { content: "›"; float: right; margin-right: -0.5rem; font-size: 1.2rem; }
     }
     
     @media (max-width: 991px) {
-      .dropdown-submenu .collapse {
-        position: static; width: auto; border: none; box-shadow: none; background: rgba(0,0,0,0.1);
-        margin-left: 1.2rem;
-      }
+      .dropdown-submenu .collapse { position: static; width: auto; border: none; box-shadow: none; background: rgba(0,0,0,0.1); margin-left: 1.2rem; }
     }
   </style>
 </head>
@@ -1014,3 +608,4 @@
 
 </body>
 </html>
+
