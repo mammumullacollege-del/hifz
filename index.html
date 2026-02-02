@@ -71,21 +71,9 @@
       font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; color: var(--islamic-cream);
     }
     
-    /* HERO SECTION WITH CAROUSEL */
     .hero-section {
-      background: linear-gradient(rgba(10, 92, 54, 0.85), rgba(6, 78, 59, 0.85)), url('https://i.ibb.co/FqLZ21p9/masjid.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      position: relative;
-      overflow: hidden;
-      padding: 6rem 0;
-      min-height: 85vh;
-      display: flex;
-      align-items: center;
-      margin-top: 0;
-    }
+      background: linear-gradient(rgba(10, 92, 54, 0.85), rgba(6, 78, 59, 0.85)), url('https://i.ibb.co/FqLZ21p9/masjid.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative;      overflow: hidden;      padding: 4rem 0;      min-height: auto;      display: flex;      align-items: center;      margin-top: 0;    }
+    
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -95,32 +83,73 @@
       background: linear-gradient(135deg, rgba(10, 92, 54, 0.85), rgba(6, 78, 59, 0.85));
       z-index: 1;
     }
-    .hero-content {
+    
+    .hero-content-wrapper {
       position: relative;
       z-index: 2;
     }
     
-    /* Carousel Styles */
-    .hero-carousel-container {
+    .hero-content-left {
+      margin-bottom: 2rem;
+    }
+    
+    .hero-carousel-right {
       margin-top: 2rem;
+    }
+    
+    .arabic-text {
+      font-family: 'Scheherazade New', serif; 
+      font-size: 1.2rem; 
+      color: var(--islamic-gold); 
+      margin-bottom: 1.5rem; 
+      text-align: center; 
+      direction: rtl; 
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-title {
+      color: var(--islamic-gold); 
+      font-weight: 700; 
+      margin-bottom: 1rem; 
+      font-size: 2rem; 
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    
+    .hero-subtitle {
+      color: white; 
+      font-size: 1.1rem; 
+      opacity: 0.95; 
+      margin-bottom: 2rem; 
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-carousel-container {
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       border: 3px solid var(--islamic-gold);
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      height: 300px;
     }
     
     .carousel-item img {
-      height: 400px;
+      height: 300px;
       object-fit: cover;
       width: 100%;
     }
     
     .carousel-caption-custom {
       background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-      padding: 1.5rem;
+      padding: 1rem;
       bottom: 0;
       left: 0;
       right: 0;
@@ -129,20 +158,46 @@
     .carousel-caption-custom h5 {
       color: var(--islamic-gold);
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+    
+    .carousel-caption-custom p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.7;
+    }
+    
+    .carousel-control-prev {
+      left: 10px;
+    }
+    
+    .carousel-control-next {
+      right: 10px;
     }
     
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 50%;
-      padding: 1rem;
       background-size: 60%;
     }
     
+    .carousel-indicators {
+      margin-bottom: 5px;
+    }
+    
     .carousel-indicators [data-bs-target] {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       margin: 0 5px;
       background-color: rgba(255, 255, 255, 0.5);
@@ -153,16 +208,67 @@
       background-color: var(--islamic-gold);
     }
     
-    .arabic-text {
-      font-family: 'Scheherazade New', serif; font-size: 1.6rem; color: var(--islamic-gold); margin: 2rem 0; text-align: center; direction: rtl; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    @media (min-width: 992px) {
+      .hero-section {
+        padding: 6rem 0;
+        min-height: 85vh;
+      }
+      
+      .hero-content-left {
+        margin-bottom: 0;
+        padding-right: 2rem;
+      }
+      
+      .hero-carousel-right {
+        margin-top: 0;
+        padding-left: 2rem;
+      }
+      
+      .hero-title {
+        font-size: 2.8rem;
+        text-align: left;
+      }
+      
+      .arabic-text {
+        font-size: 1.6rem;
+        text-align: right;
+        margin-bottom: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.3rem;
+        text-align: left;
+        margin-bottom: 2.5rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1rem;
+        margin-bottom: 0;
+      }
+      
+      .hero-carousel-container {
+        height: 400px;
+      }
+      
+      .carousel-item img {
+        height: 400px;
+      }
     }
     
-    .hero-title {
-      color: var(--islamic-gold); font-weight: 700; margin-bottom: 1.5rem; font-size: 2.8rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    .hero-subtitle {
-      color: white; font-size: 1.3rem; opacity: 0.95; margin-bottom: 2rem; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    @media (min-width: 768px) and (max-width: 991px) {
+      .hero-carousel-container {
+        height: 350px;
+      }
+      
+      .carousel-item img {
+        height: 350px;
+      }
+      
+      .hero-title {
+        font-size: 2.2rem;
+      }
     }
     
     .content-section {
@@ -389,7 +495,7 @@
         font-size: 1.1rem;
       }
       .hero-section {
-        min-height: 70vh; padding: 2.5rem 0; background-attachment: scroll;
+        min-height: auto; padding: 2.5rem 0; background-attachment: scroll;
       }
       .hero-title {
         font-size: 1.8rem; margin-bottom: 1rem;
@@ -406,14 +512,29 @@
       .content-section {
         padding: 2.5rem 0;
       }
+      .hero-carousel-container {
+        height: 250px;
+      }
       .carousel-item img {
         height: 250px;
       }
       .carousel-caption-custom h5 {
-        font-size: 1.2rem;
+        font-size: 1rem;
+      }
+      .carousel-caption-custom p {
+        font-size: 0.8rem;
+      }
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 35px;
+        height: 35px;
       }
       .navbar-collapse {
         background: var(--dark-green); padding: 1rem; border-radius: 0 0 10px 10px; border: 1px solid var(--islamic-gold); margin-top: 0px; max-height: 70vh; overflow-y: auto;
+      }
+      .hero-buttons a {
+        width: 100%;
+        max-width: 300px;
       }
     }
     
@@ -430,8 +551,18 @@
       .arabic-text {
         font-size: 0.9rem;
       }
+      .hero-carousel-container {
+        height: 220px;
+      }
       .carousel-item img {
-        height: 200px;
+        height: 220px;
+      }
+      .hero-buttons {
+        gap: 0.8rem;
+      }
+      .hero-buttons a {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
       }
     }
     
@@ -503,23 +634,25 @@
 
 <section class="hero-section">
   <div class="hero-overlay"></div>
-  <div class="container hero-content">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 text-center">
-        <div class="arabic-text" data-aos="fade-up">﴿ إِنَّا نَحْنُ نَزَّلْنَا ٱلذِّكْرَ وَإِنَّا لَهُۥ لَحَـٰفِظُونَ ۞ ﴾ [ سورة الحجر: 9]</div>
-        <h1 class="hero-title" data-aos="fade-up">AL HAFIZ MAMMU MULLLA COLLEGE OF THAHFEEZUL QURAN</h1>
-        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+  <div class="container hero-content-wrapper">
+    <div class="row align-items-center">
+      <div class="col-lg-6 hero-content-left" data-aos="fade-right">
+        <div class="arabic-text" data-aos="fade-right">﴿ إِنَّا نَحْنُ نَزَّلْنَا ٱلذِّكْرَ وَإِنَّا لَهُۥ لَحَـٰفِظُونَ ۞ ﴾ [ سورة الحجر: 9]</div>
+        <h1 class="hero-title" data-aos="fade-right" data-aos-delay="100">AL HAFIZ MAMMU MULLLA COLLEGE OF THAHFEEZUL QURAN</h1>
+        <p class="hero-subtitle" data-aos="fade-right" data-aos-delay="200">
           PUTHANPALLI, CHEMMANIYODE<br>
           Under QUWATHUL ISLAM SANGAM<br>
           Affiliated With JAMIA NOORIYYA ARABIYYA, PATTIKKAD
         </p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap mt-4" data-aos="fade-up" data-aos-delay="400">
-          <a href="admission.html" class="btn-gold btn-lg">Admission</a>
-          <a href="#about" class="btn-outline-gold btn-lg">Learn More</a>
-          <a href="result.html" class="btn-outline-gold btn-lg">Exam Results</a>
+        <div class="hero-buttons" data-aos="fade-right" data-aos-delay="300">
+          <a href="admission.html" class="btn-gold">Admission</a>
+          <a href="#about" class="btn-outline-gold">Learn More</a>
+          <a href="result.html" class="btn-outline-gold">Exam Results</a>
         </div>
-        
-        <div class="hero-carousel-container mt-5" data-aos="fade-up" data-aos-delay="600">
+      </div>
+      
+      <div class="col-lg-6 hero-carousel-right" data-aos="fade-left" data-aos-delay="400">
+        <div class="hero-carousel-container">
           <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
