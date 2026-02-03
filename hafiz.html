@@ -214,11 +214,18 @@
       <div class="row align-items-center">
         <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right">
           <div class="text-center mb-3">
-          <a href="moulid.pdf" 
-             class="btn btn-gold btn-lg">
-            <i class="fas fa-book me-2"></i>Moulid Kithab
-          </a>
-        </div>
+  <button class="btn btn-gold btn-lg" 
+          onclick="document.getElementById('pdfViewer').style.display='block'">
+    <i class="fas fa-book me-2"></i>Moulid Kithab - Read Online
+  </button>
+</div>
+          <div id="pdfViewer" style="display:none; position:fixed; inset:0; background:#0008; z-index:2000;">
+  <span style="position:absolute; top:15px; right:30px; color:white; font-size:40px; cursor:pointer;" 
+        onclick="document.getElementById('pdfViewer').style.display='none'">×</span>
+  
+  <iframe src="moulid.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" 
+          style="width:100%; height:100%; border:none;"></iframe>
+</div>
           <img src="https://i.ibb.co/NgNk4j5r/IMG-20260201-WA0009.jpg"
                class="leader-image"
                alt="അല്‍ ഹാഫിള് ">
