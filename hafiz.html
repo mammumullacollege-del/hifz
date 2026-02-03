@@ -213,53 +213,12 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right">
-<div class="text-center mb-3">
-  <!-- Button triggers different action based on device -->
-  <button class="btn btn-gold btn-lg" onclick="smartPDFView()">
-    <i class="fas fa-book me-2"></i>Read Moulid Kithab
-  </button>
-  <p class="text-muted mt-1 small">
-    <i class="fas fa-info-circle"></i> Opens in browser on all devices
-  </p>
-</div>
-
-<!-- Fullscreen PDF Viewer (initially hidden) -->
-<div id="pdfModal" class="modal fade" tabindex="-1" style="display: none;">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content" style="border-radius: 0; background: #f8f3e6;">
-      <div class="modal-header" style="background: linear-gradient(135deg, #0a5c36, #064e3b); border-bottom: 3px solid #c19a3f;">
-        <h5 class="modal-title text-white">
-          <i class="fas fa-book me-2"></i>Moulid Kithab
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body p-0">
-        <iframe id="pdfFrame" 
-                src="" 
-                style="width: 100%; height: calc(100vh - 120px); border: none;">
-        </iframe>
-      </div>
-      <div class="modal-footer" style="border-top: 2px solid #c19a3f;">
-        <div class="d-flex justify-content-between w-100">
-          <div>
-            <a href="moulid.pdf" class="btn btn-gold btn-sm" download>
-              <i class="fas fa-download me-1"></i> Download
-            </a>
-            <button class="btn btn-outline-gold btn-sm ms-2" onclick="printPDF()">
-              <i class="fas fa-print me-1"></i> Print
-            </button>
-          </div>
-          <button class="btn btn-outline-gold" data-bs-dismiss="modal">
-            Close
-          </button>
+          <div class="text-center mb-3">
+          <a href="moulid.pdf" 
+             class="btn btn-gold btn-lg">
+            <i class="fas fa-book me-2"></i>Moulid Kithab
+          </a>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-          
           <img src="https://i.ibb.co/NgNk4j5r/IMG-20260201-WA0009.jpg"
                class="leader-image"
                alt="അല്‍ ഹാഫിള് ">
@@ -656,29 +615,6 @@
       });
     });
   });
-</script>
-<script>
-function smartPDFView() {
-  const pdfUrl = 'moulid.pdf';
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
-  if (isMobile) {
-    // Always use modal for mobile
-    const pdfFrame = document.getElementById('pdfFrame');
-    pdfFrame.src = pdfUrl;
-    const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
-    pdfModal.show();
-  } else {
-    // For desktop, try to open in new tab
-    // Add parameter to encourage viewing
-    window.open(pdfUrl + '#toolbar=0&view=FitH', '_blank');
-  }
-}
-
-function printPDF() {
-  const pdfFrame = document.getElementById('pdfFrame');
-  pdfFrame.contentWindow.print();
-}
 </script>
 <script>
   fetch('navbar.html')
