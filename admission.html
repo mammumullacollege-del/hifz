@@ -18,6 +18,21 @@
     .arabic-font {font-family:'Scheherazade New',serif;}
     .malayalam-font {font-family:'Anek Malayalam',sans-serif;}
     .pattern-bg {background-image:radial-gradient(circle at 25% 25%,rgba(10,92,54,0.03) 2px,transparent 2px),radial-gradient(circle at 75% 75%,rgba(193,154,63,0.03) 2px,transparent 2px); background-size:50px 50px; position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;}
+    
+    /* Ticker Styles - Added here */
+    .ticker-container {background: linear-gradient(90deg, var(--dark-green), var(--islamic-green)); color: white; padding: 0; overflow: hidden; position: fixed; top: 80px; left: 0; right: 0; border-bottom: 2px solid var(--islamic-gold); height: 50px; display: flex; align-items: center; z-index: 1029; margin: 0;}
+    .ticker-wrapper {white-space: nowrap; display: inline-flex; animation: ticker 50s linear infinite; padding-left: 100%;}
+    .ticker-item {display: inline-flex; align-items: center; padding: 0 30px; font-size: 1rem; position: relative;}
+    .ticker-badge {background: var(--islamic-gold); color: var(--islamic-green); padding: 3px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-right: 10px; white-space: nowrap;}
+    .ticker-item:after {content: "•"; color: var(--islamic-gold); position: absolute; right: -10px; font-size: 1.2rem;}
+    @keyframes ticker {0% {transform: translateX(0);} 100% {transform: translateX(-100%);}}
+
+    @media (max-width: 768px) {
+      .ticker-container {top: 70px !important; height: 40px;}
+      .ticker-wrapper {animation-duration: 40s;}
+      .ticker-item {padding: 0 15px; font-size: 0.85rem;}
+    }
+    
     .navbar-optimized {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); border-bottom:3px solid var(--islamic-gold); transition:var(--transition); padding:0.5rem 0; height:80px; z-index:1030 !important;}
     .navbar-toggler {border-color:rgba(255,255,255,0.5);}
     .navbar-toggler:focus {box-shadow:0 0 0 2px var(--islamic-gold);}
@@ -143,7 +158,7 @@
     .ornament-1 {top:20%; left:5%; animation:float 6s ease-in-out infinite;}
     .ornament-2 {top:60%; right:5%; animation:float 8s ease-in-out infinite reverse;}
     .ornament-3 {bottom:20%; left:10%; animation:float 7s ease-in-out infinite;}
-    @media (max-width:768px) {body{padding-top:70px !important;} .navbar-optimized{height:70px;padding:0.3rem 0;} .page-header{height:26vh;min-height:180px;} .page-title{font-size:2.2rem;} .page-subtitle{font-size:1.1rem;} .content-section{padding:2.5rem 0;} .section-title{font-size:1.8rem;} .navbar-collapse{background:var(--dark-green);padding:1rem;border-radius:0 0 10px 10px;border:1px solid var(--islamic-gold);margin-top:0px;max-height:70vh;overflow-y:auto;} .form-container{padding:1.5rem;} .portal-card{padding:1.5rem;} .document-container{width:100%;box-shadow:none;border-radius:0;} .timeline::before{left:20px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(180deg,var(--islamic-green),var(--islamic-gold));transform:none;} .timeline-item{justify-content:flex-start;margin-bottom:2.5rem;} .timeline-content-box{width:calc(100% - 60px);margin-left:40px;margin-right:0;} .timeline-content-box::before{top:50%;left:-35px;transform:translateY(-50%);} .timeline-content-box:hover::before{transform:translateY(-50%) scale(1.2);}}
+    @media (max-width:768px) {body{padding-top:130px !important;} .navbar-optimized{height:70px;padding:0.3rem 0;} .page-header{height:26vh;min-height:180px;} .page-title{font-size:2.2rem;} .page-subtitle{font-size:1.1rem;} .content-section{padding:2.5rem 0;} .section-title{font-size:1.8rem;} .navbar-collapse{background:var(--dark-green);padding:1rem;border-radius:0 0 10px 10px;border:1px solid var(--islamic-gold);margin-top:0px;max-height:70vh;overflow-y:auto;} .form-container{padding:1.5rem;} .portal-card{padding:1.5rem;} .document-container{width:100%;box-shadow:none;border-radius:0;} .timeline::before{left:20px;right:auto;top:0;bottom:0;width:4px;height:auto;background:linear-gradient(180deg,var(--islamic-green),var(--islamic-gold));transform:none;} .timeline-item{justify-content:flex-start;margin-bottom:2.5rem;} .timeline-content-box{width:calc(100% - 60px);margin-left:40px;margin-right:0;} .timeline-content-box::before{top:50%;left:-35px;transform:translateY(-50%);} .timeline-content-box:hover::before{transform:translateY(-50%) scale(1.2);}}
     @media (max-width:576px) {.page-title{font-size:1.8rem;} .section-title{font-size:1.5rem;} .portal-icon{width:60px;height:60px;font-size:1.5rem;}}
     @media (min-width: 992px) {
       .dropdown-submenu { position: relative; }
@@ -162,6 +177,41 @@
 <div class="islamic-ornament ornament-2">✸</div>
 <div class="islamic-ornament ornament-3">✸</div>
 <div id="navbar-container"></div>
+
+<!-- Ticker Container Added Here -->
+<div class="ticker-container">
+  <div class="ticker-wrapper">
+    <div class="ticker-item">
+      <span class="ticker-badge">⚠ IMPORTANT</span>
+      Admission started! Contact now.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">📢 NEWS</span>
+       യോഗ്യത: പത്ത് വയസ് കവിയാത്ത ആണ്‍ കുട്ടി
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">📢 NEWS</span>
+      പ്രവേശന പരീക്ഷാദിനത്തില്‍ ആധാര്‍ കോപ്പി, അപേക്ഷാ ഫീ 300 രൂപ എന്നിവ സ്ഥാപനത്തില്‍ സമർപ്പിക്കുക.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">✨ UPDATED</span>
+      <strong>15-02-2026 ഞായർ ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, 12-02-2026 വ്യാഴാഴ്ചക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</strong>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">⚠ IMPORTANT</span>
+      Admission started! Contact now.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">🎉 EVENT</span>
+      സമസ്ത നൂറാം വാര്‍ഷികം 2026 ഫെബ്രുവരി 4-8 തിയ്യതികളില്‍ കാസര്‍ഗോഡ് കുണിയയില്‍.
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-badge">✨ UPDATED</span>
+      <strong>15-02-2026 ഞായർ ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, 12-02-2026 വ്യാഴാഴ്ചക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</strong>
+    </div>
+  </div>
+</div>
+
 <div class="page-header">
   <div class="container">
     <div class="page-header-content">
