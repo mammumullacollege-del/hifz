@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DSAC | Gallery</title>
+  <title>AMCT | YouTube Channel</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -86,286 +86,44 @@
       border: 2px solid var(--islamic-gold); color: var(--islamic-gold); background: transparent; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; transition: var(--transition);
     }
     .btn-outline-gold:hover {background: var(--islamic-gold); color: var(--islamic-green);}
-    
-    /* Improved Gallery Layout */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      grid-auto-rows: 200px;
-      grid-gap: 1.5rem;
-      grid-auto-flow: dense;
+    .video-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; padding: 1rem 0;
     }
-
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.08);
-    }
-
-    .gallery-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: 1;
-      border-radius: 12px;
-    }
-
-    .gallery-item:hover::before {
-      opacity: 1;
-    }
-
-    /* Removed gallery-caption and gallery-category styles since we don't need them */
-
-    /* Span items for better layout */
-    .gallery-item:nth-child(3n) {
-      grid-row: span 2;
-    }
-
-    .gallery-item:nth-child(5n) {
-      grid-column: span 2;
-    }
-
-    .gallery-item:nth-child(7n) {
-      grid-row: span 2;
-      grid-column: span 2;
-    }
-
-    /* Enhanced Lightbox Modal - Clean version without captions */
-    .gallery-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
-
-    .modal-content {
-      position: relative;
-      max-width: 95vw;
-      max-height: 95vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .modal-image-container {
-      position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-image {
-      max-width: 100%;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 4px;
-    }
-
-    /* Modal Controls */
-    .modal-controls {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      transform: translateY(-50%);
-      display: flex;
-      justify-content: space-between;
-      padding: 0 1rem;
-      pointer-events: none;
-    }
-
-    .modal-controls button {
-      pointer-events: all;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-
-    .modal-controls button:hover {
-      background: var(--islamic-gold);
-      border-color: var(--islamic-gold);
-      color: var(--islamic-green);
-      transform: scale(1.1);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-      z-index: 10000;
-    }
-
-    .modal-close:hover {
-      background: var(--islamic-gold);
-      border-color: var(--islamic-gold);
-      color: var(--islamic-green);
-      transform: rotate(90deg);
-    }
-
-    .modal-counter {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      color: white;
-      font-size: 0.9rem;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 0.4rem 0.8rem;
-      border-radius: 15px;
-      backdrop-filter: blur(5px);
-    }
-
-    /* Modal Zoom Controls */
-    .modal-zoom-controls {
-      position: absolute;
-      bottom: 1rem;
-      left: 1rem;
-      display: flex;
-      gap: 0.5rem;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 0.5rem;
-      border-radius: 25px;
-      backdrop-filter: blur(5px);
-    }
-
-    .modal-zoom-controls button {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .modal-zoom-controls button:hover {
-      background: var(--islamic-gold);
-      color: var(--islamic-green);
-    }
-
-    /* Loading Animation */
-    .image-loader {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-top-color: var(--islamic-gold);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      display: none;
-    }
-
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    /* Filter Buttons */
-    .filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: center;
-      margin-bottom: 3rem;
-      padding: 0 1rem;
-    }
-
-    .filter-btn {
-      padding: 0.8rem 1.8rem;
-      border: none;
-      background: white;
-      color: #666;
-      font-weight: 500;
-      border-radius: 30px;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .filter-btn:hover {
-      background: rgba(10, 92, 54, 0.1);
-      color: var(--islamic-green);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-
-    .filter-btn.active {
-      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
-      color: white;
-      border-color: var(--islamic-gold);
-      box-shadow: 0 6px 20px rgba(10, 92, 54, 0.3);
-    }
-
     .video-card {
-      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 2px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%;
+      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 3px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%;
     }
     .video-card:hover {transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);}
     .video-container {
       position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;
     }
     .video-container iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;}
+    .video-title {
+      color: var(--islamic-green); font-weight: 600; padding: 1.2rem; margin: 0; font-size: 1.1rem; text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center;
+    }
+    .video-info {
+      display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1.2rem; background: rgba(248, 243, 230, 0.5); border-top: 1px solid rgba(10, 92, 54, 0.1);
+    }
+    .video-category {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500;
+    }
+    .video-date {color: #666; font-size: 0.85rem;}
+    .channel-info {
+      background: white; border-radius: 15px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 2px solid var(--islamic-gold); text-align: center;
+    }
+    .channel-icon {
+      width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #FF0000, #FF3333); color: white; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0; box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+    }
+    .channel-icon.youtube {background: linear-gradient(135deg, #FF0000, #FF3333);}
+    .channel-icon.instagram {background: linear-gradient(135deg, #833AB4, #E1306C, #F77737, #FCAF45, #FFDC80);}
+    .channel-stats {display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem;}
+    .stat-item {text-align: center;}
+    .stat-number {color: var(--islamic-green); font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem;}
+    .stat-label {color: #666; font-size: 0.9rem;}
+    .category-filter {display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2.5rem;}
+    .category-btn {
+      background: white; border: 2px solid var(--islamic-gold); color: var(--islamic-gold); padding: 0.5rem 1.5rem; border-radius: 25px; font-weight: 500; transition: var(--transition); cursor: pointer;
+    }
+    .category-btn:hover, .category-btn.active {background: var(--islamic-gold); color: var(--islamic-green);}
     .footer {
       background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-top: 3px solid var(--islamic-gold); padding: 3rem 0 1.5rem; color: white;
     }
@@ -394,6 +152,24 @@
     .ornament-1 {top: 20%; left: 5%; animation: float 6s ease-in-out infinite;}
     .ornament-2 {top: 60%; right: 5%; animation: float 8s ease-in-out infinite reverse;}
     .ornament-3 {bottom: 20%; left: 10%; animation: float 7s ease-in-out infinite;}
+    .video-section-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: 2rem;
+      color: var(--islamic-green);
+      text-align: center;
+      margin: 4rem 0 2rem;
+      padding-bottom: 1rem;
+      position: relative;
+    }
+    .video-section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 40%;
+      right: 40%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent);
+    }
     @media (max-width: 768px) {
       body {padding-top: 70px !important;}
       .navbar-optimized {height: 70px; padding: 0.3rem 0;}
@@ -405,54 +181,51 @@
       .navbar-collapse {
         background: var(--dark-green); padding: 1rem; border-radius: 0 0 10px 10px; border: 1px solid var(--islamic-gold); margin-top: 0px; max-height: 70vh; overflow-y: auto;
       }
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-gap: 1rem;
+      .video-grid {grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;}
+      .channel-stats {gap: 1rem;}
+      .stat-number {font-size: 1.5rem;}
+      .channel-icon {width: 60px !important; height: 60px !important; font-size: 1.8rem !important; margin: 0 auto 1.2rem !important;}
+      .channel-info .d-flex {gap: 8px !important;}
+      .channel-info .mt-4.mb-5 {
+        display: flex; flex-direction: column; gap: 0.8rem; align-items: center;
       }
-      .gallery-item:nth-child(5n),
-      .gallery-item:nth-child(7n) {
-        grid-column: span 1;
+      .channel-info .btn-gold, .channel-info .btn-outline-gold {width: 100%; max-width: 300px; margin: 0.2rem 0 !important;}
+      .channel-info {padding: 1.5rem; margin: 0 1rem 2rem;}
+      .video-title {min-height: 60px; font-size: 1rem; padding: 1rem;}
+      .video-section-title {
+        font-size: 1.6rem;
+        margin: 3rem 0 1.5rem;
       }
-      .modal-controls button {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-      }
-      .modal-close {
-        width: 35px;
-        height: 35px;
-        font-size: 1.3rem;
-      }
-      .modal-zoom-controls {
-        bottom: 5rem;
-      }
-      .modal-zoom-controls button {
-        width: 32px;
-        height: 32px;
-      }
-      .filter-buttons {gap: 0.5rem;}
-      .filter-btn {padding: 0.6rem 1.2rem; font-size: 0.9rem;}
     }
     @media (max-width: 576px) {
       .page-title {font-size: 1.8rem;}
       .section-title {font-size: 1.5rem;}
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        grid-auto-rows: 180px;
+      .video-grid {grid-template-columns: 1fr; gap: 1rem;}
+      .channel-stats {flex-direction: column; gap: 0.5rem;}
+      .category-filter {gap: 0.5rem;}
+      .category-btn {padding: 0.4rem 1rem; font-size: 0.9rem;}
+      .channel-icon {width: 50px !important; height: 50px !important; font-size: 1.5rem !important;}
+      .channel-info h2.section-title {font-size: 1.5rem !important; margin-bottom: 0.8rem !important;}
+      .channel-info p.section-subtitle {font-size: 0.95rem !important; margin-bottom: 1rem !important;}
+      .video-info {padding: 0.6rem 1rem; flex-direction: column; gap: 0.5rem; align-items: center;}
+      .video-category, .video-date {font-size: 0.75rem;}
+      .content-section {padding: 2rem 0;}
+      .btn-outline-gold.btn-lg {padding: 0.6rem 1.5rem; font-size: 0.9rem;}
+      .btn-outline-gold.btn-lg.px-5 {padding-left: 1.5rem !important; padding-right: 1.5rem !important;}
+      .video-section-title {
+        font-size: 1.4rem;
+        margin: 2.5rem 0 1.5rem;
       }
-      .filter-buttons {gap: 0.3rem;}
-      .filter-btn {padding: 0.5rem 1rem; font-size: 0.85rem;}
-      .modal-controls {
-        padding: 0 0.5rem;
-      }
-      .modal-controls button {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-      }
-      .modal-zoom-controls {
-        bottom: 4rem;
-      }
+    }
+    @media (max-width: 400px) {
+      .page-title {font-size: 1.6rem;}
+      .page-subtitle {font-size: 1rem; padding: 0 1rem;}
+      .channel-info {padding: 1rem; margin: 0 0.5rem 1.5rem;}
+      .stat-number {font-size: 1.3rem;}
+      .stat-label {font-size: 0.8rem;}
+      .video-card {border-radius: 10px;}
+      .category-filter {gap: 0.3rem;}
+      .category-btn {padding: 0.3rem 0.8rem; font-size: 0.8rem;}
     }
     @media (min-width: 992px) {
       .dropdown-submenu {  position: relative;  }
@@ -475,469 +248,374 @@
 <div class="page-header">
   <div class="container">
     <div class="page-header-content">
-      <h1 class="page-title">Photo Gallery</h1>
-      <p class="page-subtitle">Beautiful moments and memories from Darunnajath Shareeath & Arts College</p>
+      <h1 class="page-title">YouTube Channel</h1>
+      <p class="page-subtitle">Watch our anniversary celebrations, Islamic programs, events and college activities</p>
     </div>
   </div>
 </div>
 <section class="content-section">
   <div class="container">
-    <div class="filter-buttons mb-4" data-aos="fade-up">
-      <button class="filter-btn active" data-filter="all">All Photos</button>
-      <button class="filter-btn" data-filter="convocation">Convocation</button>
-      <button class="filter-btn" data-filter="report">News Report</button>
-      <button class="filter-btn" data-filter="students">Students</button>
-      <button class="filter-btn" data-filter="functions">Functions</button>
-      <button class="filter-btn" data-filter="events">Events</button>
-      <button class="filter-btn" data-filter="campus">Campus</button>
-      <button class="filter-btn" data-filter="academic">Academic</button>      
-      <button class="filter-btn" data-filter="activities">Activities</button>   
+    <div class="channel-info" data-aos="fade-up">
+      <div class="d-flex justify-content-center mb-2 gap-4">
+        <a href="https://www.youtube.com/@nissamedia" class="channel-icon youtube" target="_blank" aria-label="Youtube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/nissamedia?igsh=MWk3aTJsYzBycHEzNw==" class="channel-icon instagram" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      <h2 class="section-title text-center" style="font-size: 2rem; margin-bottom: 1rem;">
+        AMCT Social Media
+      </h2>
+      <p class="section-subtitle" style="margin-bottom: 1.5rem;">
+        Subscribe to our channels to stay updated with college events, anniversary celebrations, Islamic programs and more.
+      </p>
+      <div class="channel-stats mb-4">
+        <div class="stat-item">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Featured Videos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Years Coverage</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">32-36</div>
+          <div class="stat-label">Anniversary Years</div>
+        </div>
+      </div>
+      <div class="mt-4 mb-5">
+        <a href="https://www.youtube.com/@nissamedia" target="_blank" class="btn-gold me-2">
+          <i class="fab fa-youtube me-2"></i>Visit Youtube
+        </a>
+        <a href="https://www.instagram.com/nissamedia?igsh=MWk3aTJsYzBycHEzNw==" target="_blank" class="btn-gold me-2">
+          <i class="fab fa-instagram me-2"></i>Visit Instagram
+        </a>
+        <button class="btn-outline-gold" onclick="subscribeAlert()">
+          <i class="fas fa-bell me-2"></i>Subscribe
+        </button>
+      </div>
     </div>
-    <div class="gallery-grid" id="galleryContainer" data-aos="fade-up" data-aos-delay="100">
+    
+    <h2 class="video-section-title" data-aos="fade-up">Anniversary Celebrations</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rH8gTr_utrA?si=VfIykk_MMdV4rVxC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">36th Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">Latest</span>
+          </div>
+        </div>
+      </div>
       
-      <div class="gallery-item" data-category="report">
-        <img src="https://i.ibb.co/FLLDHYKF/1769428173-suprabhatham-epaper.png" alt="Arts and Crafts Display">
-      </div>
-      <div class="gallery-item" data-category="report">
-        <img src="https://i.ibb.co/pjDFMsHG/chandrika-epaper-MALAPPURAM13-13.png" alt="Arts and Crafts Display">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/GQ74Hsjg/IMG-20260123-WA0122.jpg" alt="Arts and Crafts Display">
-      </div>
-      <div class="gallery-item" data-category="activities">
-        <img src="https://i.ibb.co/RGCXB7T4/IMG-20170916-WA0063.jpg" alt="College Event Celebration">
-      </div>
-      <div class="gallery-item" data-category="activities">
-        <img src="https://i.ibb.co/gL6hVNbd/IMG-20170916-WA0086.jpg" alt="College Cultural Event">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/cXhw9PMC/IMG-20171003-WA0066.jpg" alt="College Annual Function">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/vC8VYDVh/Whats-App-Image-2026-01-21-at-11-38-43-AM.jpg" alt="College Main Building Entrance">
-      </div>
-      <div class="gallery-item" data-category="students">
-        <img src="https://i.ibb.co/21yhyNCn/Whats-App-Image-2026-01-21-at-11-38-44-AM.jpg" alt="College Campus Ground">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/BVHVcJSG/Whats-App-Image-2026-01-21-at-11-38-45-AM.jpg" alt="College Library Building">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/yFx60BzB/Whats-App-Image-2026-01-21-at-11-38-45-AM-1.jpg" alt="Classroom Learning Session">
-      </div>
-      <div class="gallery-item" data-category="academic">
-        <img src="https://i.ibb.co/SD8WZ4LJ/Whats-App-Image-2026-01-21-at-11-38-46-AM-1.jpg" alt="Laboratory Practical Class">
-      </div>
-      <div class="gallery-item" data-category="academic">
-        <img src="https://i.ibb.co/zTRm7cP0/Whats-App-Image-2026-01-21-at-11-38-46-AM.jpg" alt="Seminar Session in Progress">
-      </div>
-      <div class="gallery-item" data-category="report">
-        <img src="https://i.ibb.co/3m667Nxq/Whats-App-Image-2026-01-21-at-11-38-47-AM-1.jpg" alt="Annual Day Celebration">
-      </div>
-      <div class="gallery-item" data-category="report">
-        <img src="https://i.ibb.co/zhSXZfJN/Whats-App-Image-2026-01-21-at-11-38-47-AM.jpg" alt="Prize Distribution Ceremony">
-      </div>
-      <div class="gallery-item" data-category="report">
-        <img src="https://i.ibb.co/ymDS5bdP/Whats-App-Image-2026-01-21-at-11-38-48-AM-1.jpg" alt="Cultural Festival Performance">
-      </div>
-      <div class="gallery-item" data-category="report">
-        <img src="https://i.ibb.co/219SYwdw/Whats-App-Image-2026-01-21-at-11-38-48-AM.jpg" alt="Student Group Discussion">
-      </div>
-      <div class="gallery-item" data-category="report">
-        <img src="https://i.ibb.co/99701Lhp/Whats-App-Image-2026-01-21-at-11-38-49-AM.jpg" alt="Student Project Exhibition">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/TBX4XMpW/Whats-App-Image-2026-01-21-at-11-38-49-AM-1.jpg" alt="Arts and Crafts Display">
-      </div>
-      <div class="gallery-item" data-category="campus">
-        <img src="https://i.ibb.co/zV71cXvk/Whats-App-Image-2026-01-21-at-11-28-03-AM-1.jpg" alt="College Hostel Building">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/7xnJ4DKk/Whats-App-Image-2026-01-21-at-11-28-08-AM.jpg" alt="convocation">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/xVNP0N1/Whats-App-Image-2026-01-21-at-11-28-09-AM-1.jpg" alt="Annual convocation Day">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/35VhHNf8/Whats-App-Image-2026-01-21-at-11-28-09-AM.jpg" alt="convocation">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/DPTHFfFs/Whats-App-Image-2026-01-21-at-11-28-10-AM-1.jpg" alt="convocation">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/yn3rHHhK/Whats-App-Image-2026-01-21-at-11-28-10-AM.jpg" alt="convocation">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/sdnLFC74/Whats-App-Image-2026-01-21-at-11-28-11-AM.jpg" alt="convocation">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/gLRwCS70/Whats-App-Image-2026-01-21-at-11-28-12-AM-1.jpg" alt="Convocation">
-      </div>
-      <div class="gallery-item" data-category="convocation">
-        <img src="https://i.ibb.co/1YPT2b2w/Whats-App-Image-2026-01-21-at-11-28-12-AM.jpg" alt="Student Council Meeting">
-      </div>
-      <div class="gallery-item" data-category="students">
-        <img src="https://i.ibb.co/MDFkjKvT/Whats-App-Image-2026-01-21-at-11-28-13-AM.jpg" alt="Cultural Dance Practice">
-      </div>
-      <div class="gallery-item" data-category="students">
-        <img src="https://i.ibb.co/rf4K4n5Z/Whats-App-Image-2026-01-21-at-11-28-14-AM-1.jpg" alt="Independence Day Celebration">
-      </div>
-      <div class="gallery-item" data-category="students">
-        <img src="https://i.ibb.co/rRDjSFJm/Whats-App-Image-2026-01-21-at-11-28-14-AM.jpg" alt="College Cafeteria">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/zTz4qbcC/Whats-App-Image-2026-01-21-at-11-28-15-AM.jpg" alt="College Administrative Block">
-      </div>
-      <div class="gallery-item" data-category="activities">
-        <img src="https://i.ibb.co/Y78DT3MC/Whats-App-Image-2026-01-21-at-11-28-16-AM-1.jpg" alt="Computer Lab Session">
-      </div>
-      <div class="gallery-item" data-category="activities">
-        <img src="https://i.ibb.co/mVLk3Q9Q/Whats-App-Image-2026-01-21-at-11-28-17-AM.jpg" alt="College Anniversary Celebration">
-      </div>
-      <div class="gallery-item" data-category="students">
-        <img src="https://i.ibb.co/tM73DP3k/Whats-App-Image-2026-01-21-at-11-28-18-AM-1.jpg" alt="Parents Teachers Meeting">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/Kph6yyN5/Whats-App-Image-2026-01-21-at-11-28-18-AM.jpg" alt="Student Study Group">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/GfdwK03P/Whats-App-Image-2026-01-21-at-11-28-19-AM-1.jpg" alt="Debate Competition">
-      </div>
-      <div class="gallery-item" data-category="activities">
-        <img src="https://i.ibb.co/mFNxc2Dz/Whats-App-Image-2026-01-21-at-11-28-19-AM.jpg" alt="Quiz Competition">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/v453Cys5/Whats-App-Image-2026-01-21-at-11-28-20-AM-1.jpg" alt="College Farewell Party">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/XZtVsPtK/Whats-App-Image-2026-01-21-at-11-28-20-AM.jpg" alt="Award Ceremony">
-      </div>
-      <div class="gallery-item" data-category="events">
-        <img src="https://i.ibb.co/1Y253hNq/Whats-App-Image-2026-01-21-at-11-28-22-AM-1.jpg" alt="College Auditorium">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/KjqsfW39/Whats-App-Image-2026-01-21-at-11-27-40-AM.jpg" alt="Morning Assembly">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/C5xRwR2Z/Whats-App-Image-2026-01-21-at-11-27-55-AM.jpg" alt="Yoga Session">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/fG253KXm/Whats-App-Image-2026-01-21-at-11-27-58-AM.jpg" alt="Morning Sports Activities">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/YFNmsFrZ/Whats-App-Image-2026-01-21-at-11-27-59-AM.jpg" alt="Group Study Session">
-      </div>
-      <div class="gallery-item" data-category="functions">
-        <img src="https://i.ibb.co/RG9VshdD/Whats-App-Image-2026-01-21-at-11-28-00-AM.jpg" alt="Library Study Time">
-      </div>
-      <div class="gallery-item" data-category="campus">
-        <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo">
-      </div>
-      <div class="gallery-item" data-category="campus">
-        <img src="https://i.ibb.co/rf3Sp41S/COLLEGE-2.png" alt="College Building">
-      </div>
-    </div>
-    <div class="section-header mt-5" data-aos="fade-up">
-      <h2 class="section-title">Video Gallery</h2>
-      <p class="section-subtitle">Watch memorable moments from our college events</p>
-    </div>
-    <div class="row g-4" data-aos="fade-up" data-aos-delay="200">
-      <div class="col-md-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
         <div class="video-card">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/EMgzRUdoiWk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="First Convocation Ceremony"></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/FuvYrloMvxc?si=IDFQZ8fjoT6G4xwE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          <div class="p-4">
-            <h5 class="fw-bold" style="color: var(--islamic-green);">First Convocation Ceremony</h5>
-            <p class="text-muted mb-0">The historic first convocation ceremony of our college</p>
+          <h5 class="video-title">35th Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2023</span>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
         <div class="video-card">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/vNfz0ExArPg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="49th Anniversary Celebration"></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rr4Q4OuBX_U?si=fX6zHt7SuUQ6N9GU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          <div class="p-4">
-            <h5 class="fw-bold" style="color: var(--islamic-green);">49th Anniversary Celebration</h5>
-            <p class="text-muted mb-0">Commemorating 49 years of educational excellence</p>
+          <h5 class="video-title">34th Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2022</span>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
         <div class="video-card">
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/NFVBCxXrl4k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="48th Anniversary Celebration"></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/5geoEJPtdcg?si=8CvgesA6U1YPH9Ib" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          <div class="p-4">
-            <h5 class="fw-bold" style="color: var(--islamic-green);">48th Anniversary Celebration</h5>
-            <p class="text-muted mb-0">Celebrating 48 years of legacy and learning</p>
+          <h5 class="video-title">33rd Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2021</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/EW4bOUxfLSg?si=LUqBUax7vClqq3Ck" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">32nd Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2020</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
-      <a href="youtube.html" class="btn-gold px-5">
-        <i class="fab fa-youtube me-2"></i>View More on YouTube
-      </a>
+    
+    <h2 class="video-section-title" data-aos="fade-up">Meelad & Islamic Programs</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/uAUF_MMrC8E" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="Gulsare Madeena 2nd Edition"></iframe>
+          </div>
+          <h5 class="video-title">Gulsare Madeena 2nd Edition</h5>
+          <div class="video-info">
+            <span class="video-category">Meelad</span>
+            <span class="video-date">Special</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/imKSchqAktY?si=SBQ7NfpMXTj7oTwV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Special Islamic Program 1</h5>
+          <div class="video-info">
+            <span class="video-category">Islamic</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/eSoIoR8X65A?si=IoFek4L1i5rLlrVF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Special Islamic Program 2</h5>
+          <div class="video-info">
+            <span class="video-category">Islamic</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UCEbuuzlUYY?si=-9PfCK-N3gQLKfNC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Special Islamic Program 3</h5>
+          <div class="video-info">
+            <span class="video-category">Islamic</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="400">
-      <a href="index.html" class="btn-outline-gold px-4">
+    
+    <h2 class="video-section-title" data-aos="fade-up">Other Events & Programs</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6-7RgX9jCJE?si=YmE8Kz0cRKxCRyTd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 1</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/3x34hAZzkBU?si=Tz2HwX4culbgAXxU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 2</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6Wru2RMv3_8?si=4QmYeTggcPz9nkP9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 3</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UQNtW0uYN1Q?si=4IVyW9z5uy9nTtHD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 4</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/-3Zyt-ZAkfs?si=5AJwEEEtIs98ToyA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 5</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="350">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Aubquzww_cY?si=EvfpXrITyP9EjbSW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 6</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/jsesrH6YdWI?si=hOsoUC1ZmqIe7JIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 7</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="450">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ZDr5lhasqQU?si=zOJeldOT6HxcYyw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 8</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/JL92hGvCqsM?si=eEXCAkRh74Pvy0nG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 9</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="550">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Bfm8UJulbVM?si=fkleH9ej7GlOuRHu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">College Event Program 10</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="index.html" class="btn-outline-gold btn-lg px-5">
         <i class="fas fa-home me-2"></i>Back to Home
       </a>
     </div>
   </div>
 </section>
-
-<!-- Gallery Modal - Clean version without captions -->
-<div class="gallery-modal" id="galleryModal">
-  <div class="modal-close" id="modalClose">&times;</div>
-  <div class="modal-content">
-    <div class="modal-image-container">
-      <div class="image-loader" id="imageLoader"></div>
-      <img class="modal-image" id="modalImage" src="" alt="">
-    </div>
-    <div class="modal-counter" id="modalCounter"></div>
-    <div class="modal-controls">
-      <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-      <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-    </div>
-    <div class="modal-zoom-controls">
-      <button id="zoomIn"><i class="fas fa-search-plus"></i></button>
-      <button id="zoomOut"><i class="fas fa-search-minus"></i></button>
-      <button id="resetZoom"><i class="fas fa-expand-alt"></i></button>
-    </div>
-  </div>
-</div>
-
 <div id="footer-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    setupGallery();
-    AOS.init({ duration: 800, once: true, offset: 50 });
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    window.addEventListener('scroll', function() {
-      const navbar = document.querySelector('.navbar-optimized');
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      navbar.classList.toggle('scrolled', scrollTop > 50);
+  AOS.init({duration: 800, once: true, offset: 50, disable: window.innerWidth < 768});
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar-optimized');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    navbar.classList.toggle('scrolled', scrollTop > 50);
+  });
+  function subscribeAlert() {
+    alert('Thank you for your interest in subscribing! Please visit our YouTube channel and click the Subscribe button.');
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      if(this.getAttribute('href') !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = window.innerWidth <= 768 ? 70 : 80;
+          window.scrollTo({top: target.offsetTop - offset, behavior: 'smooth'});
+          const navbarCollapse = document.querySelector('.navbar-collapse');
+          if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+          }
+        }
+      }
     });
   });
-
-  function setupGallery() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const modal = document.getElementById('galleryModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalCounter = document.getElementById('modalCounter');
-    const modalClose = document.getElementById('modalClose');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const zoomInBtn = document.getElementById('zoomIn');
-    const zoomOutBtn = document.getElementById('zoomOut');
-    const resetZoomBtn = document.getElementById('resetZoom');
-    const imageLoader = document.getElementById('imageLoader');
-    
-    let currentIndex = 0;
-    let currentFilter = 'all';
-    let filteredItems = Array.from(galleryItems);
-    let scale = 1;
-
-    // Filter functionality
-    filterButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const filter = this.getAttribute('data-filter');
-        currentFilter = filter;
-        
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        
-        filteredItems = Array.from(galleryItems).filter(item => {
-          const category = item.getAttribute('data-category');
-          return filter === 'all' || category === filter;
-        });
-        
-        galleryItems.forEach(item => {
-          const category = item.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
-            item.style.display = 'block';
-            setTimeout(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'scale(1)';
-            }, 50);
-          } else {
-            item.style.opacity = '0';
-            item.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-              item.style.display = 'none';
-            }, 300);
-          }
-        });
+  document.querySelectorAll('.navbar-nav .nav-link-optimized:not(.dropdown-toggle)').forEach(link => {
+    link.addEventListener('click', () => {
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+        bsCollapse.hide();
+      }
+    });
+  });
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth > 768) {
+      const scrolled = window.pageYOffset;
+      const ornaments = document.querySelectorAll('.islamic-ornament');
+      ornaments.forEach((ornament, index) => {
+        const speed = 0.05 * (index + 1);
+        ornament.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.05}deg)`;
       });
+    }
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    const videos = document.querySelectorAll('.video-card');
+    videos.forEach((video, index) => {
+      video.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     });
-
-    // Open modal on image click
-    galleryItems.forEach((item, index) => {
-      item.addEventListener('click', () => {
-        // Get filtered items for current filter
-        const currentFilteredItems = Array.from(galleryItems).filter(item => {
-          const category = item.getAttribute('data-category');
-          return currentFilter === 'all' || category === currentFilter;
-        });
-        
-        // Find index in filtered items
-        currentIndex = currentFilteredItems.indexOf(item);
-        openModal(currentFilteredItems);
-      });
-    });
-
-    function openModal(items) {
-      filteredItems = items;
-      updateModal();
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      resetZoom();
-    }
-
-    function updateModal() {
-      if (filteredItems.length === 0) return;
-      
-      const currentItem = filteredItems[currentIndex];
-      const img = currentItem.querySelector('img');
-      
-      // Show loader
-      modalImage.style.opacity = '0';
-      imageLoader.style.display = 'block';
-      
-      // Preload image
-      const tempImage = new Image();
-      tempImage.src = img.src;
-      tempImage.onload = () => {
-        modalImage.src = img.src;
-        modalImage.alt = img.alt;
-        modalCounter.textContent = `${currentIndex + 1} / ${filteredItems.length}`;
-        
-        // Hide loader and show image
-        setTimeout(() => {
-          imageLoader.style.display = 'none';
-          modalImage.style.opacity = '1';
-        }, 300);
-      };
-    }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % filteredItems.length;
-      updateModal();
-      resetZoom();
-    }
-
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
-      updateModal();
-      resetZoom();
-    }
-
-    function zoomIn() {
-      scale = Math.min(scale * 1.2, 4);
-      updateImageScale();
-    }
-
-    function zoomOut() {
-      scale = Math.max(scale / 1.2, 1);
-      updateImageScale();
-    }
-
-    function resetZoom() {
-      scale = 1;
-      updateImageScale();
-    }
-
-    function updateImageScale() {
-      modalImage.style.transform = `scale(${scale})`;
-      modalImage.style.transition = 'transform 0.3s ease';
-    }
-
-    // Event Listeners
-    nextBtn.addEventListener('click', nextImage);
-    prevBtn.addEventListener('click', prevImage);
-    modalClose.addEventListener('click', () => {
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    });
-
-    zoomInBtn.addEventListener('click', zoomIn);
-    zoomOutBtn.addEventListener('click', zoomOut);
-    resetZoomBtn.addEventListener('click', resetZoom);
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (modal.style.display === 'flex') {
-        switch(e.key) {
-          case 'Escape':
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            break;
-          case 'ArrowRight':
-            nextImage();
-            break;
-          case 'ArrowLeft':
-            prevImage();
-            break;
-          case '+':
-            zoomIn();
-            break;
-          case '-':
-            zoomOut();
-            break;
-          case '0':
-            resetZoom();
-            break;
-        }
-      }
-    });
-
-    // Swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    modal.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    modal.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          nextImage(); // Swipe left
-        } else {
-          prevImage(); // Swipe right
-        }
-      }
-    }
-
-    // Double click to zoom
-    modalImage.addEventListener('dblclick', (e) => {
-      if (scale === 1) {
-        zoomIn();
-      } else {
-        resetZoom();
-      }
-    });
-
-    // Prevent modal close when clicking on image
-    modalImage.addEventListener('click', (e) => {
-      e.stopPropagation();
-    });
-  }
-
+  });
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
       toggle.addEventListener('click', function (e) {
