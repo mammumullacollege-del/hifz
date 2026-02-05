@@ -152,6 +152,24 @@
     .ornament-1 {top: 20%; left: 5%; animation: float 6s ease-in-out infinite;}
     .ornament-2 {top: 60%; right: 5%; animation: float 8s ease-in-out infinite reverse;}
     .ornament-3 {bottom: 20%; left: 10%; animation: float 7s ease-in-out infinite;}
+    .video-section-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: 2rem;
+      color: var(--islamic-green);
+      text-align: center;
+      margin: 4rem 0 2rem;
+      padding-bottom: 1rem;
+      position: relative;
+    }
+    .video-section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 40%;
+      right: 40%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent);
+    }
     @media (max-width: 768px) {
       body {padding-top: 70px !important;}
       .navbar-optimized {height: 70px; padding: 0.3rem 0;}
@@ -174,6 +192,10 @@
       .channel-info .btn-gold, .channel-info .btn-outline-gold {width: 100%; max-width: 300px; margin: 0.2rem 0 !important;}
       .channel-info {padding: 1.5rem; margin: 0 1rem 2rem;}
       .video-title {min-height: 60px; font-size: 1rem; padding: 1rem;}
+      .video-section-title {
+        font-size: 1.6rem;
+        margin: 3rem 0 1.5rem;
+      }
     }
     @media (max-width: 576px) {
       .page-title {font-size: 1.8rem;}
@@ -190,6 +212,10 @@
       .content-section {padding: 2rem 0;}
       .btn-outline-gold.btn-lg {padding: 0.6rem 1.5rem; font-size: 0.9rem;}
       .btn-outline-gold.btn-lg.px-5 {padding-left: 1.5rem !important; padding-right: 1.5rem !important;}
+      .video-section-title {
+        font-size: 1.4rem;
+        margin: 2.5rem 0 1.5rem;
+      }
     }
     @media (max-width: 400px) {
       .page-title {font-size: 1.6rem;}
@@ -223,7 +249,7 @@
   <div class="container">
     <div class="page-header-content">
       <h1 class="page-title">YouTube Channel</h1>
-      <p class="page-subtitle">Watch our latest events, speeches, convocations, and college activities</p>
+      <p class="page-subtitle">Watch our anniversary celebrations, Islamic programs, events and college activities</p>
     </div>
   </div>
 </div>
@@ -231,189 +257,298 @@
   <div class="container">
     <div class="channel-info" data-aos="fade-up">
       <div class="d-flex justify-content-center mb-2 gap-4">
-        <a href="https://www.youtube.com/@nissamedia" class="channel-icon youtube" target="_blank" aria-label="Youtube">
+        <a href="https://www.youtube.com/@himputhanpalli2265" class="channel-icon youtube" target="_blank" aria-label="Youtube">
           <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://www.instagram.com/nissamedia?igsh=MWk3aTJsYzBycHEzNw==" class="channel-icon instagram" target="_blank" aria-label="Instagram">
-          <i class="fab fa-instagram"></i>
         </a>
       </div>
       <h2 class="section-title text-center" style="font-size: 2rem; margin-bottom: 1rem;">
-        Darunnajath College Social Media
+        AMCT Social Media
       </h2>
       <p class="section-subtitle" style="margin-bottom: 1.5rem;">
-        Subscribe to our channels to stay updated with college events, academic programs, cultural activities, and more.
+        Subscribe to our channels to stay updated with college events, anniversary celebrations, Islamic programs and more.
       </p>
       <div class="channel-stats mb-4">
         <div class="stat-item">
-          <div class="stat-number">12+</div>
+          <div class="stat-number">20+</div>
           <div class="stat-label">Featured Videos</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">4+</div>
-          <div class="stat-label">Event Categories</div>
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Years Coverage</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">5+</div>
-          <div class="stat-label">Years of Content</div>
+          <div class="stat-number">32-36</div>
+          <div class="stat-label">Anniversary Years</div>
         </div>
       </div>
       <div class="mt-4 mb-5">
-        <a href="https://www.youtube.com/@nissamedia" target="_blank" class="btn-gold me-2">
+        <a href="https://www.youtube.com/@himputhanpalli2265" target="_blank" class="btn-gold me-2">
           <i class="fab fa-youtube me-2"></i>Visit Youtube
-        </a>
-        <a href="https://www.instagram.com/nissamedia?igsh=MWk3aTJsYzBycHEzNw==" target="_blank" class="btn-gold me-2">
-          <i class="fab fa-instagram me-2"></i>Visit Instagram
         </a>
         <button class="btn-outline-gold" onclick="subscribeAlert()">
           <i class="fas fa-bell me-2"></i>Subscribe
         </button>
       </div>
     </div>
-    <div class="category-filter" data-aos="fade-up" data-aos-delay="100">
-      <button class="category-btn active" onclick="filterVideos('all')">All Videos</button>
-      <button class="category-btn" onclick="filterVideos('convocation')">Convocations</button>
-      <button class="category-btn" onclick="filterVideos('anniversary')">Anniversaries</button>
-      <button class="category-btn" onclick="filterVideos('fest')">Arts Fest</button>
-      <button class="category-btn" onclick="filterVideos('tribute')">Tributes</button>
-    </div>
-    <div class="video-grid" id="videoGrid">
-      <div class="video-card" data-category="convocation" data-aos="fade-up">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/EMgzRUdoiWk" title="First Convocation Ceremony" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">First Convocation Ceremony</h3>
-        <div class="video-info">
-          <span class="video-category">Convocation</span>
-          <span class="video-date">2023</span>
+    
+    <h2 class="video-section-title" data-aos="fade-up">Anniversary Celebrations</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rH8gTr_utrA?si=VfIykk_MMdV4rVxC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">36th Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2025</span>
+          </div>
         </div>
       </div>
-      <div class="video-card" data-category="anniversary" data-aos="fade-up" data-aos-delay="100">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/uGe4yT6RU70" title="Golden Jubilee Inaugural Conference" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">Golden Jubilee Inaugural Conference</h3>
-        <div class="video-info">
-          <span class="video-category">Anniversary</span>
-          <span class="video-date">50 Years</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="anniversary" data-aos="fade-up" data-aos-delay="200">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/vNfz0ExArPg" title="49th Anniversary Celebration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">49th Anniversary Celebration</h3>
-        <div class="video-info">
-          <span class="video-category">Anniversary</span>
-          <span class="video-date">2022</span>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/FuvYrloMvxc?si=IDFQZ8fjoT6G4xwE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">35th Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2024</span>
+          </div>
         </div>
       </div>
-      <div class="video-card" data-category="anniversary" data-aos="fade-up" data-aos-delay="300">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/NFVBCxXrl4k" title="48th Anniversary" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">48th Anniversary Celebration</h3>
-        <div class="video-info">
-          <span class="video-category">Anniversary</span>
-          <span class="video-date">2021</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="anniversary" data-aos="fade-up" data-aos-delay="400">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/AkwAou7HtpI" title="47th Anniversary" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">47th Anniversary Celebration</h3>
-        <div class="video-info">
-          <span class="video-category">Anniversary</span>
-          <span class="video-date">2020</span>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rr4Q4OuBX_U?si=fX6zHt7SuUQ6N9GU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">34th Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2023</span>
+          </div>
         </div>
       </div>
-      <div class="video-card" data-category="anniversary" data-aos="fade-up" data-aos-delay="500">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/POYg_YRnsJs" title="46th Anniversary" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">46th Anniversary Celebration</h3>
-        <div class="video-info">
-          <span class="video-category">Anniversary</span>
-          <span class="video-date">2019</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="tribute" data-aos="fade-up" data-aos-delay="100">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/YXQNsb6ZwFQ" title="KT Ustahd Anusmarana Ganam" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">KT Ustahd Tribute Song</h3>
-        <div class="video-info">
-          <span class="video-category">Tribute</span>
-          <span class="video-date">Memorial</span>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/5geoEJPtdcg?si=8CvgesA6U1YPH9Ib" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">33rd Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2022</span>
+          </div>
         </div>
       </div>
-      <div class="video-card" data-category="fest" data-aos="fade-up" data-aos-delay="200">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/qwa_7-1toc0" title="Arts Fest Theme Song 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">Arts Festival Theme Song 2024</h3>
-        <div class="video-info">
-          <span class="video-category">Arts Fest</span>
-          <span class="video-date">2024</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="fest" data-aos="fade-up" data-aos-delay="300">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/QevnMUnRgL0" title="Arts Fest Theme Song 2023" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">Arts Festival Theme Song 2023</h3>
-        <div class="video-info">
-          <span class="video-category">Arts Fest</span>
-          <span class="video-date">2023</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="fest" data-aos="fade-up" data-aos-delay="400">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/qm9RXJfq7qg" title="Arts Fest Theme Song 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">Arts Festival Theme Song 2022</h3>
-        <div class="video-info">
-          <span class="video-category">Arts Fest</span>
-          <span class="video-date">2022</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="fest" data-aos="fade-up" data-aos-delay="500">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/2bAX6V7GCb0" title="Arts Fest Theme Song 2021" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">Arts Festival Theme Song 2021</h3>
-        <div class="video-info">
-          <span class="video-category">Arts Fest</span>
-          <span class="video-date">2021</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="fest" data-aos="fade-up" data-aos-delay="100">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/lfVX2lvFGsU" title="Arts Fest Burda" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">Arts Festival Burda Performance</h3>
-        <div class="video-info">
-          <span class="video-category">Arts Fest</span>
-          <span class="video-date">Special</span>
-        </div>
-      </div>
-      <div class="video-card" data-category="fest" data-aos="fade-up" data-aos-delay="200">
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/nYof6ARiLTM" title="Arts Fest Theme Song 2019" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h3 class="video-title">Arts Festival Theme Song 2019</h3>
-        <div class="video-info">
-          <span class="video-category">Arts Fest</span>
-          <span class="video-date">2019</span>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/EW4bOUxfLSg?si=LUqBUax7vClqq3Ck" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">32nd Anniversary Commemoration</h5>
+          <div class="video-info">
+            <span class="video-category">Anniversary</span>
+            <span class="video-date">2021</span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="text-center mt-5" data-aos="fade-up">
-      <button class="btn-outline-gold btn-lg" onclick="loadMoreVideos()">
-        <i class="fas fa-sync-alt me-2"></i>Load More Videos
-      </button>
+    
+    <h2 class="video-section-title" data-aos="fade-up">Meelad Programs</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/uAUF_MMrC8E" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="Gulsare Madeena 2nd Edition"></iframe>
+          </div>
+          <h5 class="video-title">Gulsare Madeena 2nd Edition</h5>
+          <div class="video-info">
+            <span class="video-category">Meelad</span>
+            <span class="video-date">Special</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/jsesrH6YdWI?si=hOsoUC1ZmqIe7JIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Gulsare Madeena 1st Edition</h5>
+          <div class="video-info">
+            <span class="video-category">Meelad</span>
+            <span class="video-date">Special</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/3x34hAZzkBU?si=Tz2HwX4culbgAXxU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Meelad Program</h5>
+          <div class="video-info">
+            <span class="video-category">Meelad</span>
+            <span class="video-date">Special</span>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    <h2 class="video-section-title" data-aos="fade-up">Students performance</h2>
+    <div class="row g-4">
+            
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/imKSchqAktY?si=SBQ7NfpMXTj7oTwV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Mammu Mulla Mala</h5>
+          <div class="video-info">
+            <span class="video-category">Islamic</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/eSoIoR8X65A?si=IoFek4L1i5rLlrVF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Super Qiraath</h5>
+          <div class="video-info">
+            <span class="video-category">Islamic</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UCEbuuzlUYY?si=-9PfCK-N3gQLKfNC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Song</h5>
+          <div class="video-info">
+            <span class="video-category">Islamic</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6-7RgX9jCJE?si=YmE8Kz0cRKxCRyTd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Theme Song 2021</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6Wru2RMv3_8?si=4QmYeTggcPz9nkP9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Theme Song 2023</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UQNtW0uYN1Q?si=4IVyW9z5uy9nTtHD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Mad'h song</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 class="video-section-title" data-aos="fade-up">Other Programs</h2>
+    <div class="row g-4"> 
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/-3Zyt-ZAkfs?si=5AJwEEEtIs98ToyA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Katha Prasangam</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="350">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Aubquzww_cY?si=EvfpXrITyP9EjbSW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Katha Prasangam</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="450">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ZDr5lhasqQU?si=zOJeldOT6HxcYyw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Event Program 2024</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/JL92hGvCqsM?si=eEXCAkRh74Pvy0nG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Event Program 2024</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="550">
+        <div class="video-card">
+          <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Bfm8UJulbVM?si=fkleH9ej7GlOuRHu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h5 class="video-title">Event Program 2023</h5>
+          <div class="video-info">
+            <span class="video-category">Event</span>
+            <span class="video-date">Program</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="text-center mt-5" data-aos="fade-up">
       <a href="index.html" class="btn-outline-gold btn-lg px-5">
         <i class="fas fa-home me-2"></i>Back to Home
@@ -432,35 +567,6 @@
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     navbar.classList.toggle('scrolled', scrollTop > 50);
   });
-  function filterVideos(category) {
-    const videos = document.querySelectorAll('.video-card');
-    const buttons = document.querySelectorAll('.category-btn');
-    buttons.forEach(btn => {
-      btn.classList.remove('active');
-      if (btn.textContent.toLowerCase().includes(category) || 
-          (category === 'all' && btn.textContent.toLowerCase().includes('all'))) {
-        btn.classList.add('active');
-      }
-    });
-    videos.forEach(video => {
-      if (category === 'all' || video.dataset.category === category) {
-        video.style.display = 'block';
-        setTimeout(() => {
-          video.style.opacity = '1';
-          video.style.transform = 'translateY(0)';
-        }, 10);
-      } else {
-        video.style.opacity = '0';
-        video.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-          video.style.display = 'none';
-        }, 300);
-      }
-    });
-  }
-  function loadMoreVideos() {
-    alert('More videos will be loaded when available. Check back soon for updates!');
-  }
   function subscribeAlert() {
     alert('Thank you for your interest in subscribing! Please visit our YouTube channel and click the Subscribe button.');
   }
@@ -539,4 +645,3 @@
 </script> 
 </body>
 </html>
-
