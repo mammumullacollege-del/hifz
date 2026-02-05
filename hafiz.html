@@ -13,156 +13,487 @@
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     :root {
-      --islamic-green: #0a5c36; --islamic-gold: #c19a3f; --islamic-cream: #f8f3e6; --islamic-light: #e9f5e9; --dark-green: #064e3b; --light-gold: #ffd24d; --transition: all 0.3s ease;
+      --islamic-green: #0a5c36;
+      --islamic-gold: #c19a3f;
+      --islamic-cream: #f8f3e6;
+      --islamic-light: #e9f5e9;
+      --dark-green: #064e3b;
+      --light-gold: #ffd24d;
+      --transition: all 0.3s ease;
     }
+    
     body {
-      font-family: 'Poppins', sans-serif; background-color: var(--islamic-cream); color: #333; scroll-behavior: smooth; overflow-x: hidden; padding-top: 80px;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--islamic-cream);
+      color: #333;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      padding-top: 80px;
     }
+    
     a {text-decoration: none;}
     .arabic-font {font-family: 'Scheherazade New', serif;}
     .malayalam-font {font-family: 'Anek Malayalam', sans-serif;}
+    
     .pattern-bg {
-      background-image: radial-gradient(circle at 25% 25%, rgba(10, 92, 54, 0.03) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(193, 154, 63, 0.03) 2px, transparent 2px); background-size: 50px 50px; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+      background-image: radial-gradient(circle at 25% 25%, rgba(10, 92, 54, 0.03) 2px, transparent 2px), 
+                        radial-gradient(circle at 75% 75%, rgba(193, 154, 63, 0.03) 2px, transparent 2px);
+      background-size: 50px 50px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
+    
     .navbar-optimized {
-      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 3px solid var(--islamic-gold); transition: var(--transition); padding: 0.5rem 0; height: 80px; z-index: 1030 !important;
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      border-bottom: 3px solid var(--islamic-gold);
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      height: 80px;
+      z-index: 1030 !important;
     }
+    
     .navbar-toggler {border-color: rgba(255, 255, 255, 0.5);}
     .navbar-toggler:focus {box-shadow: 0 0 0 2px var(--islamic-gold);}
     .navbar-toggler-icon {
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
+    
     .navbar-optimized.scrolled {
-      background: rgba(10, 92, 54, 0.98); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); height: 70px;
+      background: rgba(10, 92, 54, 0.98);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      height: 70px;
     }
+    
     .navbar-brand-compact img {
-      border-radius: 8px; transition: transform 0.3s ease; width: 60px; height: 60px; object-fit: contain; filter: brightness(0) invert(1); border: none; box-shadow: 0 0 0 2px var(--islamic-gold); padding: 0;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      border: none;
+      box-shadow: 0 0 0 2px var(--islamic-gold);
+      padding: 0;
     }
+    
     .navbar-optimized.scrolled .navbar-brand-compact img {width: 50px; height: 50px;}
     .navbar-brand-compact:hover img {transform: scale(1.05);}
     .brand-text {font-size: 1.2rem; line-height: 1.2;}
     .brand-subtext {font-size: 0.8rem; opacity: 0.9;}
+    
     .nav-link-optimized {
-      color: #fff !important; font-weight: 500; transition: var(--transition); padding-left: 0.4rem; padding-right: 0.4rem; border-radius: 5px; margin: 0 2px; white-space: nowrap;
+      color: #fff !important;
+      font-weight: 500;
+      transition: var(--transition);
+      padding-left: 0.4rem;
+      padding-right: 0.4rem;
+      border-radius: 5px;
+      margin: 0 2px;
+      white-space: nowrap;
     }
+    
     .nav-item-optimized {margin: 0 2px;}
     .nav-link-optimized:hover {color: var(--islamic-gold) !important; background: rgba(255, 255, 255, 0.1);}
+    
     .dropdown-menu-optimized {
-      background: var(--islamic-green); border: 1px solid var(--islamic-gold); border-radius: 8px; padding: 0.5rem 0;
+      background: var(--islamic-green);
+      border: 1px solid var(--islamic-gold);
+      border-radius: 8px;
+      padding: 0.5rem 0;
     }
+    
     .dropdown-item-optimized {
-      color: white; padding: 0.5rem 1rem; transition: var(--transition);
+      color: white;
+      padding: 0.5rem 1rem;
+      transition: var(--transition);
     }
+    
     .dropdown-item-optimized:hover {background: var(--islamic-gold); color: var(--islamic-green);}
+    
     .page-header {
-      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; height: 30vh; min-height: 220px; display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 3rem; border-bottom: 5px solid var(--islamic-gold); position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      color: white;
+      height: 30vh;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 5px solid var(--islamic-gold);
+      position: relative;
+      overflow: hidden;
     }
+    
     .page-header::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 30%, rgba(193, 154, 63, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(10, 92, 54, 0.1) 0%, transparent 50%);
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(193, 154, 63, 0.1) 0%, transparent 50%), 
+                  radial-gradient(circle at 80% 70%, rgba(10, 92, 54, 0.1) 0%, transparent 50%);
     }
+    
     .page-header-content {position: relative; z-index: 2;}
+    
     .page-title {
-      font-family: 'Scheherazade New', serif; font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--islamic-gold); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      font-family: 'Scheherazade New', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--islamic-gold);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
+    
     .page-subtitle {
-      font-size: 1.4rem; opacity: 0.95; max-width: 800px; margin: 0 auto; color: var(--islamic-cream);
+      font-size: 1.4rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--islamic-cream);
     }
-    .content-section {padding: 4rem 0; background: var(--islamic-cream);}
+    
+    .content-section {
+      padding: 4rem 0;
+      background: var(--islamic-cream);
+    }
+    
     .section-header {
-      text-align: center; margin-bottom: 3rem; position: relative; padding: 2rem 0;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding: 2rem 0;
     }
+    
     .section-title {
-      color: var(--islamic-green); font-weight: 700; display: inline-block; padding: 0 1rem; background: var(--islamic-cream); position: relative; z-index: 2; margin-bottom: 0.5rem; font-size: 2.5rem;
+      color: var(--islamic-green);
+      font-weight: 700;
+      display: inline-block;
+      padding: 0 1rem;
+      background: var(--islamic-cream);
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
     }
+    
     .section-header::before {
-      content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent); z-index: 1;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--islamic-gold), transparent);
+      z-index: 1;
     }
-    .section-subtitle {color: #666; font-size: 1.1rem; max-width: 700px; margin: 0 auto;}
+    
+    .section-subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
     .btn-gold {
-      background: linear-gradient(135deg, var(--islamic-gold), #d4af37); border: none; color: var(--islamic-green); font-weight: 600; border-radius: 8px; box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3); transition: var(--transition); padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, var(--islamic-gold), #d4af37);
+      border: none;
+      color: var(--islamic-green);
+      font-weight: 600;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(193, 154, 63, 0.3);
+      transition: var(--transition);
+      padding: 0.75rem 1.5rem;
     }
+    
     .btn-gold:hover {
-      background: linear-gradient(135deg, #d4af37, var(--islamic-gold)); box-shadow: 0 6px 20px rgba(193, 154, 63, 0.4); transform: translateY(-2px); color: var(--islamic-green);
+      background: linear-gradient(135deg, #d4af37, var(--islamic-gold));
+      box-shadow: 0 6px 20px rgba(193, 154, 63, 0.4);
+      transform: translateY(-2px);
+      color: var(--islamic-green);
     }
+    
     .btn-outline-gold {
-      border: 2px solid var(--islamic-gold); color: var(--islamic-gold); background: transparent; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; transition: var(--transition);
+      border: 2px solid var(--islamic-gold);
+      color: var(--islamic-gold);
+      background: transparent;
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      transition: var(--transition);
     }
+    
     .btn-outline-gold:hover {background: var(--islamic-gold); color: var(--islamic-green);}
+    
     .islamic-card {
-      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 3px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%; margin-bottom: 1rem;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: var(--transition);
+      border: 3px solid transparent;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      height: 100%;
+      margin-bottom: 1rem;
     }
+    
     .islamic-card:hover {transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);}
+    
     .islamic-card-header {
-      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); color: white; padding: 1.5rem; text-align: center; border-bottom: 3px solid var(--islamic-gold);
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 3px solid var(--islamic-gold);
     }
+    
     .islamic-card-body {padding: 1.5rem;}
+    
     .footer {
-      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green)); border-top: 3px solid var(--islamic-gold); padding: 3rem 0 1.5rem; color: white;
+      background: linear-gradient(135deg, var(--dark-green), var(--islamic-green));
+      border-top: 3px solid var(--islamic-gold);
+      padding: 3rem 0 1.5rem;
+      color: white;
     }
+    
     .footer-brand {font-size: 1.8rem; font-weight: 700; color: var(--islamic-gold); margin-bottom: 1rem;}
+    
     .social-links {display: flex; gap: 12px; margin-top: 1rem;}
+    
     .social-icon {
-      width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); background: rgba(255, 255, 255, 0.1); font-size: 1.1rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 1.1rem;
     }
+    
     .social-icon:hover {transform: translateY(-5px); background: var(--islamic-gold); color: var(--islamic-green);}
+    
     .footer-links h5 {color: var(--islamic-gold); margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 600;}
+    
     .footer-links a {
-      display: block; color: rgba(255, 255, 255, 0.85); text-decoration: none; margin-bottom: 0.6rem; transition: var(--transition); font-size: 0.95rem;
+      display: block;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: var(--transition);
+      font-size: 0.95rem;
     }
+    
     .footer-links a:hover {color: var(--islamic-gold); padding-left: 5px;}
+    
     .whatsapp-float {
-      position: fixed; bottom: 25px; right: 15px; width: 60px; height: 60px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 1000; animation: float 3s ease-in-out infinite; transition: var(--transition); text-decoration: none;
+      position: fixed;
+      bottom: 25px;
+      right: 15px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      animation: float 3s ease-in-out infinite;
+      transition: var(--transition);
+      text-decoration: none;
     }
+    
     .accordion-button {
-  background-color: #f8f9fa !important;
-  color: #0a5c36 !important;
-  font-size: 1.25rem;
-}
+      background-color: #f8f9fa !important;
+      color: #0a5c36 !important;
+      font-size: 1.25rem;
+    }
 
-.accordion-button:not(.collapsed) {
-  background-color: #e9f5e9 !important;
-  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
-}
+    .accordion-button:not(.collapsed) {
+      background-color: #e9f5e9 !important;
+      box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+    }
 
-.accordion-body {
-  background-color: white;
-}
+    .accordion-body {
+      background-color: white;
+    }
 
-.accordion-item {
-  overflow: hidden;
-  border-radius: 12px !important;
-}
+    .accordion-item {
+      overflow: hidden;
+      border-radius: 12px !important;
+    }
+    
     .whatsapp-float:hover {transform: scale(1.1) rotate(10deg); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);}
+    
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
+    
     .islamic-ornament {
-      position: fixed; color: var(--islamic-gold); opacity: 0.08; font-size: 1.8rem; z-index: -1; pointer-events: none;
+      position: fixed;
+      color: var(--islamic-gold);
+      opacity: 0.08;
+      font-size: 1.8rem;
+      z-index: -1;
+      pointer-events: none;
     }
+    
     .ornament-1 {top: 20%; left: 5%; animation: float 6s ease-in-out infinite;}
     .ornament-2 {top: 60%; right: 5%; animation: float 8s ease-in-out infinite reverse;}
     .ornament-3 {bottom: 20%; left: 10%; animation: float 7s ease-in-out infinite;}
+    
     .leader-image {
-      width: 100%; max-height: 400px; object-fit: cover; border-radius: 15px; border: 5px solid var(--islamic-gold); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); margin-bottom: 2rem;
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 5px solid var(--islamic-gold);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
     }
+    
     .gallery-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
+    
     .gallery-item {
-      border-radius: 10px; overflow: hidden; transition: transform 0.3s ease; cursor: pointer; border: 3px solid transparent;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: 3px solid transparent;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
-    .gallery-item:hover {transform: scale(1.05); border-color: var(--islamic-gold);}
-    .gallery-item img {width: 100%; height: 150px; object-fit: cover;}
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--islamic-gold);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .gallery-image-container {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--islamic-cream);
+      padding: 15px;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-caption {
+      padding: 1rem;
+      text-align: center;
+      background: white;
+      border-top: 2px solid var(--islamic-light);
+      font-size: 0.9rem;
+      color: var(--islamic-green);
+      font-weight: 500;
+      flex-grow: 0;
+    }
+    
+    .gallery-modal .modal-content {
+      border-radius: 15px;
+      border: 3px solid var(--islamic-gold);
+    }
+    
+    .gallery-modal .modal-body {
+      padding: 20px;
+      background-color: var(--islamic-cream);
+    }
+    
+    .gallery-modal .modal-body img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+    
+    .gallery-modal .modal-header {
+      background: linear-gradient(135deg, var(--islamic-green), var(--dark-green));
+      color: white;
+      border-bottom: 3px solid var(--islamic-gold);
+    }
+    
+    .gallery-modal .modal-title {
+      color: var(--islamic-gold);
+      font-family: 'Scheherazade New', serif;
+    }
+    
+    .gallery-modal .btn-close {
+      filter: brightness(0) invert(1);
+    }
+    
     .video-card {
-      background: white; border-radius: 15px; overflow: hidden; transition: var(--transition); border: 3px solid transparent; box-shadow: 0 5px 15px rgba(0,0,0,0.08); height: 100%;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: var(--transition);
+      border: 3px solid transparent;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      height: 100%;
     }
+    
     .video-card:hover {transform: translateY(-8px); border-color: var(--islamic-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.15);}
+    
     .video-container {
-      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background: #000;
     }
-    .video-container iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;}
-    .video-title {color: var(--islamic-green); font-weight: 600; padding: 1rem; margin: 0; font-size: 1.1rem;}
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .video-title {
+      color: var(--islamic-green);
+      font-weight: 600;
+      padding: 1rem;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    
     @media (max-width: 768px) {
       body {padding-top: 70px !important;}
       .navbar-optimized {height: 70px; padding: 0.3rem 0;}
@@ -171,25 +502,90 @@
       .page-subtitle {font-size: 1.1rem;}
       .section-title {font-size: 1.8rem;}
       .content-section {padding: 2.5rem 0;}
+      
       .navbar-collapse {
-        background: var(--dark-green); padding: 1rem; border-radius: 0 0 10px 10px; border: 1px solid var(--islamic-gold); margin-top: 0px; max-height: 70vh; overflow-y: auto;
+        background: var(--dark-green);
+        padding: 1rem;
+        border-radius: 0 0 10px 10px;
+        border: 1px solid var(--islamic-gold);
+        margin-top: 0px;
+        max-height: 70vh;
+        overflow-y: auto;
       }
-      .gallery-grid {grid-template-columns: repeat(2, 1fr);}
+      
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      
+      .gallery-image-container {
+        height: 180px;
+        padding: 10px;
+      }
     }
+    
     @media (max-width: 576px) {
       .page-title {font-size: 1.8rem;}
       .section-title {font-size: 1.5rem;}
       .gallery-grid {grid-template-columns: 1fr;}
+      .gallery-image-container {height: 200px;}
     }
+    
     @media (min-width: 992px) {
-      .dropdown-submenu {  position: relative;  }
-      .dropdown-submenu:hover > .collapse {    display: block !important;  }
-      .dropdown-submenu .collapse {    position: absolute;    top: 0;    left: 100%;    z-index: 1000;    min-width: 12rem;    padding: 0.5rem 0;    margin: 0;    font-size: 1rem;    background-color: var(--islamic-green);    border: 1px solid var(--islamic-gold);    border-radius: 0 0.5rem 0.5rem 0.5rem;  }
-      .dropdown-submenu > a:after {    content: "›";    float: right;    margin-right: -0.5rem;    font-size: 1.2rem;  }
+      .dropdown-submenu {position: relative;}
+      .dropdown-submenu:hover > .collapse {display: block !important;}
+      .dropdown-submenu .collapse {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        z-index: 1000;
+        min-width: 12rem;
+        padding: 0.5rem 0;
+        margin: 0;
+        font-size: 1rem;
+        background-color: var(--islamic-green);
+        border: 1px solid var(--islamic-gold);
+        border-radius: 0 0.5rem 0.5rem 0.5rem;
+      }
+      
+      .dropdown-submenu > a:after {
+        content: "›";
+        float: right;
+        margin-right: -0.5rem;
+        font-size: 1.2rem;
+      }
     }
+    
     @media (max-width: 991px) {
-      .dropdown-submenu .collapse {    position: static;    width: auto;    border: none;    box-shadow: none;    background: rgba(0,0,0,0.1);
-    margin-left: 1.2rem;  }
+      .dropdown-submenu .collapse {
+        position: static;
+        width: auto;
+        border: none;
+        box-shadow: none;
+        background: rgba(0,0,0,0.1);
+        margin-left: 1.2rem;
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .gallery-image-container {
+        height: 280px;
+      }
+    }
+    
+    .gallery-item img {
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
@@ -208,21 +604,18 @@
     </div>
   </div>
 </header>
+
 <main>
   <section class="content-section">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right">
           <div class="text-center mb-3">
-          <a href="moulid.pdf" 
-             target="_blank" 
-             class="btn btn-gold btn-lg">
-            <i class="fas fa-book me-2"></i>Moulid Kithab
-          </a>
-        </div>
-          <img src="https://i.ibb.co/NgNk4j5r/IMG-20260201-WA0009.jpg"
-               class="leader-image"
-               alt="അല്‍ ഹാഫിള് ">
+            <a href="moulid.pdf" target="_blank" class="btn btn-gold btn-lg">
+              <i class="fas fa-book me-2"></i>Moulid Kithab
+            </a>
+          </div>
+          <img src="https://i.ibb.co/NgNk4j5r/IMG-20260201-WA0009.jpg" class="leader-image" alt="അല്‍ ഹാഫിള്">
         </div>
         <div class="col-lg-8" data-aos="fade-left">
           <div class="section-header">
@@ -234,11 +627,11 @@
           </div>
         </div>
       </div>
+      
       <div class="row mt-5">
         <div class="col-12">
-          <div class="malayalam-font" style="font-size: 1.1rem; line-height: 1.8; text-align: justify;">         
-            
-<p>മലബാറിലെ പുരാതന മുസ്ലിം ജമാഅത്തുകളില്‍ പെട്ട ഒന്നാണ് കാപ്പ് മഹല്ല്. കേരളത്തിലെ മക്ക എന്ന് ശ്രുതിക്കപ്പെട്ട പൊന്നാനിയില്‍ മതപഠനത്തിനും ഇസ്ലാമിക സേവനത്തിനും നേതൃത്വം കൊടുത്തിരുന്ന സൂഫിവര്യന്മാരും മഹാ പണ്ഡിതന്മാരുമായ മഖ്ദൂം കുടുംബത്തിലെ താവഴിയില്‍പെട്ട പണ്ഡിതന്മാര്‍ കാപ്പിലും ദീനീസേവനത്തിന് നേതൃത്വം നല്‍കിയിട്ടുണ്ട്. കാപ്പില്‍ മുസ്ലിയാരകത്ത് എന്നാണവര്‍ ഇവിടെ അറിയപ്പെടുന്നത്. നൂറ്റാണ്ടുകളോളം പഴക്കമുണ്ടെന്ന് അനുമാനിക്കപ്പെടുന്ന കാപ്പ് മഹല്ലില്‍ ആ കുടുംബ പരമ്പരയില്‍ പെട്ടവരാണ് ഖാസിയും ഖതീബുമായി ഏറെകാലം സേവനമനുഷ്ഠിച്ചത്. ഇസ്ലാമിക പാരമ്പര്യത്തിന്റെയും മതചിട്ടയുടെയും ചട്ടകൂട്ടില്‍ നിലനിന്നിരുന്ന കാപ്പ് മഹല്ലിലെ അറിയപ്പെടുന്ന മുസ്ലിം തറവാടായിരുന്നു പന്തലാന്‍ കുടുംബം. കാപ്പില്‍ മുസ്ലിയാരകത്ത് കുടുംബത്തിലെ ആലിമീങ്ങളുമായി ഉറ്റ ബന്ധത്തിലായിരുന്നു പന്തലാന്മാര്‍. അത് കൊണ്ടു തന്നെ നമ്മുടെ ചരിത്ര പുരുഷന്‍ മമ്മു മുല്ലയുടെ പിതാവ് പന്തലാന്‍ ഉണ്ണീന്‍കുട്ടി മുല്ല നാട്ടിലെ പ്രാഥമിക മതപഠനത്തിനും ഇസ്ലാമിക സേവനത്തിനും നേതൃത്വം കൊടുക്കുന്നതില്‍ മുന്‍പന്തിയിലായിരുന്നു. കുട്ടികളെ ഓത്ത് പഠിപ്പിക്കാന്‍, വീടുകളില്‍ ഖുര്‍ആന്‍ ഓതാന്‍, മൗലിദ്, മാല പാരായണം ചെയ്യാന്‍, ദുആ ചെയ്യാന്‍ തുടങ്ങിയ പഴയ മുസ്ലിം തറവാടുകളില്‍ നിലവിലുണ്ടായിരുന്ന സര്‍വ്വ ഇസ്ലാമിക ചടങ്ങുകള്‍ക്കും ഉണ്ണീന്‍കുട്ടി മുല്ല തന്നെ വേണം. നാട്ടില്‍ എല്ലാവര്‍ക്കും വേണ്ടപ്പെട്ട മഹല്‍ വ്യക്തി. കല്ല്യാണത്തിനും അടിയന്തരത്തിനും നാട്ടുമൂപ്പന്മാരുടെ കൂടിയാലോചന സഭകളിലും മുല്ലാക്ക പ്രധാന അതിഥിയായിരുന്നു. ഈ നാട്ടു മുല്ലാക്കാന്റെ സീമന്ത പുത്രനായാണ് നമ്മുടെ സ്മര്യ പുരുഷന്‍ ജനിച്ചത്.</p>
+          <div class="malayalam-font" style="font-size: 1.1rem; line-height: 1.8; text-align: justify;">
+            <p>മലബാറിലെ പുരാതന മുസ്ലിം ജമാഅത്തുകളില്‍ പെട്ട ഒന്നാണ് കാപ്പ് മഹല്ല്. കേരളത്തിലെ മക്ക എന്ന് ശ്രുതിക്കപ്പെട്ട പൊന്നാനിയില്‍ മതപഠനത്തിനും ഇസ്ലാമിക സേവനത്തിനും നേതൃത്വം കൊടുത്തിരുന്ന സൂഫിവര്യന്മാരും മഹാ പണ്ഡിതന്മാരുമായ മഖ്ദൂം കുടുംബത്തിലെ താവഴിയില്‍പെട്ട പണ്ഡിതന്മാര്‍ കാപ്പിലും ദീനീസേവനത്തിന് നേതൃത്വം നല്‍കിയിട്ടുണ്ട്. കാപ്പില്‍ മുസ്ലിയാരകത്ത് എന്നാണവര്‍ ഇവിടെ അറിയപ്പെടുന്നത്. നൂറ്റാണ്ടുകളോളം പഴക്കമുണ്ടെന്ന് അനുമാനിക്കപ്പെടുന്ന കാപ്പ് മഹല്ലില്‍ ആ കുടുംബ പരമ്പരയില്‍ പെട്ടവരാണ് ഖാസിയും ഖതീബുമായി ഏറെകാലം സേവനമനുഷ്ഠിച്ചത്. ഇസ്ലാമിക പാരമ്പര്യത്തിന്റെയും മതചിട്ടയുടെയും ചട്ടകൂട്ടില്‍ നിലനിന്നിരുന്ന കാപ്പ് മഹല്ലിലെ അറിയപ്പെടുന്ന മുസ്ലിം തറവാടായിരുന്നു പന്തലാന്‍ കുടുംബം. കാപ്പില്‍ മുസ്ലിയാരകത്ത് കുടുംബത്തിലെ ആലിമീങ്ങളുമായി ഉറ്റ ബന്ധത്തിലായിരുന്നു പന്തലാന്മാര്‍. അത് കൊണ്ടു തന്നെ നമ്മുടെ ചരിത്ര പുരുഷന്‍ മമ്മു മുല്ലയുടെ പിതാവ് പന്തലാന്‍ ഉണ്ണീന്‍കുട്ടി മുല്ല നാട്ടിലെ പ്രാഥമിക മതപഠനത്തിനും ഇസ്ലാമിക സേവനത്തിനും നേതൃത്വം കൊടുക്കുന്നതില്‍ മുന്‍പന്തിയിലായിരുന്നു. കുട്ടികളെ ഓത്ത് പഠിപ്പിക്കാന്‍, വീടുകളില്‍ ഖുര്‍ആന്‍ ഓതാന്‍, മൗലിദ്, മാല പാരായണം ചെയ്യാന്‍, ദുആ ചെയ്യാന്‍ തുടങ്ങിയ പഴയ മുസ്ലിം തറവാടുകളില്‍ നിലവിലുണ്ടായിരുന്ന സര്‍വ്വ ഇസ്ലാമിക ചടങ്ങുകള്‍ക്കും ഉണ്ണീന്‍കുട്ടി മുല്ല തന്നെ വേണം. നാട്ടില്‍ എല്ലാവര്‍ക്കും വേണ്ടപ്പെട്ട മഹല്‍ വ്യക്തി. കല്ല്യാണത്തിനും അടിയന്തരത്തിനും നാട്ടുമൂപ്പന്മാരുടെ കൂടിയാലോചന സഭകളിലും മുല്ലാക്ക പ്രധാന അതിഥിയായിരുന്നു. ഈ നാട്ടു മുല്ലാക്കാന്റെ സീമന്ത പുത്രനായാണ് നമ്മുടെ സ്മര്യ പുരുഷന്‍ ജനിച്ചത്.</p>
 <p>ചെറുപ്പത്തില്‍ സാധാരണ കുട്ടികളെപ്പോലെ അവരില്‍ ഒരാളായി മമ്മു കളിച്ചു നടന്നു. നല്ല ആരോഗ്യവും അനുസരണയുമുളള കുട്ടി. മാതാവിനും പിതാവിനും കുട്ടിയോട് അതിരറ്റ സ്നേഹ വാത്സല്യം.</p>
 <p>ദാരിദ്ര്യത്തിന്റെയും ജീവിത പ്രശ്നങ്ങളുടെയും നടുവില്‍ കഷ്ടപ്പെടുന്നവരായിരുന്നു അക്കാലത്തെ ഗ്രാമീണ കുടുംബങ്ങളില്‍ ഏറെയും. ഉണ്ണീന്‍കുട്ടി മുല്ലയും അതില്‍ നിന്ന് ഒഴിവല്ലായിരുന്നു. കൂടിയോത്തിനും മറ്റുമായി വീടുകളില്‍ നിന്ന് വീടുകളിലേക്കുള്ള നിരന്തര യാത്ര തന്റെ ദിനചര്യയുടെ പ്രധാന ഭാഗമായിരുന്നു. ഈ യാത്രയില്‍ കൊച്ചുമകനെയും ചിലപ്പോള്‍ അദ്ദേഹം കൂടെ കൊണ്ടുപോകാറുണ്ടായിരുന്നു. തന്റെ ജോലികള്‍ തുടര്‍ന്നു നടത്താന്‍ നാളെയുടെ വാഗ്ദാനമായി കൊച്ചുമകനെ മനസ്സില്‍ പ്രതിഷ്ഠിക്കുകയായിരുന്നു നിഷ്ക്കളങ്കനായ ആ പിതാവ്. </p>
              <div class="accordion-item border border-0 shadow-sm mb-3 rounded-3">
@@ -456,39 +849,87 @@
         <p class="section-subtitle">Memorable moments of our beloved leader</p>
       </div>
       <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="https://i.ibb.co/NgNk4j5r/IMG-20260201-WA0009.jpg" alt="അല്‍ ഹാഫിള് ">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.ibb.co/NgNk4j5r/IMG-20260201-WA0009.jpg" alt="അല്‍ ഹാഫിള്" loading="lazy">
+          </div>
+          <div class="gallery-caption">അല്‍ ഹാഫിള് - മമ്മു മുല്ല ഹാജി</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/WztVc8d8/IMG-20260203-175623.jpg" alt="അല്‍ ഹാഫിള് 1">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/WztVc8d8/IMG-20260203-175623.jpg" alt="അല്‍ ഹാഫിള് 1" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 1</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/yNPCJt9F/IMG-20260203-175157.jpg" alt="അല്‍ ഹാഫിള് 2">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/yNPCJt9F/IMG-20260203-175157.jpg" alt="അല്‍ ഹാഫിള് 2" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 2</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/HL21JR5r/IMG-20260203-175220.jpg" alt="അല്‍ ഹാഫിള് 3">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/HL21JR5r/IMG-20260203-175220.jpg" alt="അല്‍ ഹാഫിള് 3" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 3</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/0Nf16Fmr/IMG-20260203-175314.jpg" alt="അല്‍ ഹാഫിള് 4">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/0Nf16Fmr/IMG-20260203-175314.jpg" alt="അല്‍ ഹാഫിള് 4" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 4</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/MGDJcNRv/IMG-20260203-175335.jpg" alt="അല്‍ ഹാഫിള് 5">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/MGDJcNRv/IMG-20260203-175335.jpg" alt="അല്‍ ഹാഫിള് 5" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 5</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/LsTFqwfm/IMG-20260203-175410.jpg" alt="അല്‍ ഹാഫിള് 6">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/LsTFqwfm/IMG-20260203-175410.jpg" alt="അല്‍ ഹാഫിള് 6" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 6</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/25wNqMvk/IMG-20260203-175449.jpg" alt="അല്‍ ഹാഫിള് 7">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/25wNqMvk/IMG-20260203-175449.jpg" alt="അല്‍ ഹാഫിള് 7" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 7</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/fbKQ3pXw/IMG-20260203-175516.jpg" alt="അല്‍ ഹാഫിള് 8">
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/fbKQ3pXw/IMG-20260203-175516.jpg" alt="അല്‍ ഹാഫിള് 8" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 8</div>
         </div>
-        <div class="gallery-item">
-          <img src="https://i.postimg.cc/MGDJcNRp/IMG-20260203-175543.jpg" alt="അല്‍ ഹാഫിള് 9">
-        </div>        
+        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openImage(this)">
+          <div class="gallery-image-container">
+            <img src="https://i.postimg.cc/MGDJcNRp/IMG-20260203-175543.jpg" alt="അല്‍ ഹാഫിള് 9" loading="lazy">
+          </div>
+          <div class="gallery-caption">Memorable Moment 9</div>
+        </div>
       </div>
     </div>
   </section>
+
+  <div class="modal fade gallery-modal" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="imageModalLabel">Photo View</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="modalImage" src="" alt="" class="img-fluid">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-gold" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <section class="content-section">
     <div class="container">
       <div class="section-header">
@@ -551,13 +992,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  AOS.init({duration: 800, once: true, offset: 50, disable: window.innerWidth < 768});
+  AOS.init({
+    duration: 800,
+    once: true,
+    offset: 50,
+    disable: window.innerWidth < 768
+  });
+  
   document.getElementById('currentYear').textContent = new Date().getFullYear();
+  
   let lastScrollTop = 0;
   window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar-optimized');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     navbar.classList.toggle('scrolled', scrollTop > 50);
+    
     if (window.innerWidth <= 768) {
       if (scrollTop > lastScrollTop && scrollTop > 100) {
         navbar.style.transform = 'translateY(-100%)';
@@ -569,6 +1018,7 @@
     }
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   });
+  
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       if(this.getAttribute('href') !== '#') {
@@ -576,7 +1026,10 @@
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           const offset = window.innerWidth <= 768 ? 70 : 80;
-          window.scrollTo({top: target.offsetTop - offset, behavior: 'smooth'});
+          window.scrollTo({
+            top: target.offsetTop - offset,
+            behavior: 'smooth'
+          });
           const navbarCollapse = document.querySelector('.navbar-collapse');
           if (navbarCollapse.classList.contains('show')) {
             bootstrap.Collapse.getInstance(navbarCollapse).hide();
@@ -585,6 +1038,7 @@
       }
     });
   });
+  
   document.querySelectorAll('.navbar-nav .nav-link-optimized:not(.dropdown-toggle)').forEach(link => {
     link.addEventListener('click', () => {
       const navbarCollapse = document.querySelector('.navbar-collapse');
@@ -593,6 +1047,7 @@
       }
     });
   });
+  
   window.addEventListener('scroll', () => {
     if (window.innerWidth > 768) {
       const scrolled = window.pageYOffset;
@@ -603,11 +1058,44 @@
       });
     }
   });
+  
   window.addEventListener('load', function() {
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => {document.body.style.opacity = '1';}, 50);
+    setTimeout(() => {
+      document.body.style.opacity = '1';
+    }, 50);
   });
+  
+  function openImage(element) {
+    const imgSrc = element.querySelector('img').src;
+    const imgAlt = element.querySelector('img').alt;
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('imageModalLabel');
+    
+    modalImage.src = imgSrc;
+    modalImage.alt = imgAlt;
+    modalTitle.textContent = imgAlt;
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.gallery-item img');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.style.opacity = '0';
+          setTimeout(() => {
+            img.style.opacity = '1';
+          }, 100);
+          observer.unobserve(img);
+        }
+      });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+  });
+  
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
       toggle.addEventListener('click', function (e) {
@@ -617,6 +1105,7 @@
     });
   });
 </script>
+
 <script>
   fetch('navbar.html')
     .then(response => response.text())
@@ -632,12 +1121,13 @@
       });
     })
     .catch(error => console.error('Navbar load error:', error));
+    
   fetch('footer.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('footer-container').innerHTML = data;
     })
     .catch(error => console.error('Footer load error:', error));
-</script> 
+</script>
 </body>
 </html>
