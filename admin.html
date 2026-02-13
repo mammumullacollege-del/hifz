@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-  <!-- jsPDF + autoTable + html2canvas for styled multi-page PDFs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -116,7 +115,6 @@
     .ornament-2 {top:60%; right:5%; animation:float 8s ease-in-out infinite reverse;}
     .ornament-3 {bottom:20%; left:10%; animation:float 7s ease-in-out infinite;}
     
-    /* Admin Nav Styles */
     .admin-nav {
       background: white; border-bottom: 2px solid var(--islamic-gold); position: relative; z-index: 1000; margin-bottom: 2rem;
     }
@@ -150,7 +148,6 @@
 
 
     
-    /* Print buttons container - only one set at top */
     .print-buttons-container {
       text-align: center;
       margin: 20px;
@@ -160,14 +157,12 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
-    /* Remove individual document print buttons */
     .document-print-btn {
       display: none;
     }
   </style>
 </head>
 <body>
-<!-- Islamic Ornaments -->
 <div class="islamic-ornament ornament-1">✸</div>
 <div class="islamic-ornament ornament-2">✸</div>
 <div class="islamic-ornament ornament-3">✸</div>
@@ -180,7 +175,6 @@
   </div>
 </div>
 
-<!-- ==================== ADMIN LOGIN MODAL ==================== -->
 <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-3" style="border-color: var(--islamic-gold);">
@@ -205,11 +199,9 @@
   </div>
 </div>
 
-<!-- ==================== ADMIN PANEL ==================== -->
 <section class="content-section" id="adminPanelSection" style="display:none; background: white;">
   <div class="container">
     
-    <!-- Admin Navigation -->
     <div class="admin-nav" data-aos="fade-down">
       <div class="container">
         <div class="admin-nav-container">
@@ -231,7 +223,6 @@
         Entrance Exam Portal
       </h2>
       
-      <!-- Admin Quick Actions - Preview Style like Admission Portal -->
       <div class="row g-4 justify-content-center mb-5">
         <div class="col-md-6 col-lg-5">
           <div class="admin-card" style="border: 2px solid var(--islamic-green);">
@@ -259,7 +250,6 @@
         </div>
       </div>
 
-      <!-- Data View Options -->
       <div class="row g-4">
         <div class="col-md-4">
           <div class="admin-card">
@@ -301,7 +291,6 @@
   </div>
 </section>
 
-<!-- Document Display Area (Like Admission Portal) -->
 <div id="documentDisplayArea" style="display: none;"></div>
   
 <div id="footer-container"></div>
@@ -309,33 +298,27 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  // Helper function to fix Google Drive photo URLs (from admission portal)
   function fixPhotoUrl(rawUrl) {
     if (!rawUrl || typeof rawUrl !== 'string') return '';
     
-    // Already a direct link
     if (rawUrl.includes('drive.google.com/uc?export=view')) {
       return rawUrl;
     }
     
-    // Thumbnail link
     if (rawUrl.includes('thumbnail?id=')) {
       const match = rawUrl.match(/id=([-\w]{25,})/);
       return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
     }
     
-    // File view link
     if (rawUrl.includes('/file/d/')) {
       const match = rawUrl.match(/\/d\/([-\w]{25,})/);
       return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
     }
     
-    // Try to extract any file ID
     const match = rawUrl.match(/([-\w]{25,})/);
     return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : '';
   }
 
-  // Pre-load images to ensure they're available
   async function preloadImage(url) {
     return new Promise((resolve) => {
       if (!url || !url.startsWith('http')) {
@@ -352,12 +335,10 @@
         resolve(null);
       };
       
-      // Add cache busting parameter
       const timestamp = new Date().getTime();
       const separator = url.includes('?') ? '&' : '?';
       img.src = url + separator + '_=' + timestamp;
       
-      // Timeout after 8 seconds
       setTimeout(() => {
         if (!img.complete) {
           console.warn('Image preload timeout:', url);
@@ -367,17 +348,13 @@
     });
   }
 
-  // Your original SCRIPT_URL
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzp_ALU42dr81AANE8TrMF7XO0BOqBOfU1mZt-58fJkZfXxlwaJJXG0X243PlZaZWolgg/exec';
 
-  // ==================== AUTO SHOW LOGIN MODAL ON PAGE LOAD ====================
   document.addEventListener('DOMContentLoaded', function() {
-    // Show login modal automatically when page loads
     const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
     adminLoginModal.show();
   });
 
-  // ==================== ADMIN LOGIN LOGIC ====================
   document.getElementById('adminLoginForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     const username = document.getElementById('adminUsername').value.trim();
@@ -396,12 +373,10 @@
   function logoutAdmin() {
     document.getElementById('adminPanelSection').style.display = 'none';
     document.getElementById('adminDataDisplay').innerHTML = '';
-    // Show login modal again
     const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
     adminLoginModal.show();
   }
 
-  // ==================== PREVIEW ALL APPLICATIONS (Like Admission Portal) ====================
   async function previewAllApplications() {
     const displayArea = document.getElementById('adminDataDisplay');
     displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all applications... Please wait...</p></div>';
@@ -418,7 +393,6 @@
       let allDocumentsHtml = '';
       let successCount = 0;
       
-      // Show loading progress
       displayArea.innerHTML = `<div class="alert alert-info">
         <i class="fas fa-spinner fa-spin me-2"></i>
         Processing ${result.data.length} applications... Please wait...
@@ -428,11 +402,9 @@
         const row = result.data[i];
         const get = (header) => row[header] ?? row[header.trim()] ?? '';
         
-        // Extract and fix photo URL
         let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
         let photoUrl = fixPhotoUrl(rawPhotoUrl);
         
-        // Prepare student data
         const studentData = {
           submissionDate: formatDate(get('Timestamp')) || new Date().toLocaleDateString('en-GB'),
           applicationId: get('ID') || get('Reg. No') || `APP-${(i+1).toString().padStart(4,'0')}`,
@@ -461,19 +433,16 @@
           photoUrl: photoUrl
         };
         
-        // Generate HTML for this application
         allDocumentsHtml += generateApplicationHtml({ collegeInfo: {}, studentData });
         successCount++;
         
 
       }
       
-      // Hide admin panel and show documents
       document.getElementById('adminPanelSection').style.display = 'none';
       const displayArea_element = document.getElementById('documentDisplayArea');
       displayArea_element.style.display = 'block';
       
-      // Add print all button at the top (only one set)
       const printButtonHtml = `
         <div class="print-buttons-container">
           <button onclick="window.print()" class="btn-gold btn-lg me-3">
@@ -487,7 +456,6 @@
       
       displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
       
-      // Clear the data display area
       displayArea.innerHTML = '';
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -500,13 +468,11 @@
       </div>`;
     }
   }
-// ==================== PREVIEW ALL HALL TICKETS (Like Admission Portal) ====================
 async function previewAllHalltickets() {
   const displayArea = document.getElementById('adminDataDisplay');
   displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all hall tickets... Please wait...</p></div>';
   
   try {
-    // Try different possible endpoints
     const endpoints = [
       `${SCRIPT_URL}?type=all_halltickets`,
       `${SCRIPT_URL}?type=halltickets`,
@@ -517,7 +483,6 @@ async function previewAllHalltickets() {
     let result = null;
     let successfulEndpoint = '';
     
-    // Try each endpoint until one works
     for (const endpoint of endpoints) {
       try {
         console.log('Trying endpoint:', endpoint);
@@ -534,14 +499,12 @@ async function previewAllHalltickets() {
       }
     }
     
-    // If no endpoint worked, try to get from applications data
     if (!result) {
       console.log('Trying to get hall tickets from applications data...');
       const appResp = await fetch(`${SCRIPT_URL}?type=all_applications`);
       const appResult = await appResp.json();
       
       if (appResult.status === 'success' && appResult.data?.length) {
-        // Filter applications that have hall ticket eligibility
         const hallTicketData = appResult.data.map(row => {
           const get = (header) => row[header] ?? row[header.trim()] ?? '';
           return {
@@ -573,7 +536,6 @@ async function previewAllHalltickets() {
     let allDocumentsHtml = '';
     let successCount = 0;
     
-    // Show loading progress
     displayArea.innerHTML = `<div class="alert alert-info">
       <i class="fas fa-spinner fa-spin me-2"></i>
       Processing ${result.data.length} hall tickets from ${successfulEndpoint || 'applications data'}... Please wait...
@@ -582,7 +544,6 @@ async function previewAllHalltickets() {
     for (let i = 0; i < result.data.length; i++) {
       const row = result.data[i];
       const get = (header) => {
-        // Try multiple possible header names
         const value = row[header] || 
                      row[header.toUpperCase()] || 
                      row[header.toLowerCase()] || 
@@ -591,7 +552,6 @@ async function previewAllHalltickets() {
         return value;
       };
       
-      // Extract and fix photo URL - TRY MULTIPLE PHOTO FIELD NAMES
       let rawPhotoUrl = get('Photo') || 
                        get('Photo Url') || 
                        get('photo') || 
@@ -602,7 +562,6 @@ async function previewAllHalltickets() {
       
       let photoUrl = fixPhotoUrl(rawPhotoUrl);
       
-      // Prepare student data with fallbacks
       const studentData = {
         registerNo: get('Reg. No') || get('ID') || get('Application ID') || get('REG_NO') || `HT-${(i+1).toString().padStart(4,'0')}`,
         studentName: get('Name') || get('Student Name') || get('STUDENT_NAME') || 'N/A',
@@ -615,18 +574,15 @@ async function previewAllHalltickets() {
         photoUrl: photoUrl
       };
       
-      // Generate HTML for this hall ticket
       allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
       successCount++;
 
     }
     
-    // Hide admin panel and show documents
     document.getElementById('adminPanelSection').style.display = 'none';
     const displayArea_element = document.getElementById('documentDisplayArea');
     displayArea_element.style.display = 'block';
     
-    // Add print all button at the top (only one set)
     const printButtonHtml = `
       <div class="print-buttons-container">
         <button onclick="window.print()" class="btn-gold btn-lg me-3">
@@ -640,7 +596,6 @@ async function previewAllHalltickets() {
     
     displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
     
-    // Clear the data display area
     displayArea.innerHTML = '';
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -656,7 +611,6 @@ async function previewAllHalltickets() {
 }
   
 
-  // ==================== SHOW ADMIN DASHBOARD ====================
   function showAdminDashboard() {
     document.getElementById('adminPanelSection').style.display = 'block';
     document.getElementById('documentDisplayArea').style.display = 'none';
@@ -664,7 +618,6 @@ async function previewAllHalltickets() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ==================== VIEW ALL RESULTS ====================
   async function showResultsData() {
     const displayArea = document.getElementById('adminDataDisplay');
     displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading all results...</p></div>';
@@ -705,7 +658,6 @@ async function previewAllHalltickets() {
     }
   }
 
-  // ==================== SHOW APPLICATION DATA TABLE ====================
   async function showApplicationData() {
     const displayArea = document.getElementById('adminDataDisplay');
     displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading data...</p></div>';
@@ -726,7 +678,6 @@ async function previewAllHalltickets() {
             <thead class="table-dark">
               <tr>`;
 
-      // Headers from first row
       const headers = Object.keys(result.data[0]);
       headers.forEach(h => {
         html += `<th>${h}</th>`;
@@ -754,7 +705,6 @@ async function previewAllHalltickets() {
     }
   }
 
-  // ==================== GENERATE APPLICATION HTML ====================
   function generateApplicationHtml(data) {
     const { collegeInfo, studentData } = data;
     const hasValidPhoto = studentData.photoUrl && (
@@ -897,7 +847,6 @@ async function previewAllHalltickets() {
         </p>
 
         <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
-          <!-- Left side: Date & Place -->
           <div style="flex: 0 0 auto;">
             <div style="margin-bottom: 14px;">
               Date: ______________________________
@@ -907,7 +856,6 @@ async function previewAllHalltickets() {
             </div>
           </div>
 
-          <!-- Right side: Signature -->
           <div style="text-align: right; flex: 1;">
             <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
             <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
@@ -925,7 +873,6 @@ async function previewAllHalltickets() {
     `;
   }
 
-  // ==================== GENERATE HALL TICKET HTML ====================
   function generateHallticketHtml(data) {
     const { collegeInfo, studentData } = data;
     const hasValidPhoto = studentData.photoUrl && (
@@ -1056,7 +1003,6 @@ async function previewAllHalltickets() {
     `;
   }
 
-  // ==================== HELPER FUNCTIONS ====================
   function formatDate(dateInput) {
     if (!dateInput) return '';
     
@@ -1088,7 +1034,6 @@ async function previewAllHalltickets() {
 
   AOS.init();
 
-  // ==================== LOAD NAVBAR AND FOOTER ====================
   fetch('navbar.html')
     .then(response => response.text())
     .then(data => {
