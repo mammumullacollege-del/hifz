@@ -18,8 +18,6 @@
     .arabic-font {font-family:'Scheherazade New',serif;}
     .malayalam-font {font-family:'Anek Malayalam',sans-serif;}
     .pattern-bg {background-image:radial-gradient(circle at 25% 25%,rgba(10,92,54,0.03) 2px,transparent 2px),radial-gradient(circle at 75% 75%,rgba(193,154,63,0.03) 2px,transparent 2px); background-size:50px 50px; position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;}
-    
-    /* Ticker Styles - Added here */
     .ticker-container {background: linear-gradient(90deg, var(--dark-green), var(--islamic-green)); color: white; padding: 0; overflow: hidden; position: fixed; top: 80px; left: 0; right: 0; border-bottom: 2px solid var(--islamic-gold); height: 50px; display: flex; align-items: center; z-index: 1029; margin: 0;}
     .ticker-wrapper {white-space: nowrap; display: inline-flex; animation: ticker 50s linear infinite; padding-left: 100%;}
     .ticker-item {display: inline-flex; align-items: center; padding: 0 30px; font-size: 1rem; position: relative;}
@@ -142,8 +140,25 @@
     .note-section {background:#fff3cd; border-radius:6px; padding:12px; margin-top:12px; border-left:4px solid #ffc107;}
     .note-title {font-size:12px; font-weight:600; color:#856404; margin-bottom:6px;}
     .note-content {font-size:11px; color:#856404; line-height:1.4;}
-    @media print {body{padding:0 !important;background:white !important;margin:0 !important;} .document-container{width:21cm !important;min-height:29.7cm !important;box-shadow:none !important;border-radius:0 !important;margin:0 !important;page-break-after:always !important;} .no-print{display:none !important;} .navbar-optimized,.footer,.whatsapp-float,.page-header,.pattern-bg,.islamic-ornament,.content-section:not(.document-section),#mainContentArea{display:none !important;} #documentDisplayArea{display:block !important;width:100% !important;height:auto !important;position:static !important;} .document-container{break-inside:avoid !important;} @page{size:A4;margin:0.5cm;}}
-    .footer {background:linear-gradient(135deg,var(--dark-green),var(--islamic-green)); border-top:3px solid var(--islamic-gold); padding:3rem 0 1.5rem; color:white;}
+@media print {
+    body * { visibility: hidden; }
+    .document-container, .document-container * { visibility: visible; }
+    .document-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 210mm !important;
+        height: auto !important;
+        min-height: 297mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+    .document-watermark,
+    .no-print { display: none !important; }
+    @page { size: A4; margin: 4mm; }
+    body { margin: 0; padding: 0; background: white; }
+}    .footer {background:linear-gradient(135deg,var(--dark-green),var(--islamic-green)); border-top:3px solid var(--islamic-gold); padding:3rem 0 1.5rem; color:white;}
     .footer-brand {font-size:1.8rem; font-weight:700; color:var(--islamic-gold); margin-bottom:1rem;}
     .social-links {display:flex; gap:12px; margin-top:1rem;}
     .social-icon {width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; text-decoration:none; transition:var(--transition); background:rgba(255,255,255,0.1); font-size:1.1rem;}
@@ -178,7 +193,6 @@
 <div class="islamic-ornament ornament-3">✸</div>
 <div id="navbar-container"></div>
 
-<!-- Ticker Container Added Here -->
 <div class="ticker-container">
   <div class="ticker-wrapper">
     <div class="ticker-item">
@@ -222,7 +236,7 @@
 <div class="instructions-box m-5" data-aos="fade-up">
   <h3 class="instructions-title"><i class="fas fa-info-circle"></i>പ്രധാന നിർദ്ദേശങ്ങൾ</h3>
   <ul class="instructions-list">
-    <li>അപ്ലിക്കേഷന്‍, ഹാള്‍‍ടക്കറ്റ്, റിസള്‍ട്ട് എന്നിവക്ക്<strong>അപേക്ഷയില്‍ നല്കിയ മൊബൈൽ നമ്പറും ജനന തീയതിയും</strong> നിർബന്ധമായും നൽകേണ്ടതാണ്.</li>
+    <li>അപ്ലിക്കേഷന്‍, ഹാള്‍‍ടക്കറ്റ്, റിസള്‍ട്ട് എന്നിവക്ക്<strong> അപേക്ഷയില്‍ നല്കിയ മൊബൈൽ നമ്പറും ജനന തീയതിയും</strong> നിർബന്ധമായും നൽകേണ്ടതാണ്.</li>
     <li>മൊബൈൽ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം</li>
     <li>അപേക്ഷ സമർപ്പിക്കുമ്പോൾ, * ചിഹ്നമുള്ള എല്ലാ ഫീൽഡുകളും നിർബന്ധമായും പൂരിപ്പിക്കേണ്ടതാണ്</li>
     <li>12-02-2026 വ്യാഴാഴ്ചക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</li>
@@ -697,7 +711,6 @@
         എന്ന എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
       </p>
             <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
-        <!-- Left side: Date & Place – no underline -->
         <div style="flex: 0 0 auto;">
           <div style="margin-bottom: 14px;">
             Date: ______________________________
@@ -706,7 +719,6 @@
             Place: _____________________________
           </div>
         </div>
-        <!-- Right side: Signature -->
         <div style="text-align: right; flex: 1;">
           <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
           <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
