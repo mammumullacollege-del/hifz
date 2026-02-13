@@ -427,6 +427,9 @@
           previousStudy: get('Old institution') || 'No',
           previousInstitution: get('Name of insti') || '',
           studyDuration: get('Period') || '',
+          juzCount: get('Number of Juz') || get('Juz count') || get('Juz') || '',
+          reasonForLeaving: get('Reason for Leaving') || get('Leaving reason') || '',
+          headTeacherPhone: get('Head Teacher Phone') || get('Teacher phone') || get('Head teacher number') || '',
           identificationMark: get('Identification mark') || 'N/A',
           physicalFitness: get('Physical Fitness: yes or no') || 'N/A',
           illness: get('ill name') || '',
@@ -769,58 +772,58 @@ async function previewAllHalltickets() {
       </div>
 
       <div class="document-section-title">2. Parent/Guardian Information</div>
-      <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
-        ${[
-          ["8. Father's Name", studentData.fatherName || 'N/A'],
-          ["9. Father's Occupation", studentData.fatherOccupation || 'N/A'],
-          ["10. Guardian's Name", studentData.guardianName || 'N/A'],
-          ["11. Relationship with Guardian", studentData.relationshipWithGuardian || 'N/A']
-        ].map(([label, value]) => `
-          <div class="info-item">
-            <span class="info-label">${label}:</span>
-            <span class="info-value">${escapeHtml(value)}</span>
-          </div>
-        `).join('')}
-        ${studentData.guardianReason ? `
-          <div class="info-item">
-            <span class="info-label">12. Reason if Guardian is not Father:</span>
-            <span class="info-value">${escapeHtml(studentData.guardianReason)}</span>
-          </div>
-        ` : ''}
-      </div>
-
+<div class="info-grid1" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
+  ${[
+    ["8. Father's Name", studentData.fatherName || 'N/A'],
+    ["9. Father's Occupation", studentData.fatherOccupation || 'N/A'],
+    ["10. Guardian's Name", studentData.guardianName || 'N/A'],
+    ["11. Relationship with Guardian", studentData.relationshipWithGuardian || 'N/A']
+  ].map(([label, value]) => `
+    <div class="info-item">
+      <span class="info-label">${label}:</span>
+      <span class="info-value">${escapeHtml(value)}</span>
+    </div>
+  `).join('')}
+  
+  <!-- Always show this line with a default message if guardianReason is empty -->
+  <div class="info-item">
+    <span class="info-label">12. Reason if Guardian is not Father:</span>
+    <span class="info-value">${escapeHtml(studentData.guardianReason) || 'Not applicable (Father is guardian)'}</span>
+  </div>
+</div>
       <div class="document-section-title">3. Educational Information</div>
       <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
-        ${[
-          ["13. Madrasa & Location", studentData.madrasa || 'N/A'],
-          ["Madrasa Class", studentData.madrasaclass || 'N/A'],
-          ["14. School & Location", studentData.school || 'N/A'],
-          ["School Class", studentData.schoolclass || 'N/A'],
-          ["15. Previous Study", studentData.previousStudy || 'No']
-        ].map(([label, value]) => `
-          <div class="info-item">
-            <span class="info-label">${label}:</span>
-            <span class="info-value">${escapeHtml(value)}</span>
+        ${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label, i) => `
+              <div class="info-item">
+                <span class="info-label">${label}:</span>
+                <span class="info-value">${escapeHtml([studentData.madrasa || 'N/A', studentData.madrasaclass || 'N/A', studentData.school || 'N/A', studentData.schoolclass || 'N/A', studentData.previousStudy || 'No'][i])}</span>
+              </div>
+            `).join('')}
           </div>
-        `).join('')}
-      </div>
-      
-      ${studentData.previousStudy === 'Yes' ? `
-        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
-          ${studentData.previousInstitution ? `
-            <div class="info-item">
-              <span class="info-label">Previous Institution:</span>
-              <span class="info-value">${escapeHtml(studentData.previousInstitution)}</span>
-            </div>
-          ` : ''}
-          ${studentData.studyDuration ? `
-            <div class="info-item">
-              <span class="info-label">Duration of Study:</span>
-              <span class="info-value">${escapeHtml(studentData.studyDuration)}</span>
-            </div>
-          ` : ''}
-        </div>
-      ` : ''}
+          ${studentData.previousStudy === 'Yes' ? `
+  <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+    <div class="info-item">
+      <span class="info-label">Previous Institution:</span>
+      <span class="info-value">${escapeHtml(studentData.previousInstitution || 'N/A')}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Duration of Study:</span>
+      <span class="info-value">${escapeHtml(studentData.studyDuration || 'N/A')}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Number of Juz:</span>
+      <span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Reason for Leaving:</span>
+      <span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Head Teacher's Phone Number:</span>
+      <span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span>
+    </div>
+  </div>
+` : ''}
 
       <div class="document-section-title">4. Medical & Identification</div>
       <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
@@ -904,7 +907,7 @@ async function previewAllHalltickets() {
     
     <div class="document-content">
       ${hasValidPhoto ? `
-        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
+        <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
           <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
             <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%; max-height:100%; object-fit:contain;" alt="Student Photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x180?text=No+Photo';">
           </div>
@@ -957,7 +960,7 @@ async function previewAllHalltickets() {
           </div>
         </div>
         
-        <div style="position:absolute; top:240px; right:40px; text-align:center; z-index:1;">
+        <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
           <div style="width:140px; height:140px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; padding:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
             <img src="${qrCodeUrl}" style="max-width:100%; max-height:100%;" alt="QR Code">
           </div>
