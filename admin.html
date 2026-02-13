@@ -576,6 +576,9 @@ async function previewAllHalltickets() {
       
       allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
       successCount++;
+      if (i < result.data.length - 1) {
+          allDocumentsHtml += '<div class="document-separator"></div>';
+        }
 
     }
     
