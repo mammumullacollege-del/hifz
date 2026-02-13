@@ -53,7 +53,7 @@
     .btn-outline-gold:hover {background:var(--islamic-gold); color:var(--islamic-green);}
     .form-container {background:white; border-radius:15px; padding:2.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:2px solid var(--islamic-gold); margin-bottom:2rem;}
     .form-title {color:var(--islamic-green); font-weight:700; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:2px solid var(--islamic-gold); font-size:1.8rem; text-align:center;}
-    .document-container {width:21cm; min-height:29.7cm; background:white; box-shadow:0 10px 30px rgba(0,0,0,0.1); border-radius:12px; overflow:hidden; margin:0 auto; position:relative;}
+    .document-container {width:21cm; min-height:29.7cm; background:white; box-shadow:0 10px 30px rgba(0,0,0,0.1); border-radius:12px; overflow:hidden; margin:0 auto 30px auto; position:relative;}
     .document-watermark {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-45deg); font-size:60px; color:rgba(10,92,54,0.03); font-weight:bold; z-index:0; white-space:nowrap; pointer-events:none;}
     .document-header {background:linear-gradient(135deg,var(--islamic-green),var(--dark-green)); color:white; padding:20px; text-align:left; position:relative; display:flex; align-items:flex-start; justify-content:flex-start; gap:20px; border-bottom:5px solid var(--islamic-gold);}
     .document-logo {width:120px; height:120px; border-radius:50%; border:3px solid white; box-shadow:0 4px 10px rgba(0,0,0,0.2); background:white; padding:3px; flex-shrink:0;}
@@ -99,7 +99,7 @@
     .note-section {background:#fff3cd; border-radius:6px; padding:12px; margin-top:12px; border-left:4px solid #ffc107;}
     .note-title {font-size:12px; font-weight:600; color:#856404; margin-bottom:6px;}
     .note-content {font-size:11px; color:#856404; line-height:1.4;}
-    @media print {body{padding:0 !important;background:white !important;margin:0 !important;} .document-container{width:21cm !important;min-height:29.7cm !important;box-shadow:none !important;border-radius:0 !important;margin:0 !important;page-break-after:always !important;} .no-print{display:none !important;} .navbar-optimized,.footer,.whatsapp-float,.page-header,.pattern-bg,.islamic-ornament,.content-section:not(.document-section),#mainContentArea{display:none !important;} #documentDisplayArea{display:block !important;width:100% !important;height:auto !important;position:static !important;} .document-container{break-inside:avoid !important;} @page{size:A4;margin:0.5cm;}}
+    @media print {body{padding:0 !important;background:white !important;margin:0 !important;} .document-container{width:21cm !important;min-height:29.7cm !important;box-shadow:none !important;border-radius:0 !important;margin:0 !important;page-break-after:always !important;} .no-print{display:none !important;} .navbar-optimized,.footer,.whatsapp-float,.page-header,.pattern-bg,.islamic-ornament,.content-section:not(.document-section),#adminPanelSection{display:none !important;} #documentDisplayArea{display:block !important;width:100% !important;height:auto !important;position:static !important;} .document-container{break-inside:avoid !important;} @page{size:A4;margin:0.5cm;}}
     .footer {background:linear-gradient(135deg,var(--dark-green),var(--islamic-green)); border-top:3px solid var(--islamic-gold); padding:3rem 0 1.5rem; color:white;}
     .footer-brand {font-size:1.8rem; font-weight:700; color:var(--islamic-gold); margin-bottom:1rem;}
     .social-links {display:flex; gap:12px; margin-top:1rem;}
@@ -147,6 +147,23 @@
 
     #adminDataTable { font-size: 0.85rem; max-height: 500px; overflow-y: auto; }
     #adminDataTable th, #adminDataTable td { white-space: nowrap; }
+
+
+    
+    /* Print buttons container - only one set at top */
+    .print-buttons-container {
+      text-align: center;
+      margin: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Remove individual document print buttons */
+    .document-print-btn {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -214,37 +231,37 @@
         Entrance Exam Portal
       </h2>
       
-      <!-- Admin Quick Actions - Like GET in Admission Portal -->
+      <!-- Admin Quick Actions - Preview Style like Admission Portal -->
       <div class="row g-4 justify-content-center mb-5">
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-5">
           <div class="admin-card" style="border: 2px solid var(--islamic-green);">
             <div class="p-4 text-center">
               <i class="fas fa-file-alt fa-4x mb-3" style="color: var(--islamic-green);"></i>
               <h4 class="mb-3" style="color: var(--islamic-green);">All Applications</h4>
-              <p class="text-muted mb-4">Download all applications in one PDF</p>
-              <button class="btn-gold w-100 py-3" onclick="generateAllApplicationsPDF()">
-                <i class="fas fa-download me-2"></i> GET ALL APPLICATIONS
+              <p class="text-muted mb-4">Preview all applications with photos</p>
+              <button class="btn-gold w-100 py-3" onclick="previewAllApplications()">
+                <i class="fas fa-eye me-2"></i> PREVIEW ALL APPLICATIONS
               </button>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-5">
           <div class="admin-card" style="border: 2px solid var(--islamic-green);">
             <div class="p-4 text-center">
               <i class="fas fa-ticket-alt fa-4x mb-3" style="color: var(--islamic-green);"></i>
               <h4 class="mb-3" style="color: var(--islamic-green);">All Hall Tickets</h4>
-              <p class="text-muted mb-4">Download all hall tickets at once</p>
-              <button class="btn-gold w-100 py-3" onclick="generateAllHallticketsPDF()">
-                <i class="fas fa-download me-2"></i> GET ALL HALL TICKETS
+              <p class="text-muted mb-4">Preview all hall tickets at once</p>
+              <button class="btn-gold w-100 py-3" onclick="previewAllHalltickets()">
+                <i class="fas fa-eye me-2"></i> PREVIEW ALL HALL TICKETS
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Data View Options (as additional features) -->
+      <!-- Data View Options -->
       <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-4">
           <div class="admin-card">
             <div class="p-4 text-center">
               <i class="fas fa-table fa-3x mb-3" style="color: var(--islamic-green);"></i>
@@ -255,7 +272,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-4">
           <div class="admin-card">
             <div class="p-4 text-center">
               <i class="fas fa-chart-line fa-3x mb-3" style="color: var(--islamic-green);"></i>
@@ -266,10 +283,10 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-4">
           <div class="admin-card">
             <div class="p-4 text-center">
-              <i class="fas fa-database fa-3x mb-3" style="color: var(--islamic-green);"></i>
+              <i class="fas fa-sign-out-alt fa-3x mb-3" style="color: var(--islamic-green);"></i>
               <h5 class="mb-3">Admin Actions</h5>
               <button class="btn-outline-gold w-100" onclick="logoutAdmin()">
                 <i class="fas fa-sign-out-alt me-2"></i> Logout
@@ -283,710 +300,668 @@
     <div id="adminDataDisplay" class="mt-5"></div>
   </div>
 </section>
+
+<!-- Document Display Area (Like Admission Portal) -->
+<div id="documentDisplayArea" style="display: none;"></div>
   
 <div id="footer-container"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  // Helper function to fix Google Drive photo URLs
-function fixPhotoUrl(rawUrl) {
-  if (!rawUrl || typeof rawUrl !== 'string') return '';
-  
-  // Already a direct link
-  if (rawUrl.includes('drive.google.com/uc?export=view')) {
-    return rawUrl;
-  }
-  
-  // Thumbnail link
-  if (rawUrl.includes('thumbnail?id=')) {
-    const match = rawUrl.match(/id=([-\w]{25,})/);
-    return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
-  }
-  
-  // File view link
-  if (rawUrl.includes('/file/d/')) {
-    const match = rawUrl.match(/\/d\/([-\w]{25,})/);
-    return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
-  }
-  
-  // Try to extract any file ID
-  const match = rawUrl.match(/([-\w]{25,})/);
-  return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : '';
-}
-
-// Pre-load images to ensure they're available for html2canvas
-async function preloadImage(url) {
-  return new Promise((resolve) => {
-    if (!url || !url.startsWith('http')) {
-      resolve(null);
-      return;
+  // Helper function to fix Google Drive photo URLs (from admission portal)
+  function fixPhotoUrl(rawUrl) {
+    if (!rawUrl || typeof rawUrl !== 'string') return '';
+    
+    // Already a direct link
+    if (rawUrl.includes('drive.google.com/uc?export=view')) {
+      return rawUrl;
     }
     
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
+    // Thumbnail link
+    if (rawUrl.includes('thumbnail?id=')) {
+      const match = rawUrl.match(/id=([-\w]{25,})/);
+      return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
+    }
     
-    img.onload = () => resolve(img);
-    img.onerror = () => {
-      console.warn('Failed to preload image:', url);
-      resolve(null);
-    };
+    // File view link
+    if (rawUrl.includes('/file/d/')) {
+      const match = rawUrl.match(/\/d\/([-\w]{25,})/);
+      return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
+    }
     
-    // Add cache busting parameter
-    const timestamp = new Date().getTime();
-    const separator = url.includes('?') ? '&' : '?';
-    img.src = url + separator + '_=' + timestamp;
-    
-    // Timeout after 8 seconds
-    setTimeout(() => {
-      if (!img.complete) {
-        console.warn('Image preload timeout:', url);
+    // Try to extract any file ID
+    const match = rawUrl.match(/([-\w]{25,})/);
+    return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : '';
+  }
+
+  // Pre-load images to ensure they're available
+  async function preloadImage(url) {
+    return new Promise((resolve) => {
+      if (!url || !url.startsWith('http')) {
         resolve(null);
+        return;
       }
-    }, 8000);
+      
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      
+      img.onload = () => resolve(img);
+      img.onerror = () => {
+        console.warn('Failed to preload image:', url);
+        resolve(null);
+      };
+      
+      // Add cache busting parameter
+      const timestamp = new Date().getTime();
+      const separator = url.includes('?') ? '&' : '?';
+      img.src = url + separator + '_=' + timestamp;
+      
+      // Timeout after 8 seconds
+      setTimeout(() => {
+        if (!img.complete) {
+          console.warn('Image preload timeout:', url);
+          resolve(null);
+        }
+      }, 8000);
+    });
+  }
+
+  // Your original SCRIPT_URL
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5NxWJWl_FHQcVDR0oZCjRgD43cXoxwkXkdu8JqlgjgKo41EzBWYeCob0DHUV-wk11qA/exec';
+
+  // ==================== AUTO SHOW LOGIN MODAL ON PAGE LOAD ====================
+  document.addEventListener('DOMContentLoaded', function() {
+    // Show login modal automatically when page loads
+    const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
+    adminLoginModal.show();
   });
-}
-// Your original SCRIPT_URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5NxWJWl_FHQcVDR0oZCjRgD43cXoxwkXkdu8JqlgjgKo41EzBWYeCob0DHUV-wk11qA/exec';
 
-// ==================== AUTO SHOW LOGIN MODAL ON PAGE LOAD ====================
-document.addEventListener('DOMContentLoaded', function() {
-  // Show login modal automatically when page loads
-  const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
-  adminLoginModal.show();
-});
+  // ==================== ADMIN LOGIN LOGIC ====================
+  document.getElementById('adminLoginForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('adminUsername').value.trim();
+    const password = document.getElementById('adminPassword').value.trim();
 
-// ==================== ADMIN LOGIN LOGIC ====================
-document.getElementById('adminLoginForm')?.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const username = document.getElementById('adminUsername').value.trim();
-  const password = document.getElementById('adminPassword').value.trim();
+    if (username === 'admin' && password === '786') {
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('adminLoginModal')).hide();
+      document.getElementById('adminPanelSection').style.display = 'block';
+      document.getElementById('adminDataDisplay').innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      alert('Wrong username or password');
+    }
+  });
 
-  if (username === 'admin' && password === '786') {
-    bootstrap.Modal.getOrCreateInstance(document.getElementById('adminLoginModal')).hide();
-    document.getElementById('adminPanelSection').style.display = 'block';
+  function logoutAdmin() {
+    document.getElementById('adminPanelSection').style.display = 'none';
     document.getElementById('adminDataDisplay').innerHTML = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else {
-    alert('Wrong username or password');
+    // Show login modal again
+    const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
+    adminLoginModal.show();
   }
-});
 
-function logoutAdmin() {
-  document.getElementById('adminPanelSection').style.display = 'none';
-  document.getElementById('adminDataDisplay').innerHTML = '';
-  // Show login modal again
-  const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
-  adminLoginModal.show();
-}
+  // ==================== PREVIEW ALL APPLICATIONS (Like Admission Portal) ====================
+  async function previewAllApplications() {
+    const displayArea = document.getElementById('adminDataDisplay');
+    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all applications... Please wait...</p></div>';
+    
+    try {
+      const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
+      const result = await resp.json();
+      
+      if (result.status !== 'success' || !result.data?.length) {
+        displayArea.innerHTML = '<div class="alert alert-warning">No applications found.</div>';
+        return;
+      }
 
-// ====== NEW WORKING VERSION - 100% PHOTO WILL COME (Tested) ======
-async function generateAllApplicationsPDF() {
-  const displayArea = document.getElementById('adminDataDisplay');
-  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading applications... Please wait...</p></div>';
-  
-  try {
-    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
-    const result = await resp.json();
-    
-    if (result.status !== 'success' || !result.data?.length) {
-      displayArea.innerHTML = '<div class="alert alert-warning">No applications found.</div>';
-      return;
-    }
-    
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ format: 'a4', unit: 'mm' });
-    
-    let successCount = 0;
-    let failedCount = 0;
-    
-    // Show progress
-    displayArea.innerHTML = `<div class="alert alert-info">
-      <i class="fas fa-spinner fa-spin me-2"></i>
-      Processing ${result.data.length} applications... 0/${result.data.length}
-    </div>`;
-    
-    for (let i = 0; i < result.data.length; i++) {
-      // Update progress
-      if (i % 5 === 0) {
-        displayArea.innerHTML = `<div class="alert alert-info">
-          <i class="fas fa-spinner fa-spin me-2"></i>
-          Processing ${result.data.length} applications... ${i}/${result.data.length}
-        </div>`;
-      }
+      let allDocumentsHtml = '';
+      let successCount = 0;
       
-      const row = result.data[i];
-      const get = (header) => row[header] ?? row[header.trim()] ?? '';
-      
-      // Extract and fix photo URL
-      let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
-      let photoUrl = fixPhotoUrl(rawPhotoUrl);
-      
-      // Prepare student data
-      const studentData = {
-        submissionDate: formatDate(get('Timestamp')) || new Date().toLocaleDateString('en-GB'),
-        applicationId: get('ID') || get('Reg. No') || 'N/A',
-        studentName: get('Name') || 'N/A',
-        houseName: get('House') || 'N/A',
-        dob: get('DOB') || 'N/A',
-        aadhaarNumber: get('Aadhar') || 'N/A',
-        address: get('Address') || 'N/A',
-        phoneNumber: get('MOB') || 'N/A',
-        whatsappNumber: get('WHATSAPP') || get('MOB') || 'N/A',
-        fatherName: get('Father') || 'N/A',
-        fatherOccupation: get('Father job') || 'N/A',
-        guardianName: get('Guardian') || 'N/A',
-        relationshipWithGuardian: get('Relation to guardian') || 'N/A',
-        guardianReason: get('if not father cause') || '',
-        madrasa: get('Madrasa') || 'N/A',
-        madrasaclass: get('Madrassa class') || 'N/A',
-        school: get('School') || 'N/A',
-        schoolclass: get('School class') || 'N/A',
-        previousStudy: get('Old institution') || 'No',
-        previousInstitution: get('Name of insti') || '',
-        studyDuration: get('Period') || '',
-        identificationMark: get('Identification mark') || 'N/A',
-        physicalFitness: get('Physical Fitness: yes or no') || 'N/A',
-        illness: get('ill name') || '',
-        photoUrl: photoUrl
-      };
-      
-      // Pre-load image if exists
-      if (photoUrl) {
-        await preloadImage(photoUrl);
-      }
-      
-      // Create temporary div for html2canvas
-      const tempDiv = document.createElement('div');
-      tempDiv.style.position = 'absolute';
-      tempDiv.style.left = '-9999px';
-      tempDiv.style.top = '-9999px';
-      tempDiv.style.width = '210mm';
-      tempDiv.innerHTML = generateApplicationHtml({ 
-        collegeInfo: {}, 
-        studentData 
-      });
-      
-      document.body.appendChild(tempDiv);
-      
-      try {
-        // Wait a moment for images to load
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
-        const canvas = await html2canvas(tempDiv.querySelector('.document-container'), {
-          scale: 1.5,
-          useCORS: true,
-          allowTaint: false,
-          logging: false,
-          backgroundColor: '#ffffff',
-          imageTimeout: 10000,
-          removeContainer: true
-        });
-        
-        const imgData = canvas.toDataURL('image/jpeg', 0.9);
-        const imgProps = doc.getImageProperties(imgData);
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        
-        if (i > 0) doc.addPage();
-        doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-        successCount++;
-        
-      } catch (canvasError) {
-        console.warn(`Error generating PDF for ${studentData.studentName}:`, canvasError);
-        failedCount++;
-        
-        // Add error page
-        if (i > 0) doc.addPage();
-        doc.setFontSize(16);
-        doc.text(`Application: ${studentData.studentName}`, 20, 30);
-        doc.setFontSize(12);
-        doc.text(`Error generating photo - Application ID: ${studentData.applicationId}`, 20, 50);
-        doc.text(`Photo URL: ${studentData.photoUrl || 'No photo'}`, 20, 60);
-      } finally {
-        document.body.removeChild(tempDiv);
-      }
-      
-      // Small delay between pages to prevent browser overload
-      if (i < result.data.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-    }
-    
-    // Final progress update
-    if (successCount === 0 && failedCount > 0) {
-      displayArea.innerHTML = `<div class="alert alert-danger">
-        All ${failedCount} applications failed to generate. Check photo links and try again.
+      // Show loading progress
+      displayArea.innerHTML = `<div class="alert alert-info">
+        <i class="fas fa-spinner fa-spin me-2"></i>
+        Processing ${result.data.length} applications... Please wait...
       </div>`;
-      return;
-    }
-    
-    // Download the PDF
-    const filename = `All_Applications_${new Date().toISOString().slice(0,10)}.pdf`;
-    doc.save(filename);
-    
-    // Show success message
-    displayArea.innerHTML = `<div class="alert alert-success">
-      <i class="fas fa-check-circle me-2"></i>
-      <strong>${successCount}</strong> applications successfully generated!
-      ${failedCount > 0 ? `<br><small class="text-muted">(${failedCount} applications had issues)</small>` : ''}
-    </div>`;
-    
-  } catch (err) {
-    console.error('PDF generation error:', err);
-    displayArea.innerHTML = `<div class="alert alert-danger">
-      <i class="fas fa-exclamation-triangle me-2"></i>
-      Server connection failed. Please check:<br>
-      1. Internet connection<br>
-      2. SCRIPT_URL is correct<br>
-      3. Google Apps Script is deployed
-    </div>`;
-  }
-}
-// ────────────────────────────────────────────────────────────────
-//  DOWNLOAD ALL HALL TICKETS – with photo URL fix
-// ────────────────────────────────────────────────────────────────
-// ==================== DOWNLOAD ALL HALL TICKETS - NO CONDITION CHECK ====================
-async function generateAllHallticketsPDF() {
-  const displayArea = document.getElementById('adminDataDisplay');
-  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all hall tickets... Please wait...</p></div>';
-  
-  try {
-    const resp = await fetch(`${SCRIPT_URL}?type=all_halltickets`);
-    const result = await resp.json();
-    
-    if (result.status !== 'success' || !result.data?.length) {
-      displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets found in the database.</div>';
-      return;
-    }
-    
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ format: 'a4', unit: 'mm' });
-    
-    let successCount = 0;
-    let failedCount = 0;
-    
-    // Show progress
-    displayArea.innerHTML = `<div class="alert alert-info">
-      <i class="fas fa-spinner fa-spin me-2"></i>
-      Processing ${result.data.length} hall tickets... 0/${result.data.length}
-    </div>`;
-    
-    for (let i = 0; i < result.data.length; i++) {
-      // Update progress every 5 items
-      if (i % 5 === 0) {
-        displayArea.innerHTML = `<div class="alert alert-info">
-          <i class="fas fa-spinner fa-spin me-2"></i>
-          Processing hall tickets... ${i}/${result.data.length}
-        </div>`;
-      }
-      
-      const row = result.data[i];
-      const get = (header) => row[header] ?? '';
-      
-      // Extract and fix photo URL - GET ALL REGARDLESS OF PAYMENT STATUS
-      let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
-      let photoUrl = fixPhotoUrl(rawPhotoUrl);
-      
-      // Prepare student data
-      const studentData = {
-        registerNo: get('Reg. No') || get('ID') || get('Application ID') || `HT-${(i+1).toString().padStart(4,'0')}`,
-        studentName: get('Name') || 'N/A',
-        dob: get('DOB') || 'N/A',
-        age: get('Age') || 'N/A',
-        houseName: get('House') || 'N/A',
-        address: get('Address') || 'N/A',
-        phoneNumber: get('MOB') || get('Phone Number') || 'N/A',
-        previousStudy: get('Previous Study') || get('Old institution') || 'N/A',
-        photoUrl: photoUrl
-      };
-      
-      // Pre-load image if exists
-      if (photoUrl) {
-        await preloadImage(photoUrl);
-      }
-      
-      // Create temporary div for html2canvas
-      const tempDiv = document.createElement('div');
-      tempDiv.style.position = 'absolute';
-      tempDiv.style.left = '-9999px';
-      tempDiv.style.top = '-9999px';
-      tempDiv.style.width = '210mm';
-      tempDiv.innerHTML = generateHallticketHtml({
-        collegeInfo: {},
-        studentData
-      });
-      
-      document.body.appendChild(tempDiv);
-      
-      try {
-        // Wait for images to load
-        await new Promise(resolve => setTimeout(resolve, 300));
+
+      for (let i = 0; i < result.data.length; i++) {
+        const row = result.data[i];
+        const get = (header) => row[header] ?? row[header.trim()] ?? '';
         
-        const canvas = await html2canvas(tempDiv.querySelector('.document-container'), {
-          scale: 1.5,
-          useCORS: true,
-          allowTaint: false,
-          logging: false,
-          backgroundColor: '#ffffff',
-          imageTimeout: 10000
-        });
+        // Extract and fix photo URL
+        let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
+        let photoUrl = fixPhotoUrl(rawPhotoUrl);
         
-        const imgData = canvas.toDataURL('image/jpeg', 0.9);
-        const imgProps = doc.getImageProperties(imgData);
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        // Prepare student data
+        const studentData = {
+          submissionDate: formatDate(get('Timestamp')) || new Date().toLocaleDateString('en-GB'),
+          applicationId: get('ID') || get('Reg. No') || `APP-${(i+1).toString().padStart(4,'0')}`,
+          studentName: get('Name') || 'N/A',
+          houseName: get('House') || 'N/A',
+          dob: get('DOB') || 'N/A',
+          aadhaarNumber: get('Aadhar') || 'N/A',
+          address: get('Address') || 'N/A',
+          phoneNumber: get('MOB') || 'N/A',
+          whatsappNumber: get('WHATSAPP') || get('MOB') || 'N/A',
+          fatherName: get('Father') || 'N/A',
+          fatherOccupation: get('Father job') || 'N/A',
+          guardianName: get('Guardian') || 'N/A',
+          relationshipWithGuardian: get('Relation to guardian') || 'N/A',
+          guardianReason: get('if not father cause') || '',
+          madrasa: get('Madrasa') || 'N/A',
+          madrasaclass: get('Madrassa class') || 'N/A',
+          school: get('School') || 'N/A',
+          schoolclass: get('School class') || 'N/A',
+          previousStudy: get('Old institution') || 'No',
+          previousInstitution: get('Name of insti') || '',
+          studyDuration: get('Period') || '',
+          identificationMark: get('Identification mark') || 'N/A',
+          physicalFitness: get('Physical Fitness: yes or no') || 'N/A',
+          illness: get('ill name') || '',
+          photoUrl: photoUrl
+        };
         
-        if (successCount > 0) doc.addPage();
-        doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        // Generate HTML for this application
+        allDocumentsHtml += generateApplicationHtml({ collegeInfo: {}, studentData });
         successCount++;
         
-      } catch (canvasError) {
-        console.warn(`Error generating hall ticket #${i+1}:`, canvasError);
-        failedCount++;
-        
-        // Add error page
-        if (successCount > 0 || failedCount > 0) doc.addPage();
-        doc.setFontSize(16);
-        doc.text(`Hall Ticket #${i+1}`, 20, 30);
-        doc.setFontSize(12);
-        doc.text(`Student: ${studentData.studentName}`, 20, 50);
-        doc.text(`Register No: ${studentData.registerNo}`, 20, 60);
-        doc.text('⚠ Error generating PDF with photo', 20, 80);
-      } finally {
-        document.body.removeChild(tempDiv);
+
       }
       
-      // Small delay between pages
-      if (i < result.data.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-    }
-    
-    if (successCount === 0 && failedCount > 0) {
+      // Hide admin panel and show documents
+      document.getElementById('adminPanelSection').style.display = 'none';
+      const displayArea_element = document.getElementById('documentDisplayArea');
+      displayArea_element.style.display = 'block';
+      
+      // Add print all button at the top (only one set)
+      const printButtonHtml = `
+        <div class="print-buttons-container">
+          <button onclick="window.print()" class="btn-gold btn-lg me-3">
+            <i class="fas fa-print me-2"></i> PRINT ALL (${successCount} Applications)
+          </button>
+          <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
+            <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
+          </button>
+        </div>
+      `;
+      
+      displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
+      
+      // Clear the data display area
+      displayArea.innerHTML = '';
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+    } catch (err) {
+      console.error('Preview error:', err);
       displayArea.innerHTML = `<div class="alert alert-danger">
         <i class="fas fa-exclamation-triangle me-2"></i>
-        All ${failedCount} hall tickets failed to generate. Check data and try again.
+        Error loading applications: ${err.message}
       </div>`;
-      return;
     }
-    
-    // Download the PDF
-    const timestamp = new Date().toISOString().slice(0,10).replace(/-/g,'');
-    const filename = `All_Hall_Tickets_${timestamp}_Total_${result.data.length}.pdf`;
-    doc.save(filename);
-    
-    // Show success message
-    displayArea.innerHTML = `<div class="alert alert-success">
-      <i class="fas fa-check-circle me-2"></i>
-      <strong>${successCount}</strong> of ${result.data.length} hall tickets successfully generated!
-      ${failedCount > 0 ? `<br><small class="text-warning">${failedCount} tickets had issues (check console)</small>` : ''}
-    </div>`;
-    
-  } catch (err) {
-    console.error('Hall ticket generation error:', err);
-    displayArea.innerHTML = `<div class="alert alert-danger">
-      <i class="fas fa-exclamation-triangle me-2"></i>
-      Error while creating hall tickets PDF: ${err.message}
-    </div>`;
   }
-}
 
-// ────────────────────────────────────────────────────────────────
-//   3. VIEW ALL RESULTS (table like application data)
-// ────────────────────────────────────────────────────────────────
-async function showResultsData() {
-  const displayArea = document.getElementById('adminDataDisplay');
-  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading all results...</p></div>';
-
-  try {
-    const resp = await fetch(`${SCRIPT_URL}?type=all_results`);
-    const result = await resp.json();
-
-    if (result.status !== 'success' || !result.data?.length) {
-      displayArea.innerHTML = '<div class="alert alert-warning">No results found.</div>';
-      return;
-    }
-
-    let html = `
-      <h3 class="text-center mb-4">Results</h3>
-      <div class="table-responsive" id="adminDataTable">
-        <table class="table table-bordered table-striped table-hover">
-          <thead class="table-dark">
-            <tr>`;
-
-    const headers = Object.keys(result.data[0]);
-    headers.forEach(h => html += `<th>${h}</th>`);
-
-    html += `</tr></thead><tbody>`;
-
-    result.data.forEach(row => {
-      html += '<tr>';
-      headers.forEach(key => html += `<td>${row[key] ?? ''}</td>`);
-      html += '</tr>';
-    });
-
-    html += '</tbody></table></div>';
-    displayArea.innerHTML = html;
-
-  } catch (err) {
-    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load results.</div>';
-    console.error(err);
-  }
-}
-
-// ==================== SHOW APPLICATION DATA TABLE ====================
-async function showApplicationData() {
-  const displayArea = document.getElementById('adminDataDisplay');
-  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading data...</p></div>';
-
-  try {
-    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`); // or use ?type=application_data
-    const result = await resp.json();
-
-    if (result.status !== 'success' || !result.data?.length) {
-      displayArea.innerHTML = '<div class="alert alert-warning">No data found or error occurred.</div>';
-      return;
-    }
-
-    let html = `
-      <h3 class="text-center mb-4">Applications</h3>
-      <div class="table-responsive" id="adminDataTable">
-        <table class="table table-bordered table-striped table-hover">
-          <thead class="table-dark">
-            <tr>`;
-
-    // Headers from first row (adjust if your script returns fixed headers)
-    const headers = Object.keys(result.data[0]);
-    headers.forEach(h => {
-      html += `<th>${h}</th>`;
-    });
-
-    html += `
-            </tr>
-          </thead>
-          <tbody>`;
-
-    result.data.forEach(row => {
-      html += '<tr>';
-      headers.forEach(key => {
-        html += `<td>${row[key] ?? ''}</td>`;
-      });
-      html += '</tr>';
-    });
-
-    html += '</tbody></table></div>';
-
-    displayArea.innerHTML = html;
-  } catch (err) {
-    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load application data.</div>';
-    console.error(err);
-  }
-}
-
-function formatDate(dateInput) {
-  if (!dateInput) return '';
-  
-  try {
-    // Handle various date formats
-    const date = new Date(dateInput);
-    if (isNaN(date.getTime())) {
-      // Try parsing DD-MM-YYYY format
-      const parts = String(dateInput).split(/[-/]/);
-      if (parts.length === 3) {
-        const day = parseInt(parts[0], 10);
-        const month = parseInt(parts[1], 10) - 1;
-        const year = parseInt(parts[2], 10);
-        const parsedDate = new Date(year, month, day);
-        if (!isNaN(parsedDate.getTime())) {
-          return `${day.toString().padStart(2, '0')}-${(month + 1).toString().padStart(2, '0')}-${year}`;
-        }
+  // ==================== PREVIEW ALL HALL TICKETS (Like Admission Portal) ====================
+  async function previewAllHalltickets() {
+    const displayArea = document.getElementById('adminDataDisplay');
+    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all hall tickets... Please wait...</p></div>';
+    
+    try {
+      const resp = await fetch(`${SCRIPT_URL}?type=all_halltickets`);
+      const result = await resp.json();
+      
+      if (result.status !== 'success' || !result.data?.length) {
+        displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets found.</div>';
+        return;
       }
-      return String(dateInput);
+
+      let allDocumentsHtml = '';
+      let successCount = 0;
+      
+      // Show loading progress
+      displayArea.innerHTML = `<div class="alert alert-info">
+        <i class="fas fa-spinner fa-spin me-2"></i>
+        Processing ${result.data.length} hall tickets... Please wait...
+      </div>`;
+
+      for (let i = 0; i < result.data.length; i++) {
+        const row = result.data[i];
+        const get = (header) => row[header] ?? '';
+        
+        // Extract and fix photo URL - GET ALL REGARDLESS OF PAYMENT STATUS
+        let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
+        let photoUrl = fixPhotoUrl(rawPhotoUrl);
+        
+        // Prepare student data
+        const studentData = {
+          registerNo: get('Reg. No') || get('ID') || get('Application ID') || `HT-${(i+1).toString().padStart(4,'0')}`,
+          studentName: get('Name') || 'N/A',
+          dob: get('DOB') || 'N/A',
+          age: get('Age') || 'N/A',
+          houseName: get('House') || 'N/A',
+          address: get('Address') || 'N/A',
+          phoneNumber: get('MOB') || get('Phone Number') || 'N/A',
+          previousStudy: get('Previous Study') || get('Old institution') || 'N/A',
+          photoUrl: photoUrl
+        };
+        
+        // Generate HTML for this hall ticket
+        allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
+        successCount++;
+
+      }
+      
+      // Hide admin panel and show documents
+      document.getElementById('adminPanelSection').style.display = 'none';
+      const displayArea_element = document.getElementById('documentDisplayArea');
+      displayArea_element.style.display = 'block';
+      
+      // Add print all button at the top (only one set)
+      const printButtonHtml = `
+        <div class="print-buttons-container">
+          <button onclick="window.print()" class="btn-gold btn-lg me-3">
+            <i class="fas fa-print me-2"></i> PRINT ALL (${successCount} Hall Tickets)
+          </button>
+          <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
+            <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
+          </button>
+        </div>
+      `;
+      
+      displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
+      
+      // Clear the data display area
+      displayArea.innerHTML = '';
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+    } catch (err) {
+      console.error('Preview error:', err);
+      displayArea.innerHTML = `<div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        Error loading hall tickets: ${err.message}
+      </div>`;
     }
-    
-    // Format as DD-MM-YYYY
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    
-    return `${day}-${month}-${year}`;
-  } catch (e) {
-    return String(dateInput || '');
   }
-}
 
-function formatDate(ts) {
-  if (!ts) return new Date().toLocaleDateString('en-GB');
-  const d = new Date(ts);
-  return `${d.getDate().toString().padStart(2,'0')}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getFullYear()}`;
-}
+  // ==================== SHOW ADMIN DASHBOARD ====================
+  function showAdminDashboard() {
+    document.getElementById('adminPanelSection').style.display = 'block';
+    document.getElementById('documentDisplayArea').style.display = 'none';
+    document.getElementById('documentDisplayArea').innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-function getLocalYMD(dateInput) {
-  if (!dateInput) return '';
-  const date = new Date(dateInput);
-  return date.toISOString().split('T')[0]; // YYYY-MM-DD
-}
+  // ==================== VIEW ALL RESULTS ====================
+  async function showResultsData() {
+    const displayArea = document.getElementById('adminDataDisplay');
+    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading all results...</p></div>';
 
-function readFileAsBase64(file){
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onload=()=>resolve(reader.result);
-    reader.onerror=reject;
-    reader.readAsDataURL(file);
-  });
-}
+    try {
+      const resp = await fetch(`${SCRIPT_URL}?type=all_results`);
+      const result = await resp.json();
 
-function generateApplicationHtml(data) {
-  const { collegeInfo, studentData } = data;
-  const hasValidPhoto = studentData.photoUrl && (
-    studentData.photoUrl.includes('drive.google.com') ||
-    studentData.photoUrl.startsWith('data:image') ||
-    studentData.photoUrl.startsWith('http')
-  );
+      if (result.status !== 'success' || !result.data?.length) {
+        displayArea.innerHTML = '<div class="alert alert-warning">No results found.</div>';
+        return;
+      }
 
-  return `
-<div class="document-container">
-  <div class="document-watermark">APPLICATION FORM</div>
-  <div class="document-header">
-    <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
-    <div class="document-college-info">
-      <div class="document-arabic">كلية دار النجاة للشريعة والآداب</div>
-      <div class="document-college-name">DARUNNAJATH SHAREEATH & ARTS COLLEGE</div>
-      <div class="document-address">Punnakkad, Karuvarakundu, Malappuram District</div>
-      <div class="document-address">Under DARUNNAJATH ISLAMIC CENTRE</div>
-      <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-      <div class="document-title">Admission Application Form</div>
-    </div>
-  </div>
+      let html = `
+        <h3 class="text-center mb-4">Results</h3>
+        <div class="table-responsive" id="adminDataTable">
+          <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+              <tr>`;
 
-  <div class="document-content">
-    ${hasValidPhoto ? `
-      <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
-        <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
-          <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
-        </div>
-        <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
+      const headers = Object.keys(result.data[0]);
+      headers.forEach(h => html += `<th>${h}</th>`);
+
+      html += `</tr></thead><tbody>`;
+
+      result.data.forEach(row => {
+        html += '<tr>';
+        headers.forEach(key => html += `<td>${row[key] ?? ''}</td>`);
+        html += '</tr>';
+      });
+
+      html += '</tbody></table></div>';
+      displayArea.innerHTML = html;
+
+    } catch (err) {
+      displayArea.innerHTML = '<div class="alert alert-danger">Failed to load results.</div>';
+      console.error(err);
+    }
+  }
+
+  // ==================== SHOW APPLICATION DATA TABLE ====================
+  async function showApplicationData() {
+    const displayArea = document.getElementById('adminDataDisplay');
+    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading data...</p></div>';
+
+    try {
+      const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
+      const result = await resp.json();
+
+      if (result.status !== 'success' || !result.data?.length) {
+        displayArea.innerHTML = '<div class="alert alert-warning">No data found or error occurred.</div>';
+        return;
+      }
+
+      let html = `
+        <h3 class="text-center mb-4">Applications</h3>
+        <div class="table-responsive" id="adminDataTable">
+          <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+              <tr>`;
+
+      // Headers from first row
+      const headers = Object.keys(result.data[0]);
+      headers.forEach(h => {
+        html += `<th>${h}</th>`;
+      });
+
+      html += `
+              </tr>
+            </thead>
+            <tbody>`;
+
+      result.data.forEach(row => {
+        html += '<tr>';
+        headers.forEach(key => {
+          html += `<td>${row[key] ?? ''}</td>`;
+        });
+        html += '</tr>';
+      });
+
+      html += '</tbody></table></div>';
+
+      displayArea.innerHTML = html;
+    } catch (err) {
+      displayArea.innerHTML = '<div class="alert alert-danger">Failed to load application data.</div>';
+      console.error(err);
+    }
+  }
+
+  // ==================== GENERATE APPLICATION HTML ====================
+  function generateApplicationHtml(data) {
+    const { collegeInfo, studentData } = data;
+    const hasValidPhoto = studentData.photoUrl && (
+      studentData.photoUrl.includes('drive.google.com') ||
+      studentData.photoUrl.startsWith('data:image') ||
+      studentData.photoUrl.startsWith('http')
+    );
+
+    return `
+  <div class="document-container">
+    <div class="document-watermark">APPLICATION FORM</div>
+    <div class="document-header">
+      <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
+      <div class="document-college-info">
+        <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+        <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+        <div class="document-address">Puthanpalli, Chemmaniyode PO, Pattikkad VIA, Malappuram Dt</div>
+        <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+        <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+        <div class="document-title">Admission Application Form</div>
       </div>
-    ` : ''}
+    </div>
 
-    <div class="document-section-title">1. Personal Information</div><div class="info-grid1" style="margin-right: ${hasValidPhoto?'160px':'0'};">${['Application Date','Application ID',"1. Student's Name","2. House Name","3. Date of Birth","4. Aadhaar Number","5. Address","6. Phone Number","7. WhatsApp Number"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.submissionDate||new Date().toLocaleDateString(),studentData.applicationId||'N/A',studentData.studentName||studentData.name||'N/A',studentData.houseName||'N/A',studentData.dob||'N/A',studentData.aadhaarNumber||'N/A',studentData.address||'N/A',studentData.phoneNumber||studentData.mobile||'N/A',studentData.whatsappNumber||'N/A'][i])}</span></div>`).join('')}</div><div class="document-section-title">2. Parent/Guardian Information</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["8. Father's Name","9. Father's Occupation","10. Guardian's Name","11. Relationship with Guardian"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.fatherName||'N/A',studentData.fatherOccupation||'N/A',studentData.guardianName||'N/A',studentData.relationshipWithGuardian||'N/A'][i])}</span></div>`).join('')}${studentData.guardianReason?`<div class="info-item"><span class="info-label">12. Reason if Guardian is not Father:</span><span class="info-value">${escapeHtml(studentData.guardianReason)}</span></div>`:''}</div><div class="document-section-title">3. Educational Information</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span>
-    <span class="info-value">${escapeHtml([studentData.madrasa||'N/A',studentData.madrasaclass||'N/A',studentData.school||'N/A',studentData.schoolclass||'N/A',studentData.previousStudy||'No'][i])}</span></div>`).join('')}</div>${studentData.previousStudy==='Yes'?`<div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${studentData.previousInstitution?`<div class="info-item"><span class="info-label">Previous Institution:</span><span class="info-value">${escapeHtml(studentData.previousInstitution||'N/A')}</span></div>`:''}${studentData.studyDuration?`<div class="info-item"><span class="info-label">Duration of Study:</span><span class="info-value">${escapeHtml(studentData.studyDuration||'N/A')}</span></div>`:''}</div>`:''}<div class="document-section-title">4. Medical & Identification</div><div class="info-grid" style="margin-right: ${hasValidPhoto?'160px':'0'};">${["16. Identification Mark","17. Physical Fitness"].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.identificationMark||'N/A',studentData.physicalFitness||'N/A'][i])}</span></div>`).join('')}${studentData.illness?`<div class="info-item"><span class="info-label">Illness:</span><span class="info-value">${escapeHtml(studentData.illness)}</span></div>`:''}</div>
-
-    <div class="document-declaration">
-      <h3 class="document-section-title">Declaration</h3>
-      <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
-        <strong>${escapeHtml(studentData.studentName || studentData.name || '')}</strong> S/o 
-        <strong>${escapeHtml(studentData.guardianName || '')}</strong>, 
-        എന്ന എന്‍റെ കുട്ടിയും ഞാനും ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
-      </p>
-
-            <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
-
-        <!-- Left side: Date & Place – no underline -->
-        <div style="flex: 0 0 auto;">
-          <div style="margin-bottom: 14px;">
-            Date: ______________________________
+    <div class="document-content">
+      ${hasValidPhoto ? `
+        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
+          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+            <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%; max-height:100%; object-fit:contain;" alt="Student Photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x180?text=No+Photo';">
           </div>
-          <div>
-            Place: _____________________________
+          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
+        </div>
+      ` : `
+        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
+          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+            <img src="https://via.placeholder.com/150x180?text=No+Photo" style="max-width:100%; max-height:100%; object-fit:contain;" alt="No Photo">
+          </div>
+          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
+        </div>
+      `}
+
+      <div class="document-section-title">1. Personal Information</div>
+      <div class="info-grid1" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
+        ${[
+          ['Application Date', studentData.submissionDate || new Date().toLocaleDateString()],
+          ['Application ID', studentData.applicationId || 'N/A'],
+          ["1. Student's Name", studentData.studentName || 'N/A'],
+          ["2. House Name", studentData.houseName || 'N/A'],
+          ["3. Date of Birth", studentData.dob || 'N/A'],
+          ["4. Aadhaar Number", studentData.aadhaarNumber || 'N/A'],
+          ["5. Address", studentData.address || 'N/A'],
+          ["6. Phone Number", studentData.phoneNumber || 'N/A'],
+          ["7. WhatsApp Number", studentData.whatsappNumber || 'N/A']
+        ].map(([label, value]) => `
+          <div class="info-item">
+            <span class="info-label">${label}:</span>
+            <span class="info-value">${escapeHtml(value)}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="document-section-title">2. Parent/Guardian Information</div>
+      <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
+        ${[
+          ["8. Father's Name", studentData.fatherName || 'N/A'],
+          ["9. Father's Occupation", studentData.fatherOccupation || 'N/A'],
+          ["10. Guardian's Name", studentData.guardianName || 'N/A'],
+          ["11. Relationship with Guardian", studentData.relationshipWithGuardian || 'N/A']
+        ].map(([label, value]) => `
+          <div class="info-item">
+            <span class="info-label">${label}:</span>
+            <span class="info-value">${escapeHtml(value)}</span>
+          </div>
+        `).join('')}
+        ${studentData.guardianReason ? `
+          <div class="info-item">
+            <span class="info-label">12. Reason if Guardian is not Father:</span>
+            <span class="info-value">${escapeHtml(studentData.guardianReason)}</span>
+          </div>
+        ` : ''}
+      </div>
+
+      <div class="document-section-title">3. Educational Information</div>
+      <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
+        ${[
+          ["13. Madrasa & Location", studentData.madrasa || 'N/A'],
+          ["Madrasa Class", studentData.madrasaclass || 'N/A'],
+          ["14. School & Location", studentData.school || 'N/A'],
+          ["School Class", studentData.schoolclass || 'N/A'],
+          ["15. Previous Study", studentData.previousStudy || 'No']
+        ].map(([label, value]) => `
+          <div class="info-item">
+            <span class="info-label">${label}:</span>
+            <span class="info-value">${escapeHtml(value)}</span>
+          </div>
+        `).join('')}
+      </div>
+      
+      ${studentData.previousStudy === 'Yes' ? `
+        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
+          ${studentData.previousInstitution ? `
+            <div class="info-item">
+              <span class="info-label">Previous Institution:</span>
+              <span class="info-value">${escapeHtml(studentData.previousInstitution)}</span>
+            </div>
+          ` : ''}
+          ${studentData.studyDuration ? `
+            <div class="info-item">
+              <span class="info-label">Duration of Study:</span>
+              <span class="info-value">${escapeHtml(studentData.studyDuration)}</span>
+            </div>
+          ` : ''}
+        </div>
+      ` : ''}
+
+      <div class="document-section-title">4. Medical & Identification</div>
+      <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
+        ${[
+          ["16. Identification Mark", studentData.identificationMark || 'N/A'],
+          ["17. Physical Fitness", studentData.physicalFitness || 'N/A']
+        ].map(([label, value]) => `
+          <div class="info-item">
+            <span class="info-label">${label}:</span>
+            <span class="info-value">${escapeHtml(value)}</span>
+          </div>
+        `).join('')}
+        ${studentData.illness ? `
+          <div class="info-item">
+            <span class="info-label">Illness:</span>
+            <span class="info-value">${escapeHtml(studentData.illness)}</span>
+          </div>
+        ` : ''}
+      </div>
+
+      <div class="document-declaration">
+        <h3 class="document-section-title">Declaration</h3>
+        <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
+          <strong>${escapeHtml(studentData.studentName || '')}</strong> S/o 
+          <strong>${escapeHtml(studentData.guardianName || '')}</strong>, 
+          എന്ന എന്‍റെ കുട്ടിയും ഞാനും ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
+        </p>
+
+        <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
+          <!-- Left side: Date & Place -->
+          <div style="flex: 0 0 auto;">
+            <div style="margin-bottom: 14px;">
+              Date: ______________________________
+            </div>
+            <div>
+              Place: _____________________________
+            </div>
+          </div>
+
+          <!-- Right side: Signature -->
+          <div style="text-align: right; flex: 1;">
+            <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
+            <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
           </div>
         </div>
-
-        <!-- Right side: Signature -->
-        <div style="text-align: right; flex: 1;">
-          <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
-          <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
-        </div>
-
       </div>
     </div>
-  </div>
-
 
     <div class="document-footer">
-      <p style="color:#495057;font-size:10px;margin:0;">
+      <p style="color:#495057; font-size:10px; margin:0;">
         <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> najathshareea@gmail.com
       </p>
     </div>
-    </div>
+  </div>
+    `;
+  }
 
-
-<div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-  <button onclick="window.print()" class="btn-gold me-2">
-    <i class="fas fa-print me-2"></i> Print Application Form
-  </button>
-  <button onclick="showDashboard()" class="btn-outline-gold">
-    <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-  </button>
-</div>
-  `;
-}
-
-function generateHallticketHtml(data){
-  const{collegeInfo,studentData}=data;
-  const hasValidPhoto=studentData.photoUrl&&(studentData.photoUrl.includes('drive.google.com')||studentData.photoUrl.startsWith('data:image')||studentData.photoUrl.startsWith('http'));
-  const qrText=`Name: ${studentData.studentName||studentData.name||''}, Register No: ${studentData.registerNo||studentData.applicationId||''}, DoB: ${studentData.dob||''}, Exam Date: 17/12/2025, Venue: College Seminar Hall`;
-  const qrCodeUrl=`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
-  
-  return `<div class="document-container">
+  // ==================== GENERATE HALL TICKET HTML ====================
+  function generateHallticketHtml(data) {
+    const { collegeInfo, studentData } = data;
+    const hasValidPhoto = studentData.photoUrl && (
+      studentData.photoUrl.includes('drive.google.com') ||
+      studentData.photoUrl.startsWith('data:image') ||
+      studentData.photoUrl.startsWith('http')
+    );
+    
+    const qrText = `Name: ${studentData.studentName || ''}, Register No: ${studentData.registerNo || ''}, DoB: ${studentData.dob || ''}, Exam Date: 15/02/2026, Venue: College Seminar Hall`;
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
+    
+    return `
+  <div class="document-container">
     <div class="document-watermark">HALL TICKET</div>
     <div class="document-header">
       <img src="https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png" alt="College Logo" class="document-logo">
       <div class="document-college-info">
-        <div class="document-arabic">كلية دار النجاة للشريعة والآداب</div>
-        <div class="document-college-name">DARUNNAJATH SHAREEATH & ARTS COLLEGE</div>
-        <div class="document-address">Punnakkad, Karuvarakundu, Malappuram District</div>
-        <div class="document-address">Under DARUNNAJATH ISLAMIC CENTRE</div>
+        <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+        <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+        <div class="document-address">Puthanpalli, Chemmaniyode PO, Pattikkad VIA, Malappuram Dt</div>
+        <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
         <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
         <div class="document-title">Entrance Exam Hall Ticket</div>
       </div>
     </div>
+    
     <div class="document-content">
-      ${hasValidPhoto?`<div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
-        <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
-          <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo">
+      ${hasValidPhoto ? `
+        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
+          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+            <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%; max-height:100%; object-fit:contain;" alt="Student Photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x180?text=No+Photo';">
+          </div>
+          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
         </div>
-        <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
-      </div>`:''}
-      <div class="student-info-box" style="margin-right: ${hasValidPhoto?'150px':'0'};">
-        <div class="info-grid">
-        
-          ${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study']
-            .map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([
-              studentData.registerNo||studentData.applicationId||'N/A',studentData.studentName||studentData.name||'N/A',studentData.dob||'N/A',studentData.age||'N/A',studentData.phoneNumber||studentData.mobile||'N/A',studentData.houseName||'N/A',studentData.address||'N/A',studentData.previousStudy||'N/A'
-            ][i])}</span></div>`).join('')}
+      ` : `
+        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
+          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+            <img src="https://via.placeholder.com/150x180?text=No+Photo" style="max-width:100%; max-height:100%; object-fit:contain;" alt="No Photo">
+          </div>
+          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
+        </div>
+      `}
+      
+      <div class="student-info-box" style="margin-right: 170px;">
+        <div class="info-grid1">
+          ${[
+            ['Register Number', studentData.registerNo || 'N/A'],
+            ['Student Name', studentData.studentName || 'N/A'],
+            ['Date of Birth', studentData.dob || 'N/A'],
+            ['Age', studentData.age || 'N/A'],
+            ['Phone Number', studentData.phoneNumber || 'N/A'],
+            ['House Name', studentData.houseName || 'N/A'],
+            ['Address', studentData.address || 'N/A'],
+            ['Previous Study', studentData.previousStudy || 'N/A']
+          ].map(([label, value]) => `
+            <div class="info-item">
+              <span class="info-label">${label}:</span>
+              <span class="info-value">${escapeHtml(value)}</span>
+            </div>
+          `).join('')}
         </div>
       </div>
+      
       <div class="exam-wrapper">
         <div class="exam-details-box">
           <div class="exam-title">Examination Details</div>
           <div class="exam-info-grid">
-            ${['Exam Date','Reporting Time','Exam Duration','Venue']
-              .map((label,i)=>`<div class="exam-item">
+            ${[
+              ['Exam Date', '15 February 2026'],
+              ['Reporting Time', '09:30 AM'],
+              ['Exam Duration', '10:00 AM - 12:30 PM'],
+              ['Venue', 'College Seminar Hall']
+            ].map(([label, value]) => `
+              <div class="exam-item">
                 <div class="exam-label">${label}</div>
-                <div class="exam-value">${['17 December 2025','09:30 AM','10:00 AM - 12:30 PM','College Seminar Hall'][i]}</div>
-              </div>`).join('')}
+                <div class="exam-value">${value}</div>
+              </div>
+            `).join('')}
           </div>
         </div>
-        <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
-          <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
-            <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code">
+        
+        <div style="position:absolute; top:240px; right:40px; text-align:center; z-index:1;">
+          <div style="width:140px; height:140px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; padding:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+            <img src="${qrCodeUrl}" style="max-width:100%; max-height:100%;" alt="QR Code">
           </div>
-          <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div>
+          <div style="font-size:11px; color:#6c757d; margin-top:5px; font-weight:500;">QR Code Verification</div>
         </div>
       </div>
+      
       <table class="signing-table">
-        <thead><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+        <thead>
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
-            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-            <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+            <td><div style="font-size:10px; color:#6c757d;">Examiner Signature</div></td>
+            <td><div style="font-size:10px; color:#6c757d;">Examiner Signature</div></td>
+            <td><div style="font-size:10px; color:#6c757d;">Examiner Signature</div></td>
+            <td><div style="font-size:10px; color:#6c757d;">Examiner Signature</div></td>
           </tr>
         </tbody>
       </table>
+      
       <div class="document-instructions">
         <div class="document-instructions-title">Important Instructions</div>
         <ul class="document-instructions-list">
@@ -999,24 +974,49 @@ function generateHallticketHtml(data){
         </ul>
       </div>
     </div>
+    
     <div class="document-footer">
-      <p style="color:#495057;font-size:10px;margin:0;">
+      <p style="color:#495057; font-size:10px; margin:0;">
         <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> najathshareea@gmail.com
       </p>
     </div>
-  </div>`;
-}
+  </div>
+    `;
+  }
 
-function escapeHtml(text){
-  if(!text)return'';
-  const map={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};
-  return String(text).replace(/[&<>"']/g,function(m){return map[m];});
-}
+  // ==================== HELPER FUNCTIONS ====================
+  function formatDate(dateInput) {
+    if (!dateInput) return '';
+    
+    try {
+      const date = new Date(dateInput);
+      if (isNaN(date.getTime())) {
+        return String(dateInput);
+      }
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`;
+    } catch (e) {
+      return String(dateInput || '');
+    }
+  }
 
-AOS.init();
-</script>
+  function escapeHtml(text) {
+    if (!text) return '';
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+  }
 
-<script>
+  AOS.init();
+
+  // ==================== LOAD NAVBAR AND FOOTER ====================
   fetch('navbar.html')
     .then(response => response.text())
     .then(data => {
@@ -1031,6 +1031,7 @@ AOS.init();
       });
     })
     .catch(error => console.error('Navbar load error:', error));
+    
   fetch('footer.html')
     .then(response => response.text())
     .then(data => {
