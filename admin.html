@@ -566,16 +566,17 @@ async function previewAllHalltickets() {
       let photoUrl = fixPhotoUrl(rawPhotoUrl);
       
       const studentData = {
-        registerNo: get('Reg. No') || get('ID') || get('Application ID') || get('REG_NO') || `HT-${(i+1).toString().padStart(4,'0')}`,
-        studentName: get('Name') || get('Student Name') || get('STUDENT_NAME') || 'N/A',
-        dob: get('DOB') || get('Date of Birth') || get('dob') || 'N/A',
-        age: get('Age') || get('AGE') || 'N/A',
-        houseName: get('House') || get('House Name') || get('HOUSE') || 'N/A',
-        address: get('Address') || get('ADDRESS') || 'N/A',
-        phoneNumber: get('MOB') || get('Phone Number') || get('Mobile') || get('PHONE') || 'N/A',
-        previousStudy: get('Previous Study') || get('Old institution') || get('PREVIOUS_STUDY') || 'N/A',
-        photoUrl: photoUrl
-      };
+  registerNo: get('Reg. No') || get('ID') || get('Application ID') || get('REG_NO') || `HT-${(i+1).toString().padStart(4,'0')}`,
+  studentName: get('Name') || get('Student Name') || get('STUDENT_NAME') || 'N/A',
+  dob: get('DOB') || get('Date of Birth') || get('dob') || 'N/A',
+  // Calculate age from DOB instead of using the Age field
+  age: calculateAgeFromDOB(get('DOB') || get('Date of Birth') || get('dob') || ''),
+  houseName: get('House') || get('House Name') || get('HOUSE') || 'N/A',
+  address: get('Address') || get('ADDRESS') || 'N/A',
+  phoneNumber: get('MOB') || get('Phone Number') || get('Mobile') || get('PHONE') || 'N/A',
+  previousStudy: get('Previous Study') || get('Old institution') || get('PREVIOUS_STUDY') || 'N/A',
+  photoUrl: photoUrl
+};
       
       allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
       successCount++;
@@ -615,6 +616,50 @@ async function previewAllHalltickets() {
     </div>`;
   }
 }
+  function calculateAge(dobString) {
+    if(!dobString)return;const birthDate=new Date(dobString);const today=new Date();let years=today.getFullYear()-birthDate.getFullYear();let months=today.getMonth()-birthDate.getMonth();let days=today.getDate()-birthDate.getDate();if(days<0){months--;days+=new Date(today.getFullYear(),today.getMonth(),0).getDate();}if(months<0){years--;months+=12;}document.getElementById('ageDisplay').textContent=`Age: ${years} years ${months} months ${days} days`;
+  }
+function calculateAgeFromDOB(dobString) {
+  if (!dobString || dobString === 'N/A') return 'N/A';
+  
+  try {
+    // Parse the date (handle different formats)
+    let birthDate;
+    
+    // Try different date formats
+    if (dobString.includes('-')) {
+      const [day, month, year] = dobString.split('-');
+      birthDate = new Date(year, month - 1, day);
+    } else if (dobString.includes('/')) {
+      const [day, month, year] = dobString.split('/');
+      birthDate = new Date(year, month - 1, day);
+    } else {
+      birthDate = new Date(dobString);
+    }
+    
+    if (isNaN(birthDate.getTime())) return 'N/A';
+    
+    const today = new Date();
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+    
+    if (days < 0) {
+      months--;
+      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+    
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+    
+    return `${years} years, ${months} months`;
+  } catch (e) {
+    console.error('Error calculating age:', e);
+    return 'N/A';
+  }
+}  
   
 
   function showAdminDashboard() {
