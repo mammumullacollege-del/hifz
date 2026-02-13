@@ -500,89 +500,161 @@
       </div>`;
     }
   }
-
-  // ==================== PREVIEW ALL HALL TICKETS (Like Admission Portal) ====================
-  async function previewAllHalltickets() {
-    const displayArea = document.getElementById('adminDataDisplay');
-    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all hall tickets... Please wait...</p></div>';
+// ==================== PREVIEW ALL HALL TICKETS (Like Admission Portal) ====================
+async function previewAllHalltickets() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all hall tickets... Please wait...</p></div>';
+  
+  try {
+    // Try different possible endpoints
+    const endpoints = [
+      `${SCRIPT_URL}?type=all_halltickets`,
+      `${SCRIPT_URL}?type=halltickets`,
+      `${SCRIPT_URL}?type=all_hall_tickets`,
+      `${SCRIPT_URL}?type=get_halltickets`
+    ];
     
-    try {
-      const resp = await fetch(`${SCRIPT_URL}?type=all_halltickets`);
-      const result = await resp.json();
-      
-      if (result.status !== 'success' || !result.data?.length) {
-        displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets found.</div>';
-        return;
+    let result = null;
+    let successfulEndpoint = '';
+    
+    // Try each endpoint until one works
+    for (const endpoint of endpoints) {
+      try {
+        console.log('Trying endpoint:', endpoint);
+        const resp = await fetch(endpoint);
+        const data = await resp.json();
+        if (data.status === 'success' && data.data && data.data.length > 0) {
+          result = data;
+          successfulEndpoint = endpoint;
+          console.log('Success with endpoint:', endpoint);
+          break;
+        }
+      } catch (e) {
+        console.log('Endpoint failed:', endpoint);
       }
-
-      let allDocumentsHtml = '';
-      let successCount = 0;
-      
-      // Show loading progress
-      displayArea.innerHTML = `<div class="alert alert-info">
-        <i class="fas fa-spinner fa-spin me-2"></i>
-        Processing ${result.data.length} hall tickets... Please wait...
-      </div>`;
-
-      for (let i = 0; i < result.data.length; i++) {
-        const row = result.data[i];
-        const get = (header) => row[header] ?? '';
-        
-        // Extract and fix photo URL - GET ALL REGARDLESS OF PAYMENT STATUS
-        let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
-        let photoUrl = fixPhotoUrl(rawPhotoUrl);
-        
-        // Prepare student data
-        const studentData = {
-          registerNo: get('Reg. No') || get('ID') || get('Application ID') || `HT-${(i+1).toString().padStart(4,'0')}`,
-          studentName: get('Name') || 'N/A',
-          dob: get('DOB') || 'N/A',
-          age: get('Age') || 'N/A',
-          houseName: get('House') || 'N/A',
-          address: get('Address') || 'N/A',
-          phoneNumber: get('MOB') || get('Phone Number') || 'N/A',
-          previousStudy: get('Previous Study') || get('Old institution') || 'N/A',
-          photoUrl: photoUrl
-        };
-        
-        // Generate HTML for this hall ticket
-        allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
-        successCount++;
-
-      }
-      
-      // Hide admin panel and show documents
-      document.getElementById('adminPanelSection').style.display = 'none';
-      const displayArea_element = document.getElementById('documentDisplayArea');
-      displayArea_element.style.display = 'block';
-      
-      // Add print all button at the top (only one set)
-      const printButtonHtml = `
-        <div class="print-buttons-container">
-          <button onclick="window.print()" class="btn-gold btn-lg me-3">
-            <i class="fas fa-print me-2"></i> PRINT ALL (${successCount} Hall Tickets)
-          </button>
-          <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
-            <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
-          </button>
-        </div>
-      `;
-      
-      displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
-      
-      // Clear the data display area
-      displayArea.innerHTML = '';
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      
-    } catch (err) {
-      console.error('Preview error:', err);
-      displayArea.innerHTML = `<div class="alert alert-danger">
-        <i class="fas fa-exclamation-triangle me-2"></i>
-        Error loading hall tickets: ${err.message}
-      </div>`;
     }
+    
+    // If no endpoint worked, try to get from applications data
+    if (!result) {
+      console.log('Trying to get hall tickets from applications data...');
+      const appResp = await fetch(`${SCRIPT_URL}?type=all_applications`);
+      const appResult = await appResp.json();
+      
+      if (appResult.status === 'success' && appResult.data?.length) {
+        // Filter applications that have hall ticket eligibility
+        const hallTicketData = appResult.data.map(row => {
+          const get = (header) => row[header] ?? row[header.trim()] ?? '';
+          return {
+            'Reg. No': get('ID') || get('Reg. No') || '',
+            'Name': get('Name') || '',
+            'DOB': get('DOB') || '',
+            'Age': get('Age') || '',
+            'House': get('House') || '',
+            'Address': get('Address') || '',
+            'MOB': get('MOB') || '',
+            'Photo': get('Photo') || get('Photo Url') || '',
+            'Previous Study': get('Old institution') || 'N/A'
+          };
+        });
+        
+        result = {
+          status: 'success',
+          data: hallTicketData
+        };
+        console.log('Created hall tickets from applications:', result.data.length);
+      }
+    }
+    
+    if (!result || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets found. Please check if:<br>1. The hall ticket endpoint is correct<br>2. There are applications with hall ticket data<br>3. The data format matches</div>';
+      return;
+    }
+
+    let allDocumentsHtml = '';
+    let successCount = 0;
+    
+    // Show loading progress
+    displayArea.innerHTML = `<div class="alert alert-info">
+      <i class="fas fa-spinner fa-spin me-2"></i>
+      Processing ${result.data.length} hall tickets from ${successfulEndpoint || 'applications data'}... Please wait...
+    </div>`;
+
+    for (let i = 0; i < result.data.length; i++) {
+      const row = result.data[i];
+      const get = (header) => {
+        // Try multiple possible header names
+        const value = row[header] || 
+                     row[header.toUpperCase()] || 
+                     row[header.toLowerCase()] || 
+                     row[header.replace(/\s+/g, '')] || 
+                     '';
+        return value;
+      };
+      
+      // Extract and fix photo URL - TRY MULTIPLE PHOTO FIELD NAMES
+      let rawPhotoUrl = get('Photo') || 
+                       get('Photo Url') || 
+                       get('photo') || 
+                       get('PHOTO') || 
+                       get('Student Photo') || 
+                       get('student_photo') || 
+                       '';
+      
+      let photoUrl = fixPhotoUrl(rawPhotoUrl);
+      
+      // Prepare student data with fallbacks
+      const studentData = {
+        registerNo: get('Reg. No') || get('ID') || get('Application ID') || get('REG_NO') || `HT-${(i+1).toString().padStart(4,'0')}`,
+        studentName: get('Name') || get('Student Name') || get('STUDENT_NAME') || 'N/A',
+        dob: get('DOB') || get('Date of Birth') || get('dob') || 'N/A',
+        age: get('Age') || get('AGE') || 'N/A',
+        houseName: get('House') || get('House Name') || get('HOUSE') || 'N/A',
+        address: get('Address') || get('ADDRESS') || 'N/A',
+        phoneNumber: get('MOB') || get('Phone Number') || get('Mobile') || get('PHONE') || 'N/A',
+        previousStudy: get('Previous Study') || get('Old institution') || get('PREVIOUS_STUDY') || 'N/A',
+        photoUrl: photoUrl
+      };
+      
+      // Generate HTML for this hall ticket
+      allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
+      successCount++;
+
+    }
+    
+    // Hide admin panel and show documents
+    document.getElementById('adminPanelSection').style.display = 'none';
+    const displayArea_element = document.getElementById('documentDisplayArea');
+    displayArea_element.style.display = 'block';
+    
+    // Add print all button at the top (only one set)
+    const printButtonHtml = `
+      <div class="print-buttons-container">
+        <button onclick="window.print()" class="btn-gold btn-lg me-3">
+          <i class="fas fa-print me-2"></i> PRINT ALL (${successCount} Hall Tickets)
+        </button>
+        <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
+          <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
+        </button>
+      </div>
+    `;
+    
+    displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
+    
+    // Clear the data display area
+    displayArea.innerHTML = '';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+  } catch (err) {
+    console.error('Preview error:', err);
+    displayArea.innerHTML = `<div class="alert alert-danger">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      Error loading hall tickets: ${err.message}<br>
+      <small>Please check browser console for more details.</small>
+    </div>`;
   }
+}
+  
 
   // ==================== SHOW ADMIN DASHBOARD ====================
   function showAdminDashboard() {
