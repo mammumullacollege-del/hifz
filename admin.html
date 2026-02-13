@@ -566,17 +566,31 @@ async function previewAllHalltickets() {
       let photoUrl = fixPhotoUrl(rawPhotoUrl);
       
       const studentData = {
-  registerNo: get('Reg. No') || get('ID') || get('Application ID') || get('REG_NO') || `HT-${(i+1).toString().padStart(4,'0')}`,
+  registerNo: get('Reg. No') || get('ID') || get('Application ID') || get('REG_NO') || `AMCT-${(i+1).toString().padStart(2,'0')}`,
   studentName: get('Name') || get('Student Name') || get('STUDENT_NAME') || 'N/A',
   dob: get('DOB') || get('Date of Birth') || get('dob') || 'N/A',
-  // Calculate age from DOB instead of using the Age field
-  age: calculateAgeFromDOB(get('DOB') || get('Date of Birth') || get('dob') || ''),
+  age: (() => {
+    const dobValue = get('DOB') || get('Date of Birth') || get('dob') || '';
+    if (!dobValue || dobValue === 'N/A') return 'N/A';
+    
+    try {
+      return calculateAgeFromDOB(dobValue);
+    } catch (e) {
+      console.warn('Age calculation failed for DOB:', dobValue);
+      return 'N/A';
+    }
+  })(),
   houseName: get('House') || get('House Name') || get('HOUSE') || 'N/A',
   address: get('Address') || get('ADDRESS') || 'N/A',
   phoneNumber: get('MOB') || get('Phone Number') || get('Mobile') || get('PHONE') || 'N/A',
   previousStudy: get('Previous Study') || get('Old institution') || get('PREVIOUS_STUDY') || 'N/A',
   photoUrl: photoUrl
 };
+
+console.log(`Student ${i+1} age calculation:`, {
+  rawDOB: get('DOB') || get('Date of Birth') || get('dob') || '',
+  calculatedAge: studentData.age
+});
       
       allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
       successCount++;
@@ -620,24 +634,35 @@ async function previewAllHalltickets() {
     if(!dobString)return;const birthDate=new Date(dobString);const today=new Date();let years=today.getFullYear()-birthDate.getFullYear();let months=today.getMonth()-birthDate.getMonth();let days=today.getDate()-birthDate.getDate();if(days<0){months--;days+=new Date(today.getFullYear(),today.getMonth(),0).getDate();}if(months<0){years--;months+=12;}document.getElementById('ageDisplay').textContent=`Age: ${years} years ${months} months ${days} days`;
   }
 function calculateAgeFromDOB(dobString) {
-  if (!dobString || dobString === 'N/A') return 'N/A';
+  if (!dobString || dobString === 'N/A' || dobString === '') return 'N/A';
   
   try {
-    // Parse the date (handle different formats)
+    console.log("Calculating age from DOB:", dobString);
+    
     let birthDate;
     
-    // Try different date formats
     if (dobString.includes('-')) {
-      const [day, month, year] = dobString.split('-');
-      birthDate = new Date(year, month - 1, day);
+      const parts = dobString.split('-');
+      if (parts[0].length === 4) {
+        birthDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      } else {
+        birthDate = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+      }
     } else if (dobString.includes('/')) {
-      const [day, month, year] = dobString.split('/');
-      birthDate = new Date(year, month - 1, day);
+      const parts = dobString.split('/');
+      if (parts[0].length === 4) {
+        birthDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      } else {
+        birthDate = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+      }
     } else {
       birthDate = new Date(dobString);
     }
     
-    if (isNaN(birthDate.getTime())) return 'N/A';
+    if (isNaN(birthDate.getTime())) {
+      console.warn("Invalid date format:", dobString);
+      return 'N/A';
+    }
     
     const today = new Date();
     let years = today.getFullYear() - birthDate.getFullYear();
@@ -646,7 +671,8 @@ function calculateAgeFromDOB(dobString) {
     
     if (days < 0) {
       months--;
-      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+      days += lastMonth.getDate();
     }
     
     if (months < 0) {
@@ -654,9 +680,15 @@ function calculateAgeFromDOB(dobString) {
       months += 12;
     }
     
-    return `${years} years, ${months} months`;
+    if (years < 1) {
+      return `${months} months`;
+    } else if (months === 0) {
+      return `${years} years`;
+    } else {
+      return `${years} years, ${months} months`;
+    }
   } catch (e) {
-    console.error('Error calculating age:', e);
+    console.error('Error calculating age:', e, 'for DOB:', dobString);
     return 'N/A';
   }
 }  
