@@ -744,8 +744,109 @@
     try{const response=await fetch(`${SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateApplicationHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
   async function handleHallticketSubmit(e){e.preventDefault();const mobile=document.getElementById('ticketMobile').value.trim();const dob=document.getElementById('ticketDob').value;
     try{const response=await fetch(`${SCRIPT_URL}?type=hallticket&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateHallticketHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
-  async function handleResultSubmit(e){e.preventDefault();const mobile=document.getElementById('resultMobile').value.trim();const dob=document.getElementById('resultDob').value;
-    try{const response=await fetch(`${SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateResultHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
+  async function handleResultSubmit(e) {
+  e.preventDefault();
+  const mobile = document.getElementById('resultMobile').value.trim();
+  const dob = document.getElementById('resultDob').value;
+
+  try {
+    console.log("=== STRICT RESULT PUBLICATION CHECK ===");
+    
+    // 1. Get settings from backend
+    const settingsResponse = await fetch(`${SCRIPT_URL}?type=result_settings`);
+    const settings = await settingsResponse.json();
+    
+    console.log("Settings response:", settings);
+
+    // 2. STRICT CHECK: Must have publish date in correct format
+    if (!settings.publishDate) {
+      alert("⚠️ Results are not yet published.\n\nPlease check back later.");
+      return;
+    }
+
+    const publishDateStr = settings.publishDate.trim();
+    console.log("Publish date string:", publishDateStr);
+    
+    // 3. STRICT FORMAT VALIDATION: Must match YYYY-MM-DD HH:MM AM/PM exactly
+    const regex = /^(\d{4})-(\d{2})-(\d{2}) (\d{1,2}):(\d{2}) (AM|PM)$/i;
+    const matches = publishDateStr.match(regex);
+    
+    if (!matches) {
+      console.error("Invalid date format:", publishDateStr);
+      alert("⚠️ Result publication date is not properly configured.\nPlease contact college office.");
+      return;
+    }
+    
+    // 4. Parse date components
+    let year = parseInt(matches[1]);
+    let month = parseInt(matches[2]) - 1; // JS months are 0-based
+    let day = parseInt(matches[3]);
+    let hour = parseInt(matches[4]);
+    let minute = parseInt(matches[5]);
+    let ampm = matches[6].toUpperCase();
+    
+    console.log("Parsed components:", { year, month: month+1, day, hour, minute, ampm });
+    
+    // 5. Convert to 24-hour format
+    if (ampm === 'PM' && hour < 12) hour += 12;
+    if (ampm === 'AM' && hour === 12) hour = 0;
+    
+    console.log("24-hour format:", { hour, minute });
+    
+    // 6. Create publication date in IST
+    const publishDate = new Date(Date.UTC(year, month, day, hour-5, minute-30, 0)); // Adjust for IST (UTC+5:30)
+    
+    // 7. Get current time in UTC for fair comparison
+    const now = new Date();
+    
+    console.log("Publish timestamp (UTC):", publishDate.getTime());
+    console.log("Current timestamp (UTC):", now.getTime());
+    console.log("Time difference (ms):", publishDate.getTime() - now.getTime());
+    console.log("Time difference (hours):", (publishDate.getTime() - now.getTime()) / (1000 * 60 * 60));
+    
+    // 8. STRICT COMPARISON: Block if current time is before publish time
+    if (now.getTime() < publishDate.getTime()) {
+      // Format the publish date in IST for display
+      const options = { 
+        timeZone: 'Asia/Kolkata', 
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long', 
+        day: 'numeric',
+        hour: 'numeric', 
+        minute: '2-digit',
+        hour12: true 
+      };
+      
+      const formattedDate = publishDate.toLocaleString('en-IN', options);
+      const timeUntil = Math.ceil((publishDate.getTime() - now.getTime()) / (1000 * 60 * 60));
+      
+      alert(`⏰ Results Not Published Yet\n\n` +
+            `📅 Publication Date: ${formattedDate} IST\n` +
+            `⏳ Time remaining: Approximately ${timeUntil} hours\n\n` +
+            `Please check back after this time.`);
+      return;
+    }
+    
+    console.log("✅ Publication time has passed, showing results");
+
+    // 9. Fetch and display result
+    console.log("Fetching result for mobile:", mobile, "DOB:", dob);
+    const response = await fetch(`${SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
+    const data = await response.json();
+
+    if (data.status === 'success') {
+      const html = generateResultHtml(data);
+      displayDocument(html);
+    } else {
+      alert('No result found for this mobile number and date of birth.');
+    }
+
+  } catch (err) {
+    console.error("Error in handleResultSubmit:", err);
+    alert("Error checking result. Please try again or contact support.");
+  }
+}  
   async function handleNewApplicationSubmit(e){e.preventDefault();const form=e.target;const formData=new FormData(form);const data=Object.fromEntries(formData.entries());const photoFile=document.getElementById('photoInput').files[0];if(photoFile){try{const photoData=await readFileAsBase64(photoFile);data.photo=JSON.stringify({name:photoFile.name,mimeType:photoFile.type,data:photoData.split(',')[1]});}catch(error){return;}}
     const submitData=new URLSearchParams();for(const[key,value]of Object.entries(data)){if(value!==undefined&&value!==null){submitData.append(key,value);}}
     try{const response=await fetch(SCRIPT_URL,{method:'POST',body:submitData,headers:{'Content-Type':'application/x-www-form-urlencoded'}});const result=await response.json();if(result.status==='success'){form.reset();document.getElementById('photoPreview').style.display='none';toggleSubmitButton(false);setTimeout(()=>{const mockData={collegeInfo:{logo:'https://i.postimg.cc/rmS5jXXX/COLLEGE-LOGO.png',contact:'كلية الحافظ ممو ملا لتحفيظ القرآن',collegeName:'AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN',underOrg:'Under QUWATHUL ISLAM SANGAM',affiliation:'Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD',address:'Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District'},studentData:{...data,submissionDate:new Date().toLocaleDateString(),applicationId:result.data.applicationId||'APP-'+Date.now(),photoUrl:photoFile?URL.createObjectURL(photoFile):null}};const html=generateApplicationHtml(mockData);displayDocument(html);},1500);}else{}}catch(error){console.error('Submission error:',error);}}
