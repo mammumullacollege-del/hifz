@@ -681,112 +681,140 @@ function calculateAgeFromDOB(dobString) {
     }
     
     if (years < 1) {
-      return `${months} months`;
+      if (months < 1) {
+        return `${days} days`;
+      } else if (days === 0) {
+        return `${months} months`;
+      } else {
+        return `${months} months ${days} days`;
+      }
     } else if (months === 0) {
-      return `${years} years`;
+      if (days === 0) {
+        return `${years} years`;
+      } else {
+        return `${years} years ${days} days`;
+      }
+    } else if (days === 0) {
+      return `${years} years ${months} months`;
     } else {
-      return `${years} years, ${months} months`;
+      return `${years} years ${months} months ${days} days`;
     }
   } catch (e) {
     console.error('Error calculating age:', e, 'for DOB:', dobString);
     return 'N/A';
   }
-}  
+}
+
+function formatDate(dateInput) {
+  if (!dateInput) return '';
   
-
-  function showAdminDashboard() {
-    document.getElementById('adminPanelSection').style.display = 'block';
-    document.getElementById('documentDisplayArea').style.display = 'none';
-    document.getElementById('documentDisplayArea').innerHTML = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  async function showResultsData() {
-    const displayArea = document.getElementById('adminDataDisplay');
-    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading all results...</p></div>';
-
-    try {
-      const resp = await fetch(`${SCRIPT_URL}?type=all_results`);
-      const result = await resp.json();
-
-      if (result.status !== 'success' || !result.data?.length) {
-        displayArea.innerHTML = '<div class="alert alert-warning">No results found.</div>';
-        return;
-      }
-
-      let html = `
-        <h3 class="text-center mb-4">Results</h3>
-        <div class="table-responsive" id="adminDataTable">
-          <table class="table table-bordered table-striped table-hover">
-            <thead class="table-dark">
-              <tr>`;
-
-      const headers = Object.keys(result.data[0]);
-      headers.forEach(h => html += `<th>${h}</th>`);
-
-      html += `</tr></thead><tbody>`;
-
-      result.data.forEach(row => {
-        html += '<tr>';
-        headers.forEach(key => html += `<td>${row[key] ?? ''}</td>`);
-        html += '</tr>';
-      });
-
-      html += '</tbody></table></div>';
-      displayArea.innerHTML = html;
-
-    } catch (err) {
-      displayArea.innerHTML = '<div class="alert alert-danger">Failed to load results.</div>';
-      console.error(err);
+  try {
+    const date = new Date(dateInput);
+    if (isNaN(date.getTime())) {
+      return String(dateInput);
     }
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  } catch (e) {
+    return String(dateInput || '');
   }
+}
 
-  async function showApplicationData() {
-    const displayArea = document.getElementById('adminDataDisplay');
-    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading data...</p></div>';
+function showAdminDashboard() {
+  document.getElementById('adminPanelSection').style.display = 'block';
+  document.getElementById('documentDisplayArea').style.display = 'none';
+  document.getElementById('documentDisplayArea').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-    try {
-      const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
-      const result = await resp.json();
+async function showResultsData() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading all results...</p></div>';
 
-      if (result.status !== 'success' || !result.data?.length) {
-        displayArea.innerHTML = '<div class="alert alert-warning">No data found or error occurred.</div>';
-        return;
-      }
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_results`);
+    const result = await resp.json();
 
-      let html = `
-        <h3 class="text-center mb-4">Applications</h3>
-        <div class="table-responsive" id="adminDataTable">
-          <table class="table table-bordered table-striped table-hover">
-            <thead class="table-dark">
-              <tr>`;
-
-      const headers = Object.keys(result.data[0]);
-      headers.forEach(h => {
-        html += `<th>${h}</th>`;
-      });
-
-      html += `
-              </tr>
-            </thead>
-            <tbody>`;
-
-      result.data.forEach(row => {
-        html += '<tr>';
-        headers.forEach(key => {
-          html += `<td>${row[key] ?? ''}</td>`;
-        });
-        html += '</tr>';
-      });
-
-      html += '</tbody></table></div>';
-
-      displayArea.innerHTML = html;
-    } catch (err) {
-      displayArea.innerHTML = '<div class="alert alert-danger">Failed to load application data.</div>';
-      console.error(err);
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No results found.</div>';
+      return;
     }
+
+    let html = `
+      <h3 class="text-center mb-4">Results</h3>
+      <div class="table-responsive" id="adminDataTable">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark">
+            <tr>`;
+
+    const headers = Object.keys(result.data[0]);
+    headers.forEach(h => html += `<th>${h}</th>`);
+
+    html += `</tr></thead><tbody>`;
+
+    result.data.forEach(row => {
+      html += '<tr>';
+      headers.forEach(key => html += `<td>${row[key] ?? ''}</td>`);
+      html += '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+    displayArea.innerHTML = html;
+
+  } catch (err) {
+    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load results.</div>';
+    console.error(err);
   }
+}
+
+async function showApplicationData() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading data...</p></div>';
+
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
+    const result = await resp.json();
+
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No data found or error occurred.</div>';
+      return;
+    }
+
+    let html = `
+      <h3 class="text-center mb-4">Applications</h3>
+      <div class="table-responsive" id="adminDataTable">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark">
+            <tr>`;
+
+    const headers = Object.keys(result.data[0]);
+    headers.forEach(h => {
+      html += `<th>${h}</th>`;
+    });
+
+    html += `
+            </tr>
+          </thead>
+          <tbody>`;
+
+    result.data.forEach(row => {
+      html += '<tr>';
+      headers.forEach(key => {
+        html += `<td>${row[key] ?? ''}</td>`;
+      });
+      html += '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+
+    displayArea.innerHTML = html;
+  } catch (err) {
+    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load application data.</div>';
+    console.error(err);
+  }
+}
 
   function generateApplicationHtml(data) {
     const { collegeInfo, studentData } = data;
@@ -964,7 +992,9 @@ function calculateAgeFromDOB(dobString) {
       studentData.photoUrl.startsWith('http')
     );
     
-    const qrText = `Name: ${studentData.studentName || ''}, Register No: ${studentData.registerNo || ''}, DoB: ${studentData.dob || ''}, Exam Date: 15/02/2026, Venue: College Seminar Hall`;
+    const formattedDob = formatDateToDDMMYYYY(studentData.dob || 'N/A');
+    
+    const qrText = `Name: ${studentData.studentName || ''}, Register No: ${studentData.registerNo || ''}, DoB: ${formattedDob}, Exam Date: 15/02/2026, Venue: College Seminar Hall`;
     const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
     
     return `
@@ -1004,8 +1034,8 @@ function calculateAgeFromDOB(dobString) {
           ${[
             ['Register Number', studentData.registerNo || 'N/A'],
             ['Student Name', studentData.studentName || 'N/A'],
-            ['Date of Birth', studentData.dob || 'N/A'],
-            ['Age', studentData.age || 'N/A'],
+            ['Date of Birth', formattedDob], 
+            ['Age', studentData.age || 'N/A'], 
             ['Phone Number', studentData.phoneNumber || 'N/A'],
             ['House Name', studentData.houseName || 'N/A'],
             ['Address', studentData.address || 'N/A'],
@@ -1088,22 +1118,47 @@ function calculateAgeFromDOB(dobString) {
     `;
   }
 
-  function formatDate(dateInput) {
-    if (!dateInput) return '';
-    
-    try {
-      const date = new Date(dateInput);
-      if (isNaN(date.getTime())) {
-        return String(dateInput);
-      }
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}-${month}-${year}`;
-    } catch (e) {
-      return String(dateInput || '');
+  function formatDateToDDMMYYYY(dateInput) {
+  if (!dateInput || dateInput === 'N/A') return 'N/A';
+  
+  try {
+    if (typeof dateInput === 'string' && /^\d{2}-\d{2}-\d{4}$/.test(dateInput)) {
+      return dateInput;
     }
+    
+    let date;
+    
+    if (dateInput.includes('-')) {
+      const parts = dateInput.split('-');
+      if (parts[0].length === 4) {
+        date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      } else {
+        date = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+      }
+    } else if (dateInput.includes('/')) {
+      const parts = dateInput.split('/');
+      if (parts[0].length === 4) {
+        date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      } else {
+        date = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+      }
+    } else {
+      date = new Date(dateInput);
+    }
+    
+    if (isNaN(date.getTime())) {
+      return String(dateInput).split(' ')[0]; 
+    }
+    
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    
+    return `${day}-${month}-${year}`;
+  } catch (e) {
+    return String(dateInput).split(' ')[0];
   }
+}
 
   function escapeHtml(text) {
     if (!text) return '';
