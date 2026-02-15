@@ -748,10 +748,96 @@
     return `<div class="document-container"><div class="document-watermark">HALL TICKET</div><div class="document-header"><img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo"><div class="document-college-info"><div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div><div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div><div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div><div class="document-address">Under QUWATHUL ISLAM SANGAM</div><div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div><div class="document-title">Entrance Exam Hall Ticket</div></div></div><div class="document-content">${hasValidPhoto?`<div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;"><div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;"><img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo"></div><div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div></div>`:''}
     <div class="student-info-box" style="margin-right: ${hasValidPhoto?'150px':'0'};"><div class="info-grid1">${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study'].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.registerNo||studentData.applicationId||'N/A',studentData.studentName||studentData.name||'N/A',studentData.dob||'N/A',studentData.age||'N/A',studentData.phoneNumber||studentData.mobile||'N/A',studentData.houseName||'N/A',studentData.address||'N/A',studentData.previousStudy||'N/A'][i])}</span></div>`).join('')}</div></div>
     <div class="exam-wrapper"><div class="exam-details-box"><div class="exam-title">Examination Details</div><div class="exam-info-grid">${['Exam Date','Reporting Time','Exam Duration','Venue'].map((label,i)=>`<div class="exam-item"><div class="exam-label">${label}</div><div class="exam-value">${['15 Febrary 2026','07:30 AM','08:00 AM - 12:30 PM','HIM Puthanpalli'][i]}</div></div>`).join('')}</div></div><div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;"><div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;"><img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code"></div><div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div></div></div><table class="signing-table"><thead><tr><th>QIRA'ATH</th><th>HIFZ</th><th>SPOT</th><th>GK</th><th>MEMORY TEST</th></tr></thead><tbody><tr><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td><td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td></tr></tbody></table><div class="document-instructions"><div class="document-instructions-title">Important Instructions</div><ul class="document-instructions-list"><li>Bring this hall ticket to the exam center</li><li>Carry any original ID proof (Aadhaar card)</li><li>Report at the exam center 30 minutes before exam time</li><li>No electronic devices allowed inside exam hall</li><li>Only blue/black ballpoint pens are allowed</li><li>Follow all instructions given by invigilators</li></ul></div></div><div class="document-footer"><p style="color:#495057;font-size:10px;margin:0;"><strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com</p></div></div><div class="no-print" style="text-align:center;margin-top:20px;padding:20px;"><button onclick="window.print()" class="btn-gold me-2"><i class="fas fa-print me-2"></i> Print Hall Ticket</button><button onclick="showDashboard()" class="btn-outline-gold"><i class="fas fa-arrow-left me-2"></i> Back to Dashboard</button></div>`;}
-  function generateResultHtml(data){const{collegeInfo,studentData}=data;let statusText="NOT QUALIFIED",statusColor="#dc3545";if(studentData.result==="QUALIFIED"){statusText="QUALIFIED";statusColor="#28a745";}else if(studentData.result==="WAITING LIST"){statusText="WAITING LIST";statusColor="#007bff";}const isQualified=studentData.result==="QUALIFIED";const isWaitingList=studentData.result==="WAITING LIST";const isQualifiedOrWaiting=isQualified||isWaitingList;
-                                    
-    return `<div class="document-container"><div class="document-watermark">${statusText}</div><div class="document-header"><img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo"><div class="document-college-info"><div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div><div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div><div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div><div class="document-address">Under QUWATHUL ISLAM SANGAM</div><div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div><div class="document-title">Entrance Exam Result</div></div></div><div class="document-content"><div class="student-info-box"><div class="info-grid">${['Student Name','Mobile Number','Date of Birth','Result Status'].map((label,i)=>`<div class="info-item"><span class="info-label">${label}:</span><span class="info-value">${escapeHtml([studentData.name||studentData.studentName||'N/A',studentData.mobile||studentData.phoneNumber||'N/A',studentData.dob||'N/A',statusText][i])}</span></div>`).join('')}</div></div><div class="result-section-box" style="border-color: ${statusColor};"><div class="result-status" style="color: ${statusColor};">${statusText}</div>${isQualifiedOrWaiting?`<div class="result-rank">Rank: ${escapeHtml(studentData.rank||'N/A')}</div>`:''}${isQualified?`<div class="admission-info-box"><div class="admission-title">Admission Details</div><div class="admission-row"><span class="admission-label">Admission Starts:</span><span class="admission-value">Announce Later</span></div><div class="admission-row"><span class="admission-label">Class Starts:</span><span class="admission-value">Announce Later</span></div></div>`:''}<div class="note-section" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;"><div class="note-title">Important Note</div><div class="note-content">Selected candidates must complete admission formalities within the specified dates. Bring all original documents for verification. For any queries, contact college office.</div></div></div></div><div class="document-footer"><p style="color:#495057;font-size:10px;margin:0;"><strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com</p></div></div><div class="no-print" style="text-align:center;margin-top:20px;padding:20px;"><button onclick="window.print()" class="btn-gold me-2"><i class="fas fa-print me-2"></i> Print Result</button><button onclick="showDashboard()" class="btn-outline-gold"><i class="fas fa-arrow-left me-2"></i> Back to Dashboard</button></div>`;}
-  function displayDocument(htmlContent){document.getElementById('mainContentArea').style.display='none';document.getElementById('documentDisplayArea').style.display='block';document.getElementById('documentDisplayArea').innerHTML=htmlContent;window.scrollTo({top:0,behavior:'smooth'});}
+  function generateResultHtml(data) {
+    const { collegeInfo, studentData } = data;
+    let statusText = "NOT QUALIFIED";
+    let statusColor = "#dc3545";
+    let malayalamNote = "";
+
+    if (studentData.result === "QUALIFIED") {
+      statusText = "QUALIFIED";
+      statusColor = "#28a745";
+      malayalamNote = `പ്രിയ വിദ്യാർത്ഥി, താങ്കൾ പ്രവേശന പരീക്ഷയിൽ വിജയിച്ചു. അഭിനന്ദനങ്ങള്‍... 
+      നിശ്ചിത തീയതിക്കുള്ളിൽ പ്രവേശന നടപടികൾ പൂർത്തീകരിക്കണം. ആധാർ, ജനന സർട്ടിഫിക്കറ്റ്, റേഷന്‍ കാർഡ് എന്നിവയുടെ രണ്ട് വീതം കോപ്പികള്‍ കൊണ്ടുവരിക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`; 
+    } 
+    else if (studentData.result === "WAITING LIST") {
+      statusText = "WAITING LIST";
+      statusColor = "#007bff";
+      malayalamNote = `മെച്ചപ്പെട്ട രീതിയില്‍ കൂടുതല്‍ മുന്നൊരുക്കം നടത്തി രണ്ടാം ഘട്ട പ്രവേശന പരീക്ഷയില്‍ യോഗ്യത നേടുക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`; 
+    } 
+    else {
+      statusText = "NOT QUALIFIED";
+      statusColor = "#dc3545";
+      malayalamNote = `ഈ വർഷം യോഗ്യത ലഭിച്ചില്ല, കോളേജ് മാനദണ്ഡ പ്രായപരിധി പ്രകാരം അടുത്ത വർഷവും അപേക്ഷിക്കാന്‍ സാധിക്കുമെങ്കില്‍ അടുത്ത വർഷം വീണ്ടും ശ്രമിക്കുക. അല്ലെങ്കിൽ മറ്റ് കോളേജുകളിൽ പ്രവേശനം തേടുക.`; 
+    }
+
+    const isQualified = studentData.result === "QUALIFIED";
+    const isWaitingList = studentData.result === "WAITING LIST";
+    const isQualifiedOrWaiting = isQualified || isWaitingList;
+
+    return `
+      <div class="document-container">
+        <div class="document-watermark">${statusText}</div>
+        <div class="document-header">
+          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Entrance Exam Result</div>
+          </div>
+        </div>
+        <div class="document-content">
+          <div class="student-info-box">
+            <div class="info-grid">
+              ${['Student Name','Mobile Number','Date of Birth','Result Status'].map((label, i) => `
+                <div class="info-item">
+                  <span class="info-label">${label}:</span>
+                  <span class="info-value">${escapeHtml([studentData.name || studentData.studentName || 'N/A', studentData.mobile || studentData.phoneNumber || 'N/A', studentData.dob || 'N/A', statusText][i])}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="result-section-box" style="border-color: ${statusColor};">
+            <div class="result-status" style="color: ${statusColor};">${statusText}</div>
+            ${isQualifiedOrWaiting ? `<div class="result-rank">Rank: ${escapeHtml(studentData.rank || 'N/A')}</div>` : ''}
+            ${isQualified ? `
+              <div class="admission-info-box">
+                <div class="admission-title">Admission Details</div>
+                <div class="admission-row">
+                  <span class="admission-label">Admission Starts:</span>
+                  <span class="admission-value">പിന്നീട് അറിയിക്കും</span>
+                </div>
+                <div class="admission-row">
+                  <span class="admission-label">Class Starts:</span>
+                  <span class="admission-value">പിന്നീട് അറിയിക്കും</span>
+                </div>
+              </div>
+            ` : ''}
+            <div class="note-section malayalam-msg" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
+              <div class="note-title">📌 Important Note</div>
+              <div class="note-content" style="white-space: pre-line;">${escapeHtml(malayalamNote)}</div>
+            </div>
+          </div>
+        </div>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
+          </p>
+        </div>
+      </div>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Result
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
+      </div>
+    `;
+  }  function displayDocument(htmlContent){document.getElementById('mainContentArea').style.display='none';document.getElementById('documentDisplayArea').style.display='block';document.getElementById('documentDisplayArea').innerHTML=htmlContent;window.scrollTo({top:0,behavior:'smooth'});}
   async function handleApplicationSubmit(e){e.preventDefault();const mobile=document.getElementById('appMobile').value.trim();const dob=document.getElementById('appDob').value;
     try{const response=await fetch(`${SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateApplicationHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
   async function handleHallticketSubmit(e){e.preventDefault();const mobile=document.getElementById('ticketMobile').value.trim();const dob=document.getElementById('ticketDob').value;
