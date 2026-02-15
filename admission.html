@@ -837,7 +837,8 @@
         </button>
       </div>
     `;
-  }  function displayDocument(htmlContent){document.getElementById('mainContentArea').style.display='none';document.getElementById('documentDisplayArea').style.display='block';document.getElementById('documentDisplayArea').innerHTML=htmlContent;window.scrollTo({top:0,behavior:'smooth'});}
+  }
+  function displayDocument(htmlContent){document.getElementById('mainContentArea').style.display='none';document.getElementById('documentDisplayArea').style.display='block';document.getElementById('documentDisplayArea').innerHTML=htmlContent;window.scrollTo({top:0,behavior:'smooth'});}
   async function handleApplicationSubmit(e){e.preventDefault();const mobile=document.getElementById('appMobile').value.trim();const dob=document.getElementById('appDob').value;
     try{const response=await fetch(`${SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);const data=await response.json();if(data.status==='success'){const html=generateApplicationHtml(data);displayDocument(html);}else{}}catch(error){console.error('Error:',error);}}
   async function handleHallticketSubmit(e){e.preventDefault();const mobile=document.getElementById('ticketMobile').value.trim();const dob=document.getElementById('ticketDob').value;
