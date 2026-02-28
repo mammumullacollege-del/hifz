@@ -356,18 +356,6 @@
   </div>
 </div>
 
-<!--<div class="instructions-box m-5" data-aos="fade-up">
-  <h3 class="instructions-title"><i class="fas fa-info-circle"></i>പ്രധാന നിർദ്ദേശങ്ങൾ</h3>
-  <ul class="instructions-list">
-    <li>അപ്ലിക്കേഷന്‍, ഹാള്‍‍ടക്കറ്റ്, റിസള്‍ട്ട് എന്നിവക്ക്<strong> അപേക്ഷയില്‍ നല്കിയ മൊബൈൽ നമ്പറും ജനന തീയതിയും</strong> നിർബന്ധമായും നൽകേണ്ടതാണ്.</li>
-    <li>മൊബൈൽ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം</li>
-    <li>അപേക്ഷ സമർപ്പിക്കുമ്പോൾ, * ചിഹ്നമുള്ള എല്ലാ ഫീൽഡുകളും നിർബന്ധമായും പൂരിപ്പിക്കേണ്ടതാണ്</li>
-    <li>12-02-2026 വ്യാഴാഴ്ചക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക</li>
-    <li>പ്രവേശന പരീക്ഷ തീയതി: <strong>15/02/2026 ഞായർ രാവിലെ 07.30</strong></li>
-    <li>പ്രവേശന പരീക്ഷാദിനത്തില്‍ ആധാര്‍ കോപ്പി, അപേക്ഷാ ഫീ 300 രൂപ എന്നിവ സ്ഥാപനത്തില്‍ സമർപ്പിക്കുക.</li>
-    <li>സംശയങ്ങൾക്ക് ബന്ധപ്പെടുക: +91 9048020243</li>
-  </ul>
-</div>-->
 <div id="mainContentArea">
   <!--<section class="content-section">
     <div class="container">
@@ -405,16 +393,23 @@
     </div>
   </section>-->
   <section class="content-section" style="background: white;">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="portal-card text-center">
-            <div class="portal-icon"><i class="fas fa-file-alt"></i></div>
-            <!--<h3 class="portal-title">New Application</h3>
-            <p class="portal-description">Submit new application</p><br><br><br>-->
-            <button class="btn-gold w-100" onclick="showForm('applyNowForm')"><i class="fas fa-pen me-2"></i>Apply Now</button>
-          </div>
-        </div>
+  <div class="container">
+    <div class="row g-4">
+
+<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+  <div class="portal-card text-center">
+    <div class="portal-icon"><i class="fas fa-file-alt"></i></div>
+    <!--<h3 class="portal-title">New Application</h3>
+    <p class="portal-description">Submit new admission application</p>-->
+    
+    <button class="btn-gold w-100 mt-4" 
+            data-bs-toggle="modal" 
+            data-bs-target="#instructionsModal">
+      <i class="fas fa-pen me-2"></i> Apply Now
+    </button>
+  </div>
+</div>
+
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-file-download"></i></div>
@@ -1670,5 +1665,45 @@
     })
     .catch(error => console.error('Footer load error:', error));
 </script>   
+<div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
+      
+      <div class="modal-header text-white" 
+           style="background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 4px solid var(--islamic-gold);">
+        <h5 class="modal-title fw-bold" id="instructionsModalLabel">
+          <i class="fas fa-info-circle me-2"></i> 
+          പ്രധാന നിർദ്ദേശങ്ങൾ
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body p-4" style="background: #fffef7;">
+        <div class="instructions-box mb-0 shadow-none border-0" style="background: transparent; padding: 0;">
+          <ul class="instructions-list fs-6" style="line-height: 1.7;">
+            <li><strong>അപ്ലിക്കേഷന്‍, ഹാള്‍ ടിക്കറ്റ്, റിസള്‍ട്ട്</strong> എന്നിവയ്ക്കെല്ലാം അപേക്ഷയിൽ നൽകിയ <strong>മൊബൈൽ നമ്പറും ജനന തീയതിയും</strong> ആവശ്യമാണ്.</li>
+            <li>മൊബൈൽ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം.</li>
+            <li>അപേക്ഷ സമർപ്പിക്കുമ്പോൾ <strong style="color:#c0392b;">* ചിഹ്നമുള്ള</strong> എല്ലാ ഫീൽഡുകളും നിർബന്ധമാണ്.</li>
+            <li><strong style="color:#c0392b;">12-02-2026</strong> വ്യാഴാഴ്ചയ്ക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക.</li>
+            <li>പ്രവേശന പരീക്ഷ തീയതി: <strong>15/02/2026 ഞായർ രാവിലെ 07:30</strong></li>
+            <li>പരീക്ഷാ ദിവസം <strong>ആധാർ കോപ്പി + അപേക്ഷാ ഫീസ് ₹300</strong> സ്ഥാപനത്തിൽ സമർപ്പിക്കണം.</li>
+            <li>സംശയങ്ങൾക്ക് ബന്ധപ്പെടുക: <strong>+91 9048020243</strong></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="modal-footer bg-light border-0 pt-0 pb-4 px-4">
+        <button type="button" class="btn btn-outline-secondary px-4 py-2" data-bs-dismiss="modal">
+          <i class="fas fa-times me-2"></i> Back to Dashboard
+        </button>
+        <button type="button" class="btn-gold px-5 py-2" 
+                onclick="document.querySelector('#instructionsModal .btn-close').click(); showForm('applyNowForm');">
+          <i class="fas fa-arrow-right me-2"></i> Continue
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
 </body>
 </html>
