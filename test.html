@@ -289,7 +289,116 @@ function showHallTicket(student) {
 }
 
 // Paste your original generateHallticketHtml function here ↓↓↓
-// (copy from your main admission page)
+function generateHallticketHtml(data) {
+    const { collegeInfo, studentData } = data;
+    const hasValidPhoto = studentData.photoUrl && (
+      studentData.photoUrl.includes('drive.google.com') ||
+      studentData.photoUrl.startsWith('data:image') ||
+      studentData.photoUrl.startsWith('http')
+    );
+
+    const formattedDob = formatDateForDisplay(studentData.dob);
+
+    const qrText = `Name: ${studentData.studentName || studentData.name || ''}, ` +
+                   `Register No: ${studentData.registerNo || studentData.applicationId || ''}, ` +
+                   `DoB: ${formattedDob}, Exam Date: ${CONFIG.EXAM_DATE_DDMMYYYY}, Venue: ${CONFIG.EXAM_VENUE}`;
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
+
+    return `
+      <div class="document-container">
+        <div class="document-watermark">HALL TICKET</div>
+        <div class="document-header">
+          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Crect width=\'120\' height=\'120\' fill=\'%230a5c36\'/%3E%3Ctext x=\'60\' y=\'60\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23c19a3f\' dy=\'.3em\'%3EAMCT%3C/text%3E%3C/svg%3E';">
+          <div class="document-college-info">
+            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+            <div class="document-title">Entrance Exam Hall Ticket</div>
+          </div>
+        </div>
+        <div class="document-content">
+          ${hasValidPhoto ? `
+            <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
+              <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+                <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo" onerror="this.style.display='none'">
+              </div>
+              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
+            </div>
+          ` : ''}
+          <div class="student-info-box" style="margin-right: ${hasValidPhoto ? '150px' : '0'};">
+            <div class="info-grid1">
+              ${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study'].map((label, i) => `
+                <div class="info-item">
+                  <span class="info-label">${label}:</span>
+                  <span class="info-value">${escapeHtml([studentData.registerNo || studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', formattedDob, studentData.age || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.houseName || 'N/A', studentData.address || 'N/A', studentData.previousStudy || 'N/A'][i])}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="exam-wrapper">
+            <div class="exam-details-box">
+              <div class="exam-title">Examination Details</div>
+              <div class="exam-info-grid">
+                ${['Exam Date','Reporting Time','Exam Duration','Venue'].map((label, i) => `
+                  <div class="exam-item">
+                    <div class="exam-label">${label}</div>
+                    <div class="exam-value">${[CONFIG.EXAM_DATE_DDMMYYYY, CONFIG.EXAM_REPORTING_TIME, CONFIG.EXAM_DURATION, CONFIG.EXAM_VENUE][i]}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
+              <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
+                <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code" onerror="this.style.display='none'">
+              </div>
+              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div>
+            </div>
+          </div>
+          <table class="signing-table">
+            <thead>
+              <tr><th>QIRA'ATH</th><th>HIFZ</th><th>SPOT</th><th>GK</th><th>MEMORY TEST</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="document-instructions">
+            <div class="document-instructions-title">Important Instructions</div>
+            <ul class="document-instructions-list">
+              <li>Bring this hall ticket to the exam center</li>
+              <li>Carry any original ID proof (Aadhaar card)</li>
+              <li>Report at the exam center 30 minutes before exam time</li>
+              <li>No electronic devices allowed inside exam hall</li>
+              <li>Only blue/black ballpoint pens are allowed</li>
+              <li>Follow all instructions given by invigilators</li>
+            </ul>
+          </div>
+        </div>
+        <div class="document-footer">
+          <p style="color:#495057;font-size:10px;margin:0;">
+            <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
+          </p>
+        </div>
+      </div>
+      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+        <button onclick="window.print()" class="btn-gold me-2">
+          <i class="fas fa-print me-2"></i> Print Hall Ticket
+        </button>
+        <button onclick="showDashboard()" class="btn-outline-gold">
+          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+        </button>
+      </div>
+    `;
+  }
+
 
 function generateHallticketHtml(data) {
   const { studentData } = data;
