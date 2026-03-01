@@ -280,7 +280,7 @@
       object-fit: cover;
     }
 
-    /* HALF CIRCLE DESIGN - UPDATED */
+    /* HALF CIRCLE DESIGN - UPDATED: TOP OF HALF CIRCLE (SEMICIRCLE) */
     .photo-container {
       position: absolute;
       width: 58%;
@@ -310,29 +310,29 @@
       object-position: center;
     }
 
-    /* HALF CIRCLE (SEMICIRCLE) BELOW THE PHOTO */
+    /* HALF CIRCLE (SEMICIRCLE) NOW AT THE TOP */
     .half-circle {
       position: absolute;
-      bottom: -15px;
+      top: 15px;        /* changed from bottom: -15px to top: -15px */
       left: 50%;
       transform: translateX(-50%);
       width: 75%;
       height: 45px;
       background: linear-gradient(180deg, rgba(255,215,0,0.95), rgba(255,185,0,0.98));
-      border-radius: 0 0 100px 100px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border-radius: 100px 100px 0 0;  /* flipped to curve at top */
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.2); /* adjusted shadow direction */
       z-index: 3;
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;   /* align text to top */
       justify-content: center;
-      padding-bottom: 6px;
+      padding-top: 6px;
       color: var(--primary-dark);
       font-weight: 800;
       font-size: 1.2rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       border: 2px solid white;
-      border-top: none;
+      border-bottom: none;       /* no border at bottom */
       backdrop-filter: blur(2px);
     }
 
@@ -342,10 +342,10 @@
       opacity: 0.9;
     }
 
-    /* Alternative decorative elements */
+    /* Glow effect now above */
     .half-circle-glow {
       position: absolute;
-      bottom: -25px;
+      top: -25px;          /* adjusted from bottom to top */
       left: 50%;
       transform: translateX(-50%);
       width: 85%;
@@ -582,12 +582,12 @@
       <div class="poster-container" id="posterPreviewContainer">
         <img id="finalPosterImg" class="template-image" alt="Final Poster">
         
-        <!-- Photo with Half Circle Below -->
+        <!-- Photo with Half Circle Above -->
         <div class="photo-container">
           <div class="user-photo">
             <img id="finalUserPhoto" alt="Your Photo">
           </div>
-          <!-- Half Circle Below Photo -->
+          <!-- Half Circle Above Photo (top semicircle) -->
           <div class="half-circle"></div>
           <div class="half-circle-glow"></div>
         </div>
@@ -780,27 +780,27 @@
           ctx.strokeStyle = 'white';
           ctx.stroke();
 
-          // Draw HALF CIRCLE below the photo (semicircle)
-          const halfCircleY = y + photoSize - 15; // Position at bottom of photo
-          const halfCircleWidth = photoSize * 0.75;
-          const halfCircleHeight = 50;
+          // Draw HALF CIRCLE ABOVE the photo (top semicircle) - UPDATED
+          const halfCircleY = y + 30; // Position at top of photo
+          const halfCircleWidth = photoSize * 1.8;
+          const halfCircleHeight = 180;
 
-          // Draw gold half circle
+          // Draw gold half circle (flipped upward)
           ctx.save();
           ctx.beginPath();
-          ctx.moveTo(x + (photoSize - halfCircleWidth)/2, halfCircleY);
+          ctx.moveTo(x + (photoSize - halfCircleWidth)/2, halfCircleY + photoSize); // bottom left anchor
           ctx.quadraticCurveTo(
             x + photoSize/2, 
-            halfCircleY + halfCircleHeight * 2.5,
+            halfCircleY - halfCircleHeight * 0.8,  // curve upward
             x + photoSize - (photoSize - halfCircleWidth)/2, 
-            halfCircleY
+            halfCircleY + photoSize
           );
           ctx.closePath();
           
           // Fill with gradient
           const gradient = ctx.createLinearGradient(
-            x + photoSize/2, halfCircleY,
-            x + photoSize/2, halfCircleY + halfCircleHeight * 2
+            x + photoSize/2, halfCircleY + photoSize - 40,
+            x + photoSize/2, halfCircleY + 40
           );
           gradient.addColorStop(0, '#FFD700');
           gradient.addColorStop(1, '#FFB800');
@@ -810,16 +810,15 @@
           
           // Add white border
           ctx.strokeStyle = 'white';
-          ctx.lineWidth = 3;
+          ctx.lineWidth = 4;
           ctx.stroke();
 
           // Add text on half circle
-          ctx.font = 'bold 32px "Poppins"';
+          ctx.font = 'bold 40px "Poppins"';
           ctx.fillStyle = '#1a3c6e';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText('★ 100 ★', x + photoSize/2, halfCircleY + halfCircleHeight/1.5);
-          
+          ctx.fillText('★ 100 ★', x + photoSize/2, halfCircleY + photoSize/2.5 + 20);
           ctx.restore();
 
           const finalUrl = canvas.toDataURL('image/jpeg', 0.95);
