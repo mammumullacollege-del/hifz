@@ -3,122 +3,587 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ഇസ്ലാമിക് അനന്തരാവകാശ കാൽക്കുലേറ്റർ</title>
+<title>ഇസ്ലാമിക് അനന്തരാവകാശ കാൽക്കുലേറ്റർ | Islamic Inheritance</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+
   :root{
-    --green:#1C5E55; --green2:#2e7d6b; --gold:#c9a227;
-    --bg:#f8f8f7; --ink:#1f2421; --muted:#5b6660; --line:#d8ded9;
+    --green:#1A5D4E;
+    --green-dark:#0D3B32;
+    --green-light:#2E7D6B;
+    --gold:#B8972E;
+    --gold-light:#D4AF4A;
+    --bg:#F5F7F5;
+    --ink:#1E2925;
+    --muted:#5E6D66;
+    --line:#DCE3DE;
+    --white:#FFFFFF;
+    --shadow:0 4px 20px rgba(0,0,0,0.06);
+    --shadow-lg:0 12px 40px rgba(0,0,0,0.1);
+    --radius:16px;
+    --radius-sm:10px;
   }
-  *{box-sizing:border-box}
+
+  *{box-sizing:border-box; margin:0; padding:0}
+
   body{
-    margin:0; font-family:"Noto Sans Malayalam","Manjari","Meera",system-ui,sans-serif;
-    background:var(--bg); color:var(--ink); line-height:1.6;
+    font-family:"Noto Sans Malayalam","Manjari","Meera",system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+    min-height:100vh;
+    padding:20px 0 60px;
   }
-  .wrap{max-width:980px; margin:0 auto; padding:18px}
+
+  /* ── Decorative header pattern ── */
+  .header-pattern{
+    position:fixed;
+    top:0; left:0; right:0;
+    height:6px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold),var(--green),var(--gold));
+    z-index:100;
+  }
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  /* ── Header ── */
   header{
-    background:linear-gradient(135deg,var(--green),#0f3f38);
-    color:#fff; border-radius:14px; padding:22px 26px; margin-bottom:18px;
+    background:linear-gradient(145deg,var(--green-dark) 0%,var(--green) 50%,#1E7060 100%);
+    color:var(--white);
+    border-radius:var(--radius);
+    padding:32px 36px;
+    margin-bottom:24px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow-lg);
   }
-  header h1{margin:0 0 4px; font-size:1.55rem}
-  header p{margin:0; opacity:.85; font-size:.95rem}
-  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:16px}
-  table{width:100%; border-collapse:collapse}
+
+  header::before{
+    content:'☪';
+    position:absolute;
+    right:28px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:5rem;
+    opacity:0.08;
+    font-family:'Amiri',serif;
+    line-height:1;
+  }
+
+  header::after{
+    content:'';
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:3px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+  }
+
+  header h1{
+    font-size:1.7rem;
+    font-weight:700;
+    letter-spacing:0.3px;
+    margin-bottom:6px;
+    position:relative;
+    z-index:1;
+  }
+
+  header p{
+    font-size:0.95rem;
+    opacity:0.8;
+    font-weight:400;
+    position:relative;
+    z-index:1;
+    letter-spacing:0.2px;
+  }
+
+  /* ── Cards ── */
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:var(--shadow);
+    transition:box-shadow 0.3s ease;
+  }
+
+  .card:hover{
+    box-shadow:0 6px 24px rgba(0,0,0,0.09);
+  }
+
+  .card h3{
+    font-size:1.1rem;
+    font-weight:700;
+    color:var(--green-dark);
+    margin-bottom:16px;
+    padding-bottom:12px;
+    border-bottom:2px solid var(--gold);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .card h3::before{
+    content:'';
+    display:inline-block;
+    width:4px;
+    height:22px;
+    background:var(--gold);
+    border-radius:2px;
+    flex-shrink:0;
+  }
+
+  /* ── Table ── */
+  .table-wrap{
+    overflow-x:auto;
+    border-radius:var(--radius-sm);
+    border:1px solid var(--line);
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.92rem;
+  }
+
   thead th{
-    background:var(--green); color:#fff; text-align:right; padding:10px 12px;
-    font-size:.92rem; position:sticky; top:0;
+    background:linear-gradient(180deg,var(--green),var(--green-dark));
+    color:var(--white);
+    text-align:left;
+    padding:12px 16px;
+    font-weight:600;
+    font-size:0.88rem;
+    letter-spacing:0.3px;
+    position:sticky;
+    top:0;
+    z-index:2;
+    white-space:nowrap;
   }
-  thead th:first-child{text-align:left}
-  tbody tr:nth-child(even){background:#f3f6f4}
-  tbody td{padding:8px 12px; border-bottom:1px solid var(--line); font-size:.92rem}
-  tbody td:first-child{font-weight:600}
+
+  thead th:first-child{border-radius:var(--radius-sm) 0 0 0}
+  thead th:last-child{border-radius:0 var(--radius-sm) 0 0}
+
+  tbody tr{
+    transition:background 0.2s;
+    border-bottom:1px solid var(--line);
+  }
+
+  tbody tr:last-child{border-bottom:none}
+
+  tbody tr:nth-child(even){background:#F8FAF9}
+
+  tbody tr:hover{background:#EDF3F0}
+
+  tbody td{
+    padding:10px 16px;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+  }
+
+  tbody tr:last-child td{border-bottom:none}
+
+  tbody td:first-child{
+    font-weight:600;
+    color:var(--green-dark);
+    font-size:0.9rem;
+  }
+
+  /* ── Inputs ── */
   input[type=number]{
-    width:90px; padding:7px 9px; border:1px solid var(--line);
-    border-radius:8px; text-align:center; font-size:1rem;
+    width:80px;
+    padding:8px 10px;
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    text-align:center;
+    font-size:0.95rem;
+    font-weight:600;
+    color:var(--green-dark);
+    background:var(--white);
+    transition:all 0.2s ease;
+    font-family:inherit;
   }
-  input[type=number]:focus{outline:2px solid var(--green2); border-color:var(--green2)}
-  .qual{color:var(--muted); font-size:.82rem}
+
+  input[type=number]:focus{
+    outline:none;
+    border-color:var(--green-light);
+    box-shadow:0 0 0 3px rgba(46,125,107,0.15);
+    background:#F0F7F4;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button{
+    opacity:0.5;
+  }
+
+  .qual{
+    color:var(--muted);
+    font-size:0.8rem;
+    line-height:1.5;
+    max-width:320px;
+  }
+
+  /* ── Estate input ── */
+  .estate-label{
+    display:block;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--green-dark);
+    margin-bottom:10px;
+  }
+
+  .estate-input-wrap{
+    position:relative;
+    max-width:360px;
+  }
+
+  .estate-input-wrap .currency-symbol{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+    font-weight:600;
+    font-size:1rem;
+    pointer-events:none;
+  }
+
+  #estate{
+    width:100%;
+    padding:12px 14px 12px 36px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    font-size:1rem;
+    font-weight:600;
+    color:var(--green-dark);
+    background:var(--white);
+    transition:all 0.2s ease;
+    font-family:inherit;
+  }
+
+  #estate:focus{
+    outline:none;
+    border-color:var(--green-light);
+    box-shadow:0 0 0 3px rgba(46,125,107,0.15);
+    background:#F0F7F4;
+  }
+
+  /* ── Buttons ── */
   .btn{
-    display:inline-block; width:100%; padding:14px; border:0; border-radius:10px;
-    background:var(--green); color:#fff; font-size:1.05rem; font-weight:700;
-    cursor:pointer; transition:.2s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    padding:15px 20px;
+    border:0;
+    border-radius:12px;
+    font-size:1.05rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:all 0.25s ease;
+    font-family:inherit;
+    letter-spacing:0.3px;
+    position:relative;
+    overflow:hidden;
   }
-  .btn:hover{background:var(--green2)}
-  .btn.gold{background:var(--gold); color:#1a1a1a}
-  .btn.gold:hover{filter:brightness(1.08)}
-  #result{display:none}
-  .share-row{display:flex; justify-content:space-between; padding:7px 4px; border-bottom:1px dashed var(--line)}
-  .share-row:last-child{border:0}
-  .share-name{font-weight:600}
-  .share-val{font-variant-numeric:tabular-nums; color:var(--green)}
-  .note{background:#fff8e6; border-right:4px solid var(--gold); padding:12px 16px; border-radius:8px; font-size:.9rem}
-  .note ul{margin:6px 0 0; padding-right:18px}
-  .err{background:#ffecec; border-right-color:#c0392b; color:#8b1a1a}
-  @media(max-width:640px){
+
+  .btn:active{transform:scale(0.985)}
+
+  .btn.gold{
+    background:linear-gradient(145deg,var(--gold),#A8851F);
+    color:var(--white);
+    box-shadow:0 4px 14px rgba(184,151,46,0.35);
+  }
+
+  .btn.gold:hover{
+    background:linear-gradient(145deg,var(--gold-light),var(--gold));
+    box-shadow:0 6px 20px rgba(184,151,46,0.45);
+    transform:translateY(-1px);
+  }
+
+  .btn.primary{
+    background:linear-gradient(145deg,var(--green),var(--green-dark));
+    color:var(--white);
+    box-shadow:0 4px 14px rgba(26,93,78,0.3);
+  }
+
+  .btn.primary:hover{
+    background:linear-gradient(145deg,var(--green-light),var(--green));
+    box-shadow:0 6px 20px rgba(26,93,78,0.4);
+    transform:translateY(-1px);
+  }
+
+  .btn.outline{
+    background:transparent;
+    color:var(--green);
+    border:2px solid var(--green);
+    box-shadow:none;
+  }
+
+  .btn.outline:hover{
+    background:var(--green);
+    color:var(--white);
+  }
+
+  /* ── Result ── */
+  #result{
+    display:none;
+    border-top:3px solid var(--gold);
+  }
+
+  #result h3{
+    color:var(--green-dark);
+  }
+
+  .share-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 8px;
+    border-bottom:1px dashed var(--line);
+    transition:background 0.2s;
+    border-radius:6px;
+  }
+
+  .share-row:hover{background:#F5F9F7}
+
+  .share-row:last-child{border-bottom:none}
+
+  .share-name{
+    font-weight:600;
+    color:var(--ink);
+    font-size:0.95rem;
+  }
+
+  .share-val{
+    font-variant-numeric:tabular-nums;
+    color:var(--green);
+    font-weight:700;
+    font-size:0.95rem;
+    text-align:right;
+  }
+
+  .share-total{
+    border-top:2px solid var(--gold);
+    margin-top:4px;
+    padding-top:12px;
+    font-weight:700;
+    font-size:1rem;
+  }
+
+  .share-total .share-name{color:var(--green-dark)}
+  .share-total .share-val{color:var(--gold)}
+
+  /* ── Note / Error ── */
+  .note{
+    background:#FFFCF2;
+    border-right:4px solid var(--gold);
+    padding:16px 20px;
+    border-radius:var(--radius-sm);
+    font-size:0.9rem;
+    line-height:1.8;
+    color:var(--ink);
+  }
+
+  .note strong{
+    color:var(--green-dark);
+    display:block;
+    margin-bottom:6px;
+  }
+
+  .note ul{
+    margin:6px 0 0;
+    padding-right:20px;
+    padding-left:0;
+    list-style-position:inside;
+  }
+
+  .note li{
+    margin-bottom:4px;
+    padding-left:4px;
+  }
+
+  .note li::marker{color:var(--gold)}
+
+  .err{
+    background:#FFF0F0;
+    border-right-color:#C0392B;
+    color:#8B1A1A;
+    border-right-width:4px;
+  }
+
+  .err strong{color:#C0392B}
+
+  /* ── Divider ornament ── */
+  .ornament{
+    text-align:center;
+    color:var(--gold);
+    font-size:1.2rem;
+    margin:20px 0 10px;
+    letter-spacing:8px;
+    opacity:0.5;
+    user-select:none;
+  }
+
+  /* ── Footer ── */
+  .footer{
+    text-align:center;
+    font-size:0.8rem;
+    color:var(--muted);
+    margin-top:30px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    line-height:1.8;
+  }
+
+  .footer .arabic{
+    font-family:'Amiri',serif;
+    font-size:1.3rem;
+    color:var(--green);
+    display:block;
+    margin-bottom:4px;
+  }
+
+  /* ── Fade-in animation ── */
+  @keyframes fadeInUp{
+    from{opacity:0; transform:translateY(12px)}
+    to{opacity:1; transform:translateY(0)}
+  }
+
+  .card{animation:fadeInUp 0.4s ease both}
+  .card:nth-child(2){animation-delay:0.05s}
+  .card:nth-child(3){animation-delay:0.1s}
+
+  #result.show{animation:fadeInUp 0.4s ease both}
+
+  /* ── Responsive ── */
+  @media(max-width:720px){
+    .wrap{padding:0 12px}
+    header{padding:24px 20px}
+    header h1{font-size:1.35rem}
+    header::before{font-size:3.5rem; right:16px}
+    .card{padding:18px}
     .qual{display:none}
-    input[type=number]{width:70px}
-    thead th{font-size:.82rem}
+    input[type=number]{width:64px; padding:7px 8px}
+    thead th{padding:10px 10px; font-size:0.8rem}
+    tbody td{padding:8px 10px; font-size:0.85rem}
+    tbody td:first-child{font-size:0.82rem}
+    .estate-input-wrap{max-width:100%}
+    .btn{padding:13px 16px; font-size:0.95rem}
+  }
+
+  @media(max-width:480px){
+    body{padding-top:12px}
+    header{padding:20px 16px; border-radius:12px}
+    header h1{font-size:1.15rem}
+    header p{font-size:0.82rem}
+    .card{padding:14px; border-radius:12px}
+    input[type=number]{width:52px; padding:6px; font-size:0.85rem}
+    .share-name{font-size:0.88rem}
+    .share-val{font-size:0.88rem}
+  }
+
+  /* ── Print ── */
+  @media print{
+    body{background:#fff; padding:0}
+    .header-pattern,.btn,.footer .arabic{display:none}
+    header{box-shadow:none; background:var(--green-dark) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .card{box-shadow:none; border:1px solid #ccc}
   }
 </style>
 </head>
 <body>
+
+<div class="header-pattern"></div>
+
 <div class="wrap">
 
   <header>
     <h1>ഇസ്ലാമിക് അനന്തരാവകാശ കാൽക്കുലേറ്റർ</h1>
-    <p>ഖുർആൻ & സുന്നത്തിന്റെ അടിസ്ഥാനത്തിൽ (ഫരൈദ് നിയമം)</p>
+    <p>ഖുർആൻ & സുന്നത്തിന്റെ അടിസ്ഥാനത്തിൽ (ഫരൈദ് നിയമം) — Islamic Inheritance Calculator</p>
   </header>
 
+  <!-- ── Heir Input Table ── -->
   <div class="card">
-    <h3 style="margin-top:0">അവശേഷിക്കുന്ന അവകാശികൾ രേഖപ്പെടുത്തുക</h3>
-    <table id="heirTable">
-      <thead>
-        <tr>
-          <th>അവകാശിയുടെ പേര്</th>
-          <th>എണ്ണം</th>
-          <th>യോഗ്യത</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- താഴെ JS-ൽ ഡാറ്റ ലോഡ് ചെയ്യും -->
-      </tbody>
-    </table>
-  </div>
-
-  <div class="card">
-    <label style="display:block; font-weight:600; margin-bottom:8px">
-      മൊത്തം ആസ്തി (₹) — ഓപ്ഷണൽ (ശതമാനത്തിനൊപ്പം തുകയും കാണിക്കും)
-    </label>
-    <input id="estate" type="number" min="0" step="0.01"
-           placeholder="ഉദാ: 1000000" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px">
-  </div>
-
-  <button class="btn gold" id="calcBtn">അനന്തരാവകാശം കണക്കാക്കുക</button>
-
-  <div id="errBox" class="card note err" style="display:none"></div>
-
-  <div id="result" class="card">
-    <h3 style="margin-top:0">വിതരണ ഫലം</h3>
-    <div id="shareList"></div>
-    <div style="margin-top:16px">
-      <button class="btn" id="resetBtn">പുതുതായി തുടങ്ങുക</button>
+    <h3>അവശേഷിക്കുന്ന അവകാശികൾ രേഖപ്പെടുത്തുക</h3>
+    <div class="table-wrap">
+      <table id="heirTable">
+        <thead>
+          <tr>
+            <th>അവകാശിയുടെ പേര്</th>
+            <th>എണ്ണം</th>
+            <th>യോഗ്യത / വിശദീകരണം</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS ലോഡ് -->
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="note">
-    <strong>ശ്രദ്ധിക്കുക:</strong>
+  <!-- ── Estate Input ── -->
+  <div class="card">
+    <label class="estate-label" for="estate">
+      മൊത്തം ആസ്തി (₹) — ഓപ്ഷണൽ
+    </label>
+    <div class="estate-input-wrap">
+      <span class="currency-symbol">₹</span>
+      <input id="estate" type="number" min="0" step="0.01" placeholder="ഉദാ: 10,00,000">
+    </div>
+    <p style="font-size:0.8rem; color:var(--muted); margin-top:8px;">
+      തുക നൽകിയാൽ ശതമാനത്തിനൊപ്പം രൂപയിലും വിഹിതം കാണിക്കും.
+    </p>
+  </div>
+
+  <!-- ── Calculate Button ── -->
+  <button class="btn gold" id="calcBtn">
+    <span>⚖️</span> അനന്തരാവകാശം കണക്കാക്കുക
+  </button>
+
+  <!-- ── Error Box ── -->
+  <div id="errBox" class="card note err" style="display:none; margin-top:16px;"></div>
+
+  <!-- ── Result ── -->
+  <div id="result" class="card" style="margin-top:20px;">
+    <h3>വിതരണ ഫലം</h3>
+    <div id="shareList"></div>
+    <div style="margin-top:20px;">
+      <button class="btn primary" id="resetBtn">↺ പുതുതായി തുടങ്ങുക</button>
+    </div>
+  </div>
+
+  <!-- ── Important Notes ── -->
+  <div class="note" style="margin-top:20px;">
+    <strong>⚠️ ശ്രദ്ധിക്കുക:</strong>
     <ul>
       <li>മുസ്ലിം ഇതര അവകാശികൾക്ക് അനന്തരാവകാശത്തിന് അർഹതയില്ല; എന്നാൽ വസ്വിയ്യത്ത് (ബീഖത്ത്) ലഭിക്കാം.</li>
-      <li>ഭാര്യ ഗർഭിണിയാണെങ്കിൽ ജനിക്കുന്ന കുഞ്ഞിനും വിഹിതം ലഭിക്കും.</li>
+      <li>ഭാര്യ ഗർഭിണിയാണെങ്കിൽ ജനിക്കുന്ന കുഞ്ഞിനും വിഹിതം ലഭിക്കും (ജനനം വരെ കണക്കിൽ ഉൾപ്പെടുത്തണം).</li>
       <li>പട്ടികയിൽ ഇല്ലാത്ത ബന്ധുക്കൾ സ്റ്റാൻഡേർഡ് അവകാശികളിൽ ഉൾപ്പെടുന്നില്ല.</li>
+      <li>ഈ കാൽക്കുലേറ്റർ ഒരു സഹായ മാർഗ്ഗം മാത്രമാണ്; കൃത്യമായ വിതരണത്തിന് യോഗ്യതയുള്ള ഒരു ഇസ്ലാമിക് പണ്ഡിതനെ സമീപിക്കുക.</li>
     </ul>
   </div>
+
+  <!-- ── Ornament ── -->
+  <div class="ornament">۞</div>
+
+  <!-- ── Footer ── -->
+  <div class="footer">
+    <span class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+    ഇസ്ലാമിക് അനന്തരാവകാശ കാൽക്കുലേറ്റർ — ഖുർആൻ (4:11-12, 4:176) & സുന്നത്തിന്റെ അടിസ്ഥാനത്തിൽ
+  </div>
+
 </div>
 
 <script>
-/* ====== അവകാശികളുടെ ഡാറ്റ (id, മലയാളം പേര്, യോഗ്യത) ====== */
+/* ====== അവകാശികളുടെ ഡാറ്റ ====== */
 const HEIRS = [
   {id:1,  ml:"ഭർത്താവ്",              q:"നിയമപരമായി വിവാഹിതനായിരിക്കണം. രഹസ്യ/രേഖപ്പെടുത്താത്ത വിവാഹം അസ്വീകാര്യം."},
-  {id:2,  ml:"ഭാര്യമാർ",              q:"ഒന്നിലധികം ഭാര്യമാർക്ക് അർഹതയുണ്ട്. ഇദ്ദ (ഇദ്ദഃ) കാലയളവ് പൂർത്തിയാകാത്ത വിവാഹമോചിതയും അർഹയാണ്."},
+  {id:2,  ml:"ഭാര്യമാർ",              q:"ഒന്നിലധികം ഭാര്യമാർക്ക് അർഹതയുണ്ട്. ഇദ്ദഃ കാലയളവ് പൂർത്തിയാകാത്ത വിവാഹമോചിതയും അർഹയാണ്."},
   {id:3,  ml:"മക്കൾ (ആൺ)",           q:"ദത്തെടുത്ത മകൻ, ഭർത്താവിന്റെ മകൻ, വ്യഭിചാരജനിത മകൻ — ഇവർക്ക് അർഹതയില്ല."},
   {id:4,  ml:"മക്കൾ (പെൺ)",          q:"ദത്തെടുത്ത മകൾ, ഭർത്താവിന്റെ മകൾ, വ്യഭിചാരജനിത മകൾ — ഇവർക്ക് അർഹതയില്ല."},
   {id:5,  ml:"ചെറുമക്കൾ (ആൺ)",       q:"മകന്റെ മക്കൾ മാത്രം. മകളുടെ മക്കൾക്ക് അർഹതയില്ല."},
@@ -153,20 +618,17 @@ const tbody = document.querySelector("#heirTable tbody");
 HEIRS.forEach(h=>{
   const tr = document.createElement("tr");
   tr.innerHTML = `
-    <td>${h.id}) ${h.ml}</td>
-    <td><input type="number" min="0" step="1" id="h${h.id}" value="0"></td>
+    <td>${h.id}. ${h.ml}</td>
+    <td><input type="number" min="0" step="1" id="h${h.id}" value="0" aria-label="${h.ml} എണ്ണം"></td>
     <td class="qual">${h.q}</td>`;
   tbody.appendChild(tr);
 });
 
 /* ====== ഫരൈദ് കണക്കുകൂട്ടൽ എൻജിൻ ====== */
 function computeShares(c){
-  // c = { husband, wives, sons, daughters, grandsons, granddaughters, father, mother,
-  //       grandfather, pgm, mgm, fullBro, fullSis, patBro, patSis, matBro, matSis, ... }
   const has = id => (c[id]||0) > 0;
   const n   = id => c[id]||0;
 
-  // പ്രധാന ഡിറ്റർമിനന്റുകൾ
   const hasSon   = has(3);
   const hasDau   = has(4);
   const hasFather= has(7);
@@ -180,8 +642,8 @@ function computeShares(c){
   const hasAnyChild = hasSon || hasDau || hasGrdSon || hasGrdDau;
   const hasMaleDesc  = hasSon || hasGrdSon;
 
-  let shares = {};      // id -> ഭിന്നസംഖ്യ (fraction as [num,den])
-  let residual = 0;     // അസബ ശേഷിക്കുന്ന ഭാഗം
+  let shares = {};
+  let residual = 0;
 
   // --- ഭർത്താവ് ---
   if (has(1)){
@@ -191,11 +653,11 @@ function computeShares(c){
   if (has(2)){
     shares[2] = hasAnyChild ? [1,8] : [1,4];
   }
-  // --- പിതാവ് (ഫർദ് + അസബ) ---
+  // --- പിതാവ് ---
   if (hasFather){
     if (hasMaleDesc) shares[7] = [1,6];
-    else if (hasDau) shares[7] = [1,6];   // + അസബ ബാക്കി
-    else { shares[7] = [1,6]; residual += 1; } // അസബ
+    else if (hasDau) shares[7] = [1,6];
+    else { shares[7] = [1,6]; residual += 1; }
   }
   // --- മാതാവ് ---
   if (hasMother){
@@ -209,20 +671,17 @@ function computeShares(c){
   // --- മുത്തശ്ശിമാർ ---
   if (has(10) && !hasMother) shares[10] = [1,6];
   if (has(11) && !hasMother) shares[11] = [1,6];
-  // രണ്ട് മുത്തശ്ശിമാരും ഉണ്ടെങ്കിൽ 1/6 പങ്കിടും
   if (shares[10] && shares[11]) { shares[10]=[1,12]; shares[11]=[1,12]; }
 
   // --- മക്കൾ ---
   if (hasSon){
-    // sons + daughters = 2:1 (അസബ)
     residual += 1;
   } else if (hasDau){
     if (n(4)===1) shares[4]=[1,2];
-    else shares[4]=[2,3];     // ഒന്നിലധികം പെൺമക്കൾ
-    // പിതാവിന് 1/6 കഴിഞ്ഞ് ബാക്കി പെൺമക്കൾക്ക് (അസബ)
+    else shares[4]=[2,3];
   }
 
-  // --- ചെറുമക്കൾ (മകൻ/മകൾ ഇല്ലെങ്കിൽ) ---
+  // --- ചെറുമക്കൾ ---
   if (!hasSon && !hasDau){
     if (hasGrdSon){ residual += 1; }
     else if (hasGrdDau){
@@ -231,11 +690,11 @@ function computeShares(c){
     }
   }
 
-  // --- സഹോദരങ്ങൾ (മക്കളോ പിതാവോ മുത്തച്ഛനോ ഇല്ലെങ്കിൽ) ---
+  // --- സഹോദരങ്ങൾ ---
   const noAscDesc = !hasAnyChild && !hasFather && !hasGrandfather;
   if (noAscDesc){
     if (hasFullBro || hasFullSis){
-      if (hasFullBro) residual += 1;              // അസബ 2:1
+      if (hasFullBro) residual += 1;
       else if (n(13)===1) shares[13]=[1,2];
       else shares[13]=[2,3];
     } else if (hasPatBro || hasPatSis){
@@ -243,11 +702,9 @@ function computeShares(c){
       else if (n(15)===1) shares[15]=[1,2];
       else shares[15]=[2,3];
     }
-    // മാതൃപക്ഷ സഹോദരങ്ങൾ — എപ്പോഴും ഫർദ്
     const matCount = n(16)+n(17);
     if (matCount>0){
       const total = (matCount===1) ? [1,6] : [1,3];
-      // പങ്കിടൽ: ആൺ/പെൺ തുല്യം
       shares[16] = [total[0]*n(16), total[1]*matCount];
       shares[17] = [total[0]*n(17), total[1]*matCount];
     }
@@ -263,17 +720,14 @@ function render(){
 
   const {shares, residual, c} = computeShares(inputs);
 
-  // ഭിന്നസംഖ്യകൾ കൂട്ടുക
   function addFrac(a,b){ return [a[0]*b[1]+b[0]*a[1], a[1]*b[1]]; }
   function gcd(a,b){ return b?gcd(b,a%b):a; }
   function reduce(f){ const g=gcd(Math.abs(f[0]),Math.abs(f[1]))||1; return [f[0]/g, f[1]/g]; }
 
   let total = [0,1];
   Object.values(shares).forEach(f=> total = addFrac(total, f));
-  // residual അസബ → ബാക്കി അവകാശികൾക്ക്
-  let asabTotal = [0,1];
+
   if (residual>0){
-    // അസബ അവകാശികൾ: മക്കൾ (3,4), ചെറുമക്കൾ (5,6), സഹോദരങ്ങൾ (12-15), പിതാവ് (7)
     let asabHeirs = [];
     if (c[3]){ asabHeirs.push([3,2],[4,1]); }
     else if (c[5]){ asabHeirs.push([5,2],[6,1]); }
@@ -282,24 +736,20 @@ function render(){
     else if (c[14]){ asabHeirs.push([14,2],[15,1]); }
 
     if (asabHeirs.length){
-      // 2:1 ഭാരം
       let weight = 0;
       asabHeirs.forEach(([id,w])=>{ weight += (c[id]||0)*w; });
       asabHeirs.forEach(([id,w])=>{
         const cnt = c[id]||0;
         if (!cnt) return;
-        // 1 യൂണിറ്റ് = 1/weight
         const f = [w*cnt, weight];
         shares[id] = shares[id] ? addFrac(shares[id], f) : f;
       });
     }
   }
 
-  // മൊത്തം വീണ്ടും കണക്കാക്കുക
   total = [0,1];
   Object.values(shares).forEach(f=> total = addFrac(total, f));
 
-  // ശതമാനമാക്കി മാറ്റുക
   const estate = parseFloat(document.getElementById("estate").value)||0;
   const list = [];
   for (const id in shares){
@@ -314,16 +764,19 @@ function render(){
 
   const box = document.getElementById("shareList");
   const err = document.getElementById("errBox");
+  const resultDiv = document.getElementById("result");
   box.innerHTML = "";
 
   if (!list.length){
     err.style.display="block";
-    err.innerHTML = "ഒരു അവകാശിയും നൽകിയിട്ടില്ല. ദയവായി എണ്ണം രേഖപ്പെടുത്തുക.";
-    document.getElementById("result").style.display="none";
+    err.innerHTML = "<strong>⚠️ ശ്രദ്ധിക്കുക:</strong> ഒരു അവകാശിയും നൽകിയിട്ടില്ല. ദയവായി എണ്ണം രേഖപ്പെടുത്തുക.";
+    resultDiv.style.display="none";
+    resultDiv.classList.remove("show");
     return;
   }
   err.style.display="none";
-  document.getElementById("result").style.display="block";
+  resultDiv.style.display="block";
+  resultDiv.classList.add("show");
 
   let sum=0;
   list.forEach(item=>{
@@ -336,18 +789,34 @@ function render(){
       }</span>`;
     box.appendChild(div);
   });
+
   const totalDiv = document.createElement("div");
-  totalDiv.className="share-row";
-  totalDiv.style.fontWeight="700";
-  totalDiv.innerHTML = `<span>ആകെ</span><span>${sum.toFixed(2)}%</span>`;
+  totalDiv.className="share-row share-total";
+  totalDiv.innerHTML = `<span class="share-name">ആകെ</span><span class="share-val">${sum.toFixed(2)}%</span>`;
   box.appendChild(totalDiv);
+
+  // Scroll to result
+  setTimeout(()=>{
+    resultDiv.scrollIntoView({behavior:"smooth", block:"start"});
+  }, 100);
 }
 
+/* ====== Event Listeners ====== */
 document.getElementById("calcBtn").addEventListener("click", render);
+
 document.getElementById("resetBtn").addEventListener("click", ()=>{
   HEIRS.forEach(h=> document.getElementById("h"+h.id).value=0);
   document.getElementById("estate").value="";
-  document.getElementById("result").style.display="none";
+  const resultDiv = document.getElementById("result");
+  resultDiv.style.display="none";
+  resultDiv.classList.remove("show");
+  document.getElementById("errBox").style.display="none";
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+// Enter key support
+document.getElementById("estate").addEventListener("keydown", e=>{
+  if (e.key==="Enter") render();
 });
 </script>
 </body>
