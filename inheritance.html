@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ഇസ്ലാമിക് അനന്തരാവകാശ കാൽക്കുലേറ്റർ</title>
+<style>
+  :root{
+    --green:#1C5E55; --green2:#2e7d6b; --gold:#c9a227;
+    --bg:#f8f8f7; --ink:#1f2421; --muted:#5b6660; --line:#d8ded9;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:"Noto Sans Malayalam","Manjari","Meera",system-ui,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:18px}
+  header{
+    background:linear-gradient(135deg,var(--green),#0f3f38);
+    color:#fff; border-radius:14px; padding:22px 26px; margin-bottom:18px;
+  }
+  header h1{margin:0 0 4px; font-size:1.55rem}
+  header p{margin:0; opacity:.85; font-size:.95rem}
+  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:16px}
+  table{width:100%; border-collapse:collapse}
+  thead th{
+    background:var(--green); color:#fff; text-align:right; padding:10px 12px;
+    font-size:.92rem; position:sticky; top:0;
+  }
+  thead th:first-child{text-align:left}
+  tbody tr:nth-child(even){background:#f3f6f4}
+  tbody td{padding:8px 12px; border-bottom:1px solid var(--line); font-size:.92rem}
+  tbody td:first-child{font-weight:600}
+  input[type=number]{
+    width:90px; padding:7px 9px; border:1px solid var(--line);
+    border-radius:8px; text-align:center; font-size:1rem;
+  }
+  input[type=number]:focus{outline:2px solid var(--green2); border-color:var(--green2)}
+  .qual{color:var(--muted); font-size:.82rem}
+  .btn{
+    display:inline-block; width:100%; padding:14px; border:0; border-radius:10px;
+    background:var(--green); color:#fff; font-size:1.05rem; font-weight:700;
+    cursor:pointer; transition:.2s;
+  }
+  .btn:hover{background:var(--green2)}
+  .btn.gold{background:var(--gold); color:#1a1a1a}
+  .btn.gold:hover{filter:brightness(1.08)}
+  #result{display:none}
+  .share-row{display:flex; justify-content:space-between; padding:7px 4px; border-bottom:1px dashed var(--line)}
+  .share-row:last-child{border:0}
+  .share-name{font-weight:600}
+  .share-val{font-variant-numeric:tabular-nums; color:var(--green)}
+  .note{background:#fff8e6; border-right:4px solid var(--gold); padding:12px 16px; border-radius:8px; font-size:.9rem}
+  .note ul{margin:6px 0 0; padding-right:18px}
+  .err{background:#ffecec; border-right-color:#c0392b; color:#8b1a1a}
+  @media(max-width:640px){
+    .qual{display:none}
+    input[type=number]{width:70px}
+    thead th{font-size:.82rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>ഇസ്ലാമിക് അനന്തരാവകാശ കാൽക്കുലേറ്റർ</h1>
+    <p>ഖുർആൻ & സുന്നത്തിന്റെ അടിസ്ഥാനത്തിൽ (ഫരൈദ് നിയമം)</p>
+  </header>
+
+  <div class="card">
+    <h3 style="margin-top:0">അവശേഷിക്കുന്ന അവകാശികൾ രേഖപ്പെടുത്തുക</h3>
+    <table id="heirTable">
+      <thead>
+        <tr>
+          <th>അവകാശിയുടെ പേര്</th>
+          <th>എണ്ണം</th>
+          <th>യോഗ്യത</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- താഴെ JS-ൽ ഡാറ്റ ലോഡ് ചെയ്യും -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <label style="display:block; font-weight:600; margin-bottom:8px">
+      മൊത്തം ആസ്തി (₹) — ഓപ്ഷണൽ (ശതമാനത്തിനൊപ്പം തുകയും കാണിക്കും)
+    </label>
+    <input id="estate" type="number" min="0" step="0.01"
+           placeholder="ഉദാ: 1000000" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:8px">
+  </div>
+
+  <button class="btn gold" id="calcBtn">അനന്തരാവകാശം കണക്കാക്കുക</button>
+
+  <div id="errBox" class="card note err" style="display:none"></div>
+
+  <div id="result" class="card">
+    <h3 style="margin-top:0">വിതരണ ഫലം</h3>
+    <div id="shareList"></div>
+    <div style="margin-top:16px">
+      <button class="btn" id="resetBtn">പുതുതായി തുടങ്ങുക</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>ശ്രദ്ധിക്കുക:</strong>
+    <ul>
+      <li>മുസ്ലിം ഇതര അവകാശികൾക്ക് അനന്തരാവകാശത്തിന് അർഹതയില്ല; എന്നാൽ വസ്വിയ്യത്ത് (ബീഖത്ത്) ലഭിക്കാം.</li>
+      <li>ഭാര്യ ഗർഭിണിയാണെങ്കിൽ ജനിക്കുന്ന കുഞ്ഞിനും വിഹിതം ലഭിക്കും.</li>
+      <li>പട്ടികയിൽ ഇല്ലാത്ത ബന്ധുക്കൾ സ്റ്റാൻഡേർഡ് അവകാശികളിൽ ഉൾപ്പെടുന്നില്ല.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+/* ====== അവകാശികളുടെ ഡാറ്റ (id, മലയാളം പേര്, യോഗ്യത) ====== */
+const HEIRS = [
+  {id:1,  ml:"ഭർത്താവ്",              q:"നിയമപരമായി വിവാഹിതനായിരിക്കണം. രഹസ്യ/രേഖപ്പെടുത്താത്ത വിവാഹം അസ്വീകാര്യം."},
+  {id:2,  ml:"ഭാര്യമാർ",              q:"ഒന്നിലധികം ഭാര്യമാർക്ക് അർഹതയുണ്ട്. ഇദ്ദ (ഇദ്ദഃ) കാലയളവ് പൂർത്തിയാകാത്ത വിവാഹമോചിതയും അർഹയാണ്."},
+  {id:3,  ml:"മക്കൾ (ആൺ)",           q:"ദത്തെടുത്ത മകൻ, ഭർത്താവിന്റെ മകൻ, വ്യഭിചാരജനിത മകൻ — ഇവർക്ക് അർഹതയില്ല."},
+  {id:4,  ml:"മക്കൾ (പെൺ)",          q:"ദത്തെടുത്ത മകൾ, ഭർത്താവിന്റെ മകൾ, വ്യഭിചാരജനിത മകൾ — ഇവർക്ക് അർഹതയില്ല."},
+  {id:5,  ml:"ചെറുമക്കൾ (ആൺ)",       q:"മകന്റെ മക്കൾ മാത്രം. മകളുടെ മക്കൾക്ക് അർഹതയില്ല."},
+  {id:6,  ml:"ചെറുമക്കൾ (പെൺ)",      q:"മകന്റെ മക്കൾ മാത്രം. മകളുടെ മക്കൾക്ക് അർഹതയില്ല."},
+  {id:7,  ml:"പിതാവ്",               q:"വ്യഭിചാരജനിത പിതാവ്, രണ്ടാനച്ഛൻ — ഇവർക്ക് അർഹതയില്ല."},
+  {id:8,  ml:"മാതാവ്",               q:"വ്യഭിചാരജനിത മാതാവ്, രണ്ടാനമ്മ — ഇവർക്ക് അർഹതയില്ല."},
+  {id:9,  ml:"മുത്തച്ഛൻ (പിതൃപക്ഷം)", q:"പിതാവിന്റെ പിതാവ് മാത്രം. മാതൃപക്ഷ മുത്തച്ഛന് അർഹതയില്ല."},
+  {id:10, ml:"മുത്തശ്ശി (പിതൃപക്ഷം)", q:"പിതാവിന്റെ മാതാവിന് അർഹതയുണ്ട്."},
+  {id:11, ml:"മുത്തശ്ശി (മാതൃപക്ഷം)", q:"മാതാവിന്റെ മാതാവിന് അർഹതയുണ്ട്."},
+  {id:12, ml:"സഹോദരന്മാർ (പൂർണ്ണ)",  q:"ഒരേ പിതാവും മാതാവും പങ്കിടുന്ന സഹോദരന്മാർ."},
+  {id:13, ml:"സഹോദരിമാർ (പൂർണ്ണ)",   q:"ഒരേ പിതാവും മാതാവും പങ്കിടുന്ന സഹോദരിമാർ."},
+  {id:14, ml:"സഹോദരന്മാർ (പിതൃപക്ഷം)", q:"ഒരേ പിതാവ്, വ്യത്യസ്ത മാതാവ്."},
+  {id:15, ml:"സഹോദരിമാർ (പിതൃപക്ഷം)", q:"ഒരേ പിതാവ്, വ്യത്യസ്ത മാതാവ്."},
+  {id:16, ml:"സഹോദരന്മാർ (മാതൃപക്ഷം)", q:"ഒരേ മാതാവ്, വ്യത്യസ്ത പിതാവ്."},
+  {id:17, ml:"സഹോദരിമാർ (മാതൃപക്ഷം)", q:"ഒരേ മാതാവ്, വ്യത്യസ്ത പിതാവ്."},
+  {id:18, ml:"സഹോദരപുത്രന്മാർ (പൂർണ്ണ)", q:"സഹോദരന്റെ മകൻ മാത്രം. സഹോദരിയുടെ മകന് അർഹതയില്ല."},
+  {id:19, ml:"സഹോദരപുത്രന്മാർ (പിതൃപക്ഷം)", q:"പിതൃപക്ഷ സഹോദരന്റെ മകൻ മാത്രം."},
+  {id:20, ml:"സഹോദരപുത്രന്റെ മക്കൾ (പൂർണ്ണ)", q:"പൂർണ്ണ സഹോദരന്റെ മകന്റെ മകൻ."},
+  {id:21, ml:"സഹോദരപുത്രന്റെ മക്കൾ (പിതൃപക്ഷം)", q:"പിതൃപക്ഷ സഹോദരന്റെ മകന്റെ മകൻ."},
+  {id:22, ml:"പിതൃവ്യന്മാർ (പൂർണ്ണ)", q:"പിതാവിന്റെ പൂർണ്ണ സഹോദരൻ."},
+  {id:23, ml:"പിതൃവ്യന്മാർ (പിതൃപക്ഷം)", q:"പിതാവിന്റെ പിതൃപക്ഷ സഹോദരൻ."},
+  {id:24, ml:"കസിൻസ് (പൂർണ്ണ)",       q:"പിതാവിന്റെ പൂർണ്ണ സഹോദരന്റെ മകൻ."},
+  {id:25, ml:"കസിൻസ് (പിതൃപക്ഷം)",    q:"പിതാവിന്റെ പിതൃപക്ഷ സഹോദരന്റെ മകൻ."},
+  {id:26, ml:"കസിൻസിന്റെ മക്കൾ (പൂർണ്ണ)", q:"പിതാവിന്റെ പൂർണ്ണ സഹോദരന്റെ മകന്റെ മകൻ."},
+  {id:27, ml:"കസിൻസിന്റെ മക്കൾ (പിതൃപക്ഷം)", q:"പിതാവിന്റെ പിതൃപക്ഷ സഹോദരന്റെ മകന്റെ മകൻ."},
+  {id:28, ml:"കസിൻസിന്റെ ചെറുമക്കൾ (പൂർണ്ണ)", q:"പിതാവിന്റെ പൂർണ്ണ സഹോദരന്റെ മകന്റെ മകന്റെ മകൻ."},
+  {id:29, ml:"കസിൻസിന്റെ ചെറുമക്കൾ (പിതൃപക്ഷം)", q:"പിതാവിന്റെ പിതൃപക്ഷ സഹോദരന്റെ മകന്റെ മകന്റെ മകൻ."}
+];
+
+/* ====== പട്ടിക നിർമ്മിക്കുക ====== */
+const tbody = document.querySelector("#heirTable tbody");
+HEIRS.forEach(h=>{
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${h.id}) ${h.ml}</td>
+    <td><input type="number" min="0" step="1" id="h${h.id}" value="0"></td>
+    <td class="qual">${h.q}</td>`;
+  tbody.appendChild(tr);
+});
+
+/* ====== ഫരൈദ് കണക്കുകൂട്ടൽ എൻജിൻ ====== */
+function computeShares(c){
+  // c = { husband, wives, sons, daughters, grandsons, granddaughters, father, mother,
+  //       grandfather, pgm, mgm, fullBro, fullSis, patBro, patSis, matBro, matSis, ... }
+  const has = id => (c[id]||0) > 0;
+  const n   = id => c[id]||0;
+
+  // പ്രധാന ഡിറ്റർമിനന്റുകൾ
+  const hasSon   = has(3);
+  const hasDau   = has(4);
+  const hasFather= has(7);
+  const hasMother= has(8);
+  const hasGrandfather = has(9);
+  const hasGrdSon = has(5);
+  const hasGrdDau = has(6);
+  const hasFullBro = has(12), hasFullSis = has(13);
+  const hasPatBro  = has(14), hasPatSis  = has(15);
+  const hasMatBro  = has(16), hasMatSis  = has(17);
+  const hasAnyChild = hasSon || hasDau || hasGrdSon || hasGrdDau;
+  const hasMaleDesc  = hasSon || hasGrdSon;
+
+  let shares = {};      // id -> ഭിന്നസംഖ്യ (fraction as [num,den])
+  let residual = 0;     // അസബ ശേഷിക്കുന്ന ഭാഗം
+
+  // --- ഭർത്താവ് ---
+  if (has(1)){
+    shares[1] = hasAnyChild ? [1,4] : [1,2];
+  }
+  // --- ഭാര്യമാർ ---
+  if (has(2)){
+    shares[2] = hasAnyChild ? [1,8] : [1,4];
+  }
+  // --- പിതാവ് (ഫർദ് + അസബ) ---
+  if (hasFather){
+    if (hasMaleDesc) shares[7] = [1,6];
+    else if (hasDau) shares[7] = [1,6];   // + അസബ ബാക്കി
+    else { shares[7] = [1,6]; residual += 1; } // അസബ
+  }
+  // --- മാതാവ് ---
+  if (hasMother){
+    const siblings = hasFullBro||hasFullSis||hasPatBro||hasPatSis||hasMatBro||hasMatSis;
+    shares[8] = (hasAnyChild || siblings) ? [1,6] : [1,3];
+  }
+  // --- മുത്തച്ഛൻ (പിതാവില്ലെങ്കിൽ) ---
+  if (hasGrandfather && !hasFather){
+    shares[9] = hasMaleDesc ? [1,6] : [1,6];
+  }
+  // --- മുത്തശ്ശിമാർ ---
+  if (has(10) && !hasMother) shares[10] = [1,6];
+  if (has(11) && !hasMother) shares[11] = [1,6];
+  // രണ്ട് മുത്തശ്ശിമാരും ഉണ്ടെങ്കിൽ 1/6 പങ്കിടും
+  if (shares[10] && shares[11]) { shares[10]=[1,12]; shares[11]=[1,12]; }
+
+  // --- മക്കൾ ---
+  if (hasSon){
+    // sons + daughters = 2:1 (അസബ)
+    residual += 1;
+  } else if (hasDau){
+    if (n(4)===1) shares[4]=[1,2];
+    else shares[4]=[2,3];     // ഒന്നിലധികം പെൺമക്കൾ
+    // പിതാവിന് 1/6 കഴിഞ്ഞ് ബാക്കി പെൺമക്കൾക്ക് (അസബ)
+  }
+
+  // --- ചെറുമക്കൾ (മകൻ/മകൾ ഇല്ലെങ്കിൽ) ---
+  if (!hasSon && !hasDau){
+    if (hasGrdSon){ residual += 1; }
+    else if (hasGrdDau){
+      if (n(6)===1) shares[6]=[1,2];
+      else shares[6]=[2,3];
+    }
+  }
+
+  // --- സഹോദരങ്ങൾ (മക്കളോ പിതാവോ മുത്തച്ഛനോ ഇല്ലെങ്കിൽ) ---
+  const noAscDesc = !hasAnyChild && !hasFather && !hasGrandfather;
+  if (noAscDesc){
+    if (hasFullBro || hasFullSis){
+      if (hasFullBro) residual += 1;              // അസബ 2:1
+      else if (n(13)===1) shares[13]=[1,2];
+      else shares[13]=[2,3];
+    } else if (hasPatBro || hasPatSis){
+      if (hasPatBro) residual += 1;
+      else if (n(15)===1) shares[15]=[1,2];
+      else shares[15]=[2,3];
+    }
+    // മാതൃപക്ഷ സഹോദരങ്ങൾ — എപ്പോഴും ഫർദ്
+    const matCount = n(16)+n(17);
+    if (matCount>0){
+      const total = (matCount===1) ? [1,6] : [1,3];
+      // പങ്കിടൽ: ആൺ/പെൺ തുല്യം
+      shares[16] = [total[0]*n(16), total[1]*matCount];
+      shares[17] = [total[0]*n(17), total[1]*matCount];
+    }
+  }
+
+  return {shares, residual, c};
+}
+
+/* ====== ഫലം കാണിക്കുക ====== */
+function render(){
+  const inputs = {};
+  HEIRS.forEach(h=> inputs[h.id] = parseInt(document.getElementById("h"+h.id).value)||0);
+
+  const {shares, residual, c} = computeShares(inputs);
+
+  // ഭിന്നസംഖ്യകൾ കൂട്ടുക
+  function addFrac(a,b){ return [a[0]*b[1]+b[0]*a[1], a[1]*b[1]]; }
+  function gcd(a,b){ return b?gcd(b,a%b):a; }
+  function reduce(f){ const g=gcd(Math.abs(f[0]),Math.abs(f[1]))||1; return [f[0]/g, f[1]/g]; }
+
+  let total = [0,1];
+  Object.values(shares).forEach(f=> total = addFrac(total, f));
+  // residual അസബ → ബാക്കി അവകാശികൾക്ക്
+  let asabTotal = [0,1];
+  if (residual>0){
+    // അസബ അവകാശികൾ: മക്കൾ (3,4), ചെറുമക്കൾ (5,6), സഹോദരങ്ങൾ (12-15), പിതാവ് (7)
+    let asabHeirs = [];
+    if (c[3]){ asabHeirs.push([3,2],[4,1]); }
+    else if (c[5]){ asabHeirs.push([5,2],[6,1]); }
+    else if (c[7] && !c[3] && !c[4]){ asabHeirs.push([7,1]); }
+    else if (c[12]){ asabHeirs.push([12,2],[13,1]); }
+    else if (c[14]){ asabHeirs.push([14,2],[15,1]); }
+
+    if (asabHeirs.length){
+      // 2:1 ഭാരം
+      let weight = 0;
+      asabHeirs.forEach(([id,w])=>{ weight += (c[id]||0)*w; });
+      asabHeirs.forEach(([id,w])=>{
+        const cnt = c[id]||0;
+        if (!cnt) return;
+        // 1 യൂണിറ്റ് = 1/weight
+        const f = [w*cnt, weight];
+        shares[id] = shares[id] ? addFrac(shares[id], f) : f;
+      });
+    }
+  }
+
+  // മൊത്തം വീണ്ടും കണക്കാക്കുക
+  total = [0,1];
+  Object.values(shares).forEach(f=> total = addFrac(total, f));
+
+  // ശതമാനമാക്കി മാറ്റുക
+  const estate = parseFloat(document.getElementById("estate").value)||0;
+  const list = [];
+  for (const id in shares){
+    const f = reduce(shares[id]);
+    const pct = (f[0]/f[1])*100;
+    if (pct <= 0) continue;
+    const heir = HEIRS.find(h=>h.id==id);
+    const amount = estate>0 ? (estate*f[0]/f[1]) : null;
+    list.push({name: heir.ml, pct, amount});
+  }
+  list.sort((a,b)=>b.pct-a.pct);
+
+  const box = document.getElementById("shareList");
+  const err = document.getElementById("errBox");
+  box.innerHTML = "";
+
+  if (!list.length){
+    err.style.display="block";
+    err.innerHTML = "ഒരു അവകാശിയും നൽകിയിട്ടില്ല. ദയവായി എണ്ണം രേഖപ്പെടുത്തുക.";
+    document.getElementById("result").style.display="none";
+    return;
+  }
+  err.style.display="none";
+  document.getElementById("result").style.display="block";
+
+  let sum=0;
+  list.forEach(item=>{
+    sum += item.pct;
+    const div = document.createElement("div");
+    div.className="share-row";
+    div.innerHTML = `<span class="share-name">${item.name}</span>
+      <span class="share-val">${item.pct.toFixed(2)}%${
+        item.amount!==null? " — ₹"+item.amount.toLocaleString("en-IN",{maximumFractionDigits:2}) : ""
+      }</span>`;
+    box.appendChild(div);
+  });
+  const totalDiv = document.createElement("div");
+  totalDiv.className="share-row";
+  totalDiv.style.fontWeight="700";
+  totalDiv.innerHTML = `<span>ആകെ</span><span>${sum.toFixed(2)}%</span>`;
+  box.appendChild(totalDiv);
+}
+
+document.getElementById("calcBtn").addEventListener("click", render);
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  HEIRS.forEach(h=> document.getElementById("h"+h.id).value=0);
+  document.getElementById("estate").value="";
+  document.getElementById("result").style.display="none";
+});
+</script>
+</body>
+</html>
