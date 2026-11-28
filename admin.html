@@ -917,6 +917,11 @@ async function previewAllHalltickets() {
     document.getElementById('adminPanelSection').style.display = 'none';
     const docArea = document.getElementById('documentDisplayArea');
     docArea.style.display = 'block';
+    
+    // 🎁 BONUS: Calculate paid/unpaid counts
+    const paidCount = result.data.filter(r => String(r['Payment Status'] || '').toUpperCase() === 'YES').length;
+    const unpaidCount = result.data.length - paidCount;
+    
     docArea.innerHTML = `
       <div class="print-buttons-container">
         <button onclick="window.print()" class="btn-gold btn-lg me-3">
@@ -925,6 +930,11 @@ async function previewAllHalltickets() {
         <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
           <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
         </button>
+        <div style="margin-top:15px; font-size:14px; color:#666;">
+          Total: <strong>${count}</strong> students 
+          (Paid: <strong style="color:#28a745;">${paidCount}</strong>, 
+          Unpaid: <strong style="color:#dc3545;">${unpaidCount}</strong>)
+        </div>
       </div>
       ${html}`;
 
