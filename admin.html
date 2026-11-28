@@ -201,31 +201,20 @@
 
 <section class="content-section" id="adminPanelSection" style="display:none; background: white;">
   <div class="container">
-    
     <div class="admin-nav" data-aos="fade-down">
       <div class="container">
         <div class="admin-nav-container">
-          <a href="admin.html" class="admin-nav-tab nav-tab-active">
-            Entrance Exam
-          </a>
-          <a href="social.html" class="admin-nav-tab">
-            Social media
-          </a>
-          <a href="inheritance.html" class="admin-nav-tab">
-            Inheritance
-          </a>
-          <a href="test.html" class="admin-nav-tab">
-            Test
-          </a>
+          <a href="admin.html" class="admin-nav-tab nav-tab-active">Entrance Exam</a>
+          <a href="social.html" class="admin-nav-tab">Social media</a>
+          <a href="inheritance.html" class="admin-nav-tab">Inheritance</a>
+          <a href="test.html" class="admin-nav-tab">Test</a>
         </div>
       </div>
     </div>
 
     <div class="form-container mt-4" data-aos="fade-up">
-      <h2 class="form-title text-center mb-4">
-        Entrance Exam Portal
-      </h2>
-      
+      <h2 class="form-title text-center mb-4">Entrance Exam Portal</h2>
+
       <div class="row g-4 justify-content-center mb-5">
         <div class="col-md-6 col-lg-5">
           <div class="admin-card" style="border: 2px solid var(--islamic-green);">
@@ -295,539 +284,262 @@
 </section>
 
 <div id="documentDisplayArea" style="display: none;"></div>
-  
 <div id="footer-container"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
 <script>
-  function fixPhotoUrl(rawUrl) {
-    if (!rawUrl || typeof rawUrl !== 'string') return '';
-    
-    if (rawUrl.includes('drive.google.com/uc?export=view')) {
-      return rawUrl;
-    }
-    
-    if (rawUrl.includes('thumbnail?id=')) {
-      const match = rawUrl.match(/id=([-\w]{25,})/);
-      return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
-    }
-    
-    if (rawUrl.includes('/file/d/')) {
-      const match = rawUrl.match(/\/d\/([-\w]{25,})/);
-      return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : '';
-    }
-    
-    const match = rawUrl.match(/([-\w]{25,})/);
-    return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : '';
+/* ============================================================
+ * GLOBAL CONFIG
+ * ============================================================ */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxO7KLtUlx_SciMT8UXBaluAbljZghqyiD4PY8XZrgg4mmy06wBj2MX0ixnO7R-zkBh0A/exec';
+
+/* ============================================================
+ * PHOTO URL FIX — FULLY REWRITTEN
+ * ============================================================
+ * Handles ALL formats:
+ *  - lh3.googleusercontent.com/d/FILE_ID=w1000  (new backend)  ✅ KEEP AS-IS
+ *  - drive.google.com/thumbnail?id=FILE_ID
+ *  - drive.google.com/file/d/FILE_ID/view
+ *  - drive.google.com/uc?export=view&id=FILE_ID
+ *  - drive.google.com/open?id=FILE_ID
+ *  - bare FILE_ID
+ *  - data:image base64
+ *  - any http(s) URL
+ * ============================================================ */
+function fixPhotoUrl(rawUrl) {
+  if (!rawUrl || typeof rawUrl !== 'string') return '';
+  const url = rawUrl.trim();
+  if (url === '') return '';
+
+  // 1. lh3.googleusercontent.com — keep as-is (works perfectly in <img>)
+  if (url.includes('lh3.googleusercontent.com')) {
+    const m = url.match(/\/d\/([-\w]{25,})/);
+    if (m) return `https://lh3.googleusercontent.com/d/${m[1]}=w1000`;
+    return url;
   }
 
-  async function preloadImage(url) {
-    return new Promise((resolve) => {
-      if (!url || !url.startsWith('http')) {
-        resolve(null);
-        return;
-      }
-      
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      
-      img.onload = () => resolve(img);
-      img.onerror = () => {
-        console.warn('Failed to preload image:', url);
-        resolve(null);
-      };
-      
-      const timestamp = new Date().getTime();
-      const separator = url.includes('?') ? '&' : '?';
-      img.src = url + separator + '_=' + timestamp;
-      
-      setTimeout(() => {
-        if (!img.complete) {
-          console.warn('Image preload timeout:', url);
-          resolve(null);
-        }
-      }, 8000);
-    });
+  // 2. Already uc?export=view — keep as-is
+  if (url.includes('drive.google.com/uc?export=view')) return url;
+
+  // 3. thumbnail?id=FILE_ID
+  if (url.includes('thumbnail?id=')) {
+    const m = url.match(/id=([-\w]{25,})/);
+    return m ? `https://lh3.googleusercontent.com/d/${m[1]}=w1000` : '';
   }
 
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxO7KLtUlx_SciMT8UXBaluAbljZghqyiD4PY8XZrgg4mmy06wBj2MX0ixnO7R-zkBh0A/exec';
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
-    adminLoginModal.show();
-  });
-
-  document.getElementById('adminLoginForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const username = document.getElementById('adminUsername').value.trim();
-    const password = document.getElementById('adminPassword').value.trim();
-
-    if (username === 'admin' && password === '786') {
-      bootstrap.Modal.getOrCreateInstance(document.getElementById('adminLoginModal')).hide();
-      document.getElementById('adminPanelSection').style.display = 'block';
-      document.getElementById('adminDataDisplay').innerHTML = '';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      alert('Wrong username or password');
-    }
-  });
-
-  function logoutAdmin() {
-    document.getElementById('adminPanelSection').style.display = 'none';
-    document.getElementById('adminDataDisplay').innerHTML = '';
-    const adminLoginModal = new bootstrap.Modal(document.getElementById('adminLoginModal'));
-    adminLoginModal.show();
+  // 4. /file/d/FILE_ID/
+  if (url.includes('/file/d/')) {
+    const m = url.match(/\/d\/([-\w]{25,})/);
+    return m ? `https://lh3.googleusercontent.com/d/${m[1]}=w1000` : '';
   }
 
-  async function previewAllApplications() {
-    const displayArea = document.getElementById('adminDataDisplay');
-    displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all applications... Please wait...</p></div>';
-    
-    try {
-      const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
-      const result = await resp.json();
-      
-      if (result.status !== 'success' || !result.data?.length) {
-        displayArea.innerHTML = '<div class="alert alert-warning">No applications found.</div>';
-        return;
-      }
-
-      let allDocumentsHtml = '';
-      let successCount = 0;
-      
-      displayArea.innerHTML = `<div class="alert alert-info">
-        <i class="fas fa-spinner fa-spin me-2"></i>
-        Processing ${result.data.length} applications... Please wait...
-      </div>`;
-
-      for (let i = 0; i < result.data.length; i++) {
-        const row = result.data[i];
-        const get = (header) => row[header] ?? row[header.trim()] ?? '';
-        
-        let rawPhotoUrl = get('Photo') || get('Photo Url') || get('photo') || '';
-        let photoUrl = fixPhotoUrl(rawPhotoUrl);
-        
-        const studentData = {
-          submissionDate: formatDate(get('Timestamp')) || new Date().toLocaleDateString('en-GB'),
-          applicationId: get('ID') || get('Reg. No') || `APP-${(i+1).toString().padStart(4,'0')}`,
-          studentName: get('Name') || 'N/A',
-          houseName: get('House') || 'N/A',
-          dob: get('DOB') || 'N/A',
-          aadhaarNumber: get('Aadhar') || 'N/A',
-          address: get('Address') || 'N/A',
-          phoneNumber: get('MOB') || 'N/A',
-          whatsappNumber: get('WHATSAPP') || get('MOB') || 'N/A',
-          fatherName: get('Father') || 'N/A',
-          fatherOccupation: get('Father job') || 'N/A',
-          guardianName: get('Guardian') || 'N/A',
-          relationshipWithGuardian: get('Relation to guardian') || 'N/A',
-          guardianReason: get('if not father cause') || '',
-          madrasa: get('Madrasa') || 'N/A',
-          madrasaclass: get('Madrassa class') || 'N/A',
-          school: get('School') || 'N/A',
-          schoolclass: get('School class') || 'N/A',
-          previousStudy: get('Old institution') || 'No',
-          previousInstitution: get('Name of insti') || '',
-          studyDuration: get('Period') || '',
-          juzCount: get('Number of Juz') || get('Juz count') || get('Juz') || '',
-          reasonForLeaving: get('Reason for Leaving') || get('Leaving reason') || '',
-          headTeacherPhone: get('Head Teacher Phone') || get('Teacher phone') || get('Head teacher number') || '',
-          identificationMark: get('Identification mark') || 'N/A',
-          physicalFitness: get('Physical Fitness: yes or no') || 'N/A',
-          illness: get('ill name') || '',
-          photoUrl: photoUrl
-        };
-        
-        allDocumentsHtml += generateApplicationHtml({ collegeInfo: {}, studentData });
-        successCount++;
-        
-
-      }
-      
-      document.getElementById('adminPanelSection').style.display = 'none';
-      const displayArea_element = document.getElementById('documentDisplayArea');
-      displayArea_element.style.display = 'block';
-      
-      const printButtonHtml = `
-        <div class="print-buttons-container">
-          <button onclick="window.print()" class="btn-gold btn-lg me-3">
-            <i class="fas fa-print me-2"></i> PRINT ALL (${successCount} Applications)
-          </button>
-          <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
-            <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
-          </button>
-        </div>
-      `;
-      
-      displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
-      
-      displayArea.innerHTML = '';
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      
-    } catch (err) {
-      console.error('Preview error:', err);
-      displayArea.innerHTML = `<div class="alert alert-danger">
-        <i class="fas fa-exclamation-triangle me-2"></i>
-        Error loading applications: ${err.message}
-      </div>`;
-    }
+  // 5. open?id=FILE_ID
+  if (url.includes('open?id=')) {
+    const m = url.match(/id=([-\w]{25,})/);
+    return m ? `https://lh3.googleusercontent.com/d/${m[1]}=w1000` : '';
   }
-async function previewAllHalltickets() {
-  const displayArea = document.getElementById('adminDataDisplay');
-  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all hall tickets... Please wait...</p></div>';
-  
-  try {
-    const endpoints = [
-      `${SCRIPT_URL}?type=all_halltickets`,
-      `${SCRIPT_URL}?type=halltickets`,
-      `${SCRIPT_URL}?type=all_hall_tickets`,
-      `${SCRIPT_URL}?type=get_halltickets`
-    ];
-    
-    let result = null;
-    let successfulEndpoint = '';
-    
-    for (const endpoint of endpoints) {
-      try {
-        console.log('Trying endpoint:', endpoint);
-        const resp = await fetch(endpoint);
-        const data = await resp.json();
-        if (data.status === 'success' && data.data && data.data.length > 0) {
-          result = data;
-          successfulEndpoint = endpoint;
-          console.log('Success with endpoint:', endpoint);
-          break;
-        }
-      } catch (e) {
-        console.log('Endpoint failed:', endpoint);
-      }
-    }
-    
-    if (!result) {
-      console.log('Trying to get hall tickets from applications data...');
-      const appResp = await fetch(`${SCRIPT_URL}?type=all_applications`);
-      const appResult = await appResp.json();
-      
-      if (appResult.status === 'success' && appResult.data?.length) {
-        const hallTicketData = appResult.data.map(row => {
-          const get = (header) => row[header] ?? row[header.trim()] ?? '';
-          return {
-            'Reg. No': get('ID') || get('Reg. No') || '',
-            'Name': get('Name') || '',
-            'DOB': get('DOB') || '',
-            'Age': get('Age') || '',
-            'House': get('House') || '',
-            'Address': get('Address') || '',
-            'MOB': get('MOB') || '',
-            'Photo': get('Photo') || get('Photo Url') || '',
-            'Previous Study': get('Old institution') || 'N/A'
-          };
-        });
-        
-        result = {
-          status: 'success',
-          data: hallTicketData
-        };
-        console.log('Created hall tickets from applications:', result.data.length);
-      }
-    }
-    
-    if (!result || !result.data?.length) {
-      displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets found. Please check if:<br>1. The hall ticket endpoint is correct<br>2. There are applications with hall ticket data<br>3. The data format matches</div>';
-      return;
-    }
 
-    let allDocumentsHtml = '';
-    let successCount = 0;
-    
-    displayArea.innerHTML = `<div class="alert alert-info">
-      <i class="fas fa-spinner fa-spin me-2"></i>
-      Processing ${result.data.length} hall tickets from ${successfulEndpoint || 'applications data'}... Please wait...
-    </div>`;
+  // 6. Bare FILE_ID
+  const bare = url.match(/^([-\w]{25,})$/);
+  if (bare) return `https://lh3.googleusercontent.com/d/${bare[1]}=w1000`;
 
-    for (let i = 0; i < result.data.length; i++) {
-      const row = result.data[i];
-      const get = (header) => {
-        const value = row[header] || 
-                     row[header.toUpperCase()] || 
-                     row[header.toLowerCase()] || 
-                     row[header.replace(/\s+/g, '')] || 
-                     '';
-        return value;
-      };
-      
-      let rawPhotoUrl = get('Photo') || 
-                       get('Photo Url') || 
-                       get('photo') || 
-                       get('PHOTO') || 
-                       get('Student Photo') || 
-                       get('student_photo') || 
-                       '';
-      
-      let photoUrl = fixPhotoUrl(rawPhotoUrl);
-      
-      const studentData = {
-  registerNo: get('Reg. No') || get('ID') || get('Application ID') || get('REG_NO') || `AMCT-${(i+1).toString().padStart(2,'0')}`,
-  studentName: get('Name') || get('Student Name') || get('STUDENT_NAME') || 'N/A',
-  dob: get('DOB') || get('Date of Birth') || get('dob') || 'N/A',
-  age: (() => {
-    const dobValue = get('DOB') || get('Date of Birth') || get('dob') || '';
-    if (!dobValue || dobValue === 'N/A') return 'N/A';
-    
-    try {
-      return calculateAgeFromDOB(dobValue);
-    } catch (e) {
-      console.warn('Age calculation failed for DOB:', dobValue);
-      return 'N/A';
-    }
-  })(),
-  houseName: get('House') || get('House Name') || get('HOUSE') || 'N/A',
-  address: get('Address') || get('ADDRESS') || 'N/A',
-  phoneNumber: get('MOB') || get('Phone Number') || get('Mobile') || get('PHONE') || 'N/A',
-  previousStudy: get('Previous Study') || get('Old institution') || get('PREVIOUS_STUDY') || 'N/A',
-  photoUrl: photoUrl
-};
-
-console.log(`Student ${i+1} age calculation:`, {
-  rawDOB: get('DOB') || get('Date of Birth') || get('dob') || '',
-  calculatedAge: studentData.age
-});
-      
-      allDocumentsHtml += generateHallticketHtml({ collegeInfo: {}, studentData });
-      successCount++;
-      if (i < result.data.length - 1) {
-          allDocumentsHtml += '<div class="document-separator"></div>';
-        }
-
-    }
-    
-    document.getElementById('adminPanelSection').style.display = 'none';
-    const displayArea_element = document.getElementById('documentDisplayArea');
-    displayArea_element.style.display = 'block';
-    
-    const printButtonHtml = `
-      <div class="print-buttons-container">
-        <button onclick="window.print()" class="btn-gold btn-lg me-3">
-          <i class="fas fa-print me-2"></i> PRINT ALL (${successCount} Hall Tickets)
-        </button>
-        <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
-          <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
-        </button>
-      </div>
-    `;
-    
-    displayArea_element.innerHTML = printButtonHtml + allDocumentsHtml;
-    
-    displayArea.innerHTML = '';
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-  } catch (err) {
-    console.error('Preview error:', err);
-    displayArea.innerHTML = `<div class="alert alert-danger">
-      <i class="fas fa-exclamation-triangle me-2"></i>
-      Error loading hall tickets: ${err.message}<br>
-      <small>Please check browser console for more details.</small>
-    </div>`;
+  // 7. data:image or http(s) URL — keep as-is
+  if (url.startsWith('data:image') || url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
   }
-}
-  function calculateAge(dobString) {
-    if(!dobString)return;const birthDate=new Date(dobString);const today=new Date();let years=today.getFullYear()-birthDate.getFullYear();let months=today.getMonth()-birthDate.getMonth();let days=today.getDate()-birthDate.getDate();if(days<0){months--;days+=new Date(today.getFullYear(),today.getMonth(),0).getDate();}if(months<0){years--;months+=12;}document.getElementById('ageDisplay').textContent=`Age: ${years} years ${months} months ${days} days`;
-  }
-function calculateAgeFromDOB(dobString) {
-  if (!dobString || dobString === 'N/A' || dobString === '') return 'N/A';
-  
-  try {
-    console.log("Calculating age from DOB:", dobString);
-    
-    let birthDate;
-    
-    if (dobString.includes('-')) {
-      const parts = dobString.split('-');
-      if (parts[0].length === 4) {
-        birthDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      } else {
-        birthDate = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-      }
-    } else if (dobString.includes('/')) {
-      const parts = dobString.split('/');
-      if (parts[0].length === 4) {
-        birthDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      } else {
-        birthDate = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-      }
-    } else {
-      birthDate = new Date(dobString);
-    }
-    
-    if (isNaN(birthDate.getTime())) {
-      console.warn("Invalid date format:", dobString);
-      return 'N/A';
-    }
-    
-    const today = new Date();
-    let years = today.getFullYear() - birthDate.getFullYear();
-    let months = today.getMonth() - birthDate.getMonth();
-    let days = today.getDate() - birthDate.getDate();
-    
-    if (days < 0) {
-      months--;
-      const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-      days += lastMonth.getDate();
-    }
-    
-    if (months < 0) {
-      years--;
-      months += 12;
-    }
-    
-    if (years < 1) {
-      if (months < 1) {
-        return `${days} days`;
-      } else if (days === 0) {
-        return `${months} months`;
-      } else {
-        return `${months} months ${days} days`;
-      }
-    } else if (months === 0) {
-      if (days === 0) {
-        return `${years} years`;
-      } else {
-        return `${years} years ${days} days`;
-      }
-    } else if (days === 0) {
-      return `${years} years ${months} months`;
-    } else {
-      return `${years} years ${months} months ${days} days`;
-    }
-  } catch (e) {
-    console.error('Error calculating age:', e, 'for DOB:', dobString);
-    return 'N/A';
-  }
+
+  return '';
 }
 
+/* ============================================================
+ * CASE-INSENSITIVE ROW GETTER
+ * ============================================================
+ * Backend may return headers like:
+ *   "Photo URL", "photoUrl", "Photo", "PHOTO", "student_photo"
+ * This helper matches ANY of them.
+ * ============================================================ */
+function makeGetter(row) {
+  if (!row || typeof row !== 'object') return () => '';
+  // Pre-compute normalized keys once
+  const normalized = {};
+  for (const key in row) {
+    if (Object.prototype.hasOwnProperty.call(row, key)) {
+      const norm = key.toLowerCase().replace(/[\s_\-\.]+/g, '');
+      normalized[norm] = row[key];
+    }
+  }
+  return function get(header) {
+    if (!header) return '';
+    const norm = String(header).toLowerCase().replace(/[\s_\-\.]+/g, '');
+    const v = normalized[norm];
+    return (v === null || v === undefined) ? '' : v;
+  };
+}
+
+/* ============================================================
+ * EXTRACT PHOTO URL FROM A ROW (tries many header names)
+ * ============================================================ */
+function extractPhotoUrl(row, get) {
+  const candidates = [
+    'Photo URL', 'PhotoURL', 'Photo Url', 'photoUrl', 'photo_url',
+    'Photo', 'PHOTO', 'photo', 'Student Photo', 'student_photo',
+    'Photo Link', 'PhotoLink', 'Image', 'IMAGE'
+  ];
+  for (const name of candidates) {
+    const val = get(name);
+    if (val && String(val).trim() !== '') return String(val).trim();
+  }
+  // Last resort — scan row keys containing "photo" or "image"
+  for (const key in row) {
+    if (/photo|image/i.test(key)) {
+      const v = row[key];
+      if (v && String(v).trim() !== '') return String(v).trim();
+    }
+  }
+  return '';
+}
+
+/* ============================================================
+ * DATA HELPERS
+ * ============================================================ */
 function formatDate(dateInput) {
   if (!dateInput) return '';
-  
   try {
-    const date = new Date(dateInput);
-    if (isNaN(date.getTime())) {
-      return String(dateInput);
+    if (typeof dateInput === 'string' && /^\d{2}-\d{2}-\d{4}$/.test(dateInput)) {
+      return dateInput;
     }
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
+    const date = new Date(dateInput);
+    if (isNaN(date.getTime())) return String(dateInput);
+    const d = date.getDate().toString().padStart(2, '0');
+    const m = (date.getMonth() + 1).toString().padStart(2, '0');
+    const y = date.getFullYear();
+    return `${d}-${m}-${y}`;
   } catch (e) {
     return String(dateInput || '');
   }
 }
 
-function showAdminDashboard() {
-  document.getElementById('adminPanelSection').style.display = 'block';
-  document.getElementById('documentDisplayArea').style.display = 'none';
-  document.getElementById('documentDisplayArea').innerHTML = '';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-async function showResultsData() {
-  const displayArea = document.getElementById('adminDataDisplay');
-  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading all results...</p></div>';
-
+function formatDateToDDMMYYYY(dateInput) {
+  if (!dateInput || dateInput === 'N/A') return 'N/A';
   try {
-    const resp = await fetch(`${SCRIPT_URL}?type=all_results`);
-    const result = await resp.json();
-
-    if (result.status !== 'success' || !result.data?.length) {
-      displayArea.innerHTML = '<div class="alert alert-warning">No results found.</div>';
-      return;
+    if (typeof dateInput === 'string' && /^\d{2}-\d{2}-\d{4}$/.test(dateInput)) {
+      return dateInput;
     }
-
-    let html = `
-      <h3 class="text-center mb-4">Results</h3>
-      <div class="table-responsive" id="adminDataTable">
-        <table class="table table-bordered table-striped table-hover">
-          <thead class="table-dark">
-            <tr>`;
-
-    const headers = Object.keys(result.data[0]);
-    headers.forEach(h => html += `<th>${h}</th>`);
-
-    html += `</tr></thead><tbody>`;
-
-    result.data.forEach(row => {
-      html += '<tr>';
-      headers.forEach(key => html += `<td>${row[key] ?? ''}</td>`);
-      html += '</tr>';
-    });
-
-    html += '</tbody></table></div>';
-    displayArea.innerHTML = html;
-
-  } catch (err) {
-    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load results.</div>';
-    console.error(err);
+    let date;
+    if (typeof dateInput === 'string' && dateInput.includes('-')) {
+      const p = dateInput.split('-');
+      date = p[0].length === 4
+        ? new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]))
+        : new Date(parseInt(p[2]), parseInt(p[1]) - 1, parseInt(p[0]));
+    } else if (typeof dateInput === 'string' && dateInput.includes('/')) {
+      const p = dateInput.split('/');
+      date = p[0].length === 4
+        ? new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]))
+        : new Date(parseInt(p[2]), parseInt(p[1]) - 1, parseInt(p[0]));
+    } else {
+      date = new Date(dateInput);
+    }
+    if (isNaN(date.getTime())) return String(dateInput).split(' ')[0];
+    const d = date.getDate().toString().padStart(2, '0');
+    const m = (date.getMonth() + 1).toString().padStart(2, '0');
+    return `${d}-${m}-${date.getFullYear()}`;
+  } catch (e) {
+    return String(dateInput).split(' ')[0];
   }
 }
 
-async function showApplicationData() {
-  const displayArea = document.getElementById('adminDataDisplay');
-  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success" role="status"></div><p class="mt-3">Loading data...</p></div>';
-
+function calculateAgeFromDOB(dobString) {
+  if (!dobString || dobString === 'N/A' || dobString === '') return 'N/A';
   try {
-    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
-    const result = await resp.json();
-
-    if (result.status !== 'success' || !result.data?.length) {
-      displayArea.innerHTML = '<div class="alert alert-warning">No data found or error occurred.</div>';
-      return;
+    let birthDate;
+    if (dobString.includes('-')) {
+      const p = dobString.split('-');
+      birthDate = p[0].length === 4
+        ? new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]))
+        : new Date(parseInt(p[2]), parseInt(p[1]) - 1, parseInt(p[0]));
+    } else if (dobString.includes('/')) {
+      const p = dobString.split('/');
+      birthDate = p[0].length === 4
+        ? new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]))
+        : new Date(parseInt(p[2]), parseInt(p[1]) - 1, parseInt(p[0]));
+    } else {
+      birthDate = new Date(dobString);
     }
-
-    let html = `
-      <h3 class="text-center mb-4">Applications</h3>
-      <div class="table-responsive" id="adminDataTable">
-        <table class="table table-bordered table-striped table-hover">
-          <thead class="table-dark">
-            <tr>`;
-
-    const headers = Object.keys(result.data[0]);
-    headers.forEach(h => {
-      html += `<th>${h}</th>`;
-    });
-
-    html += `
-            </tr>
-          </thead>
-          <tbody>`;
-
-    result.data.forEach(row => {
-      html += '<tr>';
-      headers.forEach(key => {
-        html += `<td>${row[key] ?? ''}</td>`;
-      });
-      html += '</tr>';
-    });
-
-    html += '</tbody></table></div>';
-
-    displayArea.innerHTML = html;
-  } catch (err) {
-    displayArea.innerHTML = '<div class="alert alert-danger">Failed to load application data.</div>';
-    console.error(err);
+    if (isNaN(birthDate.getTime())) return 'N/A';
+    const today = new Date();
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+    if (days < 0) {
+      months--;
+      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+    if (months < 0) { years--; months += 12; }
+    if (years < 1 && months < 1) return `${days} days`;
+    if (years < 1) return `${months} months ${days} days`;
+    return `${years} years ${months} months ${days} days`;
+  } catch (e) {
+    return 'N/A';
   }
 }
 
-  function generateApplicationHtml(data) {
-    const { collegeInfo, studentData } = data;
-    const hasValidPhoto = studentData.photoUrl && (
-      studentData.photoUrl.includes('drive.google.com') ||
-      studentData.photoUrl.startsWith('data:image') ||
-      studentData.photoUrl.startsWith('http')
-    );
+function escapeHtml(text) {
+  if (text === null || text === undefined) return '';
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+  return String(text).replace(/[&<>"']/g, m => map[m]);
+}
 
+/* ============================================================
+ * PHOTO HTML BUILDER — with debug placeholder on error
+ * ============================================================ */
+function buildPhotoBox(photoUrl, caption) {
+  caption = caption || 'Student Photograph';
+  const hasPhoto = photoUrl && (
+    photoUrl.startsWith('http') ||
+    photoUrl.startsWith('data:image') ||
+    photoUrl.includes('googleusercontent') ||
+    photoUrl.includes('drive.google.com')
+  );
+
+  if (!hasPhoto) {
     return `
+      <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
+        <div style="width:150px; height:180px; border:2px dashed #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+          <div style="text-align:center; color:#adb5bd; font-size:11px;">
+            <i class="fas fa-user fa-3x" style="opacity:0.4;"></i>
+            <div style="margin-top:6px;">No Photo</div>
+          </div>
+        </div>
+        <div style="font-size:11px; color:#6c757d; margin-top:5px; font-weight:500;">${caption}</div>
+      </div>
+    `;
+  }
+
+  return `
+    <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
+      <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+        <img src="${escapeHtml(photoUrl)}"
+             style="max-width:100%; max-height:100%; object-fit:contain;"
+             alt="Student Photo"
+             loading="lazy"
+             referrerpolicy="no-referrer"
+             onerror="this.onerror=null; this.parentNode.innerHTML='<div style=\\'text-align:center;color:#dc3545;font-size:10px;padding:6px;\\'><i class=\\'fas fa-exclamation-triangle fa-2x\\'></i><div style=\\'margin-top:4px;\\'>Photo Error</div></div>';">
+      </div>
+      <div style="font-size:11px; color:#6c757d; margin-top:5px; font-weight:500;">${caption}</div>
+    </div>
+  `;
+}
+
+/* ============================================================
+ * DOCUMENT GENERATORS
+ * ============================================================ */
+function generateApplicationHtml(data) {
+  const studentData = data.studentData || {};
+  const photoBox = buildPhotoBox(studentData.photoUrl, 'Student Photograph');
+
+  return `
   <div class="document-container">
     <div class="document-watermark">APPLICATION FORM</div>
     <div class="document-header">
@@ -843,133 +555,68 @@ async function showApplicationData() {
     </div>
 
     <div class="document-content">
-      ${hasValidPhoto ? `
-        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
-          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
-            <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%; max-height:100%; object-fit:contain;" alt="Student Photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x180?text=No+Photo';">
-          </div>
-          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
-        </div>
-      ` : `
-        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
-          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
-            <img src="https://via.placeholder.com/150x180?text=No+Photo" style="max-width:100%; max-height:100%; object-fit:contain;" alt="No Photo">
-          </div>
-          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
-        </div>
-      `}
+      ${photoBox}
 
       <div class="document-section-title">1. Personal Information</div>
-      <div class="info-grid1" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
-        ${[
-          ['Application Date', studentData.submissionDate || new Date().toLocaleDateString()],
-          ['Application ID', studentData.applicationId || 'N/A'],
-          ["1. Student's Name", studentData.studentName || 'N/A'],
-          ["2. House Name", studentData.houseName || 'N/A'],
-          ["3. Date of Birth", studentData.dob || 'N/A'],
-          ["4. Aadhaar Number", studentData.aadhaarNumber || 'N/A'],
-          ["5. Address", studentData.address || 'N/A'],
-          ["6. Phone Number", studentData.phoneNumber || 'N/A'],
-          ["7. WhatsApp Number", studentData.whatsappNumber || 'N/A']
-        ].map(([label, value]) => `
-          <div class="info-item">
-            <span class="info-label">${label}:</span>
-            <span class="info-value">${escapeHtml(value)}</span>
-          </div>
-        `).join('')}
+      <div class="info-grid1" style="margin-right: 170px;">
+        <div class="info-item"><span class="info-label">Application Date:</span><span class="info-value">${escapeHtml(studentData.submissionDate || formatDate(new Date()))}</span></div>
+        <div class="info-item"><span class="info-label">Application ID:</span><span class="info-value">${escapeHtml(studentData.applicationId || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">1. Student's Name:</span><span class="info-value">${escapeHtml(studentData.studentName || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">2. House Name:</span><span class="info-value">${escapeHtml(studentData.houseName || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">3. Date of Birth:</span><span class="info-value">${escapeHtml(studentData.dob || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">4. Aadhaar Number:</span><span class="info-value">${escapeHtml(studentData.aadhaarNumber || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">5. Address:</span><span class="info-value">${escapeHtml(studentData.address || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">6. Phone Number:</span><span class="info-value">${escapeHtml(studentData.phoneNumber || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">7. WhatsApp Number:</span><span class="info-value">${escapeHtml(studentData.whatsappNumber || 'N/A')}</span></div>
       </div>
 
       <div class="document-section-title">2. Parent/Guardian Information</div>
-<div class="info-grid1" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
-  ${[
-    ["8. Father's Name", studentData.fatherName || 'N/A'],
-    ["9. Father's Occupation", studentData.fatherOccupation || 'N/A'],
-    ["10. Guardian's Name", studentData.guardianName || 'N/A'],
-    ["11. Relationship with Guardian", studentData.relationshipWithGuardian || 'N/A']
-  ].map(([label, value]) => `
-    <div class="info-item">
-      <span class="info-label">${label}:</span>
-      <span class="info-value">${escapeHtml(value)}</span>
-    </div>
-  `).join('')}
-  
-  <!-- Always show this line with a default message if guardianReason is empty -->
-  <div class="info-item">
-    <span class="info-label">12. Reason if Guardian is not Father:</span>
-    <span class="info-value">${escapeHtml(studentData.guardianReason) || 'Not applicable (Father is guardian)'}</span>
-  </div>
-</div>
+      <div class="info-grid1" style="margin-right: 170px;">
+        <div class="info-item"><span class="info-label">8. Father's Name:</span><span class="info-value">${escapeHtml(studentData.fatherName || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">9. Father's Occupation:</span><span class="info-value">${escapeHtml(studentData.fatherOccupation || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">10. Guardian's Name:</span><span class="info-value">${escapeHtml(studentData.guardianName || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">11. Relationship:</span><span class="info-value">${escapeHtml(studentData.relationshipWithGuardian || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">12. Reason if Guardian not Father:</span><span class="info-value">${escapeHtml(studentData.guardianReason) || 'Not applicable'}</span></div>
+      </div>
+
       <div class="document-section-title">3. Educational Information</div>
-      <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
-        ${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label, i) => `
-              <div class="info-item">
-                <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([studentData.madrasa || 'N/A', studentData.madrasaclass || 'N/A', studentData.school || 'N/A', studentData.schoolclass || 'N/A', studentData.previousStudy || 'No'][i])}</span>
-              </div>
-            `).join('')}
-          </div>
-          ${studentData.previousStudy === 'Yes' ? `
-  <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-    <div class="info-item">
-      <span class="info-label">Previous Institution:</span>
-      <span class="info-value">${escapeHtml(studentData.previousInstitution || 'N/A')}</span>
-    </div>
-    <div class="info-item">
-      <span class="info-label">Duration of Study:</span>
-      <span class="info-value">${escapeHtml(studentData.studyDuration || 'N/A')}</span>
-    </div>
-    <div class="info-item">
-      <span class="info-label">Number of Juz:</span>
-      <span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span>
-    </div>
-    <div class="info-item">
-      <span class="info-label">Reason for Leaving:</span>
-      <span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span>
-    </div>
-    <div class="info-item">
-      <span class="info-label">Head Teacher's Phone Number:</span>
-      <span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span>
-    </div>
-  </div>
-` : ''}
+      <div class="info-grid" style="margin-right: 170px;">
+        <div class="info-item"><span class="info-label">13. Madrasa:</span><span class="info-value">${escapeHtml(studentData.madrasa || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">Madrasa Class:</span><span class="info-value">${escapeHtml(studentData.madrasaclass || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">14. School:</span><span class="info-value">${escapeHtml(studentData.school || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">School Class:</span><span class="info-value">${escapeHtml(studentData.schoolclass || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">15. Previous Study:</span><span class="info-value">${escapeHtml(studentData.previousStudy || 'No')}</span></div>
+      </div>
+
+      ${studentData.previousStudy === 'Yes' ? `
+        <div class="info-grid" style="margin-right: 170px;">
+          <div class="info-item"><span class="info-label">Previous Institution:</span><span class="info-value">${escapeHtml(studentData.previousInstitution || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Duration:</span><span class="info-value">${escapeHtml(studentData.studyDuration || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Number of Juz:</span><span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Reason for Leaving:</span><span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Head Teacher Phone:</span><span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span></div>
+        </div>
+      ` : ''}
 
       <div class="document-section-title">4. Medical & Identification</div>
-      <div class="info-grid" style="margin-right: ${hasValidPhoto ? '170px' : '170px'};">
-        ${[
-          ["16. Identification Mark", studentData.identificationMark || 'N/A'],
-          ["17. Physical Fitness", studentData.physicalFitness || 'N/A']
-        ].map(([label, value]) => `
-          <div class="info-item">
-            <span class="info-label">${label}:</span>
-            <span class="info-value">${escapeHtml(value)}</span>
-          </div>
-        `).join('')}
-        ${studentData.illness ? `
-          <div class="info-item">
-            <span class="info-label">Illness:</span>
-            <span class="info-value">${escapeHtml(studentData.illness)}</span>
-          </div>
-        ` : ''}
+      <div class="info-grid" style="margin-right: 170px;">
+        <div class="info-item"><span class="info-label">16. Identification Mark:</span><span class="info-value">${escapeHtml(studentData.identificationMark || 'N/A')}</span></div>
+        <div class="info-item"><span class="info-label">17. Physical Fitness:</span><span class="info-value">${escapeHtml(studentData.physicalFitness || 'N/A')}</span></div>
+        ${studentData.illness ? `<div class="info-item"><span class="info-label">Illness:</span><span class="info-value">${escapeHtml(studentData.illness)}</span></div>` : ''}
       </div>
 
       <div class="document-declaration">
         <h3 class="document-section-title">Declaration</h3>
         <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
-          <strong>${escapeHtml(studentData.studentName || '')}</strong> S/o 
-          <strong>${escapeHtml(studentData.guardianName || '')}</strong>, 
-          എന്ന എന്‍റെ കുട്ടിയും ഞാനും ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ ദാറുന്നജാത്ത് ശരീഅത്ത് & ആർട്സ് കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
+          <strong>${escapeHtml(studentData.studentName || '')}</strong> S/o
+          <strong>${escapeHtml(studentData.guardianName || '')}</strong>,
+          എന്ന എൻറെ കുട്ടിയും ഞാനും അൽ ഹാഫിള്‍ മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിർദ്ദേശങ്ങളും പാലിക്കാൻ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നു.
         </p>
-
         <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
-          <div style="flex: 0 0 auto;">
-            <div style="margin-bottom: 14px;">
-              Date: ______________________________
-            </div>
-            <div>
-              Place: _____________________________
-            </div>
+          <div>
+            <div style="margin-bottom: 14px;">Date: ______________________________</div>
+            <div>Place: _____________________________</div>
           </div>
-
           <div style="text-align: right; flex: 1;">
             <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
             <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
@@ -983,24 +630,17 @@ async function showApplicationData() {
         <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
       </p>
     </div>
-  </div>
-    `;
-  }
+  </div>`;
+}
 
-  function generateHallticketHtml(data) {
-    const { collegeInfo, studentData } = data;
-    const hasValidPhoto = studentData.photoUrl && (
-      studentData.photoUrl.includes('drive.google.com') ||
-      studentData.photoUrl.startsWith('data:image') ||
-      studentData.photoUrl.startsWith('http')
-    );
-    
-    const formattedDob = formatDateToDDMMYYYY(studentData.dob || 'N/A');
-    
-    const qrText = `Name: ${studentData.studentName || ''}, Register No: ${studentData.registerNo || ''}, DoB: ${formattedDob}, Exam Date: 15/02/2026, Venue: College Seminar Hall`;
-    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
-    
-    return `
+function generateHallticketHtml(data) {
+  const studentData = data.studentData || {};
+  const photoBox = buildPhotoBox(studentData.photoUrl, 'Student Photograph').replace('top:40px', 'top:20px');
+  const formattedDob = formatDateToDDMMYYYY(studentData.dob || 'N/A');
+  const qrText = `Name: ${studentData.studentName || ''}, Register No: ${studentData.registerNo || ''}, DoB: ${formattedDob}, Exam Date: 15/02/2026, Venue: College Seminar Hall`;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
+
+  return `
   <div class="document-container">
     <div class="document-watermark">HALL TICKET</div>
     <div class="document-header">
@@ -1014,80 +654,43 @@ async function showApplicationData() {
         <div class="document-title">Entrance Exam Hall Ticket</div>
       </div>
     </div>
-    
+
     <div class="document-content">
-      ${hasValidPhoto ? `
-        <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
-          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
-            <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%; max-height:100%; object-fit:contain;" alt="Student Photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x180?text=No+Photo';">
-          </div>
-          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
-        </div>
-      ` : `
-        <div style="position:absolute; top:40px; right:40px; text-align:center; z-index:1;">
-          <div style="width:150px; height:180px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
-            <img src="https://via.placeholder.com/150x180?text=No+Photo" style="max-width:100%; max-height:100%; object-fit:contain;" alt="No Photo">
-          </div>
-          <div style="font-size:12px; color:#6c757d; margin-top:5px; font-weight:500;">Student Photograph</div>
-        </div>
-      `}
-      
+      ${photoBox}
+
       <div class="student-info-box" style="margin-right: 170px;">
         <div class="info-grid1">
-          ${[
-            ['Register Number', studentData.registerNo || 'N/A'],
-            ['Student Name', studentData.studentName || 'N/A'],
-            ['Date of Birth', formattedDob], 
-            ['Age', studentData.age || 'N/A'], 
-            ['Phone Number', studentData.phoneNumber || 'N/A'],
-            ['House Name', studentData.houseName || 'N/A'],
-            ['Address', studentData.address || 'N/A'],
-            ['Previous Study', studentData.previousStudy || 'N/A']
-          ].map(([label, value]) => `
-            <div class="info-item">
-              <span class="info-label">${label}:</span>
-              <span class="info-value">${escapeHtml(value)}</span>
-            </div>
-          `).join('')}
+          <div class="info-item"><span class="info-label">Register Number:</span><span class="info-value">${escapeHtml(studentData.registerNo || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Student Name:</span><span class="info-value">${escapeHtml(studentData.studentName || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Date of Birth:</span><span class="info-value">${escapeHtml(formattedDob)}</span></div>
+          <div class="info-item"><span class="info-label">Age:</span><span class="info-value">${escapeHtml(studentData.age || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Phone Number:</span><span class="info-value">${escapeHtml(studentData.phoneNumber || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">House Name:</span><span class="info-value">${escapeHtml(studentData.houseName || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Address:</span><span class="info-value">${escapeHtml(studentData.address || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Previous Study:</span><span class="info-value">${escapeHtml(studentData.previousStudy || 'N/A')}</span></div>
         </div>
       </div>
-      
+
       <div class="exam-wrapper">
         <div class="exam-details-box">
           <div class="exam-title">Examination Details</div>
           <div class="exam-info-grid">
-            ${[
-              ['Exam Date', '15 February 2026'],
-              ['Reporting Time', '07:30 AM'],
-              ['Exam Duration', '08:00 AM - 10:00 AM'],
-              ['Venue', 'HIM Puthanpalli']
-            ].map(([label, value]) => `
-              <div class="exam-item">
-                <div class="exam-label">${label}</div>
-                <div class="exam-value">${value}</div>
-              </div>
-            `).join('')}
+            <div class="exam-item"><div class="exam-label">Exam Date</div><div class="exam-value">15 February 2026</div></div>
+            <div class="exam-item"><div class="exam-label">Reporting Time</div><div class="exam-value">07:30 AM</div></div>
+            <div class="exam-item"><div class="exam-label">Exam Duration</div><div class="exam-value">08:00 AM - 10:00 AM</div></div>
+            <div class="exam-item"><div class="exam-label">Venue</div><div class="exam-value">HIM Puthanpalli</div></div>
           </div>
         </div>
-        
-        <div style="position:absolute;top:230px;right:20px;text-align:center;z-index:1;">
-          <div style="width:140px; height:140px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; padding:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+        <div style="position:absolute; top:230px; right:20px; text-align:center; z-index:1;">
+          <div style="width:140px; height:140px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; padding:10px;">
             <img src="${qrCodeUrl}" style="max-width:100%; max-height:100%;" alt="QR Code">
           </div>
           <div style="font-size:11px; color:#6c757d; margin-top:5px; font-weight:500;">QR Code Verification</div>
         </div>
       </div>
-      
+
       <table class="signing-table">
-        <thead>
-          <tr>
-            <th>QIRA'ATH</th>
-            <th>HIFZ</th>
-            <th>SPOT</th>
-            <th>GK</th>
-            <th>MEMORY TEST</th>
-          </tr>
-        </thead>
+        <thead><tr><th>QIRA'ATH</th><th>HIFZ</th><th>SPOT</th><th>GK</th><th>MEMORY TEST</th></tr></thead>
         <tbody>
           <tr>
             <td><div style="font-size:10px; color:#6c757d;">Examiner Signature</div></td>
@@ -1098,7 +701,7 @@ async function showApplicationData() {
           </tr>
         </tbody>
       </table>
-      
+
       <div class="document-instructions">
         <div class="document-instructions-title">Important Instructions</div>
         <ul class="document-instructions-list">
@@ -1111,94 +714,329 @@ async function showApplicationData() {
         </ul>
       </div>
     </div>
-    
+
     <div class="document-footer">
       <p style="color:#495057; font-size:10px; margin:0;">
         <strong>College Contact:</strong> 9048020243 | <strong>Email:</strong> mammumullacollege@gmail.com
       </p>
     </div>
-  </div>
-    `;
-  }
+  </div>`;
+}
 
-  function formatDateToDDMMYYYY(dateInput) {
-  if (!dateInput || dateInput === 'N/A') return 'N/A';
-  
+/* ============================================================
+ * ADMIN AUTH
+ * ============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+  const m = new bootstrap.Modal(document.getElementById('adminLoginModal'));
+  m.show();
+});
+
+document.getElementById('adminLoginForm')?.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const u = document.getElementById('adminUsername').value.trim();
+  const p = document.getElementById('adminPassword').value.trim();
+  if (u === 'admin' && p === '786') {
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('adminLoginModal')).hide();
+    document.getElementById('adminPanelSection').style.display = 'block';
+    document.getElementById('adminDataDisplay').innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    alert('Wrong username or password');
+  }
+});
+
+function logoutAdmin() {
+  document.getElementById('adminPanelSection').style.display = 'none';
+  document.getElementById('adminDataDisplay').innerHTML = '';
+  document.getElementById('documentDisplayArea').style.display = 'none';
+  document.getElementById('documentDisplayArea').innerHTML = '';
+  new bootstrap.Modal(document.getElementById('adminLoginModal')).show();
+}
+
+function showAdminDashboard() {
+  document.getElementById('adminPanelSection').style.display = 'block';
+  document.getElementById('documentDisplayArea').style.display = 'none';
+  document.getElementById('documentDisplayArea').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+ * PREVIEW ALL APPLICATIONS (with photo fix)
+ * ============================================================ */
+async function previewAllApplications() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all applications...</p></div>';
+
   try {
-    if (typeof dateInput === 'string' && /^\d{2}-\d{2}-\d{4}$/.test(dateInput)) {
-      return dateInput;
+    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
+    const result = await resp.json();
+
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No applications found.</div>';
+      return;
     }
-    
-    let date;
-    
-    if (dateInput.includes('-')) {
-      const parts = dateInput.split('-');
-      if (parts[0].length === 4) {
-        date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      } else {
-        date = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+
+    console.log('📋 Available headers:', Object.keys(result.data[0]));
+    console.log('🖼️ Sample row:', result.data[0]);
+
+    let html = '';
+    let count = 0;
+
+    displayArea.innerHTML = `<div class="alert alert-info"><i class="fas fa-spinner fa-spin me-2"></i>Processing ${result.data.length} applications...</div>`;
+
+    for (let i = 0; i < result.data.length; i++) {
+      const row = result.data[i];
+      const get = makeGetter(row);
+
+      const rawPhoto = extractPhotoUrl(row, get);
+      const photoUrl = fixPhotoUrl(rawPhoto);
+
+      if (i < 3) {
+        console.log(`Row ${i + 1} (${get('Name') || get('Student Name') || 'N/A'})`);
+        console.log('   raw photo :', rawPhoto);
+        console.log('   fixed URL :', photoUrl);
       }
-    } else if (dateInput.includes('/')) {
-      const parts = dateInput.split('/');
-      if (parts[0].length === 4) {
-        date = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      } else {
-        date = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-      }
-    } else {
-      date = new Date(dateInput);
+
+      const studentData = {
+        submissionDate: formatDate(get('Timestamp')) || formatDate(new Date()),
+        applicationId: get('ID') || get('Reg. No') || get('Application ID') || `APP-${(i + 1).toString().padStart(4, '0')}`,
+        studentName: get('Name') || get('Student Name') || 'N/A',
+        houseName: get('House') || get('House Name') || 'N/A',
+        dob: formatDateToDDMMYYYY(get('DOB') || get('Date of Birth') || 'N/A'),
+        aadhaarNumber: get('Aadhar') || get('Aadhaar') || get('Aadhaar Number') || 'N/A',
+        address: get('Address') || 'N/A',
+        phoneNumber: get('MOB') || get('Mobile') || get('Phone Number') || 'N/A',
+        whatsappNumber: get('WHATSAPP') || get('WhatsApp') || get('MOB') || 'N/A',
+        fatherName: get('Father') || get('Father Name') || 'N/A',
+        fatherOccupation: get('Father job') || get('Father Occupation') || 'N/A',
+        guardianName: get('Guardian') || get('Guardian Name') || 'N/A',
+        relationshipWithGuardian: get('Relation to guardian') || get('Relationship with Guardian') || 'N/A',
+        guardianReason: get('if not father cause') || get('Guardian Reason') || '',
+        madrasa: get('Madrasa') || 'N/A',
+        madrasaclass: get('Madrassa class') || get('Madrasa Class') || 'N/A',
+        school: get('School') || 'N/A',
+        schoolclass: get('School class') || get('School Class') || 'N/A',
+        previousStudy: get('Old institution') || get('Previous Study') || 'No',
+        previousInstitution: get('Name of insti') || get('Previous Institution') || '',
+        studyDuration: get('Period') || get('Study Duration') || '',
+        juzCount: get('Number of Juz') || get('Juz count') || get('Juz') || '',
+        reasonForLeaving: get('Reason for Leaving') || get('Leaving reason') || '',
+        headTeacherPhone: get('Head Teacher Phone') || get('Teacher phone') || get('Head teacher number') || '',
+        identificationMark: get('Identification mark') || get('Identification Mark') || 'N/A',
+        physicalFitness: get('Physical Fitness: yes or no') || get('Physical Fitness') || 'N/A',
+        illness: get('ill name') || get('Illness') || '',
+        photoUrl: photoUrl
+      };
+
+      html += generateApplicationHtml({ collegeInfo: {}, studentData });
+      count++;
     }
-    
-    if (isNaN(date.getTime())) {
-      return String(dateInput).split(' ')[0]; 
-    }
-    
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    
-    return `${day}-${month}-${year}`;
-  } catch (e) {
-    return String(dateInput).split(' ')[0];
+
+    document.getElementById('adminPanelSection').style.display = 'none';
+    const docArea = document.getElementById('documentDisplayArea');
+    docArea.style.display = 'block';
+    docArea.innerHTML = `
+      <div class="print-buttons-container">
+        <button onclick="window.print()" class="btn-gold btn-lg me-3">
+          <i class="fas fa-print me-2"></i> PRINT ALL (${count} Applications)
+        </button>
+        <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
+          <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
+        </button>
+      </div>
+      ${html}`;
+
+    displayArea.innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    console.error('❌ Preview error:', err);
+    displayArea.innerHTML = `<div class="alert alert-danger">
+      <i class="fas fa-exclamation-triangle me-2"></i> Error: ${err.message}
+    </div>`;
   }
 }
 
-  function escapeHtml(text) {
-    if (!text) return '';
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-    return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+/* ============================================================
+ * PREVIEW ALL HALL TICKETS (with photo fix)
+ * ============================================================ */
+async function previewAllHalltickets() {
+  const displayArea = document.getElementById('adminDataDisplay');
+  displayArea.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading all hall tickets...</p></div>';
+
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_halltickets`);
+    const result = await resp.json();
+
+    if (result.status !== 'success' || !result.data?.length) {
+      displayArea.innerHTML = '<div class="alert alert-warning">No hall tickets found. Only applications with payment status YES are included.</div>';
+      return;
+    }
+
+    console.log('🎫 Hall ticket headers:', Object.keys(result.data[0]));
+
+    let html = '';
+    let count = 0;
+
+    displayArea.innerHTML = `<div class="alert alert-info"><i class="fas fa-spinner fa-spin me-2"></i>Processing ${result.data.length} hall tickets...</div>`;
+
+    for (let i = 0; i < result.data.length; i++) {
+      const row = result.data[i];
+      const get = makeGetter(row);
+
+      const rawPhoto = extractPhotoUrl(row, get);
+      const photoUrl = fixPhotoUrl(rawPhoto);
+
+      if (i < 3) {
+        console.log(`Hall ticket ${i + 1} (${get('Name') || get('Student Name') || 'N/A'})`);
+        console.log('   raw photo :', rawPhoto);
+        console.log('   fixed URL :', photoUrl);
+      }
+
+      const dobRaw = get('DOB') || get('Date of Birth') || '';
+      const studentData = {
+        registerNo: get('Reg. No') || get('ID') || get('Application ID') || `AMCT-${(i + 1).toString().padStart(2, '0')}`,
+        studentName: get('Name') || get('Student Name') || 'N/A',
+        dob: formatDateToDDMMYYYY(dobRaw || 'N/A'),
+        age: dobRaw ? calculateAgeFromDOB(dobRaw) : 'N/A',
+        houseName: get('House') || get('House Name') || 'N/A',
+        address: get('Address') || 'N/A',
+        phoneNumber: get('MOB') || get('Mobile') || get('Phone Number') || 'N/A',
+        previousStudy: get('Previous Study') || get('Old institution') || 'N/A',
+        photoUrl: photoUrl
+      };
+
+      html += generateHallticketHtml({ collegeInfo: {}, studentData });
+      count++;
+
+      if (i < result.data.length - 1) {
+        html += '<div class="document-separator" style="page-break-after: always;"></div>';
+      }
+    }
+
+    document.getElementById('adminPanelSection').style.display = 'none';
+    const docArea = document.getElementById('documentDisplayArea');
+    docArea.style.display = 'block';
+    docArea.innerHTML = `
+      <div class="print-buttons-container">
+        <button onclick="window.print()" class="btn-gold btn-lg me-3">
+          <i class="fas fa-print me-2"></i> PRINT ALL (${count} Hall Tickets)
+        </button>
+        <button onclick="showAdminDashboard()" class="btn-outline-gold btn-lg">
+          <i class="fas fa-arrow-left me-2"></i> Back to Admin Panel
+        </button>
+      </div>
+      ${html}`;
+
+    displayArea.innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    console.error('❌ Preview error:', err);
+    displayArea.innerHTML = `<div class="alert alert-danger">
+      <i class="fas fa-exclamation-triangle me-2"></i> Error: ${err.message}
+    </div>`;
   }
+}
 
-  AOS.init();
+/* ============================================================
+ * TABLES
+ * ============================================================ */
+async function showApplicationData() {
+  const area = document.getElementById('adminDataDisplay');
+  area.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading data...</p></div>';
 
-  fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navbar-container').innerHTML = data;
-      document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
-        toggle.addEventListener('click', function (e) {
-          e.stopPropagation();
-          e.preventDefault();
-          const target = document.querySelector(toggle.getAttribute('data-bs-target'));
-          const bsCollapse = new bootstrap.Collapse(target, { toggle: true });
-        });
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_applications`);
+    const result = await resp.json();
+    if (result.status !== 'success' || !result.data?.length) {
+      area.innerHTML = '<div class="alert alert-warning">No data found.</div>';
+      return;
+    }
+    let html = `<h3 class="text-center mb-4">Applications</h3>
+      <div class="table-responsive" id="adminDataTable">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark"><tr>`;
+    const headers = Object.keys(result.data[0]);
+    headers.forEach(h => html += `<th>${escapeHtml(h)}</th>`);
+    html += `</tr></thead><tbody>`;
+    result.data.forEach(row => {
+      html += '<tr>';
+      headers.forEach(k => {
+        // Render photo as thumbnail if this column looks like a photo
+        if (/photo|image/i.test(k) && row[k]) {
+          const fixed = fixPhotoUrl(String(row[k]));
+          if (fixed) {
+            html += `<td><img src="${escapeHtml(fixed)}" style="max-height:50px;max-width:50px;border-radius:4px;" referrerpolicy="no-referrer" onerror="this.style.display='none'"></td>`;
+          } else {
+            html += `<td>${escapeHtml(row[k])}</td>`;
+          }
+        } else {
+          html += `<td>${escapeHtml(row[k])}</td>`;
+        }
       });
-    })
-    .catch(error => console.error('Navbar load error:', error));
-    
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Footer load error:', error));
-</script> 
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    area.innerHTML = html;
+  } catch (err) {
+    area.innerHTML = '<div class="alert alert-danger">Failed to load data.</div>';
+  }
+}
 
+async function showResultsData() {
+  const area = document.getElementById('adminDataDisplay');
+  area.innerHTML = '<div class="text-center my-5"><div class="spinner-border text-success"></div><p class="mt-3">Loading results...</p></div>';
+
+  try {
+    const resp = await fetch(`${SCRIPT_URL}?type=all_results`);
+    const result = await resp.json();
+    if (result.status !== 'success' || !result.data?.length) {
+      area.innerHTML = '<div class="alert alert-warning">No results found.</div>';
+      return;
+    }
+    let html = `<h3 class="text-center mb-4">Results</h3>
+      <div class="table-responsive" id="adminDataTable">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark"><tr>`;
+    const headers = Object.keys(result.data[0]);
+    headers.forEach(h => html += `<th>${escapeHtml(h)}</th>`);
+    html += `</tr></thead><tbody>`;
+    result.data.forEach(row => {
+      html += '<tr>';
+      headers.forEach(k => html += `<td>${escapeHtml(row[k])}</td>`);
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    area.innerHTML = html;
+  } catch (err) {
+    area.innerHTML = '<div class="alert alert-danger">Failed to load results.</div>';
+  }
+}
+
+/* ============================================================
+ * NAVBAR & FOOTER LOAD
+ * ============================================================ */
+fetch('navbar.html')
+  .then(r => r.text())
+  .then(data => {
+    document.getElementById('navbar-container').innerHTML = data;
+    document.querySelectorAll('.submenu-toggle').forEach(t => {
+      t.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(t.getAttribute('data-bs-target'));
+        new bootstrap.Collapse(target, { toggle: true });
+      });
+    });
+  })
+  .catch(err => console.warn('Navbar not loaded:', err));
+
+fetch('footer.html')
+  .then(r => r.text())
+  .then(data => { document.getElementById('footer-container').innerHTML = data; })
+  .catch(err => console.warn('Footer not loaded:', err));
+
+AOS.init();
+</script>
 </body>
 </html>
