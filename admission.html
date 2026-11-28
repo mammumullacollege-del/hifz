@@ -270,6 +270,7 @@
   </div>
 </div>
 <div id="navbar-container"></div>
+
 <script>
   const CONFIG = {
     EXAM_DATE_ISO: '2026-02-15',
@@ -290,19 +291,19 @@
     CLASS_STARTS: 'പിന്നീട് അറിയിക്കും',
     COLLEGE_PHONE: '9048020243',
     COLLEGE_EMAIL: 'mammumullacollege@gmail.com',
-    
-    SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxO7KLtUlx_SciMT8UXBaluAbljZghqyiD4PY8XZrgg4mmy06wBj2MX0ixnO7R-zkBh0A/exec'
+
+    SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbz9E1ja3oMEvVlEUxXudqpJI6nvpXcF7Hno25FJsM9W38ZnPyQMMSl3xpTZJUXeuP23kg/exec'
   };
-  
+
   function formatDateToDDMMYYYY(isoDate) {
     if (!isoDate) return 'N/A';
     if (isoDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
       const parts = isoDate.split('-');
-      return `${parts[2]}-${parts[1]}-${parts[0]}`;
+      return parts[2] + '-' + parts[1] + '-' + parts[0];
     }
     return isoDate;
   }
-  
+
   function formatDateForDisplay(dateString) {
     if (!dateString) return 'N/A';
     if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
@@ -320,7 +321,7 @@
     </div>
     <div class="ticker-item">
       <span class="ticker-badge">📢 NEWS</span>
-       യോഗ്യത: പത്ത് വയസ് കവിയാത്ത ആണ്‍ കുട്ടി
+      യോഗ്യത: പത്ത് വയസ് കവിയാത്ത ആണ്‍ കുട്ടി
     </div>
     <div class="ticker-item">
       <span class="ticker-badge">📢 NEWS</span>
@@ -358,80 +359,32 @@
 </div>
 
 <div id="mainContentArea">
-  <!--<section class="content-section">
+  <section class="content-section" style="background: white;">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Admission Timeline</h2>
-      </div>
-      <div class="timeline">
-        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-lg-center">
-          <div class="timeline-item" data-aos="fade-up">
-            <div class="timeline-content-box">
-              <div class="timeline-date">15 February 2026, 10:00 AM</div>
-              <h3 class="timeline-title"><i class="fas fa-file-signature"></i>Entrance Examination</h3>
-            </div>
-          </div>
-          <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-            <div class="timeline-content-box">
-              <div class="timeline-date">17 February 2026</div>
-              <h3 class="timeline-title"><i class="fas fa-chart-line"></i>Result Announcement</h3>
-            </div>
-          </div>
-          <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-            <div class="timeline-content-box">
-              <div class="timeline-date">Announce Later</div>
-              <h3 class="timeline-title"><i class="fas fa-user-graduate"></i>Admission Starts</h3>
-            </div>
-          </div>
-          <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-            <div class="timeline-content-box">
-              <div class="timeline-date">Announce Later</div>
-              <h3 class="timeline-title"><i class="fas fa-book-open"></i>Classes Commence</h3>
-            </div>
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="portal-card text-center">
+            <div class="portal-icon"><i class="fas fa-file-alt"></i></div>
+            <button class="btn-gold w-100 mt-4" data-bs-toggle="modal" data-bs-target="#instructionsModal">
+              <i class="fas fa-pen me-2"></i> Apply Now
+            </button>
           </div>
         </div>
-      </div>
-    </div>
-  </section>-->
-  <section class="content-section" style="background: white;">
-  <div class="container">
-    <div class="row g-4">
-
-<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-  <div class="portal-card text-center">
-    <div class="portal-icon"><i class="fas fa-file-alt"></i></div>
-    <!--<h3 class="portal-title">New Application</h3>
-    <p class="portal-description">Submit new admission application</p>-->
-    
-    <button class="btn-gold w-100 mt-4" 
-            data-bs-toggle="modal" 
-            data-bs-target="#instructionsModal">
-      <i class="fas fa-pen me-2"></i> Apply Now
-    </button>
-  </div>
-</div>
-
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-file-download"></i></div>
-            <!--<h3 class="portal-title">Download Application</h3>
-            <p class="portal-description">Download your submitted application form</p>-->
             <button class="btn-gold w-100" onclick="showForm('applicationForm')"><i class="fas fa-download me-2"></i>Download Application</button>
           </div>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-ticket-alt"></i></div>
-            <!--<h3 class="portal-title">Hall Ticket</h3>
-            <p class="portal-description">Download your entrance exam hall ticket</p><br>-->
             <button class="btn-gold w-100" onclick="showForm('hallticketForm')"><i class="fas fa-ticket-alt me-2"></i>Get Hall Ticket</button>
           </div>
         </div>
         <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
           <div class="portal-card text-center">
             <div class="portal-icon"><i class="fas fa-chart-line"></i></div>
-            <!--<h3 class="portal-title">Check Result</h3>
-            <p class="portal-description">Check your entrance examination result</p><br><br>-->
             <button class="btn-gold w-100" onclick="showForm('resultForm')"><i class="fas fa-search me-2"></i>Check Result</button>
           </div>
         </div>
@@ -454,13 +407,13 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">1. കുട്ടിയുടെ പേര് | Student's Name:</label>
-                  <input type="text" class="form-control" name="studentName" placeholder="പൂർണ്ണ പേര് രേഖപ്പെടുത്തുക | Enter full name" required>
+                  <input type="text" class="form-control" name="studentName" placeholder="പൂർണ്ണ പേര് രേഖപ്പെടുത്തുക" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">2. വീട്ടു പേര് | House Name:</label>
-                  <input type="text" class="form-control" name="houseName" placeholder="വീട്ടു പേര് രേഖപ്പെടുത്തുക | House name" required>
+                  <input type="text" class="form-control" name="houseName" placeholder="വീട്ടു പേര്" required>
                 </div>
               </div>
             </div>
@@ -471,31 +424,30 @@
                   <input type="date" class="form-control" name="dob" id="dobInput" max="2018-12-31" required onchange="validateAndCalculateAge(this.value)">
                   <small class="text-muted" id="ageDisplay"></small>
                   <small class="text-muted text-danger" id="ageError" style="display:none;"></small>
-                  <small class="text-muted" id="dobDisplay" style="display:none;"></small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">4. ആധാര്‍ നമ്പര്‍ | Aadhaar Number:</label>
-                  <input type="text" class="form-control" name="aadhaarNumber" placeholder="ആധാര്‍ നമ്പര്‍ രേഖപ്പെടുത്തുക | Enter Aadhaar number" required pattern="\d{12}" title="Aadhaar number must be 12 digits" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                  <input type="text" class="form-control" name="aadhaarNumber" placeholder="12 digit Aadhaar" required pattern="\d{12}" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
               </div>
             </div>
             <div class="mb-3">
               <label class="form-label required">5. വിലാസം | Postal Address:</label>
-              <textarea class="form-control" name="address" placeholder="പൂർണ്ണ വിലാസം രേഖപ്പെടുത്തുക | Enter full address" required rows="3"></textarea>
+              <textarea class="form-control" name="address" placeholder="പൂർണ്ണ വിലാസം" required rows="3"></textarea>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">6. ഫോണ്‍ നമ്പര്‍ | Phone Number:</label>
-                  <input type="tel" class="form-control" name="phoneNumber" placeholder="9876543210 | Enter phone number" required pattern="\d{10}" title="Phone number must be 10 digits" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                  <input type="tel" class="form-control" name="phoneNumber" placeholder="10 digit phone" required pattern="\d{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label class="form-label">7. വാട്‌സ്ആപ്പ് നമ്പര്‍ | WhatsApp Number:</label>
-                  <input type="tel" class="form-control" name="whatsappNumber" placeholder="വാട്‌സ്ആപ്പ് നമ്പര്‍ (വ്യത്യസ്തമെങ്കിൽ) | Enter WhatsApp number (if different)" pattern="\d{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                  <label class="form-label">7. വാട്‌സ്ആപ്പ് നമ്പര്‍ | WhatsApp:</label>
+                  <input type="tel" class="form-control" name="whatsappNumber" placeholder="WhatsApp (if different)" pattern="\d{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
               </div>
             </div>
@@ -506,13 +458,13 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">8. പിതാവിന്‍റെ പേര് | Father's Name:</label>
-                  <input type="text" class="form-control" name="fatherName" placeholder="പിതാവിന്‍റെ പേര് രേഖപ്പെടുത്തുക | Enter father's name" required>
+                  <input type="text" class="form-control" name="fatherName" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">9. പിതാവിന്‍റെ ജോലി | Father's Occupation:</label>
-                  <input type="text" class="form-control" name="fatherOccupation" placeholder="പിതാവിന്‍റെ ജോലി രേഖപ്പെടുത്തുക | Enter father's occupation" required>
+                  <input type="text" class="form-control" name="fatherOccupation" required>
                 </div>
               </div>
             </div>
@@ -520,14 +472,14 @@
               <div class="col-md-6">
                 <div class="mb-3">
                   <label class="form-label required">10. രക്ഷിതാവിന്‍റെ പേര് | Guardian's Name:</label>
-                  <input type="text" class="form-control" name="guardianName" placeholder="രക്ഷിതാവിന്‍റെ പേര് | Guardian's name" required>
+                  <input type="text" class="form-control" name="guardianName" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label class="form-label required">11. വിദ്യാര്‍ത്ഥിക്ക് രക്ഷിതാവുമായുള്ള ബന്ധം | Relationship with Guardian:</label>
+                  <label class="form-label required">11. ബന്ധം | Relationship:</label>
                   <select class="form-control" name="relationshipWithGuardian" required>
-                    <option value="" disabled selected>രക്ഷിതാവുമായുള്ള ബന്ധം തിരഞ്ഞെടുക്കുക | Select Relationship</option>
+                    <option value="" disabled selected>Select</option>
                     <option value="Father">പിതാവ് | Father</option>
                     <option value="Mother">മാതാവ് | Mother</option>
                     <option value="Brother">സഹോദരൻ | Brother</option>
@@ -538,8 +490,8 @@
               </div>
             </div>
             <div class="mb-3">
-              <label class="form-label">12. രക്ഷിതാവ്, പിതാവല്ലെങ്കില്‍ കാരണം | Reason if Guardian is not Father:</label>
-              <textarea class="form-control" name="guardianReason" placeholder="രക്ഷിതാവ് പിതാവല്ലെങ്കില്‍ കാരണം | Enter reason if guardian is not father" rows="2"></textarea>
+              <label class="form-label">12. രക്ഷിതാവ് പിതാവല്ലെങ്കില്‍ കാരണം | Reason:</label>
+              <textarea class="form-control" name="guardianReason" rows="2"></textarea>
             </div>
           </div>
           <div class="form-step">
@@ -547,15 +499,15 @@
             <div class="row mb-4 align-items-end">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label class="form-label required">13. പഠിക്കുന്ന മദ്റസയും സ്ഥലവും | Madrasa & Location:</label>
-                  <input type="text" class="form-control" name="madrasa" placeholder="മദ്റസയും സ്ഥലവും രേഖപ്പെടുത്തുക | Enter Madrasa name and location" required>
+                  <label class="form-label required">13. മദ്റസയും സ്ഥലവും | Madrasa & Location:</label>
+                  <input type="text" class="form-control" name="madrasa" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label class="form-label required">ക്ലാസ് | Class:</label>
+                  <label class="form-label required">Class:</label>
                   <select class="form-control" name="madrasaclass" required>
-                    <option value="" disabled selected>മദ്റസ ക്ലാസ് തിരഞ്ഞെടുക്കുക | Select Madrasa class</option>
+                    <option value="" disabled selected>Select</option>
                     <option value="II">II</option>
                     <option value="III">III</option>
                     <option value="IV">IV</option>
@@ -567,15 +519,15 @@
             <div class="row align-items-end">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label class="form-label required">14. പഠിക്കുന്ന സ്കൂളും സ്ഥലവും | School & Location:</label>
-                  <input type="text" class="form-control" name="school" placeholder="സ്കൂളും സ്ഥലവും രേഖപ്പെടുത്തുക | Enter School name and location" required>
+                  <label class="form-label required">14. സ്കൂളും സ്ഥലവും | School & Location:</label>
+                  <input type="text" class="form-control" name="school" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label class="form-label required">ക്ലാസ് | Class:</label>
+                  <label class="form-label required">Class:</label>
                   <select class="form-control" name="schoolclass" required>
-                    <option value="" disabled selected>സ്കൂള്‍ ക്ലാസ് തിരഞ്ഞെടുക്കുക | Select School class</option>
+                    <option value="" disabled selected>Select</option>
                     <option value="II">II</option>
                     <option value="III">III</option>
                     <option value="IV">IV</option>
@@ -585,7 +537,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <label class="form-label required">15. മുമ്പ് ഏതെങ്കിലും ഹിഫ്ള് കോളേജ്, ദര്‍സ്, കോളേജ് പഠിച്ചിട്ടുണ്ടോ | Previously Studied at Hifz College/Dars/College:</label>
+              <label class="form-label required">15. മുമ്പ് ഹിഫ്ള് കോളേജ്/ദർസ് പഠിച്ചിട്ടുണ്ടോ | Previously studied?:</label>
               <div class="d-flex gap-4">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="previousStudy" id="previousNo" value="No" onchange="togglePreviousStudy(false)" checked>
@@ -601,32 +553,32 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label class="form-label">ഏത് സ്ഥാപനത്തില്‍ | Which Institution:</label>
-                    <input type="text" class="form-control" name="previousInstitution" placeholder="സ്ഥാപനത്തിന്റെ പേര് രേഖപ്പെടുത്തുക | Enter institution name">
+                    <label class="form-label">Which Institution:</label>
+                    <input type="text" class="form-control" name="previousInstitution">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label class="form-label">എത്ര കാലം | Duration of Study:</label>
-                    <input type="text" class="form-control" name="studyDuration" placeholder="പഠന കാലം രേഖപ്പെടുത്തുക | Enter duration">
+                    <label class="form-label">Duration of Study:</label>
+                    <input type="text" class="form-control" name="studyDuration">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label class="form-label">എത്ര ജുസുഅ് | Number of Juz:</label>
-                    <input type="text" class="form-control" name="juzCount" placeholder="ജുസുഅിന്റെ എണ്ണം രേഖപ്പെടുത്തുക | Enter number of Juz">
+                    <label class="form-label">Number of Juz:</label>
+                    <input type="text" class="form-control" name="juzCount">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label class="form-label">പോരാനുള്ള കാരണം | Reason for Leaving:</label>
-                    <textarea class="form-control" name="reasonForLeaving" placeholder="പോരാനുള്ള കാരണം രേഖപ്പെടുത്തുക | Enter reason for leaving" rows="2"></textarea>
+                    <label class="form-label">Reason for Leaving:</label>
+                    <textarea class="form-control" name="reasonForLeaving" rows="2"></textarea>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label class="form-label">പ്രധാന അദ്ധ്യാപകന്‍റെ ഫോണ്‍ നമ്പര്‍ | Head Teacher's Phone Number:</label>
-                    <input type="tel" class="form-control" name="headTeacherPhone" placeholder="9876543210 | Enter phone number" pattern="\d{10}" title="Phone number must be 10 digits" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <label class="form-label">Head Teacher's Phone:</label>
+                    <input type="tel" class="form-control" name="headTeacherPhone" pattern="\d{10}" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                   </div>
                 </div>
               </div>
@@ -635,11 +587,11 @@
           <div class="form-step">
             <div class="form-step-title"><i class="fas fa-heartbeat me-2"></i>Medical & Identification</div>
             <div class="mb-3">
-              <label class="form-label required">16. കുട്ടിയെ തിരിച്ചറിയാനുള്ള അടയാളം | Student's Identification Mark:</label>
-              <input type="text" class="form-control" name="identificationMark" placeholder="തിരിച്ചറിയല്‍ അടയാളം രേഖപ്പെടുത്തുക | Enter identification mark" required>
+              <label class="form-label required">16. തിരിച്ചറിയാനുള്ള അടയാളം | Identification Mark:</label>
+              <input type="text" class="form-control" name="identificationMark" required>
             </div>
             <div class="mb-3">
-              <label class="form-label required">17. കുട്ടിയുടെ ശാരീരിക ക്ഷമത | Student's Physical Fitness:</label>
+              <label class="form-label required">17. ശാരീരിക ക്ഷമത | Physical Fitness:</label>
               <div class="d-flex gap-4">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="physicalFitness" id="fitnessHealthy" value="Healthy" onchange="toggleIllnessSection(false)" checked>
@@ -647,14 +599,14 @@
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="physicalFitness" id="fitnessMedication" value="Medication" onchange="toggleIllnessSection(true)">
-                  <label class="form-check-label" for="fitnessMedication">സ്ഥിരമായി ഗുളിക കഴിക്കാറുണ്ട് | Regular Medication</label>
+                  <label class="form-check-label" for="fitnessMedication">സ്ഥിരമായി ഗുളിക | Regular Medication</label>
                 </div>
               </div>
             </div>
             <div id="illness-section" style="display: none;">
               <div class="mb-3">
                 <label class="form-label">രോഗം | Illness:</label>
-                <textarea class="form-control" name="illness" placeholder="രോഗത്തിന്റെ വിശദാംശങ്ങൾ രേഖപ്പെടുത്തുക | Enter details of illness" rows="2"></textarea>
+                <textarea class="form-control" name="illness" rows="2"></textarea>
               </div>
             </div>
           </div>
@@ -674,10 +626,10 @@
           </div>
           <div class="instructions-box mt-4">
             <h4 class="instructions-title"><i class="fas fa-file-contract"></i>Declaration</h4>
-            <p id="declarationText" class="mb-3">എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.</p>
+            <p class="mb-3">എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നു.</p>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="declarationCheckbox" required onchange="toggleSubmitButton(this.checked)">
-              <label class="form-check-label" for="declarationCheckbox">I hereby declare that all information provided is true and correct to the best of my knowledge. I agree to abide by all rules and regulations of the college.</label>
+              <label class="form-check-label" for="declarationCheckbox">I hereby declare that all information is true and correct. I agree to abide by all rules of the college.</label>
             </div>
           </div>
           <button type="submit" class="btn-gold w-100 mt-4" id="submitApplicationBtn" disabled><i class="fas fa-paper-plane me-2"></i>Submit Application</button>
@@ -696,7 +648,7 @@
         <form id="downloadApplicationForm" onsubmit="return handleApplicationSubmit(event)">
           <div class="mb-4">
             <label class="form-label required"><i class="fas fa-mobile-alt me-2"></i>Mobile Number</label>
-            <input type="tel" class="form-control" id="appMobile" pattern="\d{10}" placeholder="10 digit mobile number" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <input type="tel" class="form-control" id="appMobile" pattern="\d{10}" placeholder="10 digit mobile" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
           </div>
           <div class="mb-4">
             <label class="form-label required"><i class="fas fa-calendar-alt me-2"></i>Date of Birth</label>
@@ -718,7 +670,7 @@
         <form id="downloadHallticketForm" onsubmit="return handleHallticketSubmit(event)">
           <div class="mb-4">
             <label class="form-label required"><i class="fas fa-mobile-alt me-2"></i>Mobile Number</label>
-            <input type="tel" class="form-control" id="ticketMobile" pattern="\d{10}" placeholder="10 digit mobile number" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <input type="tel" class="form-control" id="ticketMobile" pattern="\d{10}" placeholder="10 digit mobile" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
           </div>
           <div class="mb-4">
             <label class="form-label required"><i class="fas fa-calendar-alt me-2"></i>Date of Birth</label>
@@ -740,7 +692,7 @@
         <form id="checkResultForm" onsubmit="return handleResultSubmit(event)">
           <div class="mb-4">
             <label class="form-label required"><i class="fas fa-mobile-alt me-2"></i>Mobile Number</label>
-            <input type="tel" class="form-control" id="resultMobile" pattern="\d{10}" placeholder="10 digit mobile number" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <input type="tel" class="form-control" id="resultMobile" pattern="\d{10}" placeholder="10 digit mobile" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
           </div>
           <div class="mb-4">
             <label class="form-label required"><i class="fas fa-calendar-alt me-2"></i>Date of Birth</label>
@@ -762,947 +714,694 @@
   <i class="fab fa-whatsapp"></i>
 </a>
 
+<div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
+      <div class="modal-header text-white" style="background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 4px solid var(--islamic-gold);">
+        <h5 class="modal-title fw-bold" id="instructionsModalLabel">
+          <i class="fas fa-info-circle me-2"></i> പ്രധാന നിർദ്ദേശങ്ങൾ
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4" style="background: #fffef7;">
+        <ul class="instructions-list fs-6" style="line-height: 1.7;">
+          <li><strong>അപ്ലിക്കേഷന്‍, ഹാള്‍ ടിക്കറ്റ്, റിസള്‍ട്ട്</strong> ഡൌണ്‍ലോഡ് ചെയ്യാന്‍ അപേക്ഷയിൽ നൽകുന്ന <strong>മൊബൈൽ നമ്പറും ജനന തീയതിയും</strong> ആവശ്യമാണ്.</li>
+          <li>മൊബൈൽ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം.</li>
+          <li><strong style="color:#c0392b;">* ചിഹ്നമുള്ള</strong> എല്ലാ ഫീൽഡുകളും നിർബന്ധമാണ്.</li>
+          <li>ഫോട്ടോ 5MB-ൽ താഴെ JPG/PNG ആയിരിക്കണം.</li>
+          <li>അപേക്ഷ സമർപ്പിച്ചതിന് ശേഷം ലഭിക്കുന്ന <strong>Application ID</strong> സൂക്ഷിക്കുക.</li>
+          <li>ഹാള്‍ ടിക്കറ്റ് ലഭിക്കാൻ അപേക്ഷാ ഫീ അടച്ചിരിക്കണം.</li>
+        </ul>
+        <div class="text-end mt-4">
+          <button type="button" class="btn-gold" data-bs-dismiss="modal" onclick="showForm('applyNowForm')">
+            <i class="fas fa-arrow-right me-2"></i> Continue to Application
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('tickerExamDate').innerHTML = `${CONFIG.EXAM_DATE_DDMMYYYY} ${CONFIG.EXAM_DAY_MALAYALAM} ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ, ${CONFIG.APPLICATION_DEADLINE_DDMMYYYY} ന് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക`;
-    document.getElementById('tickerResultDate').innerHTML = `${CONFIG.RESULT_PUBLISH_DATE_DDMMYYYY} ${CONFIG.RESULT_PUBLISH_DAY_MALAYALAM} ${CONFIG.RESULT_PUBLISH_TIME} ഹിഫ്‍ള് സെലക്ഷന്‍ പരീക്ഷ റിസള്‍ട്ട് പബ്ലിഷ് ചെയ്യും`;
-    document.getElementById('examNote').innerHTML = `പ്രവേശന പരീക്ഷ ${CONFIG.EXAM_DATE_DDMMYYYY} ${CONFIG.EXAM_DAY_MALAYALAM} ${CONFIG.EXAM_TIME}`;
-    
-    initializePage();
+/* ============================================================
+ * INIT
+ * ============================================================ */
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('tickerExamDate').innerHTML = CONFIG.EXAM_DATE_DDMMYYYY + ' ' + CONFIG.EXAM_DAY_MALAYALAM + ' ഹിഫ്‌ള് സെലക്ഷന്‍ പരീക്ഷ, ' + CONFIG.APPLICATION_DEADLINE_DDMMYYYY + ' ന് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക';
+  document.getElementById('tickerResultDate').innerHTML = CONFIG.RESULT_PUBLISH_DATE_DDMMYYYY + ' ' + CONFIG.RESULT_PUBLISH_DAY_MALAYALAM + ' ' + CONFIG.RESULT_PUBLISH_TIME + ' ഹിഫ്‌ള് സെലക്ഷന്‍ പരീക്ഷ റിസള്‍ട്ട് പബ്ലിഷ് ചെയ്യും';
+  document.getElementById('examNote').innerHTML = 'പ്രവേശന പരീക്ഷ ' + CONFIG.EXAM_DATE_DDMMYYYY + ' ' + CONFIG.EXAM_DAY_MALAYALAM + ' ' + CONFIG.EXAM_TIME;
+  initializePage();
+});
+
+function initializePage() {
+  AOS.init({ duration: 800, once: true, offset: 50, disable: window.innerWidth < 768 });
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(input => input.setAttribute('max', today));
+  var dropdownElementList = [].slice.call(document.querySelectorAll('[data-bs-toggle="collapse"]'));
+  dropdownElementList.map(function (el) { return new bootstrap.Collapse(el, { toggle: false }); });
+}
+
+/* ============================================================
+ * NAVIGATION
+ * ============================================================ */
+function showDashboard() {
+  document.getElementById('mainContentArea').style.display = 'block';
+  document.getElementById('documentDisplayArea').style.display = 'none';
+  document.getElementById('documentDisplayArea').innerHTML = '';
+  document.querySelectorAll('[id$="Section"]').forEach(section => {
+    if (section.id !== 'mainContentArea') section.style.display = 'none';
   });
+  document.querySelectorAll('.content-section').forEach(section => {
+    if (!section.id.includes('FormSection') && !section.id.includes('DisplayArea')) section.style.display = 'block';
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-  let lastScrollTop = 0;
-
-  function initializePage() {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 50,
-      disable: window.innerWidth < 768
-    });
-    
-    const today = new Date().toISOString().split('T')[0];
-    document.querySelectorAll('input[type="date"]').forEach(input => {
-      input.setAttribute('max', today);
-    });
-    
-    var dropdownElementList = [].slice.call(document.querySelectorAll('[data-bs-toggle="collapse"]'));
-    dropdownElementList.map(function (dropdownToggleEl) {
-      return new bootstrap.Collapse(dropdownToggleEl, { toggle: false });
-    });
+function showForm(formId) {
+  document.getElementById('mainContentArea').style.display = 'block';
+  document.getElementById('documentDisplayArea').style.display = 'none';
+  document.getElementById('documentDisplayArea').innerHTML = '';
+  document.querySelectorAll('[id$="Section"]').forEach(section => section.style.display = 'none');
+  const formSection = document.getElementById(formId + 'Section');
+  if (formSection) {
+    formSection.style.display = 'block';
+    window.scrollTo({ top: formSection.offsetTop - 20, behavior: 'smooth' });
   }
-
-  function showDashboard() {
-    document.getElementById('mainContentArea').style.display = 'block';
-    document.getElementById('documentDisplayArea').style.display = 'none';
-    document.getElementById('documentDisplayArea').innerHTML = '';
-    
-    document.querySelectorAll('[id$="Section"]').forEach(section => {
-      if (section.id !== 'mainContentArea') {
-        section.style.display = 'none';
-      }
-    });
-    
-    document.querySelectorAll('.content-section').forEach(section => {
-      if (!section.id.includes('FormSection') && !section.id.includes('DisplayArea')) {
-        section.style.display = 'block';
-      }
-    });
-    
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  const modalEl = document.getElementById('instructionsModal');
+  if (modalEl) {
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
   }
+}
 
-  function showForm(formId) {
-    document.getElementById('mainContentArea').style.display = 'block';
-    document.getElementById('documentDisplayArea').style.display = 'none';
-    document.getElementById('documentDisplayArea').innerHTML = '';
-    
-    document.querySelectorAll('[id$="Section"]').forEach(section => {
-      section.style.display = 'none';
-    });
-    
-    const formSection = document.getElementById(formId + 'Section');
-    if (formSection) {
-      formSection.style.display = 'block';
-      window.scrollTo({top: formSection.offsetTop - 20, behavior: 'smooth'});
-    }
+/* ============================================================
+ * FORM HELPERS
+ * ============================================================ */
+function validateAndCalculateAge(dobString) {
+  if (!dobString) return false;
+  const birthDate = new Date(dobString);
+  const examDate = new Date(CONFIG.EXAM_DATE_ISO);
+  let years = examDate.getFullYear() - birthDate.getFullYear();
+  let months = examDate.getMonth() - birthDate.getMonth();
+  let days = examDate.getDate() - birthDate.getDate();
+  if (days < 0) { months--; days += new Date(examDate.getFullYear(), examDate.getMonth(), 0).getDate(); }
+  if (months < 0) { years--; months += 12; }
+  const ageDisplay = document.getElementById('ageDisplay');
+  const ageError = document.getElementById('ageError');
+  ageDisplay.textContent = 'Age as on ' + CONFIG.EXAM_DATE_DDMMYYYY + ': ' + years + ' years ' + months + ' months ' + days + ' days';
+  ageDisplay.style.display = 'block';
+  if (years < CONFIG.MIN_AGE_YEARS) {
+    ageError.textContent = '❌ Must be at least ' + CONFIG.MIN_AGE_YEARS + ' years old.';
+    ageError.style.display = 'block';
+    return false;
+  } else if (years > CONFIG.MAX_AGE_YEARS) {
+    ageError.textContent = '❌ Must not be older than ' + CONFIG.MAX_AGE_YEARS + ' years.';
+    ageError.style.display = 'block';
+    return false;
+  } else {
+    ageError.style.display = 'none';
+    return true;
   }
+}
 
-  function validateAndCalculateAge(dobString) {
-    if (!dobString) return false;
+function togglePreviousStudy(show) {
+  document.getElementById('previous-study-section').style.display = show ? 'block' : 'none';
+}
 
-    const birthDate = new Date(dobString);
-    const examDate = new Date(CONFIG.EXAM_DATE_ISO);
-    let years = examDate.getFullYear() - birthDate.getFullYear();
-    let months = examDate.getMonth() - birthDate.getMonth();
-    let days = examDate.getDate() - birthDate.getDate();
-    
-    if (days < 0) {
-      months--;
-      days += new Date(examDate.getFullYear(), examDate.getMonth(), 0).getDate();
-    }
-    if (months < 0) {
-      years--;
-      months += 12;
-    }
-    
-    const formattedDate = formatDateToDDMMYYYY(dobString);
-    const ageDisplay = document.getElementById('ageDisplay');
-    const ageError = document.getElementById('ageError');
-    
-    ageDisplay.textContent = `Date of Birth: ${formattedDate} | Age as on ${CONFIG.EXAM_DATE_DDMMYYYY}: ${years} years ${months} months ${days} days`;
-    ageDisplay.style.display = 'block';
-    
-    if (years < CONFIG.MIN_AGE_YEARS) {
-      ageError.textContent = `❌ Student must be at least ${CONFIG.MIN_AGE_YEARS} years old on exam date.`;
-      ageError.style.display = 'block';
-      return false;
-    } else if (years > CONFIG.MAX_AGE_YEARS) {
-      ageError.textContent = `❌ Student must not be older than ${CONFIG.MAX_AGE_YEARS} years on exam date.`;
-      ageError.style.display = 'block';
-      return false;
-    } else {
-      ageError.style.display = 'none';
-      return true;
-    }
-  }
+function toggleIllnessSection(show) {
+  document.getElementById('illness-section').style.display = show ? 'block' : 'none';
+}
 
-  function togglePreviousStudy(show) {
-    document.getElementById('previous-study-section').style.display = show ? 'block' : 'none';
-    const inputs = document.querySelectorAll('#previous-study-section input, #previous-study-section textarea');
-    inputs.forEach(input => {
-      if (show) {
-        input.setAttribute('data-required', 'true');
-      } else {
-        input.removeAttribute('data-required');
-      }
-    });
-  }
+function toggleSubmitButton(enabled) {
+  document.getElementById('submitApplicationBtn').disabled = !enabled;
+}
 
-  function toggleIllnessSection(show) {
-    document.getElementById('illness-section').style.display = show ? 'block' : 'none';
-  }
+/* ============================================================
+ * PHOTO UPLOAD
+ * ============================================================ */
+function handleDragOver(e) { e.preventDefault(); e.stopPropagation(); document.getElementById('fileUploadContainer').classList.add('dragover'); }
+function handleDragLeave(e) { e.preventDefault(); e.stopPropagation(); document.getElementById('fileUploadContainer').classList.remove('dragover'); }
+function handleDrop(e) {
+  e.preventDefault(); e.stopPropagation();
+  document.getElementById('fileUploadContainer').classList.remove('dragover');
+  const files = e.dataTransfer.files;
+  if (files.length > 0) handleFile(files[0]);
+}
+function handlePhotoUpload(e) { const file = e.target.files[0]; if (file) handleFile(file); }
+function handleFile(file) {
+  if (!file.type.startsWith('image/')) { alert('Please upload an image file'); return; }
+  if (file.size > 5 * 1024 * 1024) { alert('File size must be less than 5MB'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('photoPreview');
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+    document.getElementById('removePhotoBtn').style.display = 'inline-block';
+  };
+  reader.readAsDataURL(file);
+}
+function removePhoto() {
+  document.getElementById('photoInput').value = '';
+  document.getElementById('photoPreview').src = '';
+  document.getElementById('photoPreview').style.display = 'none';
+  document.getElementById('removePhotoBtn').style.display = 'none';
+}
 
-  function toggleSubmitButton(enabled) {
-    document.getElementById('submitApplicationBtn').disabled = !enabled;
-  }
-
-  function handleDragOver(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    document.getElementById('fileUploadContainer').classList.add('dragover');
-  }
-
-  function handleDragLeave(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    document.getElementById('fileUploadContainer').classList.remove('dragover');
-  }
-
-  function handleDrop(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    document.getElementById('fileUploadContainer').classList.remove('dragover');
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      handleFile(files[0]);
-    }
-  }
-
-  function handlePhotoUpload(e) {
-    const file = e.target.files[0];
-    if (file) {
-      handleFile(file);
-    }
-  }
-
-  function handleFile(file) {
-    if (!file.type.startsWith('image/')) {
-      alert('Please upload an image file');
-      return;
-    }
-    
-    if (file.size > 5 * 1024 * 1024) {
-      alert('File size must be less than 5MB');
-      return;
-    }
-    
+/* ============================================================
+ * IMAGE COMPRESSION (IMPORTANT!)
+ * ============================================================ */
+function compressImage(file, maxSizeKB) {
+  maxSizeKB = maxSizeKB || 800;
+  return new Promise(function(resolve, reject) {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      const preview = document.getElementById('photoPreview');
-      preview.src = e.target.result;
-      preview.style.display = 'block';
-      document.getElementById('removePhotoBtn').style.display = 'inline-block';
+    reader.onload = function(ev) {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        let width = img.width, height = img.height;
+        const maxDim = 1000;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) { height = Math.round(height * maxDim / width); width = maxDim; }
+          else { width = Math.round(width * maxDim / height); height = maxDim; }
+        }
+        canvas.width = width; canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        let q = 0.85;
+        let dataUrl = canvas.toDataURL('image/jpeg', q);
+        while ((dataUrl.length * 0.75 / 1024) > maxSizeKB && q > 0.3) {
+          q -= 0.1;
+          dataUrl = canvas.toDataURL('image/jpeg', q);
+        }
+        resolve(dataUrl);
+      };
+      img.onerror = reject;
+      img.src = ev.target.result;
     };
+    reader.onerror = reject;
     reader.readAsDataURL(file);
-  }
-
-  function removePhoto() {
-    document.getElementById('photoInput').value = '';
-    document.getElementById('photoPreview').src = '';
-    document.getElementById('photoPreview').style.display = 'none';
-    document.getElementById('removePhotoBtn').style.display = 'none';
-  }
-
-  function readFileAsBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
-
-  function escapeHtml(text) {
-    if (!text) return '';
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-    return String(text).replace(/[&<>"']/g, function(m) {
-      return map[m];
-    });
-  }
-
-  function generateApplicationHtml(data) {
-    const { collegeInfo, studentData } = data;
-    const hasValidPhoto = studentData.photoUrl && (
-      studentData.photoUrl.includes('drive.google.com') ||
-      studentData.photoUrl.startsWith('data:image') ||
-      studentData.photoUrl.startsWith('http')
-    );
-
-    const formattedSubmissionDate = formatDateForDisplay(studentData.submissionDate || new Date().toISOString().split('T')[0]);
-    const formattedDob = formatDateForDisplay(studentData.dob);
-
-    return `
-      <div class="document-container">
-        <div class="document-watermark">APPLICATION FORM</div>
-        <div class="document-header">
-          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Crect width=\'120\' height=\'120\' fill=\'%230a5c36\'/%3E%3Ctext x=\'60\' y=\'60\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23c19a3f\' dy=\'.3em\'%3EAMCT%3C/text%3E%3C/svg%3E';">
-          <div class="document-college-info">
-            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
-            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
-            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
-            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
-            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-            <div class="document-title">Admission Application Form</div>
-          </div>
-        </div>
-        <div class="document-content">
-          ${hasValidPhoto ? `
-            <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
-              <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
-                <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo" onerror="this.style.display='none'">
-              </div>
-              <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
-            </div>
-          ` : ''}
-          <div class="document-section-title">1. Personal Information</div>
-          <div class="info-grid1" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-            ${['Application Date','Application ID',"1. Student's Name","2. House Name","3. Date of Birth","4. Aadhaar Number","5. Address","6. Phone Number","7. WhatsApp Number"].map((label, i) => `
-              <div class="info-item">
-                <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([formattedSubmissionDate, studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', studentData.houseName || 'N/A', formattedDob, studentData.aadhaarNumber || 'N/A', studentData.address || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.whatsappNumber || 'N/A'][i])}</span>
-              </div>
-            `).join('')}
-          </div>
-          <div class="document-section-title">2. Parent/Guardian Information</div>
-          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-            ${["8. Father's Name","9. Father's Occupation","10. Guardian's Name","11. Relationship with Guardian"].map((label, i) => `
-              <div class="info-item">
-                <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([studentData.fatherName || 'N/A', studentData.fatherOccupation || 'N/A', studentData.guardianName || 'N/A', studentData.relationshipWithGuardian || 'N/A'][i])}</span>
-              </div>
-            `).join('')}
-            ${studentData.guardianReason ? `
-              <div class="info-item">
-                <span class="info-label">12. Reason if Guardian is not Father:</span>
-                <span class="info-value">${escapeHtml(studentData.guardianReason)}</span>
-              </div>
-            ` : ''}
-          </div>
-          <div class="document-section-title">3. Educational Information</div>
-          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-            ${["13. Madrasa & Location","Madrasa Class","14. School & Location","School Class","15. Previous Study"].map((label, i) => `
-              <div class="info-item">
-                <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([studentData.madrasa || 'N/A', studentData.madrasaclass || 'N/A', studentData.school || 'N/A', studentData.schoolclass || 'N/A', studentData.previousStudy || 'No'][i])}</span>
-              </div>
-            `).join('')}
-          </div>
-          ${studentData.previousStudy === 'Yes' ? `
-            <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-              ${studentData.previousInstitution ? `
-                <div class="info-item">
-                  <span class="info-label">Previous Institution:</span>
-                  <span class="info-value">${escapeHtml(studentData.previousInstitution || 'N/A')}</span>
-                </div>
-              ` : ''}
-              ${studentData.studyDuration ? `
-                <div class="info-item">
-                  <span class="info-label">Duration of Study:</span>
-                  <span class="info-value">${escapeHtml(studentData.studyDuration || 'N/A')}</span>
-                </div>
-              ` : ''}
-              ${studentData.juzCount ? `
-                <div class="info-item">
-                  <span class="info-label">Number of Juz:</span>
-                  <span class="info-value">${escapeHtml(studentData.juzCount || 'N/A')}</span>
-                </div>
-              ` : ''}
-              ${studentData.reasonForLeaving ? `
-                <div class="info-item">
-                  <span class="info-label">Reason for Leaving:</span>
-                  <span class="info-value">${escapeHtml(studentData.reasonForLeaving || 'N/A')}</span>
-                </div>
-              ` : ''}
-              ${studentData.headTeacherPhone ? `
-                <div class="info-item">
-                  <span class="info-label">Head Teacher's Phone Number:</span>
-                  <span class="info-value">${escapeHtml(studentData.headTeacherPhone || 'N/A')}</span>
-                </div>
-              ` : ''}
-            </div>
-          ` : ''}
-          <div class="document-section-title">4. Medical & Identification</div>
-          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
-            ${["16. Identification Mark","17. Physical Fitness"].map((label, i) => `
-              <div class="info-item">
-                <span class="info-label">${label}:</span>
-                <span class="info-value">${escapeHtml([studentData.identificationMark || 'N/A', studentData.physicalFitness || 'N/A'][i])}</span>
-              </div>
-            `).join('')}
-            ${studentData.illness ? `
-              <div class="info-item">
-                <span class="info-label">Illness:</span>
-                <span class="info-value">${escapeHtml(studentData.illness)}</span>
-              </div>
-            ` : ''}
-          </div>
-          <div class="document-declaration">
-            <h3 class="document-section-title">Declaration</h3>
-            <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
-              <strong>${escapeHtml(studentData.studentName || studentData.name || '')}</strong> S/o
-              <strong>${escapeHtml(studentData.guardianName || '')}</strong>,
-              എന്ന എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നതോടൊപ്പം എന്‍റെ ഈ കുട്ടിയെ അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജില്‍ ചേര്‍ക്കുവാന്‍ അപേക്ഷിക്കുന്നു.
-            </p>
-            <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
-              <div style="flex: 0 0 auto;">
-                <div style="margin-bottom: 14px;">Date: ______________________________</div>
-                <div>Place: _____________________________</div>
-              </div>
-              <div style="text-align: right; flex: 1;">
-                <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
-                <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="document-footer">
-          <p style="color:#495057;font-size:10px;margin:0;">
-            <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
-          </p>
-        </div>
-      </div>
-      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-        <button onclick="window.print()" class="btn-gold me-2">
-          <i class="fas fa-print me-2"></i> Print Application Form
-        </button>
-        <button onclick="showDashboard()" class="btn-outline-gold">
-          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-        </button>
-      </div>
-    `;
-  }
-
-  function generateHallticketHtml(data) {
-    const { collegeInfo, studentData } = data;
-    const hasValidPhoto = studentData.photoUrl && (
-      studentData.photoUrl.includes('drive.google.com') ||
-      studentData.photoUrl.startsWith('data:image') ||
-      studentData.photoUrl.startsWith('http')
-    );
-
-    const formattedDob = formatDateForDisplay(studentData.dob);
-
-    const qrText = `Name: ${studentData.studentName || studentData.name || ''}, ` +
-                   `Register No: ${studentData.registerNo || studentData.applicationId || ''}, ` +
-                   `DoB: ${formattedDob}, Exam Date: ${CONFIG.EXAM_DATE_DDMMYYYY}, Venue: ${CONFIG.EXAM_VENUE}`;
-    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrText)}`;
-
-    return `
-      <div class="document-container">
-        <div class="document-watermark">HALL TICKET</div>
-        <div class="document-header">
-          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Crect width=\'120\' height=\'120\' fill=\'%230a5c36\'/%3E%3Ctext x=\'60\' y=\'60\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23c19a3f\' dy=\'.3em\'%3EAMCT%3C/text%3E%3C/svg%3E';">
-          <div class="document-college-info">
-            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
-            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
-            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
-            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
-            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-            <div class="document-title">Entrance Exam Hall Ticket</div>
-          </div>
-        </div>
-        <div class="document-content">
-          ${hasValidPhoto ? `
-            <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
-              <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
-                <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Student Photo" onerror="this.style.display='none'">
-              </div>
-              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
-            </div>
-          ` : ''}
-          <div class="student-info-box" style="margin-right: ${hasValidPhoto ? '150px' : '0'};">
-            <div class="info-grid1">
-              ${['Register Number','Student Name','Date of Birth','Age','Phone Number','House Name','Address','Previous Study'].map((label, i) => `
-                <div class="info-item">
-                  <span class="info-label">${label}:</span>
-                  <span class="info-value">${escapeHtml([studentData.registerNo || studentData.applicationId || 'N/A', studentData.studentName || studentData.name || 'N/A', formattedDob, studentData.age || 'N/A', studentData.phoneNumber || studentData.mobile || 'N/A', studentData.houseName || 'N/A', studentData.address || 'N/A', studentData.previousStudy || 'N/A'][i])}</span>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          <div class="exam-wrapper">
-            <div class="exam-details-box">
-              <div class="exam-title">Examination Details</div>
-              <div class="exam-info-grid">
-                ${['Exam Date','Reporting Time','Exam Duration','Venue'].map((label, i) => `
-                  <div class="exam-item">
-                    <div class="exam-label">${label}</div>
-                    <div class="exam-value">${[CONFIG.EXAM_DATE_DDMMYYYY, CONFIG.EXAM_REPORTING_TIME, CONFIG.EXAM_DURATION, CONFIG.EXAM_VENUE][i]}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-            <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
-              <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
-                <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR Code" onerror="this.style.display='none'">
-              </div>
-              <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code Verification</div>
-            </div>
-          </div>
-          <table class="signing-table">
-            <thead>
-              <tr><th>QIRA'ATH</th><th>HIFZ</th><th>SPOT</th><th>GK</th><th>MEMORY TEST</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-                <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="document-instructions">
-            <div class="document-instructions-title">Important Instructions</div>
-            <ul class="document-instructions-list">
-              <li>Bring this hall ticket to the exam center</li>
-              <li>Carry any original ID proof (Aadhaar card)</li>
-              <li>Report at the exam center 30 minutes before exam time</li>
-              <li>No electronic devices allowed inside exam hall</li>
-              <li>Only blue/black ballpoint pens are allowed</li>
-              <li>Follow all instructions given by invigilators</li>
-            </ul>
-          </div>
-        </div>
-        <div class="document-footer">
-          <p style="color:#495057;font-size:10px;margin:0;">
-            <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
-          </p>
-        </div>
-      </div>
-      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-        <button onclick="window.print()" class="btn-gold me-2">
-          <i class="fas fa-print me-2"></i> Print Hall Ticket
-        </button>
-        <button onclick="showDashboard()" class="btn-outline-gold">
-          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-        </button>
-      </div>
-    `;
-  }
-
-  function generateResultHtml(data) {
-    const { collegeInfo, studentData } = data;
-
-    const formattedDob = formatDateForDisplay(studentData.dob);
-
-    let statusText = "NOT QUALIFIED";
-    let statusColor = "#dc3545";
-    let malayalamNote = "";
-    
-    if (studentData.result === "QUALIFIED") {
-      statusText = "QUALIFIED";
-      statusColor = "#28a745";
-      malayalamNote = `പ്രിയ വിദ്യാർത്ഥി, താങ്കൾ പ്രവേശന പരീക്ഷയിൽ വിജയിച്ചു. അഭിനന്ദനങ്ങള്‍...
-      നിശ്ചിത തീയതിക്കുള്ളിൽ പ്രവേശന നടപടികൾ പൂർത്തീകരിക്കണം. ആധാർ, ജനന സർട്ടിഫിക്കറ്റ്, റേഷന്‍ കാർഡ് എന്നിവയുടെ രണ്ട് വീതം കോപ്പികള്‍ കൊണ്ടുവരിക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`;
-    }
-    else if (studentData.result === "WAITING LIST") {
-      statusText = "WAITING LIST";
-      statusColor = "#007bff";
-      malayalamNote = `മെച്ചപ്പെട്ട രീതിയില്‍ കൂടുതല്‍ മുന്നൊരുക്കം നടത്തി രണ്ടാം ഘട്ട പ്രവേശന പരീക്ഷയില്‍ യോഗ്യത നേടുക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.`;
-    }
-    else {
-      statusText = "NOT QUALIFIED";
-      statusColor = "#dc3545";
-      malayalamNote = `ഈ വർഷം യോഗ്യത ലഭിച്ചില്ല, കോളേജ് മാനദണ്ഡ പ്രായപരിധി പ്രകാരം അടുത്ത വർഷവും അപേക്ഷിക്കാന്‍ സാധിക്കുമെങ്കില്‍ അടുത്ത വർഷം വീണ്ടും ശ്രമിക്കുക. അല്ലെങ്കിൽ മറ്റ് കോളേജുകളിൽ പ്രവേശനം തേടുക.`;
-    }
-    
-    const isQualified = studentData.result === "QUALIFIED";
-    const isWaitingList = studentData.result === "WAITING LIST";
-    const isQualifiedOrWaiting = isQualified || isWaitingList;
-    
-    return `
-      <div class="document-container">
-        <div class="document-watermark">${statusText}</div>
-        <div class="document-header">
-          <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="College Logo" class="document-logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\' viewBox=\'0 0 120 120\'%3E%3Crect width=\'120\' height=\'120\' fill=\'%230a5c36\'/%3E%3Ctext x=\'60\' y=\'60\' font-size=\'14\' text-anchor=\'middle\' fill=\'%23c19a3f\' dy=\'.3em\'%3EAMCT%3C/text%3E%3C/svg%3E';">
-          <div class="document-college-info">
-            <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
-            <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
-            <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
-            <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
-            <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
-            <div class="document-title">Entrance Exam Result</div>
-          </div>
-        </div>
-        <div class="document-content">
-          <div class="student-info-box">
-            <div class="info-grid">
-              ${['Student Name','Mobile Number','Date of Birth'].map((label, i) => `
-                <div class="info-item">
-                  <span class="info-label">${label}:</span>
-                  <span class="info-value">${escapeHtml([studentData.name || studentData.studentName || 'N/A', studentData.mobile || studentData.phoneNumber || 'N/A', formattedDob][i])}</span>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          <div class="result-section-box" style="border-color: ${statusColor};">
-            <div class="result-status" style="color: ${statusColor};">${statusText}</div>
-            ${isQualifiedOrWaiting ? `<div class="result-rank">Rank: ${escapeHtml(studentData.rank || 'N/A')}</div>` : ''}
-            ${isQualified ? `
-              <div class="admission-info-box">
-                <div class="admission-title">Admission Details</div>
-                <div class="admission-row">
-                  <span class="admission-label">Admission Starts:</span>
-                  <span class="admission-value">${CONFIG.ADMISSION_STARTS}</span>
-                </div>
-                <div class="admission-row">
-                  <span class="admission-label">Class Starts:</span>
-                  <span class="admission-value">${CONFIG.CLASS_STARTS}</span>
-                </div>
-              </div>
-            ` : ''}
-            <div class="note-section malayalam-msg" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
-              <div class="note-title">📌 Important Note</div>
-              <div class="note-content" style="white-space: pre-line;">${escapeHtml(malayalamNote)}</div>
-            </div>
-          </div>
-        </div>
-        <div class="document-footer">
-          <p style="color:#495057;font-size:10px;margin:0;">
-            <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
-          </p>
-        </div>
-      </div>
-      <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
-        <button onclick="window.print()" class="btn-gold me-2">
-          <i class="fas fa-print me-2"></i> Print Result
-        </button>
-        <button onclick="showDashboard()" class="btn-outline-gold">
-          <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-        </button>
-      </div>
-    `;
-  }
-
-  function displayDocument(htmlContent) {
-    document.getElementById('mainContentArea').style.display = 'none';
-    document.getElementById('documentDisplayArea').style.display = 'block';
-    document.getElementById('documentDisplayArea').innerHTML = htmlContent;
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-
-  async function handleApplicationSubmit(e) {
-    e.preventDefault();
-    showLoading('Searching Application', 'Please wait while we fetch your details');
-
-    const mobile = document.getElementById('appMobile').value.trim();
-    const dob = document.getElementById('appDob').value;
-
-    try {
-      const response = await fetch(`${CONFIG.SCRIPT_URL}?type=application&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
-      if (!response.ok) throw new Error('Network response was not ok');
-      const data = await response.json();
-      
-      setTimeout(() => {
-        hideLoading();
-        if (data.status === 'success') {
-          const html = generateApplicationHtml(data);
-          displayDocument(html);
-        } else {
-          alert('Application not found. Please check your details.');
-        }
-      }, 1500);
-    } catch (error) {
-      hideLoading();
-      console.error('Error:', error);
-      alert('An error occurred. Please try again or contact support.');
-    }
-  }
-
-  async function handleHallticketSubmit(e) {
-    e.preventDefault();
-    showLoading('Generating Hall Ticket', 'Please wait while we prepare your document');
-
-    const mobile = document.getElementById('ticketMobile').value.trim();
-    const dob = document.getElementById('ticketDob').value;
-
-    try {
-      const response = await fetch(`${CONFIG.SCRIPT_URL}?type=hallticket&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
-      if (!response.ok) throw new Error('Network response was not ok');
-      const data = await response.json();
-      
-      setTimeout(() => {
-        hideLoading();
-        if (data.status === 'success') {
-          const html = generateHallticketHtml(data);
-          displayDocument(html);
-        } else {
-          alert('Hall ticket not found. Please check your details.');
-        }
-      }, 1500);
-    } catch (error) {
-      hideLoading();
-      console.error('Error:', error);
-      alert('An error occurred. Please try again or contact support.');
-    }
-  }
-
-  async function handleResultSubmit(e) {
-    e.preventDefault();
-    showLoading('Checking Result', 'Please wait while we retrieve your result');
-
-    const mobile = document.getElementById('resultMobile').value.trim();
-    const dob = document.getElementById('resultDob').value;
-    
-    try {
-      const allResultsResponse = await fetch(`${CONFIG.SCRIPT_URL}?type=all_results`);
-      if (!allResultsResponse.ok) throw new Error('Network response was not ok');
-      const allResults = await allResultsResponse.json();
-      
-      if (allResults.status !== 'success') {
-        hideLoading();
-        alert("Error fetching results. Please try again.");
-        return;
-      }
-      
-      const studentResult = allResults.data.find(row => {
-        const rowMobile = String(row["MOBILE NO"] || "").trim();
-        const rowDob = String(row["DATE OF BIRTH"] || "").trim();
-        return rowMobile === mobile && rowDob === dob;
-      });
-      
-      if (!studentResult) {
-        hideLoading();
-        alert('No result found for this mobile number and date of birth.');
-        return;
-      }
-      
-      const resultDateStr = studentResult["RESULT DATE"];
-      
-      if (!resultDateStr || resultDateStr.toString().trim() === "") {
-        hideLoading();
-        alert("⚠️ Your result is not yet published.\n\nPlease check back later.");
-        return;
-      }
-      
-      const publishDateStr = resultDateStr.toString().trim();
-      const regex = /^(\d{4})-(\d{2})-(\d{2}) (\d{1,2}):(\d{2}) (AM|PM)$/i;
-      const matches = publishDateStr.match(regex);
-      
-      if (!matches) {
-        console.error("Invalid date format:", publishDateStr);
-        hideLoading();
-        alert("⚠️ Result date format is incorrect. Please contact college office.");
-        return;
-      }
-      
-      let year = parseInt(matches[1]);
-      let month = parseInt(matches[2]) - 1;
-      let day = parseInt(matches[3]);
-      let hour = parseInt(matches[4]);
-      let minute = parseInt(matches[5]);
-      let ampm = matches[6].toUpperCase();
-      
-      if (ampm === 'PM' && hour < 12) hour += 12;
-      if (ampm === 'AM' && hour === 12) hour = 0;
-      
-      const istDateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}T${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}:00+05:30`;
-      const publishDate = new Date(istDateStr);
-      const now = new Date();
-      
-      if (now.getTime() < publishDate.getTime()) {
-        const options = {
-          timeZone: 'Asia/Kolkata',
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true
-        };
-        
-        const formattedDate = publishDate.toLocaleString('en-IN', options);
-        const diffMs = publishDate.getTime() - now.getTime();
-        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-        const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-        
-        hideLoading();
-        alert(`⏰ Your Result is Not Yet Published\n\n` +
-              `📅 Publication Date: ${formattedDate} IST\n` +
-              `⏳ Time remaining: Approximately ${diffHours} hours ${diffMinutes} minutes\n\n` +
-              `Please check back after this time.`);
-        return;
-      }
-      
-      const response = await fetch(`${CONFIG.SCRIPT_URL}?type=result&mobile=${encodeURIComponent(mobile)}&dob=${encodeURIComponent(dob)}`);
-      if (!response.ok) throw new Error('Network response was not ok');
-      const data = await response.json();
-      
-      setTimeout(() => {
-        hideLoading();
-        if (data.status === 'success') {
-          const html = generateResultHtml(data);
-          displayDocument(html);
-        } else {
-          alert('Error fetching result details.');
-        }
-      }, 1500);
-    } catch (err) {
-      hideLoading();
-      console.error("Error in handleResultSubmit:", err);
-      alert("Error checking result. Please try again or contact support.");
-    }
-  }
-
-  async function handleNewApplicationSubmit(e) {
-    e.preventDefault();
-    
-    const dob = document.getElementById('dobInput').value;
-    if (!validateAndCalculateAge(dob)) {
-      alert('Please check the age requirements. Student must be between 5 and 10 years old on exam date.');
-      return;
-    }
-    
-    showLoading('Submitting Application', 'Please wait while we process your application');
-
-    const form = e.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    const photoFile = document.getElementById('photoInput').files[0];
-
-    if (photoFile) {
-      try {
-        const photoData = await readFileAsBase64(photoFile);
-        data.photo = JSON.stringify({
-          name: photoFile.name,
-          mimeType: photoFile.type,
-          data: photoData.split(',')[1]
-        });
-      } catch (error) {
-        hideLoading();
-        alert('Error processing photo. Please try again.');
-        return;
-      }
-    }
-
-    const submitData = new URLSearchParams();
-    for (const [key, value] of Object.entries(data)) {
-      if (value !== undefined && value !== null && value !== '') {
-        submitData.append(key, value);
-      }
-    }
-
-    try {
-      const response = await fetch(CONFIG.SCRIPT_URL, {
-        method: 'POST',
-        body: submitData,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      });
-      
-      if (!response.ok) throw new Error('Network response was not ok');
-      const result = await response.json();
-      
-      setTimeout(() => {
-        hideLoading();
-        if (result.status === 'success') {
-          form.reset();
-          removePhoto();
-          toggleSubmitButton(false);
-          
-          const mockData = {
-            collegeInfo: {
-              logo: 'https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg',
-              contact: 'كلية الحافظ ممو ملا لتحفيظ القرآن',
-              collegeName: 'AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN',
-              underOrg: 'Under QUWATHUL ISLAM SANGAM',
-              affiliation: 'Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD',
-              address: 'Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District'
-            },
-            studentData: {
-              ...data,
-              submissionDate: new Date().toISOString().split('T')[0],
-              applicationId: result.data.applicationId || 'APP-' + Date.now(),
-              photoUrl: photoFile ? URL.createObjectURL(photoFile) : null
-            }
-          };
-          
-          const html = generateApplicationHtml(mockData);
-          displayDocument(html);
-        } else {
-          alert('Submission failed. Please try again.');
-        }
-      }, 1500);
-    } catch (error) {
-      hideLoading();
-      console.error('Submission error:', error);
-      alert('An error occurred during submission. Please try again or contact support.');
-    }
-  }
-
-  function updateDateDisplay(dateString, elementId) {
-    if (!dateString) return;
-    const formattedDate = formatDateToDDMMYYYY(dateString);
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.textContent = `Selected Date: ${formattedDate}`;
-      element.style.display = 'block';
-    }
-  }
-
-  function adjustTickerSpeed() {
-    const tickerWrapper = document.querySelector('.ticker-wrapper');
-    if (!tickerWrapper) return;
-    if (window.innerWidth <= 768) {
-      tickerWrapper.style.animationDuration = '40s';
-    } else {
-      tickerWrapper.style.animationDuration = '50s';
-    }
-  }
-
-  window.addEventListener('load', function() {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => {
-      document.body.style.opacity = '1';
-    }, 50);
-    adjustTickerSpeed();
   });
+}
 
-  window.addEventListener('resize', adjustTickerSpeed);
+/* ============================================================
+ * UTILITIES
+ * ============================================================ */
+function escapeHtml(text) {
+  if (!text) return '';
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+  return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+}
 
-  function showLoading(message = 'Processing...', subMessage = 'Please wait a moment') {
-    document.getElementById('loadingText').textContent = message;
-    document.getElementById('loadingSubtext').textContent = subMessage;
-    document.getElementById('loadingOverlay').style.display = 'flex';
+/* ============================================================
+ * DOCUMENT GENERATORS
+ * ============================================================ */
+function generateApplicationHtml(data) {
+  const studentData = data.studentData;
+  const hasValidPhoto = studentData.photoUrl && (
+    studentData.photoUrl.includes('google') ||
+    studentData.photoUrl.startsWith('data:image') ||
+    studentData.photoUrl.startsWith('http')
+  );
+  const formattedSubmissionDate = formatDateForDisplay(studentData.submissionDate || new Date().toISOString().split('T')[0]);
+  const formattedDob = formatDateForDisplay(studentData.dob);
 
-    const activeButtons = document.querySelectorAll('button:focus, button:active');
-    activeButtons.forEach(btn => {
-      btn.classList.add('btn-loading');
-      const originalHtml = btn.innerHTML;
-      btn.setAttribute('data-original-html', originalHtml);
-      btn.innerHTML = '<span class="btn-spinner"></span><span class="btn-text">Loading...</span>';
-    });
-  }
-
-  function hideLoading() {
-    document.getElementById('loadingOverlay').style.display = 'none';
-
-    document.querySelectorAll('.btn-loading').forEach(btn => {
-      const originalHtml = btn.getAttribute('data-original-html');
-      if (originalHtml) {
-        btn.innerHTML = originalHtml;
-      }
-      btn.classList.remove('btn-loading');
-      btn.removeAttribute('data-original-html');
-    });
-  }
-</script>
-<script>
-  fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navbar-container').innerHTML = data;
-      document.querySelectorAll('.submenu-toggle').forEach(function (toggle) {
-        toggle.addEventListener('click', function (e) {
-          e.stopPropagation();
-          e.preventDefault();
-          const target = document.querySelector(toggle.getAttribute('data-bs-target'));
-          const bsCollapse = new bootstrap.Collapse(target, { toggle: true });
-        });
-      });
-    })
-    .catch(error => console.error('Navbar load error:', error));
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer-container').innerHTML = data;
-    })
-    .catch(error => console.error('Footer load error:', error));
-</script>   
-<div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg" style="border-radius: 12px; overflow: hidden;">
-      
-      <div class="modal-header text-white" 
-           style="background: linear-gradient(135deg, var(--islamic-green), var(--dark-green)); border-bottom: 4px solid var(--islamic-gold);">
-        <h5 class="modal-title fw-bold" id="instructionsModalLabel">
-          <i class="fas fa-info-circle me-2"></i> 
-          പ്രധാന നിർദ്ദേശങ്ങൾ
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+  return `
+    <div class="document-container">
+      <div class="document-watermark">APPLICATION FORM</div>
+      <div class="document-header">
+        <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="Logo" class="document-logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'120\\' height=\\'120\\' viewBox=\\'0 0 120 120\\'%3E%3Crect width=\\'120\\' height=\\'120\\' fill=\\'%230a5c36\\'/%3E%3C/svg%3E';">
+        <div class="document-college-info">
+          <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+          <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+          <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+          <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+          <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+          <div class="document-title">Admission Application Form</div>
+        </div>
       </div>
-      
-      <div class="modal-body p-4" style="background: #fffef7;">
-        <div class="instructions-box mb-0 shadow-none border-0" style="background: transparent; padding: 0;">
-          <ul class="instructions-list fs-6" style="line-height: 1.7;">
-            <li><strong>അപ്ലിക്കേഷന്‍, ഹാള്‍ ടിക്കറ്റ്, റിസള്‍ട്ട്</strong> എന്നിവ ഡൌണ്‍ലോഡ് ചെയ്യാന്‍ അപേക്ഷയിൽ നൽകുന്ന <strong>മൊബൈൽ നമ്പറും ജനന തീയതിയും</strong> ആവശ്യമാണ്.</li>
-            <li>മൊബൈൽ നമ്പർ 10 അക്കങ്ങൾ ആയിരിക്കണം.</li>
-            <li>അപേക്ഷ സമർപ്പിക്കുമ്പോൾ <strong style="color:#c0392b;">* ചിഹ്നമുള്ള</strong> എല്ലാ ഫീൽഡുകളും നിർബന്ധമാണ്.</li>
-            <li><strong style="color:#c0392b;">12-02-2026</strong> വ്യാഴാഴ്ചയ്ക്ക് മുമ്പ് അപേക്ഷ സമർപ്പിക്കുക.</li>
-            <li>പ്രവേശന പരീക്ഷ തീയതി: <strong>15/02/2026 ഞായർ രാവിലെ 07:30</strong></li>
-            <li>പരീക്ഷാ ദിവസം <strong>ആധാർ കോപ്പി + അപേക്ഷാ ഫീസ് ₹300</strong> സ്ഥാപനത്തിൽ സമർപ്പിക്കണം.</li>
-            <li>സംശയങ്ങൾക്ക് ബന്ധപ്പെടുക: <strong>+91 9048020243</strong></li>
+      <div class="document-content">
+        ${hasValidPhoto ? `
+          <div style="position:absolute;top:40px;right:40px;text-align:center;z-index:1;">
+            <div style="width:150px;height:180px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+              <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Photo" onerror="this.style.display='none'">
+            </div>
+            <div style="font-size:12px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photograph</div>
+          </div>
+        ` : ''}
+        <div class="document-section-title">1. Personal Information</div>
+        <div class="info-grid1" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+          <div class="info-item"><span class="info-label">Application Date:</span><span class="info-value">${escapeHtml(formattedSubmissionDate)}</span></div>
+          <div class="info-item"><span class="info-label">Application ID:</span><span class="info-value">${escapeHtml(studentData.applicationId || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">1. Student's Name:</span><span class="info-value">${escapeHtml(studentData.studentName || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">2. House Name:</span><span class="info-value">${escapeHtml(studentData.houseName || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">3. Date of Birth:</span><span class="info-value">${escapeHtml(formattedDob)}</span></div>
+          <div class="info-item"><span class="info-label">4. Aadhaar Number:</span><span class="info-value">${escapeHtml(studentData.aadhaarNumber || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">5. Address:</span><span class="info-value">${escapeHtml(studentData.address || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">6. Phone Number:</span><span class="info-value">${escapeHtml(studentData.phoneNumber || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">7. WhatsApp Number:</span><span class="info-value">${escapeHtml(studentData.whatsappNumber || 'N/A')}</span></div>
+        </div>
+        <div class="document-section-title">2. Parent/Guardian Information</div>
+        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+          <div class="info-item"><span class="info-label">8. Father's Name:</span><span class="info-value">${escapeHtml(studentData.fatherName || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">9. Father's Occupation:</span><span class="info-value">${escapeHtml(studentData.fatherOccupation || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">10. Guardian's Name:</span><span class="info-value">${escapeHtml(studentData.guardianName || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">11. Relationship:</span><span class="info-value">${escapeHtml(studentData.relationshipWithGuardian || 'N/A')}</span></div>
+          ${studentData.guardianReason ? `<div class="info-item"><span class="info-label">12. Reason:</span><span class="info-value">${escapeHtml(studentData.guardianReason)}</span></div>` : ''}
+        </div>
+        <div class="document-section-title">3. Educational Information</div>
+        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+          <div class="info-item"><span class="info-label">13. Madrasa:</span><span class="info-value">${escapeHtml(studentData.madrasa || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">Madrasa Class:</span><span class="info-value">${escapeHtml(studentData.madrasaclass || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">14. School:</span><span class="info-value">${escapeHtml(studentData.school || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">School Class:</span><span class="info-value">${escapeHtml(studentData.schoolclass || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">15. Previous Study:</span><span class="info-value">${escapeHtml(studentData.previousStudy || 'No')}</span></div>
+        </div>
+        ${studentData.previousStudy === 'Yes' ? `
+          <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+            ${studentData.previousInstitution ? `<div class="info-item"><span class="info-label">Previous Institution:</span><span class="info-value">${escapeHtml(studentData.previousInstitution)}</span></div>` : ''}
+            ${studentData.studyDuration ? `<div class="info-item"><span class="info-label">Duration:</span><span class="info-value">${escapeHtml(studentData.studyDuration)}</span></div>` : ''}
+            ${studentData.juzCount ? `<div class="info-item"><span class="info-label">Juz Count:</span><span class="info-value">${escapeHtml(studentData.juzCount)}</span></div>` : ''}
+            ${studentData.reasonForLeaving ? `<div class="info-item"><span class="info-label">Reason:</span><span class="info-value">${escapeHtml(studentData.reasonForLeaving)}</span></div>` : ''}
+            ${studentData.headTeacherPhone ? `<div class="info-item"><span class="info-label">Head Teacher Phone:</span><span class="info-value">${escapeHtml(studentData.headTeacherPhone)}</span></div>` : ''}
+          </div>
+        ` : ''}
+        <div class="document-section-title">4. Medical & Identification</div>
+        <div class="info-grid" style="margin-right: ${hasValidPhoto ? '160px' : '0'};">
+          <div class="info-item"><span class="info-label">16. ID Mark:</span><span class="info-value">${escapeHtml(studentData.identificationMark || 'N/A')}</span></div>
+          <div class="info-item"><span class="info-label">17. Physical Fitness:</span><span class="info-value">${escapeHtml(studentData.physicalFitness || 'N/A')}</span></div>
+          ${studentData.illness ? `<div class="info-item"><span class="info-label">Illness:</span><span class="info-value">${escapeHtml(studentData.illness)}</span></div>` : ''}
+        </div>
+        <div class="document-declaration">
+          <h3 class="document-section-title">Declaration</h3>
+          <p style="text-align: justify; line-height: 1.4; margin-bottom: 18px; font-size: 11px;">
+            <strong>${escapeHtml(studentData.studentName || '')}</strong> S/o
+            <strong>${escapeHtml(studentData.guardianName || '')}</strong>,
+            എന്ന എന്‍റെ കുട്ടിയും ഞാനും അല്‍ ഹാഫിള് മമ്മു മുല്ല തഹ്ഫീളുല്‍ ഖുർആന്‍ കോളേജിന്‍റെ എല്ലാ നിയമങ്ങളും നിര്‍ദ്ദേശങ്ങളും പാലിക്കാന്‍ സന്നദ്ധരാണെന്ന് സാക്ഷ്യപ്പെടുത്തുന്നു.
+          </p>
+          <div class="document-signature-section" style="margin-top: 30px; font-size: 11px; display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;">
+            <div><div style="margin-bottom: 14px;">Date: ______________________________</div><div>Place: _____________________________</div></div>
+            <div style="text-align: right; flex: 1;">
+              <div class="document-signature-line" style="width: 260px; margin-left: auto; margin-bottom: 6px;"></div>
+              <div style="font-size: 11px; font-weight: 500;">Parent/Guardian's Name & Signature</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="document-footer">
+        <p style="color:#495057;font-size:10px;margin:0;">
+          <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
+        </p>
+      </div>
+    </div>
+    <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+      <button onclick="window.print()" class="btn-gold me-2"><i class="fas fa-print me-2"></i> Print Application Form</button>
+      <button onclick="showDashboard()" class="btn-outline-gold"><i class="fas fa-arrow-left me-2"></i> Back to Dashboard</button>
+    </div>
+  `;
+}
+
+function generateHallticketHtml(data) {
+  const studentData = data.studentData;
+  const hasValidPhoto = studentData.photoUrl && (
+    studentData.photoUrl.includes('google') ||
+    studentData.photoUrl.startsWith('data:image') ||
+    studentData.photoUrl.startsWith('http')
+  );
+  const formattedDob = formatDateForDisplay(studentData.dob);
+  const qrText = 'Name: ' + (studentData.studentName || '') + ', RegNo: ' + (studentData.registerNo || studentData.applicationId || '') + ', DoB: ' + formattedDob + ', Exam: ' + CONFIG.EXAM_DATE_DDMMYYYY + ', Venue: ' + CONFIG.EXAM_VENUE;
+  const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(qrText);
+
+  return `
+    <div class="document-container">
+      <div class="document-watermark">HALL TICKET</div>
+      <div class="document-header">
+        <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="Logo" class="document-logo" onerror="this.style.display='none'">
+        <div class="document-college-info">
+          <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+          <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+          <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+          <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+          <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+          <div class="document-title">Entrance Exam Hall Ticket</div>
+        </div>
+      </div>
+      <div class="document-content">
+        ${hasValidPhoto ? `
+          <div style="position:absolute;top:20px;right:20px;text-align:center;z-index:1;">
+            <div style="width:140px;height:170px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;">
+              <img src="${escapeHtml(studentData.photoUrl)}" style="max-width:100%;max-height:100%;object-fit:contain;" alt="Photo" onerror="this.style.display='none'">
+            </div>
+            <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">Student Photo</div>
+          </div>
+        ` : ''}
+        <div class="student-info-box" style="margin-right: ${hasValidPhoto ? '150px' : '0'};">
+          <div class="info-grid1">
+            <div class="info-item"><span class="info-label">Register Number:</span><span class="info-value">${escapeHtml(studentData.registerNo || studentData.applicationId || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">Student Name:</span><span class="info-value">${escapeHtml(studentData.studentName || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">Date of Birth:</span><span class="info-value">${escapeHtml(formattedDob)}</span></div>
+            <div class="info-item"><span class="info-label">Age:</span><span class="info-value">${escapeHtml(studentData.age || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">Phone Number:</span><span class="info-value">${escapeHtml(studentData.phoneNumber || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">House Name:</span><span class="info-value">${escapeHtml(studentData.houseName || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">Address:</span><span class="info-value">${escapeHtml(studentData.address || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">Previous Study:</span><span class="info-value">${escapeHtml(studentData.previousStudy || 'N/A')}</span></div>
+          </div>
+        </div>
+        <div class="exam-wrapper">
+          <div class="exam-details-box">
+            <div class="exam-title">Examination Details</div>
+            <div class="exam-info-grid">
+              <div class="exam-item"><div class="exam-label">Exam Date</div><div class="exam-value">${CONFIG.EXAM_DATE_DDMMYYYY}</div></div>
+              <div class="exam-item"><div class="exam-label">Reporting Time</div><div class="exam-value">${CONFIG.EXAM_REPORTING_TIME}</div></div>
+              <div class="exam-item"><div class="exam-label">Exam Duration</div><div class="exam-value">${CONFIG.EXAM_DURATION}</div></div>
+              <div class="exam-item"><div class="exam-label">Venue</div><div class="exam-value">${CONFIG.EXAM_VENUE}</div></div>
+            </div>
+          </div>
+          <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
+            <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
+              <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR" onerror="this.style.display='none'">
+            </div>
+            <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code</div>
+          </div>
+        </div>
+        <table class="signing-table">
+          <thead><tr><th>QIRA'ATH</th><th>HIFZ</th><th>SPOT</th><th>GK</th><th>MEMORY TEST</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+              <td><div style="font-size:10px;color:#6c757d;">Examiner Signature</div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="document-instructions">
+          <div class="document-instructions-title">Important Instructions</div>
+          <ul class="document-instructions-list">
+            <li>Bring this hall ticket to the exam center</li>
+            <li>Carry any original ID proof (Aadhaar card)</li>
+            <li>Report at the exam center 30 minutes before exam time</li>
+            <li>No electronic devices allowed inside exam hall</li>
+            <li>Only blue/black ballpoint pens are allowed</li>
+            <li>Follow all instructions given by invigilators</li>
           </ul>
         </div>
       </div>
-      
-      <div class="modal-footer bg-light border-0 pt-0 pb-4 px-4">
-        <button type="button" class="btn btn-outline-secondary px-4 py-2" data-bs-dismiss="modal">
-          <i class="fas fa-times me-2"></i> Back to Dashboard
-        </button>
-        <button type="button" class="btn-gold px-5 py-2" 
-                onclick="document.querySelector('#instructionsModal .btn-close').click(); showForm('applyNowForm');">
-          <i class="fas fa-arrow-right me-2"></i> Continue
-        </button>
+      <div class="document-footer">
+        <p style="color:#495057;font-size:10px;margin:0;">
+          <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
+        </p>
       </div>
-      
     </div>
-  </div>
-</div>
+    <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+      <button onclick="window.print()" class="btn-gold me-2"><i class="fas fa-print me-2"></i> Print Hall Ticket</button>
+      <button onclick="showDashboard()" class="btn-outline-gold"><i class="fas fa-arrow-left me-2"></i> Back to Dashboard</button>
+    </div>
+  `;
+}
+
+function generateResultHtml(data) {
+  const studentData = data.studentData;
+  const formattedDob = formatDateForDisplay(studentData.dob);
+
+  let statusText = 'NOT QUALIFIED';
+  let statusColor = '#dc3545';
+  let malayalamNote = '';
+
+  if (studentData.result === 'QUALIFIED') {
+    statusText = 'QUALIFIED';
+    statusColor = '#28a745';
+    malayalamNote = 'പ്രിയ വിദ്യാർത്ഥി, താങ്കൾ പ്രവേശന പരീക്ഷയിൽ വിജയിച്ചു. അഭിനന്ദനങ്ങൾ...\nനിശ്ചിത തീയതിക്കുള്ളിൽ പ്രവേശന നടപടികൾ പൂർത്തീകരിക്കണം. ആധാർ, ജനന സർട്ടിഫിക്കറ്റ്, റേഷൻ കാർഡ് എന്നിവയുടെ രണ്ട് കോപ്പികൾ കൊണ്ടുവരിക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.';
+  } else if (studentData.result === 'WAITING LIST') {
+    statusText = 'WAITING LIST';
+    statusColor = '#007bff';
+    malayalamNote = 'മെച്ചപ്പെട്ട രീതിയിൽ കൂടുതൽ മുന്നൊരുക്കം നടത്തി രണ്ടാം ഘട്ട പ്രവേശന പരീക്ഷയിൽ യോഗ്യത നേടുക. സംശയങ്ങൾക്ക് കോളേജ് ഓഫീസുമായി ബന്ധപ്പെടുക.';
+  } else {
+    malayalamNote = 'ഈ വർഷം യോഗ്യത ലഭിച്ചില്ല. കോളേജ് മാനദണ്ഡ പ്രായപരിധി പ്രകാരം അടുത്ത വർഷം വീണ്ടും ശ്രമിക്കുക.';
+  }
+
+  const isQualified = studentData.result === 'QUALIFIED';
+  const isWaitingList = studentData.result === 'WAITING LIST';
+  const isQualifiedOrWaiting = isQualified || isWaitingList;
+
+  return `
+    <div class="document-container">
+      <div class="document-watermark">${statusText}</div>
+      <div class="document-header">
+        <img src="https://i.ibb.co/4nGs7mp2/IMG-20260214-WA0004.jpg" alt="Logo" class="document-logo" onerror="this.style.display='none'">
+        <div class="document-college-info">
+          <div class="document-arabic">كلية الحافظ ممو ملا لتحفيظ القرآن</div>
+          <div class="document-college-name">AL HAFIZ MAMMU MULLA COLLEGE OF THAHFEEZUL QURAN</div>
+          <div class="document-address">Puthanpaalli, Chemmaniyode, Pattikkad Via, Malappuram District</div>
+          <div class="document-address">Under QUWATHUL ISLAM SANGAM</div>
+          <div class="document-address">Affiliated to JAMIA NOORIYYA ARABIYYA, PATTIKKAD</div>
+          <div class="document-title">Entrance Exam Result</div>
+        </div>
+      </div>
+      <div class="document-content">
+        <div class="student-info-box">
+          <div class="info-grid">
+            <div class="info-item"><span class="info-label">Student Name:</span><span class="info-value">${escapeHtml(studentData.name || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">Mobile Number:</span><span class="info-value">${escapeHtml(studentData.mobile || 'N/A')}</span></div>
+            <div class="info-item"><span class="info-label">Date of Birth:</span><span class="info-value">${escapeHtml(formattedDob)}</span></div>
+          </div>
+        </div>
+        <div class="result-section-box" style="border-color: ${statusColor};">
+          <div class="result-status" style="color: ${statusColor};">${statusText}</div>
+          ${isQualifiedOrWaiting ? `<div class="result-rank">Rank: ${escapeHtml(studentData.rank || 'N/A')}</div>` : ''}
+          ${isQualified ? `
+            <div class="admission-info-box">
+              <div class="admission-title">Admission Details</div>
+              <div class="admission-row"><span class="admission-label">Admission Starts:</span><span class="admission-value">${CONFIG.ADMISSION_STARTS}</span></div>
+              <div class="admission-row"><span class="admission-label">Class Starts:</span><span class="admission-value">${CONFIG.CLASS_STARTS}</span></div>
+            </div>
+          ` : ''}
+          <div class="note-section" style="text-align:left;background:#fff3cd;border-left:4px solid #ffc107;margin-top:15px;">
+            <div class="note-title">📌 Important Note</div>
+            <div class="note-content" style="white-space: pre-line;">${escapeHtml(malayalamNote)}</div>
+          </div>
+        </div>
+      </div>
+      <div class="document-footer">
+        <p style="color:#495057;font-size:10px;margin:0;">
+          <strong>College Contact:</strong> ${CONFIG.COLLEGE_PHONE} | <strong>Email:</strong> ${CONFIG.COLLEGE_EMAIL}
+        </p>
+      </div>
+    </div>
+    <div class="no-print" style="text-align:center;margin-top:20px;padding:20px;">
+      <button onclick="window.print()" class="btn-gold me-2"><i class="fas fa-print me-2"></i> Print Result</button>
+      <button onclick="showDashboard()" class="btn-outline-gold"><i class="fas fa-arrow-left me-2"></i> Back to Dashboard</button>
+    </div>
+  `;
+}
+
+function displayDocument(htmlContent) {
+  document.getElementById('mainContentArea').style.display = 'none';
+  document.getElementById('documentDisplayArea').style.display = 'block';
+  document.getElementById('documentDisplayArea').innerHTML = htmlContent;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+ * API HANDLERS
+ * ============================================================ */
+async function handleApplicationSubmit(e) {
+  e.preventDefault();
+  showLoading('Searching Application', 'Please wait while we fetch your details');
+  const mobile = document.getElementById('appMobile').value.trim();
+  const dob = document.getElementById('appDob').value;
+  try {
+    const url = CONFIG.SCRIPT_URL + '?type=application&mobile=' + encodeURIComponent(mobile) + '&dob=' + encodeURIComponent(dob);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    setTimeout(() => {
+      hideLoading();
+      if (data.status === 'success') {
+        displayDocument(generateApplicationHtml(data));
+      } else {
+        alert(data.message || 'Application not found. Please check your details.');
+      }
+    }, 800);
+  } catch (error) {
+    hideLoading();
+    console.error('Error:', error);
+    alert('An error occurred: ' + error.message);
+  }
+}
+
+async function handleHallticketSubmit(e) {
+  e.preventDefault();
+  showLoading('Generating Hall Ticket', 'Please wait while we prepare your document');
+  const mobile = document.getElementById('ticketMobile').value.trim();
+  const dob = document.getElementById('ticketDob').value;
+  try {
+    const url = CONFIG.SCRIPT_URL + '?type=hallticket&mobile=' + encodeURIComponent(mobile) + '&dob=' + encodeURIComponent(dob);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    setTimeout(() => {
+      hideLoading();
+      if (data.status === 'success') {
+        displayDocument(generateHallticketHtml(data));
+      } else {
+        alert(data.message || 'Hall ticket not found. Please check your details.');
+      }
+    }, 800);
+  } catch (error) {
+    hideLoading();
+    console.error('Error:', error);
+    alert('An error occurred: ' + error.message);
+  }
+}
+
+async function handleResultSubmit(e) {
+  e.preventDefault();
+  showLoading('Checking Result', 'Please wait while we retrieve your result');
+  const mobile = document.getElementById('resultMobile').value.trim();
+  const dob = document.getElementById('resultDob').value;
+  try {
+    const url = CONFIG.SCRIPT_URL + '?type=result&mobile=' + encodeURIComponent(mobile) + '&dob=' + encodeURIComponent(dob);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    setTimeout(() => {
+      hideLoading();
+      if (data.status === 'success') {
+        displayDocument(generateResultHtml(data));
+      } else if (data.code === 'NOT_PUBLISHED') {
+        const pd = data.publishDate ? '\n\n📅 Publication: ' + data.publishDate + ' IST' : '';
+        alert('⏰ Result not yet published.\nPlease check back later.' + pd);
+      } else {
+        alert(data.message || 'No result found. Please check your details.');
+      }
+    }, 800);
+  } catch (error) {
+    hideLoading();
+    console.error('Result error:', error);
+    alert('Error checking result. Please try again.');
+  }
+}
+
+async function handleNewApplicationSubmit(e) {
+  e.preventDefault();
+  const dob = document.getElementById('dobInput').value;
+  if (!validateAndCalculateAge(dob)) {
+    alert('Please check the age requirements (5–10 years on exam date).');
+    return;
+  }
+
+  showLoading('Submitting Application', 'Please wait while we process your application');
+  const form = e.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  const photoFile = document.getElementById('photoInput').files[0];
+
+  if (photoFile) {
+    try {
+      const compressed = await compressImage(photoFile, 800);
+      data.photo = JSON.stringify({
+        name: photoFile.name.replace(/\.[^/.]+$/, '') + '.jpg',
+        mimeType: 'image/jpeg',
+        data: compressed.split(',')[1]
+      });
+    } catch (err) {
+      hideLoading();
+      alert('Error processing photo. Please try again with a smaller image.');
+      return;
+    }
+  }
+
+  const submitData = new URLSearchParams();
+  for (const [k, v] of Object.entries(data)) {
+    if (v !== undefined && v !== null && v !== '') submitData.append(k, v);
+  }
+
+  try {
+    const response = await fetch(CONFIG.SCRIPT_URL, {
+      method: 'POST',
+      body: submitData,
+      redirect: 'follow'
+    });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const text = await response.text();
+    let result;
+    try { result = JSON.parse(text); }
+    catch (parseErr) {
+      console.error('Non-JSON:', text);
+      throw new Error('Server returned invalid response');
+    }
+
+    setTimeout(() => {
+      hideLoading();
+      if (result.status === 'success') {
+        form.reset();
+        removePhoto();
+        toggleSubmitButton(false);
+        const appId = (result.data && result.data.applicationId) || 'N/A';
+        const photoUrl = (result.data && result.data.photoUrl) || null;
+        const mockData = {
+          collegeInfo: {},
+          studentData: Object.assign({}, data, {
+            submissionDate: new Date().toISOString().split('T')[0],
+            applicationId: appId,
+            photoUrl: photoUrl
+          })
+        };
+        displayDocument(generateApplicationHtml(mockData));
+      } else {
+        alert(result.message || 'Submission failed. Please try again.');
+      }
+    }, 800);
+  } catch (error) {
+    hideLoading();
+    console.error('Submission error:', error);
+    alert('An error occurred: ' + error.message);
+  }
+}
+
+/* ============================================================
+ * LOADING
+ * ============================================================ */
+function showLoading(message, subMessage) {
+  document.getElementById('loadingText').textContent = message || 'Processing...';
+  document.getElementById('loadingSubtext').textContent = subMessage || 'Please wait a moment';
+  document.getElementById('loadingOverlay').style.display = 'flex';
+}
+
+function hideLoading() {
+  document.getElementById('loadingOverlay').style.display = 'none';
+}
+
+/* ============================================================
+ * TICKER
+ * ============================================================ */
+function adjustTickerSpeed() {
+  const tickerWrapper = document.querySelector('.ticker-wrapper');
+  if (!tickerWrapper) return;
+  tickerWrapper.style.animationDuration = window.innerWidth <= 768 ? '40s' : '50s';
+}
+window.addEventListener('load', function() {
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.3s ease';
+  setTimeout(() => { document.body.style.opacity = '1'; }, 50);
+  adjustTickerSpeed();
+});
+window.addEventListener('resize', adjustTickerSpeed);
+</script>
+
+<script>
+/* Load navbar & footer (optional external files) */
+fetch('navbar.html')
+  .then(r => r.text())
+  .then(data => { document.getElementById('navbar-container').innerHTML = data; })
+  .catch(err => console.warn('Navbar not loaded:', err));
+fetch('footer.html')
+  .then(r => r.text())
+  .then(data => { document.getElementById('footer-container').innerHTML = data; })
+  .catch(err => console.warn('Footer not loaded:', err));
+</script>
 </body>
 </html>
