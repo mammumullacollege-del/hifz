@@ -73,7 +73,7 @@
     .document-signature-section {text-align:right; margin-top:20px; padding-top:10px; solid #ced4da;}
     .document-signature-line {display:inline-block; width:250px; border-bottom:1px solid #212529; margin-bottom:3px;}
     .student-info-box {background:#f8f9fa; border-radius:8px; padding:15px; margin-bottom:15px; border:1px solid #dee2e6;}
-    .exam-details-box {background:white; border:2px solid var(--islamic-green); border-radius:8px; padding:15px; margin:15px 0; max-width: 600px; display:flex; flex-direction:column;}
+    .exam-details-box {background:white; border:2px solid var(--islamic-green); border-radius:8px; padding:15px; margin:15px 0; max-width:600px; display:flex; flex-direction:column;}
     .exam-title {font-size:16px; font-weight:700; color:var(--islamic-green); text-align:center; margin-bottom:12px;}
     .exam-info-grid {display:grid; grid-template-columns:repeat(2,1fr); gap:10px; flex:1;}
     .exam-item {padding:8px; background:#f8f9fa; border-radius:6px; border:1px solid #dee2e6; display:flex; flex-direction:column; justify-content:center;}
@@ -658,7 +658,7 @@ function generateHallticketHtml(data) {
     <div class="document-content">
       ${photoBox}
 
-      <div class="student-info-box" style="margin-right: 170px;">
+      <div class="student-info-box" style="margin-right: 150px;">
         <div class="info-grid1">
           <div class="info-item"><span class="info-label">Register Number:</span><span class="info-value">${escapeHtml(studentData.registerNo || 'N/A')}</span></div>
           <div class="info-item"><span class="info-label">Student Name:</span><span class="info-value">${escapeHtml(studentData.studentName || 'N/A')}</span></div>
@@ -681,12 +681,12 @@ function generateHallticketHtml(data) {
             <div class="exam-item"><div class="exam-label">Venue</div><div class="exam-value">HIM Puthanpalli</div></div>
           </div>
         </div>
-        <div style="position:absolute; top:230px; right:20px; text-align:center; z-index:1;">
-          <div style="width:140px; height:140px; border:2px solid #dee2e6; border-radius:10px; overflow:hidden; background:#f8f9fa; display:flex; align-items:center; justify-content:center; padding:10px;">
-            <img src="${qrCodeUrl}" style="max-width:100%; max-height:100%;" alt="QR Code">
+        <div style="position:absolute;top:210px;right:20px;text-align:center;z-index:1;">
+            <div style="width:140px;height:140px;border:2px solid #dee2e6;border-radius:10px;overflow:hidden;background:#f8f9fa;display:flex;align-items:center;justify-content:center;padding:10px;">
+              <img src="${qrCodeUrl}" style="max-width:100%;max-height:100%;" alt="QR" onerror="this.style.display='none'">
+            </div>
+            <div style="font-size:11px;color:#6c757d;margin-top:5px;font-weight:500;">QR Code</div>
           </div>
-          <div style="font-size:11px; color:#6c757d; margin-top:5px; font-weight:500;">QR Code</div>
-        </div>
       </div>
 
       <table class="signing-table">
